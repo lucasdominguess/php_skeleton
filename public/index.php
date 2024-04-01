@@ -9,6 +9,8 @@ use App\Application\Settings\SettingsInterface;
 use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;
+use Slim\Views\Twig;
+use Slim\Views\TwigMiddleware;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -37,6 +39,13 @@ $container = $containerBuilder->build();
 // Instantiate the app
 AppFactory::setContainer($container);
 $app = AppFactory::create();
+// Create Twig
+$twig = Twig::create(__DIR__ .'/../views', ['cache' => false]);
+$container->set('view',$twig);
+// Add Twig-View Middleware
+$app->add(TwigMiddleware::create($app, $twig));
+
+
 $callableResolver = $app->getCallableResolver();
 
 // Register middleware
@@ -80,3 +89,13 @@ $errorMiddleware->setDefaultErrorHandler($errorHandler);
 $response = $app->handle($request);
 $responseEmitter = new ResponseEmitter();
 $responseEmitter->emit($response);
+
+// Create App
+// AppFactory::setContainer($container);
+// $app = AppFactory::create();
+
+// Create Twig
+// $twig = Twig::create(__DIR__ .'/../app/views', ['cache' => false]);
+// $container->set('view',$twig);
+// // Add Twig-View Middleware
+// $app->add(TwigMiddleware::create($app, $twig));
