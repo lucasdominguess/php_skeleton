@@ -11,6 +11,7 @@ use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;
 use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
+use App\Application\Actions\User;
 
 require __DIR__ . '/../vendor/autoload.php';
 

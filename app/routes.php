@@ -9,6 +9,7 @@ use App\Application\Actions\User\ListUsersAction;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
+use App\Application\Actions\User;
 
 return function (App $app) {
     $app->options('/{routes:.*}', function (Request $request, Response $response) {
@@ -25,12 +26,45 @@ return function (App $app) {
         $group->get('', ListUsersAction::class);
         $group->get('/{id}', ViewUserAction::class);
     });
+    
 
+    
     $app->get('/', function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'index.html', [
+        return $view->render($response, 'index.php', [
           
         ]);
-    })->setName('profile');
+    })->setName('login');
+
+    $app->get('/registrar', function ($request, $response, $args) {
+        $view = Twig::fromRequest($request);
+        return $view->render($response, 'registrar.php', [
+          
+        ]);
+    })->setName('registro');
+
+
+
+
+    // $app->get('/hello/{name}', function (Request $request, Response $response, $args) {
+    //     $name = $args['name'];
+    //     $response->getBody()->write("ola, $name");
+    //     return $response;
+    // })->setName('paghello');
+
+    // $app->get('/home', function (Request $request, Response $response, $args) {
+    //     $name = $args['name'];
+    //     $response->getBody()->write("ola, $name");
+    //     return $response;
+    // });
+
+
+    // $app->get('/home', function ($request, $response, $args) {
+    //     $view = Twig::fromRequest($request);
+    //     return $view->render($response, 'index.html', [
+          
+    //     ]);
+    // })
+
 };
 // $app->run();

@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+.body_bg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* min-height: 1080px;
+    max-height: max-content;  */
+    background: linear-gradient(150deg, #0664a5, #000000, #0664a5, #000000, #0664a5);
+    background-size: 1000% 1000%;
+    -webkit-animation: AnimacaoGradient 5s linear infinite;
+    -moz-animation: AnimacaoGradient 5s linear infinite;
+    animation: AnimacaoGradient 5s linear infinite;
+}
+
+@keyframes AnimacaoGradient {
+    0%{background-position:100%}
+    50%{background-position:50%}
+    100%{background-position:0%}
+}
+
+ #login{
+    padding: 15px;
+    border-radius: 10px;
+    min-width: 350px;
+    height: auto;
+   
+    margin-bottom: 0px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.input{ 
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 1em;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.btn_entrar{
+    background: linear-gradient(150deg, #0664a5, #000000, #0664a5, #000000, #0664a5);
+    background-size: 1000% 1000%;
+    -webkit-animation: AnimacaoGradient 5s linear infinite;
+    -moz-animation: AnimacaoGradient 5s linear infinite;
+    animation: AnimacaoGradient 5s linear infinite;
+
+    width: 100%;
+    font-size: 1em;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+
+#btn_entrar:hover{
+    background: rgba(16, 235, 93, 0.276);
+    background: linear-gradient(42deg, rgba(16, 235, 228, 0.436) 16%, rgba(0, 213, 255, 0.541) 74%);
+}
+#h3login{ 
+    text-align: center;
+    padding: 10px;
+    font-family: "Poppins", sans-serif;
+}
+#sessao_login{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.conteudo{ 
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+#div-img{
+    display: flex;
+    justify-content: start;
+    align-items: start; 
+   
+;
+    
+}
+#img { 
+    width: 100%;
+    position: absolute;
+    
+}
+#title_login{ 
+    font-family: "Madimi One", sans-serif;
+    font-size: 28px;
+    font-weight: 500;
+    font-style: normal;
+}
