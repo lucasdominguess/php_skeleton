@@ -8,7 +8,7 @@
   //Enviando Formulario para o Backend
   async function enviar(v_form){ 
   
-      const response = await fetch('http://localhost:8080/cadastro.php',{
+      const response = await fetch('/registar.php',{
         method:'post',
         body : v_form
       })
