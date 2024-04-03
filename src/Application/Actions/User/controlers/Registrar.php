@@ -5,23 +5,28 @@ use App\Application\Actions\User\UserAction;
 use Psr\Http\Message\ResponseInterface as Response; 
 use Slim\Views\Twig;
 
-class Registrar {
-    public function test(){
 
-        echo json_encode('chegou no registar');
+class Registrar extends UserAction 
+{
+    protected function action(): Response
+    {   
+        if( 1 != 1 )
+        {
+            $view = Twig::fromRequest($this->request);
+            return $view->render($this->response, 'index.html', [
+              
+            ]); 
+        }
+        else{
+
+            $view = Twig::fromRequest($this->request);
+            return $view->render($this->response, 'registrar.php', [
+              
+            ]);
+        }
+
     }
-}
-// class Registrar extends UserAction 
-// {
-//     protected function action(): Response
-//     {   
-     
-//         // $view = Twig::fromRequest($this->request);
-//         // return $view->render($this->response, 'registrar.php', [
-          
-//         // ]);
-//     // })->setName('registro');
-//     }
+};
 //     public $view ;
 
 

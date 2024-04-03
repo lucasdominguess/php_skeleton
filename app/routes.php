@@ -39,14 +39,15 @@ return function (App $app) {
         ]);
     })->setName('login');
 
-    $app->post('/logar', function ($request, $response, $args) {
-        $view = Twig::fromRequest($request);
-        return $view->render($response, 'registrar.php', [
+    // $app->get('/logar', function ($request, $response,$args) {
+    //     //  echo json_encode('chegou no app da rota');
+    //     $view = Twig::fromRequest($request);
+    //     return $view->render($response, 'registrar.php', [
           
-        ]);
-    });
+    //     ]);
+    // });
 
-    // $app->get('/logar',Registrar::class);
+    $app->get('/logar',Registrar::class);
 
     // $app->get('/logar', function ($request, $response, $args) {
     //     $view = Twig::fromRequest($request);
@@ -79,4 +80,3 @@ return function (App $app) {
     // })
 
 };
-// $app->run();

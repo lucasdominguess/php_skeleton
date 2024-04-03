@@ -1,22 +1,24 @@
 //enviando dados de login 
 async function logar(v_form){
 
-const response = await fetch('/logar',{
+const response = await fetch('/logar')
+// ,{
 
-    method : 'post' , 
-    body : v_form
-}) 
+//     method : 'post' , 
+//     body : v_form
 
-let newResponse = await response.json()
+// });
+// let newResponse = await response.json()
      
-let icon = newResponse.status == 'fail' ? 'error' : 'success' 
-let reload = newResponse.status=='fail' ? false : true
+// let icon = newResponse.status == 'fail' ? 'error' : 'success' 
+// let reload = newResponse.status=='fail' ? false : true
 
-if(icon=='error'){
-    fnMensagem(icon,newResponse.msg)
-}else {
-    fnMensagem(icon,newResponse.msg,false,'registrar')
-}
+// if(icon=='error'){
+//     fnMensagem(icon,newResponse.msg)
+// }else {
+//     fnMensagem(icon,newResponse.msg,false,'logar')
+//     // window.location.href='registrar' 
+// }
 
 
 // fnMensagem(icon,newResponse.msg,reload)
@@ -33,6 +35,6 @@ if(icon=='error'){
 $('#btn_entrar').on('click', async ()=> {
     let v_form = new FormData(document.getElementById('form_login')) 
 
-    logar(v_form)
+    logar()
   })
 
