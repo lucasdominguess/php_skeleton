@@ -1,7 +1,7 @@
 //enviando dados de login 
 async function logar(v_form){
 
-const response = await fetch('logar.php',{
+const response = await fetch('/app/classes/Logar.php',{
     method : 'post' , 
     body : v_form
 }) 

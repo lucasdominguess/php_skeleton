@@ -42,6 +42,8 @@ return function (App $app) {
           
         ]);
     })->setName('registro');
+    
+
 
 
 
