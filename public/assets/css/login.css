@@ -30,13 +30,14 @@ body {
 
  #login{
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 5px;
     min-width: 350px;
     height: auto;
-   
+    background-color:rgba(233, 233, 235, 0.947);
     margin-bottom: 0px;
     margin-left: auto;
     margin-right: auto;
+    
 }
 
 

@@ -10,6 +10,8 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 use App\Application\Actions\User;
+use App\Application\Actions\User\controlers;
+use App\Application\Actions\User\controlers\Registrar;
 
 return function (App $app) {
     $app->options('/{routes:.*}', function (Request $request, Response $response) {
@@ -25,6 +27,7 @@ return function (App $app) {
     $app->group('/users', function (Group $group) {
         $group->get('', ListUsersAction::class);
         $group->get('/{id}', ViewUserAction::class);
+       
     });
     
 
@@ -36,14 +39,21 @@ return function (App $app) {
         ]);
     })->setName('login');
 
-    $app->get('/registrar', function ($request, $response, $args) {
+    $app->post('/logar', function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
         return $view->render($response, 'registrar.php', [
           
         ]);
-    })->setName('registro');
-    
+    });
 
+    // $app->get('/logar',Registrar::class);
+
+    // $app->get('/logar', function ($request, $response, $args) {
+    //     $view = Twig::fromRequest($request);
+    //     return $view->render($response, 'registrar.php', [
+          
+    //     ]);
+    // })->setName('registro');
 
 
 

@@ -1,7 +1,8 @@
 //enviando dados de login 
 async function logar(v_form){
 
-const response = await fetch('/app/classes/Logar.php',{
+const response = await fetch('/logar',{
+
     method : 'post' , 
     body : v_form
 }) 
@@ -14,7 +15,7 @@ let reload = newResponse.status=='fail' ? false : true
 if(icon=='error'){
     fnMensagem(icon,newResponse.msg)
 }else {
-    fnMensagem(icon,newResponse.msg,false,'registrar.php')
+    fnMensagem(icon,newResponse.msg,false,'registrar')
 }
 
 
