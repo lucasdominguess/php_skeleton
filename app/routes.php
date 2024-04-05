@@ -34,7 +34,7 @@ return function (App $app) {
     
     $app->get('/', function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'index.php', [
+        return $view->render($response, 'index.html', [
           
         ]);
     })->setName('login');
@@ -47,7 +47,7 @@ return function (App $app) {
     //     ]);
     // });
 
-    $app->get('/logar',Registrar::class);
+    $app->post('/logar',Registrar::class);
 
     // $app->get('/logar', function ($request, $response, $args) {
     //     $view = Twig::fromRequest($request);
