@@ -1,6 +1,6 @@
 <?php
 // Senha a ser criptografada
-$senha = 1;
+$senha = '$2y$10$fGIRKYHh.LycrXwepKLqyeG.CYA08S0zbNoF.iRWXdxLkNYpkSwfq';
 
 // Criptografar a senha
 $senhaCriptografada = password_hash($senha, PASSWORD_DEFAULT);
