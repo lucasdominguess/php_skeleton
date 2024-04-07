@@ -169,3 +169,10 @@ ul.pagination:hover{
     -webkit-backdrop-filter: blur(9.4px);
     border: 1px solid rgba(255, 255, 255, 1);
 }
+#title_h3 { 
+    font-family: "Madimi One", sans-serif;
+    text-align: center;
+}
+.h1s{
+    font-family: "Madimi One", sans-serif; 
+}
