@@ -1,7 +1,7 @@
 //enviando dados de login 
-async function logar(v_form){
-
-const response = await fetch('/logar'
+async function logar(rota,v_form=null){
+const rots = rota 
+const response = await fetch(`${rots}`
 ,{
 
     method : 'post' , 
@@ -11,8 +11,12 @@ const response = await fetch('/logar'
 
 let newResponse = await response.json()
      
-let icon = newResponse.status == 'fail' ? 'error' : 'success' 
-let reload = newResponse.status=='fail' ? false : true
+let icon = newResponse.data.status == 'fail' ? 'error' : 'success' 
+let reload = newResponse.data.status=='fail' ? false : true
+let rotas = newResponse.data.location 
+let msg = newResponse.data.msg
+
+// console.log(newResponse.data) 
 
 function fnMensagem(icon,msg,reload=false,location=''){
     Swal.fire({
@@ -34,9 +38,9 @@ function fnMensagem(icon,msg,reload=false,location=''){
 }
 
 if(icon=='error'){
-    fnMensagem(icon,newResponse.msg)
+    fnMensagem(icon,msg)
 }else {
-    fnMensagem(icon,newResponse.msg,false,'registrar')
+    fnMensagem(icon,msg,false,rotas)
     // window.location.href='registrar' 
 }
 }
@@ -44,6 +48,11 @@ if(icon=='error'){
 $('#btn_entrar').on('click', async ()=> {
     let v_form = new FormData(document.getElementById('form_login')) 
 
-    logar(v_form)
+    logar('/logar',v_form)
+  })
+$('#btn_sair').on('click', async ()=> {
+    
+
+    logar('/sair')
   })
 
