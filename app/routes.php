@@ -34,7 +34,7 @@ return function (App $app) {
     
     $app->get('/', function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'index.html', [
+        return $view->render($response, 'index.php', [
           
         ]);
     })->setName('login');
@@ -49,12 +49,12 @@ return function (App $app) {
 
     $app->post('/logar',Registrar::class);
 
-    // $app->get('/logar', function ($request, $response, $args) {
-    //     $view = Twig::fromRequest($request);
-    //     return $view->render($response, 'registrar.php', [
+    $app->get('/registrar', function ($request, $response, $args) {
+        $view = Twig::fromRequest($request);
+        return $view->render($response, 'registrar.php', [
           
-    //     ]);
-    // })->setName('registro');
+        ]);
+    })->setName('registro');
 
 
 

@@ -22,8 +22,8 @@
     <!-- Sessao login -->
     <section id="sessao" class="container-fluid">
 
-            <div id="div-img"> <img id="img" class="opacity-50" src="assets/img/img2.svg" alt="">
-            </div>
+            <!-- <div id="div-img"> <img id="img" class="opacity-50" src="assets/img/img2.svg" alt="">
+            </div> -->
             <div id="login">
 
             <form id="form_login">

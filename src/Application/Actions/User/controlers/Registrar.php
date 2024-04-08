@@ -10,22 +10,20 @@ class Registrar extends UserAction
 {
     protected function action(): Response
     {   
-        if( 1 != 1 )
-        {
-            $view = Twig::fromRequest($this->request);
-            return $view->render($this->response, 'index.html', [
+        // if( 1 != 1 )
+        // {
+        //     $view = Twig::fromRequest($this->request);
+        //     return $view->render($this->response, 'index.html', [
               
-            ]); 
-        }
-        else{
+        //     ]); 
+        // }
+        // else{
+        //]);
 
-            $view = Twig::fromRequest($this->request);
-            return $view->render($this->response, 'registrar.php', [
-              
-            ]);
-        }
+        $response = ['cod' => 'fail'];
+        return $this->respondWithData($response);
+}
 
-    }
 };
 //     public $view ;
 
