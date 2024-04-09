@@ -3,7 +3,7 @@
 async function buscar()
     {
     try {
-        let response = await fetch(`http://localhost:9000/listar.php/`);
+        let response = await fetch(`/listar`);
         let obj = await response.json()
     
         return obj

@@ -40,12 +40,14 @@ $container = $containerBuilder->build();
 // Instantiate the app
 AppFactory::setContainer($container);
 $app = AppFactory::create();
+
+// $config = parse_ini_file(__DIR__ .'../config');
+$env = parse_ini_file(__DIR__ .'/../.env');
 // Create Twig
 $twig = Twig::create(__DIR__ .'/../views', ['cache' => false]);
 $container->set('view',$twig);
 // Add Twig-View Middleware
 $app->add(TwigMiddleware::create($app, $twig));
-
 
 $callableResolver = $app->getCallableResolver();
 
