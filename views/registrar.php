@@ -3,14 +3,6 @@
 // if ($_SESSION["email"] == null) {
 //     header('location: http://localhost:9000');
 // }
-// $nome = $_SESSION['nome'] ?? '';
-
-// $nome = $_SESSION['nome'] ?? '';
-// $logado = $_SESSION['sessao'] ?? 'ffff';
-// $logado2 = $_SESSION['sessao']->format('H:i:s');
-// // $tempo = $_SESSION['tempo30'] ?? 'vazio' ;
-// // $newtime = $tempo->format("H:i:s");
-
 
 
 ?>
@@ -38,15 +30,15 @@
             <section id="sessao_adm" class="col-2">
                 <div id="nomeAdm">
                     <div>
-                        <h4>Bem-vindo</h4>
-                        <h3><?php echo $nome; ?> ! </h3>
+                        <h4>Bem-vindo !</h4>
+                        <h3><?php ?> </h3>
                     </div>
                 </div>
                 <div id="tempo_sessao">
-                    <?php echo $logado2;   ?> <br>
+                    <?php    ?> <br>
                 </div>
                 <div>
-                    <button class="btn btn-danger">Sair</button>
+                    <button id="btn_sair" class="btn btn-danger">Sair</button>
                 </div>
 
             </section>

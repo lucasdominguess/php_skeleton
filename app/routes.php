@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 use Slim\App;
 use Slim\Views\Twig;
-use App\Application\Actions\User\ViewUserAction;
-use App\Application\Actions\User\ListUsersAction;
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 use App\Application\Actions\User;
 use App\Application\Actions\User\controlers;
+use App\Application\Actions\User\ViewUserAction;
+use App\Application\Actions\User\ListUsersAction;
+
+use Psr\Http\Message\ResponseInterface as Response;
 use App\Application\Actions\User\controlers\Registrar;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Interfaces\RouteCollectorProxyInterface as Group;
+use App\Application\Actions\User\controlers\SairSessaoAction;
 
 return function (App $app) {
     $app->options('/{routes:.*}', function (Request $request, Response $response) {
@@ -46,8 +48,12 @@ return function (App $app) {
           
     //     ]);
     // });
+   
+        $app->post('/logar',Registrar::class);
 
-    $app->post('/logar',Registrar::class);
+        $app->post('/sair',SairSessaoAction::class);
+
+    
 
     $app->get('/registrar', function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
@@ -56,6 +62,7 @@ return function (App $app) {
         ]);
     })->setName('registro');
 
+    // $app->post('/',Registrar::class);
 
 
 

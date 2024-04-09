@@ -20,7 +20,7 @@ class Registrar extends UserAction
         // else{
         //]);
 
-        $response = ['cod' => 'fail'];
+        $response= ['status'=>'ok','msg'=>'logado com sucesso','location'=>'registrar'];
         return $this->respondWithData($response);
 }
 
