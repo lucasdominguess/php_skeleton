@@ -14,6 +14,7 @@ use App\Application\Actions\User\controlers\Registrar;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Application\Actions\User\controlers\ListarAction;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
+use App\Application\Actions\User\controlers\RegistrarAction;
 use App\Application\Actions\User\controlers\SairSessaoAction;
 
 return function (App $app) {
@@ -50,7 +51,7 @@ return function (App $app) {
     //     ]);
     // });
    
-        $app->post('/logar',Registrar::class);
+        $app->post('/ajax',RegistrarAction::class);
 
         $app->post('/sair',SairSessaoAction::class);
         $app->get('/listar',ListarAction::class);

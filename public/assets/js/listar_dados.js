@@ -5,8 +5,9 @@ async function buscar()
     try {
         let response = await fetch(`/listar`);
         let obj = await response.json()
-    
-        return obj
+      //  console.log(obj.data[4])
+        return obj.data
+
     }catch(error) {  //Identificando possivel erro 
       console.log('erro na busca',error)
     }finally {
@@ -60,9 +61,11 @@ function tH(keys) {
 // Construindo body de tabela dinamicamente
 function arrumar(obj){      
 
-     
-
+  
+  
         const values = Object.values(obj)
+        // console.log(values)
+
         const tr = document.createElement('tr'); 
         for (let i = 0; i < values.length; i++) {  
             const el = values[i];
@@ -93,25 +96,26 @@ function arrumar(obj){
     tr.append(td2,td3)
 
   
-
+    
     $('.tbody').append(tr);
-  
+    
     //evento botao de editar 
-    button.addEventListener('click',btn_editar);
-    button2.addEventListener('click',confirmExcluir);
-};
-
-
-
+    // button.addEventListener('click',requestGET);
+    // button2.addEventListener('click',confirmExcluir);
+  };
+  
 
 $(document).ready(async ()=>{
-        let obj = await buscar();
-        tH(Object.keys(obj[0]));
-       
-       
-        // loop para construir chave da tabela
-        for (let index = 0; index < obj.length; index++) {
-          const element = obj[index];
+    let obj= await buscar();
+    tH(Object.keys(obj[0]));
+    
+    // console.log(obj)
+    
+    // loop para construir chave da tabela
+    for (let index = 0; index < obj.length; index++) {
+      // console.log(obj.length)
+      const element = obj[index];
+      
           arrumar(element)      
          
         }
