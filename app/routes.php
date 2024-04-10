@@ -9,12 +9,14 @@ use App\Application\Actions\User\controlers;
 use App\Application\Actions\User\ViewUserAction;
 use App\Application\Actions\User\ListUsersAction;
 
+use App\Application\Middleware\UsuarioMiddleware;
 use Psr\Http\Message\ResponseInterface as Response;
 use App\Application\Actions\User\controlers\Registrar;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use App\Application\Actions\User\controlers\LogarAction;
 use App\Application\Actions\User\controlers\ListarAction;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
-use App\Application\Actions\User\controlers\RegistrarAction;
+use App\Application\Actions\User\controlers\CadastrarAction;
 use App\Application\Actions\User\controlers\SairSessaoAction;
 
 return function (App $app) {
@@ -51,11 +53,13 @@ return function (App $app) {
     //     ]);
     // });
    
-        $app->post('/ajax',RegistrarAction::class);
+        $app->post('/logar',LogarAction::class);
 
         $app->post('/sair',SairSessaoAction::class);
         $app->get('/listar',ListarAction::class);
     
+        $app->post('/cadastrar',CadastrarAction::class);
+        // ->add(new UsuarioMiddleware());
 
     $app->get('/registrar', function ($request, $response, $args) {
         $view = Twig::fromRequest($request);

@@ -1,8 +1,14 @@
 <?php 
-require 'Pessoa.php';
+namespace App\classes;
+
+use DateTime;
+use DateTimeZone;
+use App\classes\Pessoa;
 
 
-class Estagiario extends Pessoa
+
+
+class Usuario extends Pessoa
     {
         public function __construct($nome, public readonly Data $data) 
         {
@@ -27,7 +33,7 @@ class Estagiario extends Pessoa
             $resultado = $resultado/365.25;
             $res= intval($resultado);
             if($res < 18 || $res > 50){
-                throw new Exception("Idade invalida Para Estagio"); 
+                throw new \Exception("Idade invalida Para cadastro"); 
             }
             
             parent::__construct($this->nome,$this->data);

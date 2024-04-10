@@ -100,7 +100,7 @@ function arrumar(obj){
     $('.tbody').append(tr);
     
     //evento botao de editar 
-    // button.addEventListener('click',requestGET);
+    button.addEventListener('click',requestGET(17));
     // button2.addEventListener('click',confirmExcluir);
   };
   
@@ -121,9 +121,9 @@ $(document).ready(async ()=>{
         }
         // Construindo datatables
         $('#table1').DataTable({
-          language: {
-            url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json'
-        },
+        //   language: {
+        //     url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json'
+        // },
           dom: 'Blfrtip',
           pageLength : 5,
           lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']],
@@ -143,7 +143,7 @@ $(document).ready(async ()=>{
         $('.dt-buttons').addClass('d-flex');
       }
       })
-
+      
       });
 
 

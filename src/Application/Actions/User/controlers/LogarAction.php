@@ -7,7 +7,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\Twig;
 
 
-class RegistrarAction extends UserAction 
+class LogarAction extends UserAction 
 {
     protected function action(): Response
     {   

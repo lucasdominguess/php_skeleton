@@ -45,3 +45,21 @@ function admMensagem(msg,icon){
       
     }
   })}
+  function confirmExcluir(key) {
+    Swal.fire({
+      title: "Deseja realmente Excluir? \n Todos os dados serao Apagados! ",
+      showDenyButton: true,
+      confirmButtonText: "Sim",
+      denyButtonText: `Não`,
+      icon: "question",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        ExcluirDados(key);
+  
+        // Swal.fire(`O ID do paciente é ${button.id}`, "", "info");
+      } else if (result.isDenied) {
+        // Swal.fire("OK!");
+      }
+    });
+  }
+  

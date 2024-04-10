@@ -1,5 +1,8 @@
 <?php
 
+namespace App\classes;
+use DateTime;
+use DateTimeZone;
 
 class Data
 {
@@ -14,7 +17,7 @@ class Data
     {
         if (!preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/im",$data)) {
             // print_r("aqui print ".$data);
-            throw new Exception("Erro! Formato de data invalida.");
+            throw new \Exception("Erro! Formato de data invalida.");
         }
 
 

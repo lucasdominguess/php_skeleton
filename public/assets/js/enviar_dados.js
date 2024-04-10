@@ -21,20 +21,3 @@
      
   // };
 
-
-// Sweet Alert (mostra msg de sucess ou fail )
-//   function fnMensagem(icon,msg,reload=false){
-//     Swal.fire({
-//       title: msg,
-//       icon: icon,
-//       confirmButtonText: 'Ok',
-//       timer: 3500,
-//       timerProgressBar: true,
-//       willClose: () => {
-        
-//         if(reload){
-//           window.location.reload();
-//       }
-//     }
-//     });
-// }

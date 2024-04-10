@@ -3,7 +3,7 @@
 $('#btn_entrar').on('click', async ()=> {
     let v_form = new FormData(document.getElementById('form_login')) 
 
-    requestPOST('/ajax',v_form)
+    requestPOST('/logar',v_form)
   })
 $('#btn_sair').on('click', async ()=> {
     
@@ -20,7 +20,7 @@ $('#btn_sair').on('click', async ()=> {
 $('#btn_enviarCad').on('click', async ()=> {
     let v_form = new FormData(document.getElementById('form_cad')) 
 
-    requestPOST(v_form)
+    requestPOST('/cadastrar',v_form)
   
 
   })

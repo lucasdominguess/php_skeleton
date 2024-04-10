@@ -1,9 +1,10 @@
 <?php 
 
+namespace App\classes;
+
 class Pessoa { 
 
-    public function __construct(public string $nome,
-    Data $data) //alterar string para DateTime
+    public function __construct(public string $nome) //alterar string para DateTime
     {
         $this->validaNome();
       
@@ -11,7 +12,7 @@ class Pessoa {
     private function validaNome():void {
         
          if (!preg_match("/^[a-zàáâãçèéêìíîòóôõùúû'\s]{3,}$/im",$this->nome)) {   //Regex para validar formado de nome com min. de 3
-        throw new Exception("Erro! Nome inválido."); 
+        throw new \Exception("Erro! Nome invalido."); 
       }
      
     }

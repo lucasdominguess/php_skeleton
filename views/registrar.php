@@ -155,7 +155,7 @@
 
 
 <script src="assets/js/sweet_alert.js"></script>
-<script src="assets/js/event_button.js"></script>
+<script src="assets/js/button_events.js"></script>
 <script src="assets/js/listar_dados.js"></script>
 <script src="assets/js/editar_dados.js"></script>
 <script src="assets/js/enviar_dados.js"></script>
