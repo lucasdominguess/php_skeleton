@@ -1,10 +1,14 @@
 //botoes + eventos
 
+// login 
 $('#btn_entrar').on('click', async ()=> {
     let v_form = new FormData(document.getElementById('form_login')) 
 
     requestPOST('/logar',v_form)
   })
+
+
+//home 
 $('#btn_sair').on('click', async ()=> {
     
    requestPOST('/sair')
