@@ -12,8 +12,9 @@ function limparCampos(){
 }
   //Criando Modal & dados para alterar/cadastrar na table
 function createModal(key) {
+  
     let keys = Object.keys(key)
-    // console.log(keys)
+    
     $("#myModal").fadeToggle(1000)
     $('#title_h3').text('Editar Cadastro')
 

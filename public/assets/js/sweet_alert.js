@@ -45,7 +45,7 @@ function admMensagem(msg,icon){
       
     }
   })}
-  function confirmExcluir(key) {
+function confirmExcluir(key) {
     Swal.fire({
       title: "Deseja realmente Excluir? \n Todos os dados serao Apagados! ",
       showDenyButton: true,
@@ -54,7 +54,8 @@ function admMensagem(msg,icon){
       icon: "question",
     }).then((result) => {
       if (result.isConfirmed) {
-        ExcluirDados(key);
+       let id= key.target.id
+        requestDELETE(key,'/excluir')
   
         // Swal.fire(`O ID do paciente é ${button.id}`, "", "info");
       } else if (result.isDenied) {

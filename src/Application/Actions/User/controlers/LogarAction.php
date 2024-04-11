@@ -30,7 +30,7 @@ class LogarAction extends UserAction
         //     return $this->respondWithData($response);
         // }
 
-        $response= ['status'=>'ok','msg'=>'logado com sucesso','location'=>'registrar'];
+        $response= ['status'=>'ok','msg'=>'logado com sucesso','location'=>'home'];
         return $this->respondWithData($response);
 }
 

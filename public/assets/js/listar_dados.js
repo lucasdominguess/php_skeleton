@@ -100,8 +100,9 @@ function arrumar(obj){
     $('.tbody').append(tr);
     
     //evento botao de editar 
-    button.addEventListener('click',requestGET(17));
-    // button2.addEventListener('click',confirmExcluir);
+  
+    button.addEventListener('click',requestGET);
+    button2.addEventListener('click',confirmExcluir);
   };
   
 
