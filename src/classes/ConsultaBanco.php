@@ -4,10 +4,10 @@ namespace App\classes;
 use PDO;
 use DateTime;
 use DateTimeZone;
-use App\Infrastructure\Persistence\User\Sql;
+use App\classes\BloquearAcesso;
 
 use App\Application\Actions\User\controlers;
-use App\Application\Actions\User\controlers\BloquearAcesso;
+use App\Infrastructure\Persistence\User\Sql;
 use App\Application\Actions\User\controlers\LogarAction;
 
 class ConsultaBanco{ 

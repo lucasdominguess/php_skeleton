@@ -10,7 +10,7 @@ async function requestPOST(rota,v_form=null){
 });
 
 let newResponse = await response.json()
-
+console.log(newResponse)
 let icon = newResponse.data.status == 'fail' ? 'error' : 'success' 
 let reload = newResponse.data.status=='fail' ? false : true
 let rotas = newResponse.data.location 

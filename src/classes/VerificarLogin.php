@@ -1,26 +1,27 @@
 <?php
 namespace App\classes;
 
-use App\Application\Actions\User\controlers\BloquearAcesso;
-use App\Application\Actions\User\UserAction;
+
 use DateTime;
 use DateTimeZone;
 use App\classes\Token;
-use App\Infrastructure\Persistence\User\Sql;
+use App\classes\BloquearAcesso;
 use phpDocumentor\Reflection\Types\This;
-use Psr\Http\Message\ResponseInterface as response;
+use App\Application\Actions\User\UserAction;
+use App\Infrastructure\Persistence\User\Sql;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface as response;
 
-class VerificarLogin extends UserAction { 
+class VerificarLogin { 
 
-public function __construct() {
-   $this->action();
+public function __construct($email,$senha) {
+   $this->validarLogin($email,$senha);
 }
 
-    protected function action():response
+    protected function validarLogin($email,$senha)
     {
-        $email = $_POST['email']; 
-        $senha = $_POST['senha']; 
+        // $email = $_POST['email']; 
+        // $senha = $_POST['senha']; 
 
         $db2 = new Sql();
         $stmt=$db2->prepare("Select * from usuarios where email = :email");
@@ -36,7 +37,7 @@ public function __construct() {
         
         $response = ['status'=>'fail','msg'=>'Usuario ou Senha invalida'];
         // echo json_encode($response) ;
-        return $this->respondWithData($response);
+        return $response;
 
         exit(); 
 
@@ -48,7 +49,7 @@ public function __construct() {
     
         $response =['status'=>'fail','msg'=>'Usuario ou Senha invalida']; 
         // echo json_encode($response) ;
-        return $this->respondWithData($response);
+        return $response;
         exit();
     }
 

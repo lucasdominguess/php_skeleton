@@ -24,20 +24,35 @@ class LogarAction extends UserAction
 
 try{ 
     $ver_email = new VerificarEmail($email);
-    // $newEmail = new ConsultaBanco($email,$senha); 
-
-    // $login = new VerificarLogin($email,$senha);
-    // $login->action();
+   
 }catch(\Throwable $e){ 
-    $response = ['cod' => 'fail', 'msg' => $e->getMessage()];
+    $response =['status' => 'fail', 'msg' => $e->getMessage()];
     return $this->respondWithData($response);
     exit();
 }
 
+// try{
+//     $newEmail = new ConsultaBanco($email,$senha); 
+// }catch(\Throwable $e){ 
+//     $response = ['cod' => 'fail', 'msg' => $e->getMessage()];
+//     return $this->respondWithData($response);
+   
+// }
+
+// try{
+//     $newEmail = new VerificarLogin($email,$senha); 
+// }catch(\Throwable $e){ 
+//     $response =  throw new \Exception($e->getMessage());
+//     return $this->respondWithData($response);
+   
+// }
 
 
-        $response= ['status'=>'ok','msg'=>'logado com kkkkksucesso','location'=>'home'];
-        return $this->respondWithData($response);
+
+
+
+        // $response2= (['status'=>'ok','msg'=>'logado com sucesso','location'=>'home']);
+        // return $this->respondWithData($response2);
 }
 
 };

@@ -1,5 +1,6 @@
 <?php 
-namespace App\Application\Actions\User\controlers;
+namespace App\classes;
+
 
 use PDO;
 use DateTime;
@@ -27,7 +28,7 @@ class BloquearAcesso {
         if ($count >= 3) { 
             // $res =json_encode(['status'=>'fail','msg'=>'Acesso Negado']);
             // echo $res ;
-            limparbloqueados($email,$senha);
+            $this->limparbloqueados($email,$senha);
             
         } else {
                $datenow = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
@@ -88,7 +89,7 @@ class BloquearAcesso {
             $stmt->bindValue(":data",$newtime);
             $stmt->execute();
             $res =(['status'=>'fail','msg'=>'Acesso Negado Aguarde 10 minutos ']);
-            echo $res ; 
+            return $res ; 
             exit();
     
     
