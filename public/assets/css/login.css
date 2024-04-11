@@ -86,7 +86,9 @@
     font-family: "Poppins", sans-serif;
   
 }
-
+#title_login{ 
+    font-weight: 550;
+}
 .input{ 
     width: 100%;
     padding: 12px 20px;

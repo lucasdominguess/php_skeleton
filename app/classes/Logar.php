@@ -13,21 +13,17 @@ try{
     $ver_email = new VerificarEmail($email);
     $newEmail = new ConsultaBanco($email,$senha); 
 
-    $login = new VerificarLogin($email,$senha);
+    $login = new VerificarLogin();
 }catch(\Throwable $e){ 
     echo $e->getMessage();
 }
-
-
-// Iniciar sessão 
-
 
 function bloqueio($email,$senha){
 
     $db5 = new Sql(); 
 
 
-    $stmt = $db5->prepare("SELECT COUNT(*) AS total FROM tentativas WHERE email = :email");
+    $stmt = $db5->prepare("SELECT COUNT(*) AS total FROM tentativa WHERE email = :email");
     $stmt->bindValue(":email", $email);
     $stmt->execute();
 
@@ -47,7 +43,7 @@ function bloqueio($email,$senha){
            $datenow = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
            $hr_bloq = date_add($datenow,date_interval_create_from_date_string('+1 minutes'));
            $hr = $hr_bloq->format("y-m-d H:i:s");
-           $stmt=$db5->prepare("insert into tentativas (email,data) values(:email,:date)") ;
+           $stmt=$db5->prepare("insert into tentativa (email,data) values(:email,:date)") ;
            $stmt->bindValue(":email",$email);
            $stmt->bindValue(":date",$hr);
            $stmt->execute();
@@ -57,7 +53,7 @@ function bloqueio($email,$senha){
 function limparbloqueados($email,$senha){
     $db3 = new Sql(); 
 
-    $stmt=$db3->prepare("select data from tentativas where email = :email order by `data` desc limit 1;") ;
+    $stmt=$db3->prepare("select data from tentativa where email = :email order by `data` desc limit 1;") ;
     $stmt->bindValue(":email",$email);
     $stmt->execute();
 
@@ -97,7 +93,7 @@ function limparbloqueados($email,$senha){
     
     
        
-        $stmt=$db3->prepare("update tentativas set data = :data where email = :email ") ;
+        $stmt=$db3->prepare("update tentativa set data = :data where email = :email ") ;
         $stmt->bindValue(":email",$email);
         $stmt->bindValue(":data",$newtime);
         $stmt->execute();
@@ -110,7 +106,7 @@ function limparbloqueados($email,$senha){
     }
     // $hr->format('Y-m-d H:i:s');
     
-            $stmt=$db3->prepare("delete from tentativas where email = :email;") ;
+            $stmt=$db3->prepare("delete from tentativa where email = :email;") ;
             $stmt->bindValue(":email",$email);
             $stmt->execute();
            

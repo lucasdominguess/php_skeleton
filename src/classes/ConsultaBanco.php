@@ -1,7 +1,14 @@
 <?php 
+namespace App\classes;
 
-require_once 'Sql.php' ; 
+use PDO;
+use DateTime;
+use DateTimeZone;
+use App\Infrastructure\Persistence\User\Sql;
 
+use App\Application\Actions\User\controlers;
+use App\Application\Actions\User\controlers\BloquearAcesso;
+use App\Application\Actions\User\controlers\LogarAction;
 
 class ConsultaBanco{ 
    
@@ -14,7 +21,7 @@ class ConsultaBanco{
     protected function verificarLogin($email,$senha) {
         $dbs =new Sql();
                   
-        $stmt = $dbs->prepare("SELECT COUNT(*) AS total FROM tentativas WHERE email = :email");
+        $stmt = $dbs->prepare("SELECT COUNT(*) AS total FROM tentativa WHERE emails = :email");
         $stmt->bindValue(":email", $email);
         $stmt->execute();
 
@@ -23,8 +30,9 @@ class ConsultaBanco{
         $count = $row['total'];
     
         if ($count >= 3) { 
-          
-            limparbloqueados($email,$senha);
+            
+            $block = new BloquearAcesso();
+            $block->limparbloqueados($email,$senha);
             
         }
     }
@@ -45,7 +53,7 @@ class ConsultaBanco{
 //            $datenow = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
 //            $hr = $datenow->format("y-m-d H:i:s");
           
-//            $stmt=$db->prepare("insert into tentativas (email,data) values(:email,:date)") ;
+//            $stmt=$db->prepare("insert into tentativa (email,data) values(:email,:date)") ;
 //            $stmt->bindValue(":email",$email);
 //            $stmt->bindValue(":date",$hr);
 //            $stmt->execute();
@@ -53,7 +61,7 @@ class ConsultaBanco{
 //     }
 //     protected function limparBloqueados($db,$email){
             
-//     $stmt=$db->prepare("select data from tentativas where email = :email order by `data` desc limit 1;") ;
+//     $stmt=$db->prepare("select data from tentativa where email = :email order by `data` desc limit 1;") ;
 //     $stmt->bindValue(":email",$email);
 //     $stmt->execute();
 
@@ -73,7 +81,7 @@ class ConsultaBanco{
 
 //     if($resultado >= 10 ){ 
       
-//         $stmt=$db->prepare("delete from tentativas where email = :email;") ;
+//         $stmt=$db->prepare("delete from tentativa where email = :email;") ;
 //         $stmt->bindValue(":email",$email);
 //         $stmt->execute();
 //         exit();
