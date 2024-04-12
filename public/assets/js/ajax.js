@@ -19,7 +19,7 @@ let msg = newResponse.data.msg
 if(icon=='error'){
     fnMensagem(icon,msg)
 }else {
-    fnMensagem(icon,msg,false,rotas)
+    fnMensagem(icon,msg,reload,rotas)
     // window.location.href='registrar' 
 }
 }

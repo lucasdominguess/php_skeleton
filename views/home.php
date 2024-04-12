@@ -1,9 +1,10 @@
 <?php
-// session_start();
+
 // if ($_SESSION["email"] == null) {
 //     header('location: http://localhost:9000');
 // }
-
+$nome = $_SESSION['nome'] ?? '2';
+$tempo = $_SESSION['sessao'] ?? '2' ;
 
 ?>
 <!DOCTYPE html>
@@ -17,7 +18,7 @@
     <link href="https://cdn.datatables.net/v/bs5/dt-2.0.2/af-2.7.0/b-3.0.1/b-html5-3.0.1/fc-5.0.0/fh-4.0.1/r-3.0.0/rg-1.5.0/rr-1.5.0/sb-1.7.0/sl-2.0.0/datatables.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/registrar.css">
+    <link rel="stylesheet" href="assets/css/home.css">
     <title>Cadastro</title>
 </head>
 
@@ -31,11 +32,11 @@
                 <div id="nomeAdm">
                     <div>
                         <h4>Bem-vindo !</h4>
-                        <h3><?php ?> </h3>
+                        <h3><?php echo $nome; ?> </h3>
                     </div>
                 </div>
                 <div id="tempo_sessao">
-                    <?php    ?> <br>
+                    <?php  echo $tempo  ?> <br>
                 </div>
                 <div>
                     <button id="btn_sair" class="btn btn-danger">Sair</button>

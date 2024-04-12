@@ -24,6 +24,6 @@ class VerificarEmail
             return $response;
             exit();
         }
-        return $email2 ;
+        // return $email2 ;
     }
 }

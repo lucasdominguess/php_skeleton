@@ -50,14 +50,15 @@
 #sessao_tabela{ 
     background:  white;
 
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.500);
     backdrop-filter: blur(9.4px);
     -webkit-backdrop-filter: blur(9.4px);
     border: 1px solid rgba(255, 255, 255, 1);
-
+   
 
 
     padding: 20px;
+   
     /* margin: 20px; */
     border-radius: 10px;
     /* border : 1px solid black */
@@ -140,6 +141,7 @@ ul.pagination:hover{
 .modal-content{ 
     height: auto;
     width: 400px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.500);
 }
 
 
