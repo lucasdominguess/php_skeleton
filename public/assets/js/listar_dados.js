@@ -49,9 +49,9 @@ function tH(keys) {
             $(table1).append(thead) ;
             $(table1).append(tbody) ;
 
-            $(h1).addClass('h1s'); 
+            $(h1).addClass('h1s titletable'); 
             $('th').addClass('labelPerso'); 
-            $(table1).addClass('table table-striped table-hover table-responsive-sm  container')
+            $(table1).addClass('table table-striped table-hover table-responsive')
             // $(table1).css('wigth','100%')
            
             $(tbody).addClass('tbody');

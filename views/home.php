@@ -8,21 +8,23 @@ $tempo = $_SESSION['sessao'] ?? '2' ;
 
 ?>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html id='html_home' lang="pt-br">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/@sweetalert2" rel="stylesheet">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet"> -->
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/v/bs5/dt-2.0.2/af-2.7.0/b-3.0.1/b-html5-3.0.1/fc-5.0.0/fh-4.0.1/r-3.0.0/rg-1.5.0/rr-1.5.0/sb-1.7.0/sl-2.0.0/datatables.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="assets/css/home.css">
     <title>Cadastro</title>
 </head>
 
-<body class="body_bg">
+<body class="body_dark">
 
     <section id="conteudo">
 
@@ -31,7 +33,7 @@ $tempo = $_SESSION['sessao'] ?? '2' ;
             <section id="sessao_adm" class="col-2">
                 <div id="nomeAdm">
                     <div>
-                        <h4>Bem-vindo !</h4>
+                        <h4 class="escletra">Bem-vindo !</h4>
                         <h3><?php echo $nome; ?> </h3>
                     </div>
                 </div>
@@ -45,7 +47,7 @@ $tempo = $_SESSION['sessao'] ?? '2' ;
             </section>
 
             <section id="nav" class='col-sm-8'>
-                <nav class="navbar navbar-expand-lg bg-white ">
+                <nav class="navbar navbar-expand-lg ">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="#">Navbar</a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,8 +83,15 @@ $tempo = $_SESSION['sessao'] ?? '2' ;
                                 <button class="btn btn-outline-success" type="submit">Search</button>
                             </form>
                         </div>
+                       
                     </div>
+                         <div id="div_icons">
+                             <abbr title="Modo Dark"><i id="icon_home" class="fa-solid fa-moon icon"></i>
+                            </abbr>
+                                                   <!-- <p>Modo Dark</p> -->
+                         </div>
                 </nav>
+                
                 </div>
 
             </section>

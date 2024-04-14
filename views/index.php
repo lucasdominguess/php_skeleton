@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!DOCTYPE html >
+<html id="html_login" lang="pt-br">
 
 <head>
     <meta charset="utf-8">
@@ -12,44 +12,53 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Madimi+One&family=Poppins:wght@100;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="assets/css/login.css">
-    
+
     <title>login</title>
 </head>
 
 <body class="body_bg">
-        
+
+    <section id="divicon">
+
+     
+    </section>
     <!-- Sessao login -->
     <section id="sessao" class="container-fluid">
 
-            <!-- <div id="div-img"> <img id="img" class="opacity-50" src="assets/img/img2.svg" alt="">
+        <!-- <div id="div-img"> <img id="img" class="opacity-50" src="assets/img/img2.svg" alt="">
             </div> -->
-            <div id="login">
+        <div id="login">
 
             <form id="form_login">
                 <div class="div_form">
                     <div>
-            
+
                         <div class="conteudo">
-   
+                            <div id="div_icons">
+                                <abbr title="Modo Dark"><i id="icon_login" class="fa-solid fa-moon icon"></i>
+                                </abbr>
+                                <!-- <p>Modo Dark</p> -->
+                            </div>
                             <div id="div_h3login">
-                                <h3 id="title_login">Login</h3> 
-                            </div> 
+                                <h3 id="title_login">Login</h3>
+                            </div>
                             <input type="hidden" name="id" id="id">
 
                             <label for="email"><b>Email:</b></label><br>
                             <input class="input" type="email" id="email" name="email" placeholder="exemplo@prefeitura.sp.gov"><br><br>
 
                             <label for="senha"><b>Senha:</b></label><br>
-                            <input class="input"  type="password" id="senha" name="senha" placeholder="Digite sua senha "><br><br>
+                            <input class="input" type="password" id="senha" name="senha" placeholder="Digite sua senha "><br><br>
 
                             <button id="btn_entrar" class="btn_entrar" type="button">Entrar</button>
                         </div>
                     </div>
                 </div>
             </form>
-            </div>
-        </section>
+        </div>
+    </section>
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -65,5 +74,6 @@
 <script src="assets/js/enviar_dados.js"></script>
 <script src="assets/js/ajax.js"></script>
 
-<script src="assets/js/index.js" ></script>
+<script src="assets/js/index.js"></script>
+
 </html>
