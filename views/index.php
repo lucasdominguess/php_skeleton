@@ -1,10 +1,12 @@
 <!DOCTYPE html >
-<html id="html_login" lang="pt-br">
+<html id="html_login" lang="pt-br" class="htmlpags">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/@sweetalert2" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+
     <link href="https://cdn.datatables.net/v/bs5/dt-2.0.2/af-2.7.0/b-3.0.1/b-html5-3.0.1/fc-5.0.0/fh-4.0.1/r-3.0.0/rg-1.5.0/rr-1.5.0/sb-1.7.0/sl-2.0.0/datatables.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -18,7 +20,7 @@
     <title>login</title>
 </head>
 
-<body class="body_bg">
+<body class="">
 
     <section id="divicon">
 
@@ -37,7 +39,7 @@
 
                         <div class="conteudo">
                             <div id="div_icons">
-                                <abbr title="Modo Dark"><i id="icon_login" class="fa-solid fa-moon icon"></i>
+                                <abbr title="Modo Dark"><i id="icon_login" class="fa-solid fa-moon icons"></i>
                                 </abbr>
                                 <!-- <p>Modo Dark</p> -->
                             </div>

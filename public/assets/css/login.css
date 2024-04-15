@@ -67,7 +67,7 @@
 
 #login 
     { 
-        background-color: rgba(250, 250, 250, 0.736);
+       border: 1px solid white;
         padding: 15px;
         border-radius: 10px;
         width: 350px;
@@ -79,7 +79,8 @@
 
 #form_login { 
     width: 100%;
-    border: 2px solid white;
+    /* border: 1px solid white; */
+    border-radius: 7px;
 }
 .div_form{ 
     height: auto;
@@ -89,7 +90,7 @@
 }
 
 .conteudo{ 
-    background-color:white;
+    /* background-color:white; */
     padding: 10px;
     border-radius: 1px;
     height: auto;

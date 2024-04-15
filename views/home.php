@@ -5,10 +5,11 @@
 // }
 $nome = $_SESSION['nome'] ?? '2';
 $tempo = $_SESSION['sessao'] ?? '2' ;
+$modoDark = $_POST['modoDark'];
 
 ?>
 <!DOCTYPE html>
-<html id='html_home' lang="pt-br">
+<html id='html_home' lang="pt-br" class="htmlpags">
 
 <head>
     <meta charset="utf-8">
@@ -86,9 +87,9 @@ $tempo = $_SESSION['sessao'] ?? '2' ;
                        
                     </div>
                          <div id="div_icons">
-                             <abbr title="Modo Dark"><i id="icon_home" class="fa-solid fa-moon icon"></i>
+                             <abbr title="Modo Dark"><i id="icon_home" class="fa-solid fa-moon icons"></i>
                             </abbr>
-                                                   <!-- <p>Modo Dark</p> -->
+                                                 
                          </div>
                 </nav>
                 

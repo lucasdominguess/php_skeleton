@@ -1,3 +1,4 @@
+
 function fnMensagem(icon,msg,reload=false,location=''){
     Swal.fire({
       title: msg,
@@ -5,6 +6,9 @@ function fnMensagem(icon,msg,reload=false,location=''){
       confirmButtonText: 'Ok',
       timer: 5500,
       timerProgressBar: true,
+      customClass: {
+        container: 'dark-mode-alert'
+      },
       willClose: () => {
         
         if(reload){
@@ -23,6 +27,9 @@ function admMensagem(msg,icon){
     confirmButtonText: 'Ok',
     timer: 3500,
     timerProgressBar: true,
+    customClass: {
+      container: 'dark-mode-alert'
+    }
 })
 }function sair() {
     Swal.fire({ 

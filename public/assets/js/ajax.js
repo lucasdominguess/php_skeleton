@@ -1,16 +1,19 @@
 //enviando dados com medoto POST
 async function requestPOST(rota,v_form=null){
     const rots = rota 
+    const modoDark = localStorage.getItem('darkMode');
+    // v_form.append(modoDark)
     const response = await fetch(`${rots}`
 ,{
 
     method : 'post' , 
-    body : v_form
+    body : v_form,
+  
 
 });
 
 let newResponse = await response.json()
-console.log(newResponse)
+// console.log(newResponse)
 let icon = newResponse.data.status == 'fail' ? 'error' : 'success' 
 let reload = newResponse.data.status=='fail' ? false : true
 let rotas = newResponse.data.location 
