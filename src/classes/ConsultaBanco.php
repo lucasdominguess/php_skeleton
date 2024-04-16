@@ -32,7 +32,7 @@ class ConsultaBanco{
         if ($count >= 3) { 
             
             $block = new BloquearAcesso();
-            $block->limparbloqueados($email,$senha);
+            $block->bloqueio($email,$senha);
             
         }
     }
