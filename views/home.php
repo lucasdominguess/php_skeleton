@@ -1,29 +1,24 @@
-<?php
+{% extends 'base.html' %}
 
-// if ($_SESSION["email"] == null) {
-//     header('location: http://localhost:9000');
-// }
-$nome = $_SESSION['nome'] ?? '2';
-$tempo = $_SESSION['sessao'] ?? '2' ;
-$modoDark = $_POST['modoDark'];
+{% block php %}
 
-?>
-<!DOCTYPE html>
-<html id='html_home' lang="pt-br" class="htmlpags">
+{% endblock %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/v/bs5/dt-2.0.2/af-2.7.0/b-3.0.1/b-html5-3.0.1/fc-5.0.0/fh-4.0.1/r-3.0.0/rg-1.5.0/rr-1.5.0/sb-1.7.0/sl-2.0.0/datatables.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="assets/css/home.css">
-    <title>Cadastro</title>
-</head>
+
+
+{% block link %}
+<html id='html_home' class="htmlpags">
+<link rel="stylesheet" href="assets/css/home.css">
+<title>Cadastro</title>
+{% endblock %}
+
+
+
+
+
+
+
+{% block body %}
 
 <body class="body_dark">
 
@@ -34,12 +29,12 @@ $modoDark = $_POST['modoDark'];
             <section id="sessao_adm" class="col-2">
                 <div id="nomeAdm">
                     <div>
-                        <h4 class="escletra">Bem-vindo !</h4>
+                        <h4 class="escletra h1s">Bem-vindo !</h4>
                         <h3><?php echo $nome; ?> </h3>
                     </div>
                 </div>
                 <div id="tempo_sessao">
-                    <?php  echo $tempo  ?> <br>
+                    <?php echo $tempo  ?> <br>
                 </div>
                 <div>
                     <button id="btn_sair" class="btn btn-danger">Sair</button>
@@ -84,15 +79,15 @@ $modoDark = $_POST['modoDark'];
                                 <button class="btn btn-outline-success" type="submit">Search</button>
                             </form>
                         </div>
-                       
+
                     </div>
-                         <div id="div_icons">
-                             <abbr title="Modo Dark"><i id="icon_home" class="fa-solid fa-moon icons"></i>
-                            </abbr>
-                                                 
-                         </div>
+                    <div id="div_icons">
+                        <abbr title="Modo Dark"><i id="icon_home" class="fa-solid fa-moon icons"></i>
+                        </abbr>
+
+                    </div>
                 </nav>
-                
+
                 </div>
 
             </section>
@@ -133,25 +128,25 @@ $modoDark = $_POST['modoDark'];
 
 
                             <h3 id="title_h3">Cadastro</h3>
-                            <input type="hidden" name="id" id="id"  class="form-control">
+                            <input type="hidden" name="id" id="id" class="form-control">
                             <label for="nome" class="form-label"><b>Nome:</b></label><br>
-                            <input type="text" id="nome" name="nome" placeholder="Digite seu nome aqui!"  class="form-control"><br><br>
+                            <input type="text" id="nome" name="nome" placeholder="Digite seu nome aqui!" class="form-control"><br><br>
                             <label for="data_nascimento" class="form-label"><b>Data de Nascimento:</b></label><br>
-                            <input type="date" id="data" name="data_nascimento"  class="form-control"><br><br>
-                            
-                            <label id="label-cep" for="cep"class="">Cep:</label><br>
-                            <input type="text" id="cep" name="cep" placeholder="Digite seu cep"class="form-control" ><br><br>
+                            <input type="date" id="data" name="data_nascimento" class="form-control"><br><br>
 
-                            <label id="label-NomeRua" for="nome_rua"class="">nome da rua</label><br>
+                            <label id="label-cep" for="cep" class="">Cep:</label><br>
+                            <input type="text" id="cep" name="cep" placeholder="Digite seu cep" class="form-control"><br><br>
+
+                            <label id="label-NomeRua" for="nome_rua" class="">nome da rua</label><br>
                             <input type="text" id="nome_rua" name="nome_rua" readonly class="form-control"><br><br>
 
-                            <label id="label-NumeroC" for="numero_casa"class="">numero da casa:</label><br>
-                            <input type="text" id="numero_casa" name="numero_casa" class="form-control" ><br><br>
+                            <label id="label-NumeroC" for="numero_casa" class="">numero da casa:</label><br>
+                            <input type="text" id="numero_casa" name="numero_casa" class="form-control"><br><br>
 
-                            <label id="label-bairro"for="bairro"class="">Bairro:</label><br>
-                            <input type="text" id="bairro" name="bairro" readonly class="form-control" ><br><br>
+                            <label id="label-bairro" for="bairro" class="">Bairro:</label><br>
+                            <input type="text" id="bairro" name="bairro" readonly class="form-control"><br><br>
 
-                            <label id="label-uf"for="uf"class="">Uf:</label><br>
+                            <label id="label-uf" for="uf" class="">Uf:</label><br>
                             <input type="text" id="uf" name="uf" readonly class="form-control"><br><br>
 
                         </form>
@@ -169,23 +164,10 @@ $modoDark = $_POST['modoDark'];
     </section>
 
 
-</body>
+    {% endblock %}
 
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.2/af-2.7.0/b-3.0.1/b-colvis-3.0.1/b-html5-3.0.1/fc-5.0.0/fh-4.0.1/r-3.0.0/rg-1.5.0/rr-1.5.0/sb-1.7.0/sl-2.0.0/datatables.min.js"></script>
 
-
-<script src="assets/js/sweet_alert.js"></script>
-<script src="assets/js/button_events.js"></script>
-<script src="assets/js/listar_dados.js"></script>
-<script src="assets/js/editar_dados.js"></script>
-<script src="assets/js/enviar_dados.js"></script>
-<script src="assets/js/ajax.js"></script>
-<script src="assets/js/validar_cep.js"></script>
-<script src="assets/js/index.js" ></script>
-
-</html>
+    {% block script %}
+    <script src="assets/js/listar_dados.js"></script>
+    {% endblock %}

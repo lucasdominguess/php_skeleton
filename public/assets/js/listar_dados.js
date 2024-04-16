@@ -147,5 +147,26 @@ $(document).ready(async ()=>{
       
       });
 
+//Função escrevendo letras
+
+document.addEventListener("DOMContentLoaded", function() {
+  function ativaLetra(elemento) {
+    const arrTexto = elemento.innerHTML.split('');
+    elemento.innerHTML = '';
+    arrTexto.forEach((letra, i) => {
+      setTimeout(() => {
+        elemento.innerHTML += letra;
+      }, 75 * i);
+    });
+  }
+
+
+  
+  function escrevendoLetra() {
+    const titulo = document.querySelector('.escletra');
+    ativaLetra(titulo);
+  }
+escrevendoLetra();
+});
 
       
