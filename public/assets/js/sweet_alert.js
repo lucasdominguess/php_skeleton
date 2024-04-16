@@ -70,6 +70,14 @@ function confirmExcluir(key) {
       }
     });
   }
+  function msgErroCep(key) { 
+    Swal.fire({
+      title: 'Cep Invalido!',
+      text: `o Cep "${key}" Nao é valido`,
+      icon: 'error',
+      confirmButtonText: 'Ok'
+    })
+  }
 // outros sweetalert
   // Swal.fire({
   //   title: "Custom animation with Animate.css",

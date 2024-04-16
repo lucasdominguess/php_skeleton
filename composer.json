@@ -5,6 +5,11 @@
             "App\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "Lucas Domingues",
@@ -30,6 +35,8 @@
         "start": "php -S localhost:8000 -t public",
         "test": ["phpunit" , "Composer\\Config::disableProcessTimeout"]
         
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.6"
     }
-    
 }

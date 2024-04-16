@@ -145,9 +145,7 @@ ul.pagination:hover{
     width: 100%;
     gap :10px
 }
-td {
 
-}
 
 /* Sessao modal  */
  #sessao_modal{ 
@@ -162,14 +160,22 @@ td {
     justify-content: center;
     align-items: center;
     width: 100%; */
-  padding-top: 250px;
+  /* padding-top: 250px; */
 } 
 .modal-content{ 
     height: auto;
     width: 400px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.500);
 }
-
+#form_cad{ 
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+#form_cad input { 
+    /* background-color: red; */
+    padding: 10;
+}
 
 #div_btncad{
     /* background-color: white; */

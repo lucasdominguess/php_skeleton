@@ -138,7 +138,21 @@ $modoDark = $_POST['modoDark'];
                             <input type="text" id="nome" name="nome" placeholder="Digite seu nome aqui!"  class="form-control"><br><br>
                             <label for="data_nascimento" class="form-label"><b>Data de Nascimento:</b></label><br>
                             <input type="date" id="data" name="data_nascimento"  class="form-control"><br><br>
+                            
+                            <label id="label-cep" for="cep"class="">Cep:</label><br>
+                            <input type="text" id="cep" name="cep" placeholder="Digite seu cep"class="form-control" ><br><br>
 
+                            <label id="label-NomeRua" for="nome_rua"class="">nome da rua</label><br>
+                            <input type="text" id="nome_rua" name="nome_rua" readonly class="form-control"><br><br>
+
+                            <label id="label-NumeroC" for="numero_casa"class="">numero da casa:</label><br>
+                            <input type="text" id="numero_casa" name="numero_casa" class="form-control" ><br><br>
+
+                            <label id="label-bairro"for="bairro"class="">Bairro:</label><br>
+                            <input type="text" id="bairro" name="bairro" readonly class="form-control" ><br><br>
+
+                            <label id="label-uf"for="uf"class="">Uf:</label><br>
+                            <input type="text" id="uf" name="uf" readonly class="form-control"><br><br>
 
                         </form>
                     </div>
@@ -171,6 +185,7 @@ $modoDark = $_POST['modoDark'];
 <script src="assets/js/editar_dados.js"></script>
 <script src="assets/js/enviar_dados.js"></script>
 <script src="assets/js/ajax.js"></script>
+<script src="assets/js/validar_cep.js"></script>
 <script src="assets/js/index.js" ></script>
 
 </html>
