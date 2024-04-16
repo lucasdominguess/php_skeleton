@@ -136,7 +136,7 @@ $(document).ready(async ()=>{
           { target: [0,3], visible: false, searchable: false},
           { title: 'Nome', targets: 1 },
           { title: 'Data de Nascimento', targets: 2 },
-          { className: "dt-head-center", targets: [1,2,4,5] },
+          { className: "text-center dt-center", targets: [2,3,4,5]},
           
       ],
       initComplete: function () {

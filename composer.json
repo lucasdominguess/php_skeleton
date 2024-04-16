@@ -33,7 +33,10 @@
     },
     "scripts": {
         "start": "php -S localhost:8000 -t public",
-        "test": ["phpunit"]
+        
+        "test": [
+            "Composer\\Config::disableProcessTimeout",
+            "phpunit"]
         
     },
     "require-dev": {
