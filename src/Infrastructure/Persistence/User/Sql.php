@@ -7,7 +7,8 @@ namespace App\Infrastructure\Persistence\User;
     {   
         public function __construct() {
             global $env;
-            parent::__construct("mysql:dbname={$env['dbname']};host={$env['host']}",$env['user'],$env['password']);
+            parent::__construct("{$env['sgbd']}:dbname={$env['dbname']};host={$env['host']}",$env['user'],$env['password']);
+            // parent::__construct("mysql:dbname={$env['dbname']};host={$env['host']}",$env['user'],$env['password']);
         }
         
         public function setParms(\PDOStatement $stmt , array $dados = []){ 

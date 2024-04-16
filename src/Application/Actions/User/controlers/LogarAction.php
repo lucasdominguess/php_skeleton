@@ -5,6 +5,7 @@ use PDO;
 use DateTime;
 use DateTimeZone;
 use Slim\Views\Twig;
+use App\Domain\User\User;
 use App\classes\ConsultaBanco;
 use App\classes\BloquearAcesso;
 use App\classes\VerificarEmail;
@@ -78,6 +79,7 @@ class LogarAction extends UserAction
                 
                 // // Iniciar sessão 
                 session_start();
+                $_SESSION[User::USER_NAME];
                 $_SESSION['id_usuario']= $retorno[0]['id_adm'];
                 $_SESSION['email']= $retorno[0]['email'];
                 $_SESSION['id']= $retorno[0]['id_adm'];
