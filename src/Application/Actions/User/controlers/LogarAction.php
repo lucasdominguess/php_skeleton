@@ -11,6 +11,7 @@ use App\classes\BloquearAcesso;
 use App\classes\VerificarEmail;
 use App\classes\VerificarLogin;
 use App\Application\Actions\User\UserAction;
+use App\classes\IniciarSessao;
 use App\Infrastructure\Persistence\User\Sql;
 use Psr\Http\Message\ResponseInterface as Response; 
 
@@ -23,6 +24,8 @@ class LogarAction extends UserAction
        
         $email = $_POST['email'] ?? null;
         $senha = $_POST['senha'] ?? null;
+
+        // return $this->respondWithData(['recebido'=>1,"email"=>$email]);
         
         try{
 
@@ -46,10 +49,10 @@ class LogarAction extends UserAction
             exit();
         }
 
-        // Verificando se email e senha correspondem a um cadastro valido 
-        $stmt=$db->prepare("Select * from usuarios where email = :email");
-        $stmt->bindValue(":email",$email);
-        $stmt->execute();
+    // Verificando se email e senha correspondem a um cadastro valido 
+    $stmt=$db->prepare("Select * from usuarios where email = :email");
+    $stmt->bindValue(":email",$email);
+    $stmt->execute();
    
         $retorno = $stmt->fetchAll(PDO::FETCH_ASSOC);
             if(!isset($retorno[0]['id_adm'])||!password_verify($senha,$retorno[0]['senha']))
@@ -60,7 +63,7 @@ class LogarAction extends UserAction
                 
 
 
-                switch ($res): 
+                switch ($res){ 
                     case $res === 1 : 
                         $response= (['status'=>'fail','msg'=>'Usuario ou Senha invalida']);
                         return $this->respondWithData($response);
@@ -72,29 +75,29 @@ class LogarAction extends UserAction
                         return $this->respondWithData($response);
                         break;
 
-                endswitch;
+                // endswitch;
                 }
+               
+            }
 
-
-                
+            //    $usersession = new IniciarSessao($retorno[0]['nome'],$retorno[0]['email']); 
+            //  session_start();
+                // @session_start();
                 // // Iniciar sessão 
-                session_start();
-                $_SESSION[User::USER_NAME];
-                $_SESSION['id_usuario']= $retorno[0]['id_adm'];
-                $_SESSION['email']= $retorno[0]['email'];
-                $_SESSION['id']= $retorno[0]['id_adm'];
-                $_SESSION['nome'] = $retorno[0]['nome'];
-                $_SESSION['sessao'] = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
+
+                // @session_start();
+                $_SESSION['email'] = $retorno[0]['email'];
+                $user = new User($retorno[0]['id_adm'],$retorno[0]['nome'],$retorno[0]['email']);
                 
-                
-                print_r($_SESSION);
+                // $_SESSION['nome']=$user::USER_NAME;
+                // $_SESSION['datasessao']=$user::USER_DATE;
+
+             
                 $response= ['status'=>'ok','msg'=>'logado com sucesso','location'=>'home'];
                 return $this->respondWithData($response);
 
 
 
-
-    
-       
-}
+    }
+  
 }

@@ -7,8 +7,9 @@ class PessoaTest extends TestCase
 {
     public function testConstrutorComNomeInvalido()
     {
-        $this->expectException(\Exception::class);
-        new Pessoa('lucas');
+        $this->expectException(\DomainException::class);
+        $this->expectExceptionMessage("Erro! Nome invalido.");
+        new Pessoa('12');
     }
 
     public function testConstrutorComNomeValido()

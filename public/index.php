@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-
+@session_start();
 use App\Application\Handlers\HttpErrorHandler;
 use App\Application\Handlers\ShutdownHandler;
 use App\Application\ResponseEmitter\ResponseEmitter;
@@ -11,7 +11,8 @@ use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;
 use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
-use App\Application\Actions\User;
+// use App\Application\Actions\User;
+use App\Domain\User\User;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -93,12 +94,5 @@ $response = $app->handle($request);
 $responseEmitter = new ResponseEmitter();
 $responseEmitter->emit($response);
 
-// Create App
-// AppFactory::setContainer($container);
-// $app = AppFactory::create();
-
-// Create Twig
-// $twig = Twig::create(__DIR__ .'/../app/views', ['cache' => false]);
-// $container->set('view',$twig);
-// // Add Twig-View Middleware
-// $app->add(TwigMiddleware::create($app, $twig));
+$username = $_SESSION[User::USER_NAME]?? '';
+define('username',$username);

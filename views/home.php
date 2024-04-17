@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block php %}
+ 
 
 {% endblock %}
 
@@ -10,8 +11,9 @@
 <html id='html_home' class="htmlpags">
 <link rel="stylesheet" href="assets/css/home.css">
 <title>Cadastro</title>
-{% endblock %}
 
+{% endblock %}
+{% set username = 'Lucas' %}
 
 
 
@@ -30,7 +32,7 @@
                 <div id="nomeAdm">
                     <div>
                         <h4 class="escletra h1s">Bem-vindo !</h4>
-                        <h3><?php echo $nome; ?> </h3>
+                        <h3>{{username}}</h3>
                     </div>
                 </div>
                 <div id="tempo_sessao">

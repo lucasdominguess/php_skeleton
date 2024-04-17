@@ -4,54 +4,30 @@ declare(strict_types=1);
 
 namespace App\Domain\User;
 
+use App\classes\Data;
 use JsonSerializable;
 
 class User implements JsonSerializable
 {
-    private ?int $id;
+    const USER_ID = 'user_id';
+    const USER_EMAIL = 'user_email';
+    const USER_NAME = 'user_nome';
+    const USER_DATE = 'datasessao'; 
 
-    private string $username;
-
-    private string $firstName;
-
-    private string $lastName;
-
-    public function __construct(?int $id, string $username, string $firstName, string $lastName)
+    public function __construct(public readonly int $id_adm,public string $nome,public string $email)
     {
-        $this->id = $id;
-        $this->username = strtolower($username);
-        $this->firstName = ucfirst($firstName);
-        $this->lastName = ucfirst($lastName);
-    }
 
-    public function getId(): ?int
-    {
-        return $this->id;
     }
-
-    public function getUsername(): string
-    {
-        return $this->username;
-    }
-
-    public function getFirstName(): string
-    {
-        return $this->firstName;
-    }
-
-    public function getLastName(): string
-    {
-        return $this->lastName;
-    }
-
     #[\ReturnTypeWillChange]
     public function jsonSerialize(): array
     {
         return [
-            'id' => $this->id,
-            'username' => $this->username,
-            'firstName' => $this->firstName,
-            'lastName' => $this->lastName,
+            'user_id' => $this->id_adm,
+            'user_nome' => $this->nome,
+            'email' => $this->email,
+            // 'datasessao' => $this->datasessao,
         ];
+
+       
     }
 }
