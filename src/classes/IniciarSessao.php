@@ -10,7 +10,7 @@ class IniciarSessao {
     }
 
     protected function criarSessao($username,$email){ 
-
+        
         $_SESSION['nome'] = $username ; 
         $_SESSION['email'] = $email ; 
     

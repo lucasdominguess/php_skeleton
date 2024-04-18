@@ -20,6 +20,7 @@ use App\Application\Actions\User\controlers\ExcluirAction;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 use App\Application\Actions\User\controlers\CadastrarAction;
 use App\Application\Actions\User\controlers\SairSessaoAction;
+use App\Application\Middleware\ValidatePostMiddleware;
 
 return function (App $app) {
     $app->options('/{routes:.*}', function (Request $request, Response $response) {
@@ -55,7 +56,7 @@ return function (App $app) {
     //     ]);
     // });
    
-        $app->post('/logar',LogarAction::class); //efetuar login 
+        $app->post('/logar',LogarAction::class)->add(ValidatePostMiddleware::class); //efetuar login 
 
         $app->post('/sair',SairSessaoAction::class); //sair da sessao
         $app->get('/listar',ListarAction::class); //listar dados para tabela
@@ -66,14 +67,19 @@ return function (App $app) {
         $app->get('/editar',EditarAction::class);
         $app->post('/excluir',ExcluirAction::class);
 
-
-
-    $app->get('/home', function ($request, $response, $args) {
+        $app->get('/home', function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
         return $view->render($response, 'home.php', [
           
         ]);
-    })->setName('registro');
+        })->setName('registro');
+
+        $app->get('/invalidtoken', function ($request, $response, $args) {
+        $view = Twig::fromRequest($request);
+        return $view->render($response, '404.html', [
+          
+        ]);
+    })->setName('tokenInvalido');
 
     // $app->post('/',Registrar::class);
 

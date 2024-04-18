@@ -13,7 +13,9 @@
 <title>Cadastro</title>
 
 {% endblock %}
-{% set username = 'Lucas' %}
+{% set username = constant('USERNAME') %}
+{% set useremail = constant('USEREMAIL') %}
+
 
 
 
@@ -31,12 +33,14 @@
             <section id="sessao_adm" class="col-2">
                 <div id="nomeAdm">
                     <div>
-                        <h4 class="escletra h1s">Bem-vindo !</h4>
-                        <h3>{{username}}</h3>
+                        <h4 class="escletra h1s">Bem-vindo, {{username}}!</h4>
+                        <h5>{{useremail}}</h5>
+                        <!-- <h5>{{userdata}}</h5> -->
+                        <!-- <h3>{{username}}</h3> -->
                     </div>
                 </div>
                 <div id="tempo_sessao">
-                    <?php echo $tempo  ?> <br>
+                    <br>
                 </div>
                 <div>
                     <button id="btn_sair" class="btn btn-danger">Sair</button>

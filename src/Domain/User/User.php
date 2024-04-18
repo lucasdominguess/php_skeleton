@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace App\Domain\User;
 
 use App\classes\Data;
+use DateTime;
 use JsonSerializable;
 
 class User implements JsonSerializable
 {
     const USER_ID = 'user_id';
-    const USER_EMAIL = 'user_email';
+    const USER_EMAIL = 'email';
     const USER_NAME = 'user_nome';
     const USER_DATE = 'datasessao'; 
 

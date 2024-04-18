@@ -2,20 +2,30 @@
 
 declare(strict_types=1);
 @session_start();
-use App\Application\Handlers\HttpErrorHandler;
-use App\Application\Handlers\ShutdownHandler;
-use App\Application\ResponseEmitter\ResponseEmitter;
-use App\Application\Settings\SettingsInterface;
-use DI\ContainerBuilder;
-use Slim\Factory\AppFactory;
-use Slim\Factory\ServerRequestCreatorFactory;
+use Slim\Csrf\Guard;
 use Slim\Views\Twig;
-use Slim\Views\TwigMiddleware;
-// use App\Application\Actions\User;
+use DI\ContainerBuilder;
 use App\Domain\User\User;
+use Slim\Factory\AppFactory;
+use Slim\Views\TwigMiddleware;
+use App\Application\Extension\CsrfExtension;
+use App\Application\Handlers\ShutdownHandler;
+// use App\Application\Actions\User;
+use Slim\Factory\ServerRequestCreatorFactory;
+use App\Application\Handlers\HttpErrorHandler;
+use App\Application\Settings\SettingsInterface;
+use App\Application\ResponseEmitter\ResponseEmitter;
 
 require __DIR__ . '/../vendor/autoload.php';
 
+// $agora = (new DateTime('now', $GLOBALS['TZ']))->format('d/m/Y H:i:s');
+// define('USER_DATA', $agora);
+ 
+// define('USERNAME',$_SESSION['nome']);
+// define('USERID',$_SESSION[ User::USER_ID] );
+define('USERNAME',$_SESSION[ User::USER_NAME] );
+define('USEREMAIL',$_SESSION[ User::USER_EMAIL] );
+// define('USERSESSION',$_SESSION[ User::USER_DATE] );
 // Instantiate PHP-DI ContainerBuilder
 $containerBuilder = new ContainerBuilder();
 
@@ -50,6 +60,8 @@ $container->set('view',$twig);
 // Add Twig-View Middleware
 $app->add(TwigMiddleware::create($app, $twig));
 
+
+
 $callableResolver = $app->getCallableResolver();
 
 // Register middleware
@@ -75,6 +87,20 @@ $request = $serverRequestCreator->createServerRequestFromGlobals();
 $responseFactory = $app->getResponseFactory();
 $errorHandler = new HttpErrorHandler($callableResolver, $responseFactory);
 
+//Criando guard 
+$guard = new Guard($responseFactory);
+$twig->addExtension(new CsrfExtension($guard));
+
+// Generate new tokens
+function gerar_token()
+{
+    global $guard;
+    $csrfNameKey = $guard->getTokenNameKey();
+    $csrfValueKey = $guard->getTokenValueKey();
+    $keyPair = $guard->generateToken();
+}
+
+gerar_token();
 // Create Shutdown Handler
 $shutdownHandler = new ShutdownHandler($request, $errorHandler, $displayErrorDetails);
 register_shutdown_function($shutdownHandler);
@@ -94,5 +120,6 @@ $response = $app->handle($request);
 $responseEmitter = new ResponseEmitter();
 $responseEmitter->emit($response);
 
-$username = $_SESSION[User::USER_NAME]?? '';
-define('username',$username);
+// $username = $_SESSION[User::USER_NAME]?? '';
+// define('username',$username);
+

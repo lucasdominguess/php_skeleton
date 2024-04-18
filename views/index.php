@@ -38,7 +38,8 @@
 
                             <label for="email"><b>Email:</b></label><br>
                             <input class="input" type="email" id="email" name="email" placeholder="exemplo@prefeitura.sp.gov"><br><br>
-
+                            <input type="hidden" name="{{csrf.keys.name}}" value="{{csrf.name}}">
+                            <input type="hidden" name="{{csrf.keys.value}}" value="{{csrf.value}}">
                             <label for="senha"><b>Senha:</b></label><br>
                             <input class="input" type="password" id="senha" name="senha" placeholder="Digite sua senha "><br><br>
 

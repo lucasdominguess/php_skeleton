@@ -79,18 +79,31 @@ class LogarAction extends UserAction
                 }
                
             }
-
+            // $_SESSION['nome'] = $retorno[0]['nome'] ; 
             //    $usersession = new IniciarSessao($retorno[0]['nome'],$retorno[0]['email']); 
+
+            //    var_dump($usersession);
+            //    return $this->respondWithData($_SESSION['email']);
+
+            //    const USER_NAME = $_SESSION['email'];
+
+
             //  session_start();
                 // @session_start();
                 // // Iniciar sessão 
 
                 // @session_start();
-                $_SESSION['email'] = $retorno[0]['email'];
+                // $_SESSION['email'] = $retorno[0]['email'];
+
+   
                 $user = new User($retorno[0]['id_adm'],$retorno[0]['nome'],$retorno[0]['email']);
                 
-                // $_SESSION['nome']=$user::USER_NAME;
-                // $_SESSION['datasessao']=$user::USER_DATE;
+
+                $_SESSION[User::USER_ID]=$user->id_adm;
+                $_SESSION[User::USER_NAME]=$user->nome;
+                $_SESSION[User::USER_EMAIL]=$user->email;
+                // $_SESSION[User::USER_DATE]=$user->datasessao;
+                // $_SESSION['datasessao']=$::USER_EMAIL;
 
              
                 $response= ['status'=>'ok','msg'=>'logado com sucesso','location'=>'home'];
