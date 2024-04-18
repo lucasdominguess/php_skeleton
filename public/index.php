@@ -17,12 +17,14 @@ use App\Application\Settings\SettingsInterface;
 use App\Application\ResponseEmitter\ResponseEmitter;
 
 require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../config.php' ;
 
-// $agora = (new DateTime('now', $GLOBALS['TZ']))->format('d/m/Y H:i:s');
-// define('USER_DATA', $agora);
+// $GLOBALS['TZ'] = new \DateTimeZone( 'America/Sao_Paulo');
+
+define('USER_DATA', $GLOBALS['hours']);
  
 // define('USERNAME',$_SESSION['nome']);
-// define('USERID',$_SESSION[ User::USER_ID] );
+define('USERID',$_SESSION[ User::USER_ID] );
 define('USERNAME',$_SESSION[ User::USER_NAME] );
 define('USEREMAIL',$_SESSION[ User::USER_EMAIL] );
 // define('USERSESSION',$_SESSION[ User::USER_DATE] );

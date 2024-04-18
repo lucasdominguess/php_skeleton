@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Application\Actions\sender\HandleSenderAction;
 use Slim\App;
 use Slim\Views\Twig;
 use App\Application\Actions\User;
@@ -23,21 +24,21 @@ use App\Application\Actions\User\controlers\SairSessaoAction;
 use App\Application\Middleware\ValidatePostMiddleware;
 
 return function (App $app) {
-    $app->options('/{routes:.*}', function (Request $request, Response $response) {
-        // CORS Pre-Flight OPTIONS Request Handler
-        return $response;
-    });
-
-    // $app->get('/', function (Request $request, Response $response) {
-    //     $response->getBody()->write('Hello world!');
+    // $app->options('/{routes:.*}', function (Request $request, Response $response) {
+    //     // CORS Pre-Flight OPTIONS Request Handler
     //     return $response;
     // });
 
-    $app->group('/users', function (Group $group) {
-        $group->get('', ListUsersAction::class);
-        $group->get('/{id}', ViewUserAction::class);
+    // // $app->get('/', function (Request $request, Response $response) {
+    // //     $response->getBody()->write('Hello world!');
+    // //     return $response;
+    // // });
+
+    // $app->group('/users', function (Group $group) {
+    //     $group->get('', ListUsersAction::class);
+    //     $group->get('/{id}', ViewUserAction::class);
        
-    });
+    // });
     
 
     
@@ -47,6 +48,7 @@ return function (App $app) {
           
         ]);
     })->setName('login');
+    $app->get('/sender', HandleSenderAction::class);
 
     // $app->get('/logar', function ($request, $response,$args) {
     //     //  echo json_encode('chegou no app da rota');
@@ -67,12 +69,19 @@ return function (App $app) {
         $app->get('/editar',EditarAction::class);
         $app->post('/excluir',ExcluirAction::class);
 
-        $app->get('/home', function ($request, $response, $args) {
+        $app->get('/acessoadm', function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
         return $view->render($response, 'home.php', [
           
         ]);
-        })->setName('registro');
+        })->setName('acessoadm');
+
+        $app->get('/acessouser', function ($request, $response, $args) {
+        $view = Twig::fromRequest($request);
+        return $view->render($response, 'home.user.html', [
+          
+        ]);
+        })->setName('acessouser');
 
         $app->get('/invalidtoken', function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
@@ -81,28 +90,25 @@ return function (App $app) {
         ]);
     })->setName('tokenInvalido');
 
-    // $app->post('/',Registrar::class);
+   
+    $app->group('/admin',function(Group $group){ 
+        $group->get('/acessoadm', function ($request, $response, $args) {
+            $view = Twig::fromRequest($request);
+            return $view->render($response, 'home.php', [
+              
+            ]);
+            })->setName('acessoadm');
+    });
+    $app->group('/user',function(Group $group){ 
+        $group->get('/acessouser', function ($request, $response, $args) {
+            $view = Twig::fromRequest($request);
+            return $view->render($response, 'home_users.html', [
+              
+            ]);
+            })->setName('acessouser');
+    });
 
 
-
-    // $app->get('/hello/{name}', function (Request $request, Response $response, $args) {
-    //     $name = $args['name'];
-    //     $response->getBody()->write("ola, $name");
-    //     return $response;
-    // })->setName('paghello');
-
-    // $app->get('/home', function (Request $request, Response $response, $args) {
-    //     $name = $args['name'];
-    //     $response->getBody()->write("ola, $name");
-    //     return $response;
-    // });
-
-
-    // $app->get('/home', function ($request, $response, $args) {
-    //     $view = Twig::fromRequest($request);
-    //     return $view->render($response, 'index.html', [
-          
-    //     ]);
-    // })
+ 
 
 };

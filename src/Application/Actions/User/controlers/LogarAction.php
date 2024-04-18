@@ -106,7 +106,7 @@ class LogarAction extends UserAction
                 // $_SESSION['datasessao']=$::USER_EMAIL;
 
              
-                $response= ['status'=>'ok','msg'=>'logado com sucesso','location'=>'home'];
+                $response= ['status'=>'ok','msg'=>'logado com sucesso','location'=>'/sender'];
                 return $this->respondWithData($response);
 
 

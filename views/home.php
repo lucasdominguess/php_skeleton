@@ -9,12 +9,14 @@
 
 {% block link %}
 <html id='html_home' class="htmlpags">
-<link rel="stylesheet" href="assets/css/home.css">
+<link rel="stylesheet" href="/assets/css/home.css">
 <title>Cadastro</title>
 
 {% endblock %}
 {% set username = constant('USERNAME') %}
 {% set useremail = constant('USEREMAIL') %}
+{% set userid = constant('USERID') %}
+{% set userdata = constant('USER_DATA') %}
 
 
 
@@ -34,8 +36,9 @@
                 <div id="nomeAdm">
                     <div>
                         <h4 class="escletra h1s">Bem-vindo, {{username}}!</h4>
-                        <h5>{{useremail}}</h5>
-                        <!-- <h5>{{userdata}}</h5> -->
+                        <!-- <h5>{{useremail}}</h5> -->
+                        <!-- <h5>{{userid}}</h5> -->
+                        <h5>{{userdata}}</h5>
                         <!-- <h3>{{username}}</h3> -->
                     </div>
                 </div>
@@ -48,7 +51,11 @@
 
             </section>
 
-            <section id="nav" class='col-sm-8'>
+            {% block nav %}
+            {{ include('nav.html') }}
+            {% endblock %}
+
+            <!-- <section id="nav" class='col-sm-8'>
                 <nav class="navbar navbar-expand-lg ">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="#">Home</a>
@@ -99,7 +106,8 @@
 
                 </div>
 
-            </section>
+            </section> -->
+           
         </header>
         <!-- Sessao cadastro -->
         <section id="sessao_cadastro">
@@ -178,5 +186,5 @@
 
 
     {% block script %}
-    <script src="assets/js/listar_dados.js"></script>
+    <script src="/assets/js/listar_dados.js"></script>
     {% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+
+
+
+  
+{% block body %}
+{% set username = constant('USERNAME') %}
+{% set useremail = constant('USEREMAIL') %}
+{% set userid = constant('USERID') %}
+{% set userdata = constant('USER_DATA') %}
+
+
+    <h1>users</h1>
+
+
+    <h2>{{username}}</h2> <br><br>
+    <h2>{{useremail}}</h2> <br><br>
+    <h2>{{userdata}}</h2>
+
+    {{ include('nav.html') }}
+
+
+{% endblock %}
