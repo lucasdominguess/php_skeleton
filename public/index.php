@@ -22,12 +22,12 @@ require __DIR__ . '/../config.php' ;
 // $GLOBALS['TZ'] = new \DateTimeZone( 'America/Sao_Paulo');
 
 define('USER_DATA', $GLOBALS['hours']);
- 
-// define('USERNAME',$_SESSION['nome']);
-define('USERID',$_SESSION[ User::USER_ID] );
-define('USERNAME',$_SESSION[ User::USER_NAME] );
-define('USEREMAIL',$_SESSION[ User::USER_EMAIL] );
-// define('USERSESSION',$_SESSION[ User::USER_DATE] );
+
+define('USERID',$_SESSION[ User::USER_ID]) ?? '';
+define('USERNAME',$_SESSION[ User::USER_NAME]) ?? '';
+define('USEREMAIL',$_SESSION[ User::USER_EMAIL]) ?? '';
+// define('USERSESSION',$_SESSION[ User::USER_DATE]) ?? '';
+
 // Instantiate PHP-DI ContainerBuilder
 $containerBuilder = new ContainerBuilder();
 

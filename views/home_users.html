@@ -1,24 +1,36 @@
 {% extends "base.html" %}
-
-
-
-
-  
-{% block body %}
 {% set username = constant('USERNAME') %}
 {% set useremail = constant('USEREMAIL') %}
 {% set userid = constant('USERID') %}
 {% set userdata = constant('USER_DATA') %}
 
+{% block link %}
+        <html id='html_userhome'>
+        <link rel="stylesheet" href="/assets/css/home.css">    
+        <title>Cadastro</title>
+{% endblock %}
 
-    <h1>users</h1>
+    
+{% block body %}
 
 
-    <h2>{{username}}</h2> <br><br>
-    <h2>{{useremail}}</h2> <br><br>
-    <h2>{{userdata}}</h2>
+<section id="conteudo">
+    <header id="header">
+        {{include('dados_session.html')}}
+        {{include('nav.html')}}
 
-    {{ include('nav.html') }}
+    </header>
+    
+    {{include('tabela.html')}}
 
 
+
+    {{include('sessao_modal_cadastro.html')}}
+
+</section>
+
+{% endblock %}
+
+{% block script %}
+<script src="/assets/js/listar_dados.js"></script>
 {% endblock %}

@@ -42,8 +42,14 @@ $("#btn_close").click(function(){
 $("#icon_login").click( function (){ 
   modoDark('icon_login','html_login')
 });
+// $("#icon_home").click( function (){ 
+//   modoDark('icon_home','html_homeuser')
+// });
 $("#icon_home").click( function (){ 
-  modoDark('icon_home','html_home')
+  modoDark('icon_home','html_userhome')
+});
+$("#icon_home").click( function (){ 
+  modoDark('icon_home','html_admhome')
 });
 
 //  //Funcao Dark_Light 

@@ -55,7 +55,7 @@ function modoDark (icon,html) {
       element.classList.add('fa-moon')
     });
       localStorage.setItem('darkMode', 'false');
-      htmlTag.setAttribute('data-bs-theme', 'ligth'); 
+      htmlTag.setAttribute('data-bs-theme','ligth'); 
 
 }};
 // function modoDark (icon,html) { 

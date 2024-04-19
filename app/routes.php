@@ -2,17 +2,19 @@
 
 declare(strict_types=1);
 
-use App\Application\Actions\sender\HandleSenderAction;
 use Slim\App;
 use Slim\Views\Twig;
 use App\Application\Actions\User;
 use App\Application\Actions\User\controlers;
+use App\Application\Middleware\AdminMiddleware;
 use App\Application\Actions\User\ViewUserAction;
 use App\Application\Actions\User\ListUsersAction;
 
 use App\Application\Middleware\UsuarioMiddleware;
 use Psr\Http\Message\ResponseInterface as Response;
+use App\Application\Actions\sender\HandleSenderAction;
 use App\Application\Actions\User\controlers\Registrar;
+use App\Application\Middleware\ValidatePostMiddleware;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Application\Actions\User\controlers\LogarAction;
 use App\Application\Actions\User\controlers\EditarAction;
@@ -21,7 +23,6 @@ use App\Application\Actions\User\controlers\ExcluirAction;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 use App\Application\Actions\User\controlers\CadastrarAction;
 use App\Application\Actions\User\controlers\SairSessaoAction;
-use App\Application\Middleware\ValidatePostMiddleware;
 
 return function (App $app) {
     // $app->options('/{routes:.*}', function (Request $request, Response $response) {
@@ -66,22 +67,20 @@ return function (App $app) {
         $app->post('/cadastrar',CadastrarAction::class); //cadastrar
         // ->add(new UsuarioMiddleware());
 
-        $app->get('/editar',EditarAction::class);
-        $app->post('/excluir',ExcluirAction::class);
 
-        $app->get('/acessoadm', function ($request, $response, $args) {
-        $view = Twig::fromRequest($request);
-        return $view->render($response, 'home.php', [
+        // $app->get('/acessoadm', function ($request, $response, $args) {
+        // $view = Twig::fromRequest($request);
+        // return $view->render($response, 'home.php', [
           
-        ]);
-        })->setName('acessoadm');
+        // ]);
+        // })->setName('acessoadm');
 
-        $app->get('/acessouser', function ($request, $response, $args) {
-        $view = Twig::fromRequest($request);
-        return $view->render($response, 'home.user.html', [
+        // $app->get('/acessouser', function ($request, $response, $args) {
+        // $view = Twig::fromRequest($request);
+        // return $view->render($response, 'home.user.html', [
           
-        ]);
-        })->setName('acessouser');
+        // ]);
+        // })->setName('acessouser');
 
         $app->get('/invalidtoken', function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
@@ -98,7 +97,14 @@ return function (App $app) {
               
             ]);
             })->setName('acessoadm');
-    });
+        
+        $group->get('/editar',EditarAction::class);
+        $group->post('/excluir',ExcluirAction::class);
+
+
+
+    })->add(new AdminMiddleware());
+
     $app->group('/user',function(Group $group){ 
         $group->get('/acessouser', function ($request, $response, $args) {
             $view = Twig::fromRequest($request);

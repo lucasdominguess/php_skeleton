@@ -31,18 +31,18 @@ async function requestGET(key) {
    
   let id = key.target.id
 //   console.log(id);
-  let response = await fetch(`/editar?id=${id}`);
+  let response = await fetch(`/admin/editar?id=${id}`);
   let obj = await response.json()
   // console.log(obj) 
   createModal(obj.data);
 }
 
-async function requestDELETE(key) {
+async function requestDELETE(key,rota) {
     try {
       let id = key.target.id;
       
       const response = await fetch(
-        `/excluir?id=${id}`,
+        `${rota}?id=${id}`,
         {
           method: "post",
           body: id,
