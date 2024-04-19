@@ -1,10 +1,9 @@
 
  //Funcao Dark_Light 
 
-// const iconhome = document.getElementById('icon_home');
-// const iconlogin = document.getElementById('icon_login');
-// 
+//Evento reload da pagina 
 document.addEventListener("DOMContentLoaded", function() {
+
       const isDarkMode = localStorage.getItem('darkMode')
 
 // verifica se o darkmode esta ativo e salvo em localStorage
@@ -33,32 +32,43 @@ document.addEventListener("DOMContentLoaded", function() {
 })
 
 
-function modoDark (icon,html) { 
+function modoDark () { 
+  const isDarkMode = localStorage.getItem('darkMode')
+  const htmlpags = document.querySelectorAll('.htmlpags');
   const icones = document.querySelectorAll('.icons');
-  
+  // const classIcons = document.getElementById(`${icon}`)
+ 
 
-  const icone =document.getElementById(`${icon}`)
-  const htmlTag = document.getElementById(`${html}`);
-  if (icone.classList.contains('fa-moon')) { 
+ 
+  if ( isDarkMode == 'false') { 
 
         icones.forEach(element => {
         element.classList.remove('fa-moon')
         element.classList.add('fa-sun')
 
       });
-      localStorage.setItem('darkMode', 'true');
-      htmlTag.setAttribute('data-bs-theme', 'dark');
+        htmlpags.forEach(element => {
+        element.setAttribute('data-bs-theme', 'dark');
+        
+      });
+      localStorage.setItem('darkMode','true');
+     
       return;
   }else {
       icones.forEach(element => {
       element.classList.remove('fa-sun')
       element.classList.add('fa-moon')
     });
+    htmlpags.forEach(element => {
+      element.setAttribute('data-bs-theme','ligth');
+      
+
+    });
       localStorage.setItem('darkMode', 'false');
-      htmlTag.setAttribute('data-bs-theme','ligth'); 
+     
 
 }};
-// function modoDark (icon,html) { 
+
 //       const icones = document.querySelectorAll('.icons');
 //       const icones = document.querySelectorAll('.htmls');
 

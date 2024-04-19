@@ -21,11 +21,10 @@ require __DIR__ . '/../config.php' ;
 
 // $GLOBALS['TZ'] = new \DateTimeZone( 'America/Sao_Paulo');
 
-define('USER_DATA', $GLOBALS['hours']);
 
-define('USERID',$_SESSION[ User::USER_ID]) ?? '';
-define('USERNAME',$_SESSION[ User::USER_NAME]) ?? '';
-define('USEREMAIL',$_SESSION[ User::USER_EMAIL]) ?? '';
+// define('USERID',$_SESSION[ User::USER_ID]) ?? '';
+// define('USERNAME',$_SESSION[ User::USER_NAME]) ?? '';
+// define('USEREMAIL',$_SESSION[ User::USER_EMAIL]) ?? '';
 // define('USERSESSION',$_SESSION[ User::USER_DATE]) ?? '';
 
 // Instantiate PHP-DI ContainerBuilder

@@ -2,7 +2,7 @@
 
 {% block link %}
 
-<html id="html_login" lang="pt-br" class="htmlpags">
+<html id="html_login" lang="pt-br">
 <link rel="stylesheet" href="assets/css/login.css">
 <title>login</title>
 {% endblock %}
