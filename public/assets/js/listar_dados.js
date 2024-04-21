@@ -1,9 +1,9 @@
 
 // Bucando dados do backend para listar tabela
-async function buscar()
+async function buscar(rota)
     {
     try {
-        let response = await fetch(`/listar`);
+        let response = await fetch(`${rota}`);
         let obj = await response.json()
       //  console.log(obj.data[4])
         return obj.data
@@ -107,7 +107,8 @@ function arrumar(obj){
   
 
 $(document).ready(async ()=>{
-    let obj= await buscar();
+  
+    let obj= await buscar('/listar');
     tH(Object.keys(obj[0]));
     
     // console.log(obj)

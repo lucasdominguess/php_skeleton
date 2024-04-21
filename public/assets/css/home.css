@@ -213,3 +213,6 @@ ul.pagination:hover{
 .h1s{
     font-family: "Madimi One", sans-serif; 
 }
+/* tr>td:nth-child(3),tr>th:nth-child(3),tr>td:nth-child(4),tr>th:nth-child(4){ 
+    display: none;
+} */

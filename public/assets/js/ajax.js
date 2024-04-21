@@ -37,6 +37,30 @@ async function requestGET(key) {
   createModal(obj.data);
 }
 
+// buscar dados com metodo GET
+async function requestGETrota(rota) { 
+   
+
+//   console.log(id);
+  let response = await fetch(`${rota}`);
+  let obj = await response.json()
+  // console.log(obj) 
+  let newResponse = await response.json()
+  // console.log(newResponse)
+  let icon = newResponse.data.status == 'fail' ? 'error' : 'success' 
+  let reload = newResponse.data.status=='fail' ? false : true
+  let rotas = newResponse.data.location 
+  let msg = newResponse.data.msg
+  
+  if(icon=='error'){
+      fnMensagem(icon,msg)
+  }else {
+      fnMensagem(icon,msg,reload,rotas)
+      // window.location.href='registrar' 
+  }
+}
+
+
 async function requestDELETE(key,rota) {
     try {
       let id = key.target.id;

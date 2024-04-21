@@ -23,6 +23,7 @@ use App\Application\Actions\User\controlers\ExcluirAction;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 use App\Application\Actions\User\controlers\CadastrarAction;
 use App\Application\Actions\User\controlers\SairSessaoAction;
+use App\Application\Actions\User\controlers\ExibiradminsAction;
 
 return function (App $app) {
     // $app->options('/{routes:.*}', function (Request $request, Response $response) {
@@ -89,7 +90,7 @@ return function (App $app) {
         ]);
     })->setName('tokenInvalido');
 
-   
+   // Rotas Admins 
     $app->group('/admin',function(Group $group){ 
         $group->get('/acessoadm', function ($request, $response, $args) {
             $view = Twig::fromRequest($request);
@@ -100,11 +101,19 @@ return function (App $app) {
         
         $group->get('/editar',EditarAction::class);
         $group->post('/excluir',ExcluirAction::class);
-
+        $group->get('/exibir_admins',ExibiradminsAction::class);
+        $group->get('/exibiradmins', function ($request, $response, $args) {
+            $view = Twig::fromRequest($request);
+            return $view->render($response,'exibiradmins.html', [
+              
+            ]);
+            })->setName('admins');
 
 
     })->add(new AdminMiddleware());
 
+
+    // rotas Usuarios
     $app->group('/user',function(Group $group){ 
         $group->get('/acessouser', function ($request, $response, $args) {
             $view = Twig::fromRequest($request);
