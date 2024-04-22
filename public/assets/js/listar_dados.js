@@ -31,8 +31,9 @@ function tH(keys) {
         let tbody = document.createElement('tbody');
         table1.append(tbody);
         let tag = document.querySelector('.htmlpags').id
-        table1.id =`table_${tag}`;
-        $('#sessao_tabela').append(table1,h1);
+        // table1.id =`table_${tag}`;
+        table1.id ="table1";
+        $(`#sessao_tabela`).append(table1,h1);
       
   
         
@@ -45,6 +46,7 @@ function tH(keys) {
             tr.append(tH);
         }
             //adcionando tabela ao local exato do html
+            // $(`#sessao_tabela_${tag}`).append(table1);
             $("#sessao_tabela").append(table1);
     
             $(table1).append(thead) ;
@@ -110,8 +112,8 @@ function arrumar(obj){
 $(document).ready(async ()=>{
   let tag = document.querySelector('.htmlpags').id
 
-   let obj = await buscar(`/listar?rota=${tag}`)
-    // let obj = await buscar('/listar');
+  //  let obj = await buscar(`/listar?rota=${tag}`)
+    let obj = await buscar('/listar');
 
     // console.log(obj)
     tH(Object.keys(obj[0]));

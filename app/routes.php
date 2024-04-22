@@ -101,7 +101,7 @@ return function (App $app) {
         
         $group->get('/editar',EditarAction::class);
         $group->post('/excluir',ExcluirAction::class);
-        // $group->get('/exibir_admins',ExibiradminsAction::class);
+        $group->get('/exibir_admins',ExibiradminsAction::class);
         $group->get('/exibiradmins', function ($request, $response, $args) {
             $view = Twig::fromRequest($request);
             return $view->render($response,'exibiradmins.html', [
