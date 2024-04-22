@@ -28,7 +28,13 @@ class ListarAction extends Action {
             return $this->respondWithData($resultado);
         }
 
-
+        if($rota == 'html_tentativas_acesso'){ 
+            $stmt = $db->query("SELECT * FROM tentativa");
+            $stmt->execute();
+            $resultado=$stmt->fetchAll(\PDO::FETCH_ASSOC); 
+            
+            return $this->respondWithData($resultado);
+        }
 
         
     }

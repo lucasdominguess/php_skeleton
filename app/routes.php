@@ -101,13 +101,19 @@ return function (App $app) {
         
         $group->get('/editar',EditarAction::class);
         $group->post('/excluir',ExcluirAction::class);
-        $group->get('/exibir_admins',ExibiradminsAction::class);
+        // $group->get('/exibir_admins',ExibiradminsAction::class);
         $group->get('/exibiradmins', function ($request, $response, $args) {
             $view = Twig::fromRequest($request);
             return $view->render($response,'exibiradmins.html', [
               
             ]);
-            })->setName('admins');
+            });
+        $group->get('/tentativasacesso', function ($request, $response, $args) {
+            $view = Twig::fromRequest($request);
+            return $view->render($response,'tentativas_acesso.html', [
+              
+            ]);
+            });
 
 
     })->add(new AdminMiddleware());
