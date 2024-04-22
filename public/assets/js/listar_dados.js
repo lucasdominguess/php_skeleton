@@ -30,7 +30,8 @@ function tH(keys) {
         table1.append(thead);
         let tbody = document.createElement('tbody');
         table1.append(tbody);
-        table1.id ='table1';
+        let tag = document.querySelector('.htmlpags').id
+        table1.id =`table_${tag}`;
         $('#sessao_tabela').append(table1,h1);
       
   
