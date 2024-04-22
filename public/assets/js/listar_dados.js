@@ -107,8 +107,12 @@ function arrumar(obj){
   
 
 $(document).ready(async ()=>{
-  
-    let obj= await buscar('/listar');
+  let tag = document.querySelector('.htmlpags').id
+
+   let obj = await buscar(`/listar?rota=${tag}`)
+    // let obj = await buscar('/listar');
+
+    // console.log(obj)
     tH(Object.keys(obj[0]));
     
     // console.log(obj)
@@ -134,10 +138,10 @@ $(document).ready(async ()=>{
         ],
         responsive: true,
         columnDefs: [
-          { target: [0,3], visible: false, searchable: false},
+          // { target: [0,3], visible: false, searchable: false},
           { title: 'Nome', targets: 1 },
-          { title: 'Data de Nascimento', targets: 2 },
-          { className: "text-center dt-center", targets: [2,3,4,5]},
+          // { title: 'Data de Nascimento', targets: 2 },
+          { className: "text-center dt-center", targets: [0,1,2,3,4]},
           
       ],
       initComplete: function () {
@@ -170,4 +174,10 @@ document.addEventListener("DOMContentLoaded", function() {
 escrevendoLetra();
 });
 
+// document.addEventListener("DOMContentLoaded", function() {
+//    let tag = document.querySelector('.htmlpags').id
+
+//   //  buscar(`/listar?rota=${tag}`)
+//     console.log(tag)
+// });
       
