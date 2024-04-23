@@ -1,19 +1,5 @@
 
-// Bucando dados do backend para listar tabela
-async function buscar(rota)
-    {
-    try {
-        let response = await fetch(`${rota}`);
-        let obj = await response.json()
-      //  console.log(obj.data[4])
-        return obj.data
 
-    }catch(error) {  //Identificando possivel erro 
-      console.log('erro na busca',error)
-    }finally {
-      
-    };
-    };
 //construindo header de tabela dinamicamente 
 function tH(keys) {
         keys.push('Editar')
@@ -106,30 +92,30 @@ function arrumar(obj){
   
     button.addEventListener('click',requestGET);
     button2.addEventListener('click',confirmExcluir);
-  };
+};
   
 
-$(document).ready(async ()=>{
-  let tag = document.querySelector('.htmlpags').id
+// $(document).ready(async ()=>{
+//   let tag = document.querySelector('.htmlpags').id
 
-  //  let obj = await buscar(`/listar?rota=${tag}`)
-    let obj = await buscar('/listar');
+//   //  let obj = await buscar(`/listar?rota=${tag}`)
+//     let obj = await buscar('/listar');
 
-    // console.log(obj)
-    tH(Object.keys(obj[0]));
+//     // console.log(obj)
+//     tH(Object.keys(obj[0]));
     
-    // console.log(obj)
+//     // console.log(obj)
     
-    // loop para construir chave da tabela
-    for (let index = 0; index < obj.length; index++) {
-      // console.log(obj.length)
-      const element = obj[index];
+//     // loop para construir chave da tabela
+//     for (let index = 0; index < obj.length; index++) {
+//       // console.log(obj.length)
+//       const element = obj[index];
       
-          arrumar(element)      
+//           arrumar(element)      
          
-        }
+//         }
     
-});
+// });
 //Função escrevendo letras
 
 document.addEventListener("DOMContentLoaded", function() {

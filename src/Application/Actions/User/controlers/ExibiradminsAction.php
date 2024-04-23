@@ -16,9 +16,9 @@ class ExibiradminsAction extends Action{
 
         
         $db =new Sql(); 
-        $stmt = $db->prepare("select * from usuarios");
+        $stmt = $db->query("select id_adm , nome ,email from usuarios");
         $stmt->execute();
-        $resultado=$stmt->fetch(\PDO::FETCH_ASSOC); 
+        $resultado=$stmt->fetchAll(\PDO::FETCH_ASSOC); 
         
         return $this->respondWithData($resultado);
         

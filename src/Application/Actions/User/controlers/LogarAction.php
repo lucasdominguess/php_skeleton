@@ -30,8 +30,8 @@ class LogarAction extends UserAction
         try{
 
             $db = new Sql();
-        }catch(\Throwable $e){ 
-            $response = (['status'=>'fail','msg'=> 'Erro de Conexao']);
+        }catch(\PDOException $e){ 
+            $response = (['status'=>'fail','msg'=> $e->getMessage()]);
             return $this->respondWithData($response);
         }
 
