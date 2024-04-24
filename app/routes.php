@@ -61,27 +61,10 @@ return function (App $app) {
     // });
    
         $app->post('/logar',LogarAction::class)->add(ValidatePostMiddleware::class); //efetuar login 
-
         $app->post('/sair',SairSessaoAction::class); //sair da sessao
         $app->get('/listar',ListarAction::class); //listar dados para tabela
-    
         $app->post('/cadastrar',CadastrarAction::class); //cadastrar
-        // ->add(new UsuarioMiddleware());
 
-
-        // $app->get('/acessoadm', function ($request, $response, $args) {
-        // $view = Twig::fromRequest($request);
-        // return $view->render($response, 'home.php', [
-          
-        // ]);
-        // })->setName('acessoadm');
-
-        // $app->get('/acessouser', function ($request, $response, $args) {
-        // $view = Twig::fromRequest($request);
-        // return $view->render($response, 'home.user.html', [
-          
-        // ]);
-        // })->setName('acessouser');
 
         $app->get('/invalidtoken', function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
@@ -101,19 +84,20 @@ return function (App $app) {
         
         $group->get('/editar',EditarAction::class);
         $group->post('/excluir',ExcluirAction::class);
-        $group->get('/exibir_admins',ExibiradminsAction::class);
+        $group->get('/exibir_admins',ListarAction::class);
         $group->get('/exibiradmins', function ($request, $response, $args) {
             $view = Twig::fromRequest($request);
             return $view->render($response,'exibiradmins.html', [
               
             ]);
             });
-        $group->get('/tentativasacesso', function ($request, $response, $args) {
-            $view = Twig::fromRequest($request);
-            return $view->render($response,'tentativas_acesso.html', [
+        // $group->get('/exibir_admins',ExibiradminsAction::class);   
+        // $group->get('/tentativasacesso', function ($request, $response, $args) {
+        //     $view = Twig::fromRequest($request);
+        //     return $view->render($response,'tentativas_acesso.html', [
               
-            ]);
-            });
+        //     ]);
+        //     });
 
 
     })->add(new AdminMiddleware());

@@ -10,16 +10,41 @@ class ListarAction extends Action {
     protected function action(): response 
     {   
         $db = new Sql();
-        // $rota = $_GET['rota'] ; 
+        $url =  $_SERVER['HTTP_REFERER'] ?? null ;
 
-        // if($rota == 'html_admhome' || $rota == 'html_userhome'){ 
+        
+        if ($url == null ){
+
+                    // $resultado = ['location'=>'/'];
+                    return $this->respondWithData($url);
+            }
+
+            
+        if($url == 'http://localhost:9000/admin/exibiradmins'){
+ 
+                $stmt = $db->query("select * from usuarios");
+                $stmt->execute();
+                $resultado=$stmt->fetchAll(\PDO::FETCH_ASSOC); 
+                
+                return $this->respondWithData($resultado);
+        }
+
+        if($url == 'http://localhost:9000/admin/acessoadm'){ 
             
             $stmt = $db->query("SELECT * FROM estagiarios;");
+            $stmt->execute();
             $resultado = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             return $this->respondWithData($resultado);
         }
+        if($url == 'http://localhost:9000/user/acessouser'){
+            $stmt = $db->query("SELECT * FROM estagiarios;");
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
+            return $this->respondWithData($resultado);
+        }
+        
     //     if($rota == 'html_exibiradmins') { 
     //         $stmt = $db->query("SELECT id_adm,nome,email FROM usuarios");
     //         $stmt->execute();
@@ -39,4 +64,4 @@ class ListarAction extends Action {
         
     // }
     
-}
+}}

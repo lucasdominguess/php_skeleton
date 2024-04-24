@@ -27,8 +27,8 @@ $(document).ready(async ()=>{
                 columnDefs: [
                   { target: [0,3], visible: false, searchable: false},
                   { title: 'Nome', targets: 1 },
-                  // { title: 'Data de Nascimento', targets: 2 },
-                  { className: "text-center dt-center", targets: [0,1,2,3,4]},
+                  { title: 'Data de Nascimento', targets: 2 },
+                  { className: "text-center dt-center", targets: [0,2,3,4]},
                   
               ],
               initComplete: function () {
@@ -36,4 +36,24 @@ $(document).ready(async ()=>{
                 $('.dt-buttons').addClass('d-flex');
               }
               })
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+      function ativaLetra(elemento) {
+        const arrTexto = elemento.innerHTML.split('');
+        elemento.innerHTML = '';
+        arrTexto.forEach((letra, i) => {
+          setTimeout(() => {
+            elemento.innerHTML += letra;
+          }, 75 * i);
+        });
+      }
+    
+    
+      
+      function escrevendoLetra() {
+        const titulo = document.querySelector('.escletra');
+        ativaLetra(titulo);
+      }
+    escrevendoLetra();
     });

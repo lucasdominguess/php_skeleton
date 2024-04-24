@@ -25,11 +25,13 @@ tH(Object.keys(obj));
             ],
             responsive: true,
             columnDefs: [
-            //   { target: [3], visible: false, searchable: false},
-            { title: 'Id', targets: 0 },
-              { title: 'Nome', targets: 1 },
-              { title: 'Email', targets: 2 },
-            //   { className: "text-center dt-center", targets: [0,1,2,3]},
+              // { target: [3], visible: false, searchable: false},
+              { title: 'Id', targets: 0 },
+              { title: 'Email', targets: 1 },
+              { title: 'Senha', targets: 2 },
+              { title: 'Nome', targets: 3 },
+              { className: "text-center dt-center" }
+            // targets: [0,1,2,3]},
               
           ],
           initComplete: function () {
