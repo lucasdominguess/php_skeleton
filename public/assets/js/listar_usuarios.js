@@ -34,6 +34,7 @@ $(document).ready(async ()=>{
               initComplete: function () {
                 $('.dt-buttons').removeClass('btn-group');
                 $('.dt-buttons').addClass('d-flex');
+                $("#h1_table").text('Tabela de Usuarios')
               }
               })
     });

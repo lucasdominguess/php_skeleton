@@ -45,21 +45,15 @@ class ListarAction extends Action {
             return $this->respondWithData($resultado);
         }
         
-    //     if($rota == 'html_exibiradmins') { 
-    //         $stmt = $db->query("SELECT id_adm,nome,email FROM usuarios");
-    //         $stmt->execute();
-    //         $resultado=$stmt->fetchAll(\PDO::FETCH_ASSOC); 
-            
-    //         return $this->respondWithData($resultado);
-    //     }
 
-    //     if($rota == 'html_tentativas_acesso'){ 
-    //         $stmt = $db->query("SELECT * FROM tentativa");
-    //         $stmt->execute();
-    //         $resultado=$stmt->fetchAll(\PDO::FETCH_ASSOC); 
+
+        if($url =='http://localhost:9000/admin/tentativasacesso'){ 
+            $stmt = $db->query("SELECT * FROM tentativa");
+            $stmt->execute();
+            $resultado=$stmt->fetchAll(\PDO::FETCH_ASSOC); 
             
-    //         return $this->respondWithData($resultado);
-    //     }
+            return $this->respondWithData($resultado);
+        }
 
         
     // }

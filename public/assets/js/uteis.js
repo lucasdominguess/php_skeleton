@@ -5,8 +5,8 @@ function tH(keys) {
         keys.push('Editar')
         keys.push('Excluir')
         let h1 =document.createElement('h1');
-        h1.innerText='Tabela de Cadastrados'
-       
+        // h1.innerText='Tabela de Cadastrados'
+        h1.id = 'h1_table'
     
         let table1 = document.createElement('table');
         

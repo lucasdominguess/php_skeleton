@@ -1,8 +1,8 @@
 $(document).ready(async ()=>{
 
-
+  
 let obj = await buscar('/admin/exibir_admins');
-console.log(obj)
+// console.log(obj)
 tH(Object.keys(obj));
 
     // loop para construir chave da tabela
@@ -37,6 +37,8 @@ tH(Object.keys(obj));
           initComplete: function () {
             $('.dt-buttons').removeClass('btn-group');
             $('.dt-buttons').addClass('d-flex');
+            $("#h1_table").text('Tabela de Administradores')
+            
           }
           })
 });

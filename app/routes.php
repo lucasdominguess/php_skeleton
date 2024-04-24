@@ -91,13 +91,13 @@ return function (App $app) {
               
             ]);
             });
-        // $group->get('/exibir_admins',ExibiradminsAction::class);   
-        // $group->get('/tentativasacesso', function ($request, $response, $args) {
-        //     $view = Twig::fromRequest($request);
-        //     return $view->render($response,'tentativas_acesso.html', [
+        $group->get('/tentativas_acesso',ListarAction::class);   
+        $group->get('/tentativasacesso', function ($request, $response, $args) {
+            $view = Twig::fromRequest($request);
+            return $view->render($response,'tentativas_acesso.html', [
               
-        //     ]);
-        //     });
+            ]);
+        });
 
 
     })->add(new AdminMiddleware());

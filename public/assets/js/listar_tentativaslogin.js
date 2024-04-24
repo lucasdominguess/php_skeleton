@@ -1,7 +1,7 @@
 $(document).ready(async ()=>{
 
 
-    let obj = await buscar('/listar');
+    let obj = await buscar('/admin/tentativas_acesso');
     
     tH(Object.keys(obj[0]));
     
@@ -25,15 +25,17 @@ $(document).ready(async ()=>{
                 ],
                 responsive: true,
                 columnDefs: [
-                  { target: [0,3], visible: false, searchable: false},
-                  { title: 'Nome', targets: 1 },
-                  // { title: 'Data de Nascimento', targets: 2 },
-                  { className: "text-center dt-center", targets: [0,1,2,3,4]},
+                  // { target: [0,3], visible: false, searchable: false},
+                  { title: 'Data', targets: 1 },
+                  // // { title: 'Data de Nascimento', targets: 2 },
+                  // { className: "text-center dt-center"}
+                  // , targets: [0,1,2,3,4]},
                   
               ],
               initComplete: function () {
                 $('.dt-buttons').removeClass('btn-group');
                 $('.dt-buttons').addClass('d-flex');
+                $("#h1_table").text('Tentativas de Acesso')
               }
               })
     });
