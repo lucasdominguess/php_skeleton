@@ -84,3 +84,18 @@ async function requestDELETE(key,rota) {
     fnMensagem(icon, newResponse.data.msg, reload);
   } catch {}
 }
+// Bucando dados do backend para listar tabela
+async function buscar(rota)
+    {
+    try {
+        let response = await fetch(`${rota}`);
+        let obj = await response.json()
+      //  console.log(obj.data[4])
+        return obj.data
+
+    }catch(error) {  //Identificando possivel erro 
+      console.log('erro na busca',error)
+    }finally {
+      
+    };
+    };

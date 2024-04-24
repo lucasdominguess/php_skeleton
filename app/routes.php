@@ -94,7 +94,7 @@ return function (App $app) {
     $app->group('/admin',function(Group $group){ 
         $group->get('/acessoadm', function ($request, $response, $args) {
             $view = Twig::fromRequest($request);
-            return $view->render($response, 'home.php', [
+            return $view->render($response, 'home.html', [
               
             ]);
             })->setName('acessoadm');
