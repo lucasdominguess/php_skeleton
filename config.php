@@ -20,6 +20,14 @@ define('USEREMAIL',$email );
 
 define('USER_DATA', $GLOBALS['hours']);
 
+define('URL_HOMEUSER','http://localhost:9000/user/acessouser');
+
+define('URL_HOMEADM','http://localhost:9000/admin/acessoadm');
+
+
+define('URL_EXIBIR_ADMIN','http://localhost:9000/admin/exibiradmins');
+define('URL_TENTA_ACESSO','http://localhost:9000/admin/tentativasacesso');
+
 // @define('USERNAME',$_SESSION[ User::USER_NAME] );
 // @define('USEREMAIL',$_SESSION[ User::USER_EMAIL] );
 // define('USERSESSION',$_SESSION[ User::USER_DATE] );
