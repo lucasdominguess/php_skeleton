@@ -39,9 +39,9 @@ class ListarAction extends Action {
    
                     
         if($url == URL_TENTA_ACESSO){ 
-         $resultado = $user->tentativasFindAll();
+         $user->tentativasFindAll();
             
-            return $this->respondWithData($resultado);
+            return $this->respondWithData($user);
         }
 
         

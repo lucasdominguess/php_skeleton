@@ -26,7 +26,8 @@ use App\Application\Actions\User\controlers\SairSessaoAction;
 use App\Application\Actions\User\controlers\ExibiradminsAction;
 
 return function (App $app) {
-    // $app->options('/{routes:.*}', function (Request $request, Response $response) {
+
+// $app->options('/{routes:.*}', function (Request $request, Response $response) {
     //     // CORS Pre-Flight OPTIONS Request Handler
     //     return $response;
     // });

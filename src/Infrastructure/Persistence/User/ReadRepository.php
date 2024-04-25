@@ -1,7 +1,6 @@
 <?php
 namespace App\Infrastructure\Persistence\User;
 
-use App\Infrastructure\Persistence\User\DataBaseRepository;
 
 
 class ReadRepository 
