@@ -12,10 +12,9 @@ class DeleteRepository
     }
 
 
-    public function deleteAll($table)
+    public function deleteAll()
     {
         $stmt = $this->db->prepare("delete * from :table");
-        $stmt->bindValue(":table", $table);
         $stmt->execute();
     
         
@@ -33,7 +32,7 @@ class DeleteRepository
     }
     public function Delete_AdminsOfId($id)
     {
-        $stmt =$this->db->prepare("delete from usuarios where id = :id");
+        $stmt =$this->db->prepare("delete from usuarios where id_adm = :id");
   
         $stmt->bindValue(":id",$id);
         $stmt->execute();
@@ -41,14 +40,14 @@ class DeleteRepository
         
       
     }
-    public function Delete_TentativasOfId($id)
+    public function Delete_TentativasOfId($email)
     {
-        $stmt =$this->db->prepare("delete from tentativas where id = :id");
+        $stmt =$this->db->prepare("delete from tentativa where emails = :email");
   
-        $stmt->bindValue(":id",$id);
+        $stmt->bindValue(":email",$email);
         $stmt->execute();
         
-        
+   
       
     }
 }

@@ -27,14 +27,14 @@ class ReadRepository
         $stmt =$this->db->prepare("select * from estagiarios where id = :id");
         $stmt->bindValue(":id",$id);
         $stmt->execute();
-        $resultado=$stmt->fetchAll(\PDO::FETCH_ASSOC); 
+        $resultado=$stmt->fetch(\PDO::FETCH_ASSOC); 
         
         return $resultado;
     }
 
     public function admsFindAll(): array
     {
-        $stmt = $this->db->prepare("select * from usuarios");
+        $stmt = $this->db->prepare("select id_adm,nome,email from usuarios");
        
         $stmt->execute();
         $resultado=$stmt->fetchAll(\PDO::FETCH_ASSOC); 
@@ -42,9 +42,8 @@ class ReadRepository
         return $resultado;
     }
     public function admFindId($id)
-
     {
-        $stmt =$this->db->prepare("select * from usuarios where id = :id");
+        $stmt =$this->db->prepare("select * from usuarios where id_adm = :id");
         $stmt->bindValue(":id",$id);
         $stmt->execute();
         $resultado=$stmt->fetchAll(\PDO::FETCH_ASSOC); 
@@ -66,7 +65,7 @@ class ReadRepository
         $stmt =$this->db->prepare("select * from tentativa where id = :id");
         $stmt->bindValue(":id",$id);
         $stmt->execute();
-        $resultado=$stmt->fetchAll(\PDO::FETCH_ASSOC); 
+        $resultado=$stmt->fetch(\PDO::FETCH_ASSOC); 
         
         return $resultado;
     }

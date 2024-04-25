@@ -42,11 +42,11 @@ class ExcluirAction extends Action{
                 return $this->respondWithData($e->getMessage());
 
             }
-    }
-
-
-
+        }
+        
+        
         $resposta =['status'=>'ok','msg'=>"Dados Excluidos com Sucesso!"];
+
        
         
         return $this->respondWithData($resposta);

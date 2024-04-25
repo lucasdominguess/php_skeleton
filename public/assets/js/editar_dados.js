@@ -13,6 +13,9 @@ function limparCampos(){
   //Criando Modal & dados para alterar/cadastrar na table
 function createModal(key) {
   
+    console.log(key[0])
+
+
     let keys = Object.keys(key)
     
     $("#myModal").fadeToggle(1000)

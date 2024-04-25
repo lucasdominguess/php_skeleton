@@ -27,7 +27,7 @@ class EditarAction extends Action{
             return $this->respondWithData($newuser); 
         
         }   
-        if($url == URL_HOMEADM || URL_HOMEUSER){
+        if($url == URL_HOMEADM || $url == URL_HOMEUSER){
       
             $newuser =  $user->estagisFindId($id);
             return $this->respondWithData($newuser); 

@@ -3,7 +3,7 @@ $(document).ready(async ()=>{
   
 let obj = await buscar('/admin/exibir_admins');
 // console.log(obj)
-tH(Object.keys(obj));
+tH(Object.keys(obj[0]));
 
     // loop para construir chave da tabela
     for (let index = 0; index < obj.length; index++) {
@@ -27,9 +27,17 @@ tH(Object.keys(obj));
             columnDefs: [
               // { target: [3], visible: false, searchable: false},
               { title: 'Id', targets: 0 },
-              { title: 'Email', targets: 1 },
-              { title: 'Senha', targets: 2 },
-              { title: 'Nome', targets: 3 },
+              { title: 'Nome', targets: 1 },
+              { title: 'Email', targets: 2 },
+              { title: 'Senha', targets: 3 },
+      
+              // tabela thiago
+                // { title: 'Id', targets: 0 },
+              // { title: 'Email', targets: 1 },
+              // { title: 'Senha', targets: 2 },
+              // { title: 'Nome', targets: 3 },
+
+
               { className: "text-center dt-center" }
             // targets: [0,1,2,3]},
               
