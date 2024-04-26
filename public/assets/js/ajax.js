@@ -33,8 +33,10 @@ async function requestGET(key) {
 //   console.log(id);
   let response = await fetch(`/admin/editar?id=${id}`);
   let obj = await response.json()
-  // console.log(obj.data.code) 
-  createModal(obj.data);
+
+  // console.log(obj.data[0][0])
+  gerarModal(obj.data.code,obj.data) 
+  // createModal(obj.data[0]);
   // modalEditarAdm(obj.data);
 }
 

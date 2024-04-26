@@ -25,8 +25,11 @@ $(document).ready(async ()=>{
                 ],
                 responsive: true,
                 columnDefs: [
-                  // { target: [0,3], visible: false, searchable: false},
-                  { title: 'Data', targets: 1 },
+                   { target: [3], visible: false, searchable: false},
+                  { title: 'Email', targets: 1 },
+                  { title: 'Data ', targets: 2 },
+                 
+                
                   // // { title: 'Data de Nascimento', targets: 2 },
                   // { className: "text-center dt-center"}
                   // , targets: [0,1,2,3,4]},

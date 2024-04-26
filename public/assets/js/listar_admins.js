@@ -29,7 +29,8 @@ tH(Object.keys(obj[0]));
               { title: 'Id', targets: 0 },
               { title: 'Nome', targets: 1 },
               { title: 'Email', targets: 2 },
-              { title: 'Senha', targets: 3 },
+              { title: 'Nivel de Permissão', targets: 3 },
+             
       
               // tabela thiago
                 // { title: 'Id', targets: 0 },

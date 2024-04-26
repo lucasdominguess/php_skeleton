@@ -34,7 +34,7 @@ class ReadRepository
 
     public function admsFindAll(): array
     {
-        $stmt = $this->db->prepare("select id_adm,nome,email from usuarios");
+        $stmt = $this->db->prepare("select id_adm,nome,email ,nivel from usuarios");
        
         $stmt->execute();
         $resultado=$stmt->fetchAll(\PDO::FETCH_ASSOC); 

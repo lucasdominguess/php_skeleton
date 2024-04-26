@@ -23,13 +23,13 @@ class EditarAction extends Action{
 
         if($url == URL_HOMEADM || $url == URL_HOMEUSER){
             
-            $newuser =  [$user->estagisFindId($id),'code'=>'1'];
+            $newuser =  [$user->estagisFindId($id),'code'=>'usuario'];
             return $this->respondWithData($newuser); 
         
         }   
         if($url == URL_EXIBIR_ADMIN){
           
-            $newuser =  [$user->admFindId($id),'code'=>'2'];
+            $newuser =  [$user->admFindId($id),'code'=>'admin'];
             return $this->respondWithData($newuser); 
         
         }   

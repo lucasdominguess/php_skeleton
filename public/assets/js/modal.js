@@ -1,5 +1,5 @@
   //Criando Modal & dados para alterar/cadastrar na table
-  function createModal(key) {
+  function Modal(key) {
   
     // console.log(key[0])
 
@@ -12,7 +12,7 @@
 // valores nos Inputs
     let values = Object.values(key) 
    
-      $("#id").val(values[0])
+    //   $("#id").val(values[0])
       $("#nome").val(values[1])
       $("#data").val(values[2])
 
@@ -26,21 +26,21 @@ function modalEditarAdm(key){
 
     let keys = Object.keys(key)
        
-    $("#id").val(keys[0])
-    $("#nome").val(keys[1])
-    $("#email").val(keys[2])
-    $("#senha").val(keys[3])
-    $("#permissao").val(keys[4])
+    // $("#id").val(keys[0])
+    // $("#nome").val(keys[1])
+    // $("#email").val(keys[2])
+    // $("#senha").val(keys[3])
+    // $("#permissao").val(keys[4])
 
 
 
 
     let values = Object.values(key) 
    
-    $("#id").val(values[0])
+    // $("#id").val(values[0])
     $("#nome").val(values[1])
     $("#email").val(values[2])
     $("#senha").val(values[3])
-    $("#permissao").val(values[4])
+    $("#nivel").val(values[4])
    
 }

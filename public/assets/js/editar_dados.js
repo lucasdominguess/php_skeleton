@@ -1,3 +1,6 @@
+
+
+
 function Cadastrar(key) { 
    
     $("#myModal").show(1000)
@@ -11,23 +14,35 @@ function limparCampos(){
    
 }
   //Criando Modal & dados para alterar/cadastrar na table
-function createModal(key) {
+// function createModal(key) {
   
-    console.log(key[0])
+//     // console.log(key[0])
 
 
-    let keys = Object.keys(key)
+//     let keys = Object.keys(key)
     
-    $("#myModal").fadeToggle(1000)
-    $('#title_h3').text('Editar Cadastro')
+//     $("#myModal").fadeToggle(1000)
+//     $('#title_h3').text('Editar Cadastro')
 
-// valores nos Inputs
-    let values = Object.values(key) 
+// // valores nos Inputs
+//     let values = Object.values(key) 
    
-      $("#id").val(values[0])
-      $("#nome").val(values[1])
-      $("#data").val(values[2])
+//       $("#id").val(values[0])
+//       $("#nome").val(values[1])
+//       $("#data").val(values[2])
 
-};
+// };
+
+
+function gerarModal(key,obj) {
+    if(key == 'usuario'){
+      Modal(obj[0])
+    }
+    if(key == 'admin'){ 
+      modalEditarAdm(obj[0][0])
+    }
+
+}
+
 
 
