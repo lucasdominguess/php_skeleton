@@ -1,3 +1,14 @@
+{% set username = constant('USERNAME') %}
+{% set useremail = constant('USEREMAIL') %}
+{% set userid = constant('USERID') %}
+{% set userdata = constant('USER_DATA') %}
+
+{% set pag_homeuser = constant('URL_HOMEUSER') %}
+{% set pag_homeadmin = constant('URL_HOMEADM') %}
+{% set pag_admin = constant('URL_EXIBIR_ADMIN') %}
+{% set pag_tentaacesso = constant('URL_TENTA_ACESSO') %}
+{% set uri = constant('URI_SERVER') %}
+
 {% block php %}
 {% endblock %}
 
@@ -18,11 +29,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Madimi+One&family=Poppins:wght@100;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/assets/css/style.css"> 
+
+
+
     {% block link %}
     {% endblock %}
 </head>
     <body class="body">
-       
+    
         {% block body %}
         {% endblock %}
       
@@ -43,6 +57,7 @@
     <script src="/assets/js/uteis.js"></script>
     <script src="/assets/js/sweet_alert.js"></script>
     <script src="/assets/js/button_events.js"></script>
+    <script src="/assets/js/modal.js"></script>
     <script src="/assets/js/editar_dados.js"></script>
     <script src="/assets/js/enviar_dados.js"></script>
     <script src="/assets/js/ajax.js"></script>

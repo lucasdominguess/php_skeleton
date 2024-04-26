@@ -21,21 +21,21 @@ class EditarAction extends Action{
         $url =  $_SERVER['HTTP_REFERER'] ?? null ;
         $user = new ReadRepository($db); 
 
-        if($url == URL_EXIBIR_ADMIN){
-          
-            $newuser =  $user->admFindId($id);
+        if($url == URL_HOMEADM || $url == URL_HOMEUSER){
+            
+            $newuser =  [$user->estagisFindId($id),'code'=>'1'];
             return $this->respondWithData($newuser); 
         
         }   
-        if($url == URL_HOMEADM || $url == URL_HOMEUSER){
-      
-            $newuser =  $user->estagisFindId($id);
+        if($url == URL_EXIBIR_ADMIN){
+          
+            $newuser =  [$user->admFindId($id),'code'=>'2'];
             return $this->respondWithData($newuser); 
         
         }   
         if($url == URL_TENTA_ACESSO){
-         
-           $newuser = $user->tentativasFindId($id);
+      
+           $newuser =  [$user->tentativasFindId($id),'code'=>'3'];
             return $this->respondWithData($newuser); 
         
         }   

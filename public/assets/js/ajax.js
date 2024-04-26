@@ -26,15 +26,16 @@ if(icon=='error'){
     // window.location.href='registrar' 
 }
 }
-// buscar dados com metodo GET
+// buscar dados com metodo GET 
 async function requestGET(key) { 
    
   let id = key.target.id
 //   console.log(id);
   let response = await fetch(`/admin/editar?id=${id}`);
   let obj = await response.json()
-  // console.log(obj) 
+  // console.log(obj.data.code) 
   createModal(obj.data);
+  // modalEditarAdm(obj.data);
 }
 
 // buscar dados com metodo GET
