@@ -28,5 +28,5 @@ define('URL_HOMEADM','http://localhost:9000/admin/acessoadm');
 define('URL_EXIBIR_ADMIN','http://localhost:9000/admin/exibiradmins');
 define('URL_TENTA_ACESSO','http://localhost:9000/admin/tentativasacesso');
 // $uri = $_SERVER['SCRIPT_URI'];
-define('URI_SERVER', $_SERVER['HTTP_REFERER']);
+define('URI_SERVER', $_SERVER['HTTP_REFERER'] ?? null);
 
