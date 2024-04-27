@@ -2,7 +2,7 @@
 async function ExcluirDados(key) {
   try {
     let id = key.target.id;
-    console.log(id);
+ 
     const response = await fetch(
       `http://localhost:9000/excluir_dados.php?id=${id}`,
       {

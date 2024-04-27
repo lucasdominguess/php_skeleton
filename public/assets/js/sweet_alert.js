@@ -61,7 +61,8 @@ function confirmExcluir(key) {
       icon: "question",
     }).then((result) => {
       if (result.isConfirmed) {
-       let id= key.target.id
+      //  let id= key.target.id
+      //  console.log(key.target.id)
         requestDELETE(key,'/admin/excluir')
   
         // Swal.fire(`O ID do paciente é ${button.id}`, "", "info");

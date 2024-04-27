@@ -32,7 +32,7 @@ class CadastrarAction extends UserAction{
                     $idN = $_POST['id'];
             
                     $primarykey = $_POST['id'] == '' ? null : $_POST['id'];
-                    $id_adm = 4;
+                    $id_adm = USERID;
                     try {
                         $newdata = new Data($data);
                         $cad = new Usuario($nome,$newdata);

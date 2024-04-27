@@ -40,11 +40,11 @@ class DeleteRepository
         
       
     }
-    public function Delete_TentativasOfId($email)
+    public function Delete_TentativasOfId($id)
     {
-        $stmt =$this->db->prepare("delete from tentativa where emails = :email");
+        $stmt =$this->db->prepare("delete from tentativa where id = :id");
   
-        $stmt->bindValue(":email",$email);
+        $stmt->bindValue(":id",$id);
         $stmt->execute();
         
    

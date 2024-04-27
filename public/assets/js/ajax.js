@@ -67,12 +67,14 @@ async function requestGETrota(rota) {
 async function requestDELETE(key,rota) {
     try {
       let id = key.target.id;
+      console.log(key.target.emails);
       
       const response = await fetch(
         `${rota}?id=${id}`,
         {
           method: "post",
           body: id,
+          
           
         }
       );

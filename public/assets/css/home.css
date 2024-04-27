@@ -178,13 +178,7 @@ ul.pagination:hover{
     padding: 10;
 }
 
-#div_btncad{
-    /* background-color: white; */
-    display: flex;
-    align-items: end;
-    justify-content: end;
-    width: 100%;
-}
+
 
 /* Classes genericas  */
 
@@ -221,3 +215,40 @@ ul.pagination:hover{
     width: 100%;
     height: auto;
 } */
+#footer { 
+   
+    width: 100%;
+}
+#div_footer{ 
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ 
+    width: 100%;
+    height: auto;
+}
+#div_footer img { 
+    width: 50%; 
+    background-image: cover;
+}
+
+#div_btncad{
+    /* background-color: antiquewhite; */
+}
+#divimgd{
+    width: 200px;
+    /* background-color: red; */
+  
+}
+#divimgd img { 
+    width: 70%;
+    padding-left: 15px;
+}
+#div_btncad{
+    /* background-color: white; */
+    display: flex;
+    justify-content: space-between;
+    /* justify-content: end; */
+    width: 100%;
+}

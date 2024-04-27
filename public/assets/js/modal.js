@@ -40,7 +40,7 @@ function modalEditarAdm(key){
     // $("#id").val(values[0])
     $("#nome").val(values[1])
     $("#email").val(values[2])
-    $("#senha").val(values[3])
+    $("#senha").val('')
     $("#nivel").val(values[4])
    
 }
