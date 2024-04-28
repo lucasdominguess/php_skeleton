@@ -11,9 +11,9 @@ use Psr\Http\Message\ResponseInterface as response;
 class EditarAction extends Action{ 
     protected function action(): response 
     {   
-        if ($_SESSION[User::USER_ID] < 4) {
-            $resultado = ['status'=>'fail','msg'=>"Permissão Negada!"];
-            return $this->respondWithData($resultado); 
+        if ($_SESSION[User::USER_NIVEL] != 5) {
+            $response = new response;
+            return $response->withHeader('Location', '/')->withStatus(302);
         }
 
         $id = $_GET['id'] ; 

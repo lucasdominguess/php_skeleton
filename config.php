@@ -10,6 +10,10 @@ $GLOBALS['TZ'] = new \DateTimeZone( 'America/Sao_Paulo');
 $GLOBALS['datefull'] = (new DateTime('now', $GLOBALS['TZ']))->format('d/m/Y H:i:s');
 $GLOBALS['hours'] = (new DateTime('now',$GLOBALS['TZ']))->format('H:i:s');
 
+define('USER_DATA', $GLOBALS['hours']);
+
+// Definindo variaveis globais para usuario 
+
 $id_adm = $_SESSION[User::USER_ID] ?? null ;
 define('USERID',$id_adm);
 $nome = $_SESSION[User::USER_NAME] ?? '' ; 
@@ -18,13 +22,14 @@ define('USERNAME',$nome);
 $email = $_SESSION[User::USER_EMAIL] ?? '' ; 
 define('USEREMAIL',$email );
 
-define('USER_DATA', $GLOBALS['hours']);
+$nivel = $_SESSION[User::USER_NIVEL] ?? null;
+define('USER_NIVEL',$nivel);
+
+
+
 
 define('URL_HOMEUSER','http://localhost:9000/user/acessouser');
-
 define('URL_HOMEADM','http://localhost:9000/admin/acessoadm');
-
-
 define('URL_EXIBIR_ADMIN','http://localhost:9000/admin/exibiradmins');
 define('URL_TENTA_ACESSO','http://localhost:9000/admin/tentativasacesso');
 // $uri = $_SERVER['SCRIPT_URI'];

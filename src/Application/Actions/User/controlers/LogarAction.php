@@ -96,12 +96,13 @@ class LogarAction extends UserAction
                 // $_SESSION['email'] = $retorno[0]['email'];
 
    
-                $user = new User($retorno[0]['id_adm'],$retorno[0]['nome'],$retorno[0]['email']);
+                $user = new User($retorno[0]['id_adm'],$retorno[0]['nome'],$retorno[0]['email'],$retorno[0]['nivel']);
                 
 
                 $_SESSION[User::USER_ID]=$user->id_adm;
                 $_SESSION[User::USER_NAME]=$user->nome;
                 $_SESSION[User::USER_EMAIL]=$user->email;
+                $_SESSION[User::USER_NIVEL]=$user->nivel;
                 // $_SESSION[User::USER_DATE]=$user->datasessao;
                 // $_SESSION['datasessao']=$::USER_EMAIL;
 
