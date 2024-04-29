@@ -28,7 +28,7 @@
         "guzzlehttp/guzzle": "^7.8",
         "league/csv": "9.0",
         "monolog/monolog": "^3.6",
-        "php-di/php-di": "^6.4",
+        "php-di/php-di": "^7.0",
         "slim/csrf": "^1.4",
         "slim/php-view": "^3.2",
         "slim/psr7": "^1.5",
