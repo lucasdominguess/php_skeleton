@@ -29,12 +29,13 @@ require __DIR__ . "/vendor/autoload.php";
 //Exibindo log no navegador   
 $logger = new Logger(name: "web");
 $logger->pushHandler(new BrowserConsoleHandler(Level::Debug));
-$logger->pushHandler( new StreamHandler( stream: __DIR__ . "/log.txt", level: level::Debug));
+$logger->pushHandler( new StreamHandler( stream: __DIR__ . "/log.csv", level: level::Debug));
 $logger->pushHandler(new SendGridHandler(
     User::USER_NAME,
     User::USER_EMAIL,
-    from: 'noreply@upins.com.br',
-    to: 'lucasdomingues25.dev@gmail.com',
+    from: 'lucasdomingues25.dev@gmail.com',
+    // to: 'lucasdomingues25.dev@gmail.com',
+    to: 'cobap35623@haislot.com',
     subject: 'error subject' . date(format: "d/m/Y H:i:s"),
     level: Level::Debug 
 ));

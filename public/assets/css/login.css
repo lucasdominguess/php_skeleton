@@ -4,8 +4,11 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     box-sizing: border-box;
 }
-
+body{
+    /* background-image: url(/assets/img/3525926.jpg); */
+}
 .body_bg{
+    /* background-image: url(/assets/img/3409297.jpg); */
     width: 100vw;
     height: 100vh;
     /* display: flex;
