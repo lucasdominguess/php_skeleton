@@ -60,6 +60,14 @@ return function (App $app) {
           
     //     ]);
     // });
+        
+      
+    // $app->get('/log', function ($request, $response, $args) {
+    //     $view = Twig::fromRequest($request);
+    //     return $view->render($response, 'logs.php', [
+          
+    //     ]);
+    // });
    
         $app->post('/logar',LogarAction::class)->add(ValidatePostMiddleware::class); //efetuar login 
         $app->post('/sair',SairSessaoAction::class); //sair da sessao
