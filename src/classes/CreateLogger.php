@@ -1,53 +1,28 @@
 <?php
 namespace App\classes;
 
-
+use App\Domain\User\User;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-
+use Monolog\Handler\TelegramBotHandler;
+use Monolog\Level;
 
 class CreateLogger {
-
-
-function logger ($dirname ,$msg, $modo = 'info'){
+    
+   
+    public function logger ($dirname ,$msg, $modo = 'info'){
+    $date = $GLOBALS['days'];
     $logger = new Logger($dirname);
-    $logger->pushHandler(new StreamHandler(dirname(__FILE__).'/logs.txt'));
+    $logger->pushHandler(new StreamHandler(dirname(__FILE__)."/../../logs/logs".$date.".csv"));
     $logger->$modo($msg);
-
-
-// if($modo == 'info'){
-    //     $logger->info($msg);
-    //     return ;
-    // }
- 
-    // switch ($modo) {
-    //     case 'info':
-    //         $logger->info($msg);
-    //       break;
-    //     case 'warning':
-    //         $logger->warning($msg);
-    //         break;
-    //     case 'error':
-    //         $logger->error($msg);
-    //         break;
-    //     case 'debug':
-    //         $logger->debug($msg);
-    //         break;
-    //     case 'notice':
-    //         $logger->notice($msg);
-    //         break;
-    //     case 'critical':
-    //         $logger->critical($msg);
-    //         break;
-    //     case 'alert':
-    //         $logger->alert($msg);
-    //         break;
-    //     case 'emergency':
-    //         $logger->emergency($msg);
-    //         break;
-       
-    //     default:
-    //         $logger->info($msg);
-    //         break;
-    }
+}
+    public function logTelegran(){
+    $logger = new Logger('TelegranBot');
+    $logger->pushHandler( new TelegramBotHandler(
+        apiKey:"6896066213:AAEfj5TxiJaH6m2CEsP9fJZh3BUvpPfypzw",
+        channel:"@phpAplicationweb",
+        level:Level::Warning
+    ));
+    $logger->warning('Administrador '.$_SESSION[User::USER_NAME].  ' efetuou login');
+} 
 }

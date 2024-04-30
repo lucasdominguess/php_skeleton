@@ -1,4 +1,4 @@
 <?php
-$csv = Reader::createFromPath('./file.csv','r+')
-    ->setHeaderOffset(0)
-;
+// $csv = Reader::createFromPath('./file.csv','r+')
+//     ->setHeaderOffset(0)
+// ;

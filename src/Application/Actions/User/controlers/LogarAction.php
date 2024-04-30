@@ -4,19 +4,20 @@ namespace App\Application\Actions\User\controlers;
 use PDO;
 use DateTime;
 use DateTimeZone;
+use Monolog\Logger;
 use Slim\Views\Twig;
 use App\Domain\User\User;
+use App\classes\CreateLogger;
 use App\classes\ConsultaBanco;
+use App\classes\IniciarSessao;
+use GuzzleHttp\Promise\Create;
 use App\classes\BloquearAcesso;
+// use App\classes\CreateLogger as ClassesCreateLogger;
 use App\classes\VerificarEmail;
 use App\classes\VerificarLogin;
-use App\Application\Actions\User\UserAction;
-use App\classes\CreateLogger;
-// use App\classes\CreateLogger as ClassesCreateLogger;
-use App\classes\IniciarSessao;
-use App\Infrastructure\Persistence\User\Sql;
 
-use GuzzleHttp\Promise\Create;
+use App\Application\Actions\User\UserAction;
+use App\Infrastructure\Persistence\User\Sql;
 use Psr\Http\Message\ResponseInterface as Response; 
 
 
@@ -114,7 +115,11 @@ class LogarAction extends UserAction
 
                 $logger = new CreateLogger();
                 $logger->logger("LOGIN",'Usuario: '.$_SESSION[User::USER_NAME].' Realizou Login','info');
-              
+                $logger->logTelegran();
+
+  
+
+
                 $response= ['status'=>'ok','msg'=>'logado com sucesso','location'=>'/sender'];
 
                 return $this->respondWithData($response);

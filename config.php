@@ -7,8 +7,9 @@ date_default_timezone_set('America/Sao_Paulo');
 ini_set('default_charset', 'UTF-8');
  
 $GLOBALS['TZ'] = new \DateTimeZone( 'America/Sao_Paulo');
-$GLOBALS['datefull'] = (new DateTime('now', $GLOBALS['TZ']))->format('d/m/Y H:i:s');
+$GLOBALS['datefull'] = (new DateTime('now', $GLOBALS['TZ']))->format('d-m-Y H:i:s');
 $GLOBALS['hours'] = (new DateTime('now',$GLOBALS['TZ']))->format('H:i:s');
+$GLOBALS['days'] = (new DateTime('now',$GLOBALS['TZ']))->format('d-m-Y');
 
 define('USER_DATA', $GLOBALS['hours']);
 

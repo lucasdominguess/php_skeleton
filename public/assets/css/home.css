@@ -3,12 +3,16 @@
 /* body  */
 .body {
     /* background-color: rgb(26, 25, 25); */
-   /* background-image: url(/assets/img/3525926.jpg); */
- 
+   /* background: url(/assets/img/3409297.jpg); */
+   
+    /* filter: grayscale(100%); */
     height: 100vh;
     width: 100%;
     
 } 
+#img{
+    filter: grayscale(100%); 
+}
 .body_ligth{
     background-color: rgb(235, 233, 233);
    
@@ -26,15 +30,16 @@
    gap: 30px;
 }
 #header{ 
+    /* background-color: rgba(0, 255, 8, 0.333); */
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    gap: 30px;
+    /* gap: 30px; */
 }
 #nav{ 
-
-
+    /* background-color: rgba(255, 0, 200, 0.581); */
+    /* width: 100%; */
     padding: 10px 0px 10px 0px;
 }
 .navbar{
@@ -56,7 +61,7 @@
     /* background-color:white; */
     /* width: 30%;
     height: 100%; */
-    min-width: 300px;
+    /* min-width: 300px; */
     /* background-color: red; */
     /* padding: 10px;
     margin: 5px; */
