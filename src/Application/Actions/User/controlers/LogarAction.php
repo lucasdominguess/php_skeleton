@@ -11,8 +11,12 @@ use App\classes\BloquearAcesso;
 use App\classes\VerificarEmail;
 use App\classes\VerificarLogin;
 use App\Application\Actions\User\UserAction;
+use App\classes\CreateLogger;
+// use App\classes\CreateLogger as ClassesCreateLogger;
 use App\classes\IniciarSessao;
 use App\Infrastructure\Persistence\User\Sql;
+
+use GuzzleHttp\Promise\Create;
 use Psr\Http\Message\ResponseInterface as Response; 
 
 
@@ -106,8 +110,13 @@ class LogarAction extends UserAction
                 // $_SESSION[User::USER_DATE]=$user->datasessao;
                 // $_SESSION['datasessao']=$::USER_EMAIL;
 
-             
+                
+
+                $logger = new CreateLogger();
+                $logger->logger("LOGIN",'Usuario: '.$_SESSION[User::USER_NAME].' Realizou Login','info');
+              
                 $response= ['status'=>'ok','msg'=>'logado com sucesso','location'=>'/sender'];
+
                 return $this->respondWithData($response);
 
 

@@ -4,12 +4,14 @@ namespace App\Application\Actions\User\controlers;
 use App\classes\Data;
 
 use App\classes\Usuario;
+use App\Domain\User\User;
+use App\classes\CriarSenha;
+use App\classes\CreateLogger;
 use App\Application\Actions\Action;
 use App\Application\Actions\User\UserAction;
-use App\classes\CriarSenha;
-use App\Infrastructure\Persistence\User\CreateRepository;
 use App\Infrastructure\Persistence\User\Sql;
 use Psr\Http\Message\ResponseInterface as Response;
+use App\Infrastructure\Persistence\User\CreateRepository;
 
 class CadastrarAction extends UserAction{ 
     protected function action(): Response
@@ -21,6 +23,7 @@ class CadastrarAction extends UserAction{
 
                 $response= ['status'=>'fail','msg'=>'PAGINA 404'];
                 return $this->respondWithData($response);
+
         }
 
         if($url == URL_HOMEADM || $url == URL_HOMEUSER){
@@ -36,6 +39,7 @@ class CadastrarAction extends UserAction{
                     try {
                         $newdata = new Data($data);
                         $cad = new Usuario($nome,$newdata);
+                       
                     } catch (\Throwable $th) {
                     
                         $resposta =['status'=>'fail','msg'=>$th->getMessage()];
@@ -46,6 +50,9 @@ class CadastrarAction extends UserAction{
                     try { 
                         $stmt = new CreateRepository($db);
                         $stmt->createUser($cad,$primarykey,$id_adm);
+
+                        $logger = new CreateLogger();
+                        $logger->logger("CADASTRO",'Usuario: '.$_SESSION[User::USER_NAME].' Cadastrou ' .$nome,'info');
                      
                    }catch(\Throwable $th) { //erro caso nome ja esteja cadastrado
                        if($db->errorCode()=='23000'){

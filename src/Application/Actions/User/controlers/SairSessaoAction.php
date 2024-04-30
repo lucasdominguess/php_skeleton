@@ -8,10 +8,12 @@ namespace App\Application\Actions\User\controlers;
 //     echo json_encode($res);
 // }
 
-use Slim\App;
-
 use DateTime;
+
+use Slim\App;
 use DateTimeZone;
+use App\Domain\User\User;
+use App\classes\CreateLogger;
 use App\Application\Actions\User\UserAction;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -19,7 +21,11 @@ class SairSessaoAction extends UserAction
 { 
     protected function action(): Response 
     {   
-       
+        $logger = new CreateLogger();
+        $logger->logger("LOGOUT",'Usuario: '.$_SESSION[User::USER_NAME].' Desconectou','info');
+
+        session_unset();
+        session_destroy();
         $response= ['status'=>'ok','msg'=>'Sessao encerrada com sucesso','location'=>'/'];
         return $this->respondWithData($response);
     }

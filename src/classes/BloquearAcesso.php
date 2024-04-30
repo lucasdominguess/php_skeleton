@@ -32,6 +32,9 @@ class BloquearAcesso {
                     $stmt->bindValue(":date",$hr);
                     $stmt->execute();
 
+                    $logger = new CreateLogger();
+                    $logger->logger("TENTATIVA DE ACESSO",'Email : ' .$email .' Foi adicionado a lista de Bloqueados','warning');
+
                     $res = 1;
                     return $res ; 
                 }else { 
