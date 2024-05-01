@@ -18,13 +18,14 @@ class CadastrarAction extends UserAction{
     {   
         $url = URI_SERVER ;
         $db = new Sql();    
+        $logger = new CreateLogger();
 
-        if($url == null ){
+        // if($url == null ){
 
-                $response= ['status'=>'fail','msg'=>'PAGINA 404'];
-                return $this->respondWithData($response);
+        //         $response= ['status'=>'fail','msg'=>'PAGINA 404'];
+        //         return $this->respondWithData($response);
 
-        }
+        // }
 
         if($url == URL_HOMEADM || $url == URL_HOMEUSER){
 
@@ -51,7 +52,7 @@ class CadastrarAction extends UserAction{
                         $stmt = new CreateRepository($db);
                         $stmt->createUser($cad,$primarykey,$id_adm);
 
-                        $logger = new CreateLogger();
+                        // $logger = new CreateLogger();
                         $logger->logger("CADASTRO",'Usuario: '.$_SESSION[User::USER_NAME].' Cadastrou ' .$nome,'info');
                      
                    }catch(\Throwable $th) { //erro caso nome ja esteja cadastrado
@@ -66,15 +67,16 @@ class CadastrarAction extends UserAction{
        }
 
        if($url == URL_EXIBIR_ADMIN){ 
-        $nome = $_POST['nome'] ; 
-        $email = $_POST['email'];
-        $senha = $_POST['senha'];
-        $nivel = $_POST['nivel']; 
-        $senhaCodif = password_hash($senha, PASSWORD_DEFAULT); 
+            $nome = $_POST['nome'] ; 
+            $email = $_POST['email'];
+            $senha = $_POST['senha'];
+            $nivel = $_POST['nivel']; 
+            $senhaCodif = password_hash($senha, PASSWORD_DEFAULT); 
         try{
            
             $user = new CreateRepository($db) ;
             $user->createAdmin($nome,$email,$senhaCodif,$nivel);
+            $logger->logger("CADASTRO",'Usuario: '.$_SESSION[User::USER_NAME].' Cadastrou um Admin ' .$nome,'info');
         }catch(\Throwable $e){
             return $this->respondWithData($e);
         }
