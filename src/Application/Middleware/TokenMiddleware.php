@@ -35,22 +35,23 @@ class TokenMiddleware {
         $datenow = new DateTime('now', new DateTimeZone('America/Sao_Paulo')); 
         $newdate_now = $datenow->format('Y-m-d H:i:s');
         
-      
+        // echo $newdate_now ;
+        // echo $exp_sessao;
         
-        if($newdate_now > $exp_sessao) 
+        if($newdate_now < $exp_sessao) 
         { 
-            header('location: /');
-          setcookie('token','',-1,'/');
-          session_destroy();
-          $response = new Response();
-        //   return $response->withHeader('Location', '/')->withStatus(302);  
+            // header('location: /');
+            
+                        $response = $handler->handle($request);
+                        return $response;
         }
-
-            $response = $handler->handle($request);
-            return $response;
+        setcookie('token','',-1,'/');
+        session_destroy();
+        $response = new Response();
+        return $response->withHeader('Location', '/')->withStatus(302);  
 
         }
-     
+        
        
         }
 
