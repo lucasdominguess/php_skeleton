@@ -36,7 +36,8 @@ class TokenMiddleware {
     
         $datenow = new DateTime('now', new DateTimeZone('America/Sao_Paulo')); 
         $newdate_now = $datenow->format('Y-m-d H:i:s');
-        
+
+        // $_SESSION['EXP_TOKEN'] = $exp_sessao ;
         // echo $newdate_now ;
         // echo $exp_sessao;
         

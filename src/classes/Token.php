@@ -32,7 +32,9 @@ class Token {
     $jwt = JWT::encode($payload, $key, 'HS256');
         //  print_r("chave cripto: ".$jwt ."\n");
         setcookie('token',$jwt);
-
+        $_SESSION['EXP_TOKEN'] = $new_exp_time ;
+        
+     
     }
  }
 

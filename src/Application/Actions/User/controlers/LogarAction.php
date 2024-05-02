@@ -86,25 +86,28 @@ class LogarAction extends UserAction
                
             }
       
-   
-                $user = new User($retorno[0]['id_adm'],$retorno[0]['nome'],$retorno[0]['email'],$retorno[0]['nivel']);
+
+                $user = new User($retorno[0]['id_adm'],$retorno[0]['nome'],$retorno[0]['email'],$retorno[0]['nivel'],$GLOBALS['TZ']);
                 
 
                 $_SESSION[User::USER_ID]=$user->id_adm;
                 $_SESSION[User::USER_NAME]=$user->nome;
                 $_SESSION[User::USER_EMAIL]=$user->email;
                 $_SESSION[User::USER_NIVEL]=$user->nivel;
-                // $_SESSION[User::USER_DATE]=$user->datasessao;
+                // $_SESSION[User::USER_DATE]=$user->data;
                 // $_SESSION['datasessao']=$::USER_EMAIL;
 
      
 
                 $logger = new CreateLogger();
-                $logger->logger("LOGIN",'Usuario: '.$_SESSION[User::USER_NAME].' Realizou Login ','info');
-                // $logger->logTelegran();
+                // $logger->loggerProcessor();
+                $logger->logger("LOGIN",'Usuario: '.$_SESSION[User::USER_NAME].' Realizou Login ','info',$_SESSION);
+                // $logger->logTelegran($_SESSION);
+                
 
                 $token = new Token($_SESSION[User::USER_NAME]);
 
+               
 
                 $response= ['status'=>'ok','msg'=>'logado com sucesso','location'=>'/sender'];
 
