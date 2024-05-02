@@ -7,9 +7,10 @@ use Slim\Views\Twig;
 use App\Application\Actions\User;
 use App\Application\Actions\User\controlers;
 use App\Application\Middleware\AdminMiddleware;
+use App\Application\Middleware\TokenMiddleware;
 use App\Application\Actions\User\ViewUserAction;
-use App\Application\Actions\User\ListUsersAction;
 
+use App\Application\Actions\User\ListUsersAction;
 use App\Application\Middleware\UsuarioMiddleware;
 use Psr\Http\Message\ResponseInterface as Response;
 use App\Application\Actions\sender\HandleSenderAction;
@@ -109,7 +110,7 @@ return function (App $app) {
         });
 
 
-    })->add(new AdminMiddleware());
+    })->add(new TokenMiddleware())->add(new AdminMiddleware());
 
 
     // rotas Usuarios
@@ -119,7 +120,8 @@ return function (App $app) {
             return $view->render($response, 'home_users.html', [
               
             ]);
-            })->setName('acessouser');
+            })->setName('acessouser')->add(new TokenMiddleware());
+
     });
 
 

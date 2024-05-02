@@ -17,6 +17,7 @@ use App\classes\VerificarEmail;
 use App\classes\VerificarLogin;
 
 use App\Application\Actions\User\UserAction;
+use App\classes\Token;
 use App\Infrastructure\Persistence\User\Sql;
 use Psr\Http\Message\ResponseInterface as Response; 
 
@@ -84,22 +85,7 @@ class LogarAction extends UserAction
                 }
                
             }
-            // $_SESSION['nome'] = $retorno[0]['nome'] ; 
-            //    $usersession = new IniciarSessao($retorno[0]['nome'],$retorno[0]['email']); 
-
-            //    var_dump($usersession);
-            //    return $this->respondWithData($_SESSION['email']);
-
-            //    const USER_NAME = $_SESSION['email'];
-
-
-            //  session_start();
-                // @session_start();
-                // // Iniciar sessão 
-
-                // @session_start();
-                // $_SESSION['email'] = $retorno[0]['email'];
-
+      
    
                 $user = new User($retorno[0]['id_adm'],$retorno[0]['nome'],$retorno[0]['email'],$retorno[0]['nivel']);
                 
@@ -111,13 +97,13 @@ class LogarAction extends UserAction
                 // $_SESSION[User::USER_DATE]=$user->datasessao;
                 // $_SESSION['datasessao']=$::USER_EMAIL;
 
-                
+     
 
                 $logger = new CreateLogger();
-                $logger->logger("LOGIN",'Usuario: '.$_SESSION[User::USER_NAME].' Realizou Login','info');
-                $logger->logTelegran();
+                $logger->logger("LOGIN",'Usuario: '.$_SESSION[User::USER_NAME].' Realizou Login ','info');
+                // $logger->logTelegran();
 
-  
+                $token = new Token($_SESSION[User::USER_NAME]);
 
 
                 $response= ['status'=>'ok','msg'=>'logado com sucesso','location'=>'/sender'];

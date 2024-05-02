@@ -12,7 +12,7 @@ class BloquearAcesso {
 
 
     function bloqueio($email,$db){
-
+                $logger = new CreateLogger();
                //Verificando se o email ja existe no banco de tentativas incorretas de login 
                 $stmt = $db->prepare("SELECT COUNT(*) AS total FROM tentativa WHERE emails = :email");
                 $stmt->bindValue(":email", $email);
@@ -32,7 +32,7 @@ class BloquearAcesso {
                     $stmt->bindValue(":date",$hr);
                     $stmt->execute();
 
-                    $logger = new CreateLogger();
+                   
                     $logger->logger("TENTATIVA DE ACESSO",'Email : ' .$email .' Foi adicionado a lista de Bloqueados','warning');
 
                     $res = 1;
@@ -64,6 +64,9 @@ class BloquearAcesso {
                                 $stmt->bindValue(":email",$email);
                                 $stmt->bindValue(":data",$newtime);
                                 $stmt->execute();
+
+                                $logger->logger("TENTATIVA DE ACESSO",'Email : ' .$email .' Foi adicionado uma penalidade de 10 minutos','warning');
+
                                 $res = 2;
                                 return $res ; 
                             }

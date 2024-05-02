@@ -26,7 +26,7 @@ define('USEREMAIL',$email );
 $nivel = $_SESSION[User::USER_NIVEL] ?? null;
 define('USER_NIVEL',$nivel);
 
-
+// $_ENV['secretkey'];
 
 
 define('URL_HOMEUSER','http://localhost:9000/user/acessouser');
