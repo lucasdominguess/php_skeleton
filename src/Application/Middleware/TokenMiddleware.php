@@ -1,7 +1,6 @@
 <?php
 namespace App\Application\Middleware;
  
-// require_once "vendor/autoload.php";
 
 use DateTime;
 use DateTimeZone;
@@ -27,7 +26,10 @@ class TokenMiddleware {
     
         $inicia_time = $decoded_array['iat'];  //tempo do inicio criação token
         $exp_sessao = $decoded_array['exp'];  //tempo de expiração do token 
-    
+        
+        // $Hrexp =$exp_sessao->format('H:i:s');
+        // define('TOKEN_EXP',$exp_sessao);
+
         $inicia_time_new=date("Y-m-d H:i:s",$inicia_time);
       
     
