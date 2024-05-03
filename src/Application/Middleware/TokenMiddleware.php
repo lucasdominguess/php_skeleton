@@ -51,7 +51,10 @@ class TokenMiddleware {
         setcookie('token','',-1,'/');
         session_destroy();
         $response = new Response();
-        return $response->withHeader('Location', '/')->withStatus(302);  
+        
+        // $resposta = ['status'=>'fail','msg'=>'Sessão Expirada','location'=>'/'];
+        return $response->withHeader('Location', '/')->withStatus(302); 
+        // return $resposta;
 
         }
         

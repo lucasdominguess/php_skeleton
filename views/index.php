@@ -44,6 +44,7 @@
                             <input class="input" type="password" id="senha" name="senha" placeholder="Digite sua senha "><br><br>
 
                             <button id="btn_entrar" class="btn_entrar" type="button">Entrar</button>
+                            <a href=""></a>
                         </div>
                     </div>
                 </div>
@@ -54,4 +55,5 @@
 
 
 {% block script %}
+<script src="/assets/js/login.js"></script>
 {% endblock %}

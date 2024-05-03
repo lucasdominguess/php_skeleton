@@ -74,7 +74,7 @@ return function (App $app) {
         $app->post('/sair',SairSessaoAction::class); //sair da sessao
         $app->get('/listar',ListarAction::class); //listar dados para tabela
         $app->post('/cadastrar',CadastrarAction::class); //cadastrar
-
+       
 
         $app->get('/invalidtoken', function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
@@ -87,7 +87,7 @@ return function (App $app) {
     $app->group('/admin',function(Group $group){ 
         $group->get('/acessoadm', function ($request, $response, $args) {
             $view = Twig::fromRequest($request);
-            return $view->render($response, 'home.html', [
+            return $view->render($response, '/admin/home.html', [
               
             ]);
             })->setName('acessoadm');
@@ -97,14 +97,20 @@ return function (App $app) {
         $group->get('/exibir_admins',ListarAction::class);
         $group->get('/exibiradmins', function ($request, $response, $args) {
             $view = Twig::fromRequest($request);
-            return $view->render($response,'exibiradmins.html', [
+            return $view->render($response,'/admin/exibiradmins.html', [
               
             ]);
             });
         $group->get('/tentativas_acesso',ListarAction::class);   
         $group->get('/tentativasacesso', function ($request, $response, $args) {
             $view = Twig::fromRequest($request);
-            return $view->render($response,'tentativas_acesso.html', [
+            return $view->render($response,'/admin/tentativas_acesso.html', [
+              
+            ]);
+        });
+        $group->get('/configadms' ,function ($request, $response, $args) {
+            $view = Twig::fromRequest($request);
+            return $view->render($response,'/admin/config_adms.html', [
               
             ]);
         });
@@ -117,7 +123,7 @@ return function (App $app) {
     $app->group('/user',function(Group $group){ 
         $group->get('/acessouser', function ($request, $response, $args) {
             $view = Twig::fromRequest($request);
-            return $view->render($response, 'home_users.html', [
+            return $view->render($response, '/users/home_users.html', [
               
             ]);
             })->setName('acessouser')->add(new TokenMiddleware());
@@ -127,4 +133,4 @@ return function (App $app) {
 
  
 
-};
+    };

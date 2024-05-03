@@ -8,6 +8,9 @@
                 <h4 class="escletra h1s">Bem-vindo, {{username}}!</h4>
                 <!-- <H6>{{exptoken}}</H6> -->
             </div>
+            <div id="fotoPerfil">
+               <img src="" alt="">
+            </div>
         </section>
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Home</a>
@@ -41,7 +44,7 @@
                             <li><a class="dropdown-item" href="#">Configurações de Usuario</a></li>
 
                             {% if userid == 4 %}
-                            <li><a class="dropdown-item" href="#">Configurações de Administradores</a></li>
+                            <li><a class="dropdown-item" href="/admin/configadms">Configurações de Administradores</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -64,7 +67,7 @@
             <button id="btn_sair" class="btn btn-danger">Sair</button>
           </div>
         <div id="div_icons">
-            <abbr title="Modo Dark"><i id="icon_home" class="fa-solid fa-moon icons"></i>
+            <i id="icon_home" class="fa-solid fa-moon icons"  data-bs-toggle="tooltip" title="Modo Dark/Ligth"></i>
             </abbr>
 
         </div>

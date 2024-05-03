@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block link %}
+
+
+        <html id='html_configuracoesadm'>
+        <link rel="stylesheet" href="/assets/css/home.css">
+        <link rel="stylesheet" href="/assets/css/config.css">
+        <title>Configurações</title>
+{% endblock %}
+
+
+{% block body %}
+
+
+<section id="conteudo">
+
+    <header id="header">
+        {{include('/assets/dados_session.html')}}
+        {{include('/assets/nav.html')}}
+
+    </header>
+
+<section id="configuracoes" class="form-control d-flex " >
+
+    <div id="editfoto" class="form-control">
+        <div id="div_img">
+            <img id="img" src="/assets/img/perfilM.svg" alt="">
+        </div>
+        <div id="div">
+            <div id="div_h1" class="d-flex ">
+
+                <h2>Editar Foto de Perfil</h2>
+            </div>
+            <div>
+                
+                <form id="form_config" class="d-flex " action="/image/update" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" accept="images/gif, images/jpeg, images/png, images/jpg, images/jfif">
+                    <button class="btn btn-outline-primary " type="submit">Alterar foto</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+</section>
+
+{% endblock %}
