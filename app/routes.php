@@ -5,11 +5,12 @@ declare(strict_types=1);
 use Slim\App;
 use Slim\Views\Twig;
 use App\Application\Actions\User;
+use App\Application\files\ArquivoAction;
 use App\Application\Actions\User\controlers;
 use App\Application\Middleware\AdminMiddleware;
 use App\Application\Middleware\TokenMiddleware;
-use App\Application\Actions\User\ViewUserAction;
 
+use App\Application\Actions\User\ViewUserAction;
 use App\Application\Actions\User\ListUsersAction;
 use App\Application\Middleware\UsuarioMiddleware;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -114,6 +115,7 @@ return function (App $app) {
               
             ]);
         });
+        $group->post('/arquivo',ArquivoAction::class);
 
 
     })->add(new TokenMiddleware())->add(new AdminMiddleware());
