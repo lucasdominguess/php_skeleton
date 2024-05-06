@@ -21,11 +21,19 @@ class Upload {
 
         $info = pathinfo($file['name']);
         $this->name = $info['filename'];
-        $this->extension = $info['extension'];
+        $this->extension =  pathinfo($file['name'],PATHINFO_EXTENSION);
     }
-    
+    public function getBasename(){
+        $extension = strlen($this->extension) ? '.' .$this->extension : '' ;
+        return $this->name.$extension ; 
+    }
         
     public function upload($dir){
-        if($this->error != 0) return false;
+      
+      
+
+        $path =$dir .'/'.$this->getBasename(); 
+        return move_uploaded_file($this->tmpName,$path) ;
     }
+
 }
