@@ -50,10 +50,20 @@ class TokenMiddleware {
         }
         setcookie('token','',-1,'/');
         session_destroy();
-        $response = new Response();
         
-        // $resposta = ['status'=>'fail','msg'=>'Sessão Expirada','location'=>'/'];
-        return $response->withHeader('Location', '/')->withStatus(302); 
+     
+        $response = new Response();
+
+                // Defina a mensagem
+        $msg = json_encode(['status' => 'fail', 'msg' => 'Sessão Expirada']);
+
+        // Redirecione o cliente e inclua a mensagem na URL como um parâmetro de consulta
+        return $response->withHeader('Location', '/?msg=' . urlencode($msg))->withStatus(302);
+
+
+
+        
+        // return $response->withHeader('Location', '/')->withStatus(302); 
         // return $resposta;
 
         }
