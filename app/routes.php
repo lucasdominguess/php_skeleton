@@ -116,6 +116,7 @@ return function (App $app) {
             ]);
         });
         $group->post('/arquivo',ArquivoAction::class);
+        $group->get('/listar_arquivos',ListarAction::class);
 
 
     })->add(new TokenMiddleware())->add(new AdminMiddleware());

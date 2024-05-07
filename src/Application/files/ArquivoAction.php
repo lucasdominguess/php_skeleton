@@ -12,22 +12,23 @@ class ArquivoAction extends Action {
     {
    
       if($_FILES['file']['error'] == 4 ) {
-        return $this->respondWithData('Nenhum arquivo foi enviado!');
+        $msg = ['status' => 'fail', 'msg' => 'Nenhum Arquivo foi enviado!'];
+        return $this->respondWithData($msg);
       }
       
       $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 
       if(!in_array($ext,['png','jpg','gif','mp4','wmv']))
       {
-        return $this->respondWithData('Formato invalido!');
+        $msg = ['status' => 'fail', 'msg' => 'Formato invalido!'];
+        return $this->respondWithData($msg);
       }
             
-            $file = new Upload($_FILES['file']);
-            $file->upload(__DIR__.'/');
+      $file = new Upload($_FILES['file']);
+      $file->upload(__DIR__.'/arquivos');
 
-            // return $this->respondWithData($file['name']);
-
-    
+      $msg = ['status' => 'ok', 'msg' => 'Arquivo enviado com sucesso!'];
+      return $this->respondWithData($msg);
 
     }
             
