@@ -46,9 +46,12 @@ class ListarAction extends Action {
         }
         
         if($url == URL_ARQUIVOS_ADM){
-            $pasta = "C:/Users/x492420/OneDrive - rede.sp/Área de Trabalho/php_skeleton/src/Application/files/arquivos ";
+            // $pasta = "C:/Users/x492420/OneDrive - rede.sp/Área de Trabalho/php_skeleton/src/Application/files/arquivos ";
+            $pasta = __DIR__ ."/../arquivos";
+            // $pasta=  "C:/Users/lucas domingues/OneDrive/Documentos/Lucas Backup/repositorios_git/php_slim/src/Application/files/arquivos";
             $arquivos = scandir($pasta);
-
+            array_shift($arquivos);
+            array_shift($arquivos);
             return $this->respondWithData($arquivos);
             
         }
