@@ -36,8 +36,8 @@ $t = strtotime($expToken);
 $r = strtotime($GLOBALS['datefull2']);
 $t0 = $t -$r;
 
-$t1 =date("i:s" , $t0);
-$t2 =date("i:s" , $t);
+$t1 =date("H:i:s" , $t0);
+$t2 =date("H:i:s" , $t);
 // $t = $expToken->diff($GLOBALS['datefull3']) ; 
 // $formExp = $_SESSION['EXP_TOKEN']->format('H:i:s');
 define('EXP_TOKEN',$t1);

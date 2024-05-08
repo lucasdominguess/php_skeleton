@@ -96,18 +96,65 @@ function arrumar(obj){
   
 
 
- async function atualizarTempo() {
+ function atualizarTempo() {
   
-    const tempo = await fetch('/temposessao')
-    let response = await tempo.json(); 
-    // var novoTempo = document.getElementById('temposessao').text ;
-    console.log(response)
+    // const tempo = await fetch('/temposessao')
+    // let response = await tempo.json(); 
+    // let exp_sessao = document.getElementById('temposessao').textContent;
+    // // console.log(exp_sessao)
+    // let dateToday = new Date();
+
+    // let hr = dateToday.getHours();
+    // let min = dateToday.getMinutes();
+    // let seg = dateToday.getSeconds();
+    
+    // let horas_form = `${min}:${seg}` 
+    // let tempo_rest =  horas_form - exp_sessao
+    // console.log(horas_form)
+
+    // Suponha que você tenha uma variável contendo o valor 59:20
+    // let tempo =  document.getElementById('temposessao').textContent
+    const tempo = document.getElementById('temposessao').textContent
+    // const tempo = "00:59:59" 
+    // Divida a string em horas, minutos e segundos
+    let [horas, minutos, segundos] = tempo.split(":");
+    
+    // Converta as strings em números
+    horas = parseInt(horas);
+    minutos = parseInt(minutos);
+    segundos = parseInt(segundos);
+    
+    // Converta as horas e minutos para segundos e some tudo
+    let totalSegundos = horas * 3600 + minutos * 60 + segundos;
+    
+    // Subtraia o tempo desejado (por exemplo, 1 segundo)
+    totalSegundos -= 1;
+    
+    // Converta os segundos de volta para horas, minutos e segundos
+    horas = Math.floor(totalSegundos / 3600);
+    minutos = Math.floor((totalSegundos % 3600) / 60);
+    segundos = totalSegundos % 60;
+    
+    console.log(`${horas}:${minutos}:${segundos}`)
+    // Formate os valores para garantir que tenham sempre 2 dígitos
+    let formattedHoras = horas.toString().padStart(2, "0");
+    let formattedMinutos = minutos.toString().padStart(2, "0");
+    let formattedSegundos = segundos.toString().padStart(2, "0");
+    
+    // Crie uma nova string no formato "hh:mm:ss"
+    let novoTempo = `${formattedHoras}:${formattedMinutos}:${formattedSegundos}`;
+    
+    tempo.textContent = 'banana'
+    // console.log(tempo)
+    // console.log(novoTempo - tempo); // Saída: "59:19:59" (1 segundo subtraído)
     // // Atualize o conteúdo da div com o novo tempo
 //    const temp = document.getElementById('temposessao').innerText = response
 }
 
 // Atualize o tempo a cada segundo
 // setInterval(atualizarTempo, 1000);
+// atualizarTempo()
+
 
 
 
