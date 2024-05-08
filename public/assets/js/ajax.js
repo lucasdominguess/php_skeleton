@@ -68,7 +68,7 @@ async function requestGETrota(rota) {
 async function requestDELETE(key,rota) {
     try {
       let id = key.target.id;
-      console.log(key.target.emails);
+      // console.log(key.target.emails);
       
       const response = await fetch(
         `${rota}?id=${id}`,
@@ -105,3 +105,12 @@ async function buscar(rota)
       
     };
     };
+
+  async function requestGETDownload (rota){
+    // let id = key.target.id
+      console.log(rota);
+      let response = await fetch(`${rota}`);
+      console.log(response)
+      let obj = await response.json()
+    
+  }

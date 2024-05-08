@@ -9,6 +9,7 @@ ini_set('default_charset', 'UTF-8');
  
 $GLOBALS['TZ'] = new \DateTimeZone( 'America/Sao_Paulo');
 $GLOBALS['datefull'] = (new DateTime('now', $GLOBALS['TZ']))->format('d-m-Y H:i:s');
+$GLOBALS['datefull2'] = (new DateTime('now', $GLOBALS['TZ']))->format('Y-m-d H:i:s');
 $GLOBALS['datefullForm'] = (new DateTime('now', $GLOBALS['TZ']))->format('Y-m-d H:i:s');
 $GLOBALS['hours'] = (new DateTime('now',$GLOBALS['TZ']))->format('H:i:s');
 $GLOBALS['days'] = (new DateTime('now',$GLOBALS['TZ']))->format('d-m-Y');
@@ -28,7 +29,18 @@ define('USEREMAIL',$email );
 $nivel = $_SESSION[User::USER_NIVEL] ?? null;
 define('USER_NIVEL',$nivel);
 
+$expToken = $_SESSION['EXP_TOKEN'] ?? '';
+$GLOBALS['datefull3'] = (new DateTime($expToken));
+// $expToken->format('H:i:s');
+$t = strtotime($expToken);
+$r = strtotime($GLOBALS['datefull2']);
+$t0 = $t -$r;
+
+$t1 =date("i:s" , $t0);
+$t2 =date("i:s" , $t);
+// $t = $expToken->diff($GLOBALS['datefull3']) ; 
 // $formExp = $_SESSION['EXP_TOKEN']->format('H:i:s');
+define('EXP_TOKEN',$t1);
 // $tokenExpira = $GLOBALS['TZ'] - $formExp;
 // $resToken = 1
 //  - $_SESSION['EXP_TOKEN']; 

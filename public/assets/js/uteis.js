@@ -95,6 +95,23 @@ function arrumar(obj){
 };
   
 
+
+ async function atualizarTempo() {
+  
+    const tempo = await fetch('/temposessao')
+    let response = await tempo.json(); 
+    // var novoTempo = document.getElementById('temposessao').text ;
+    console.log(response)
+    // // Atualize o conteúdo da div com o novo tempo
+//    const temp = document.getElementById('temposessao').innerText = response
+}
+
+// Atualize o tempo a cada segundo
+// setInterval(atualizarTempo, 1000);
+
+
+
+
 // $(document).ready(async ()=>{
 //   let tag = document.querySelector('.htmlpags').id
 
@@ -144,4 +161,3 @@ function arrumar(obj){
 //   //  buscar(`/listar?rota=${tag}`)
 //     console.log(tag)
 // });
-      

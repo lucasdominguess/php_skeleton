@@ -30,6 +30,13 @@ class ArquivoAction extends Action {
       $msg = ['status' => 'ok', 'msg' => 'Arquivo enviado com sucesso!'];
       return $this->respondWithData($msg);
 
+
+      
+
+
+
+
+
     }
             
     

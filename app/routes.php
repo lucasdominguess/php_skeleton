@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 use Slim\App;
 use Slim\Views\Twig;
+use App\classes\TempoSessao;
 use App\Application\Actions\User;
+use App\Application\files\Download;
 use App\Application\files\ArquivoAction;
+use App\Application\files\DownloadAction;
+
 use App\Application\Actions\User\controlers;
 use App\Application\Middleware\AdminMiddleware;
 use App\Application\Middleware\TokenMiddleware;
-
 use App\Application\Actions\User\ViewUserAction;
 use App\Application\Actions\User\ListUsersAction;
 use App\Application\Middleware\UsuarioMiddleware;
@@ -75,6 +78,8 @@ return function (App $app) {
         $app->post('/sair',SairSessaoAction::class); //sair da sessao
         $app->get('/listar',ListarAction::class); //listar dados para tabela
         $app->post('/cadastrar',CadastrarAction::class); //cadastrar
+        $app->get('/temposessao', TempoSessao::class);
+    
        
 
         $app->get('/invalidtoken', function ($request, $response, $args) {
@@ -117,9 +122,12 @@ return function (App $app) {
         });
         $group->post('/arquivo',ArquivoAction::class);
         $group->get('/listar_arquivos',ListarAction::class);
+        $group->get('/download',DownloadAction::class);
+        // $group->get('/download/{filename}',DownloadAction::class);
 
 
-    })->add(new TokenMiddleware())->add(new AdminMiddleware());
+    });
+    // ->add(new TokenMiddleware())->add(new AdminMiddleware());
 
 
     // rotas Usuarios

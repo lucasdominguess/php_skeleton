@@ -55,3 +55,7 @@ $("#btn_enviar_foto").click ( function (){
   let v_form = new FormData(document.getElementById('form_config')) 
   requestPOST("/admin/arquivo" ,v_form)
 });
+
+$("#btn_dowload_01").click( function () { 
+  requestGETDownload('/admin/download?filename=vendas.png')
+})

@@ -1,4 +1,5 @@
 
+{% set exptoken = constant('EXP_TOKEN') %}
 
 <section id="nav" class=' col-md-8'>
     
@@ -6,7 +7,7 @@
         <section id="sessao_adm">
             <div id="nomeAdm">
                 <h4 class="escletra h1s">Bem-vindo, {{username}}!</h4>
-                <!-- <H6>{{exptoken}}</H6> -->
+                <div id="temposessao">{{exptoken}}</div>
             </div>
             <div id="fotoPerfil">
                <img src="" alt="">

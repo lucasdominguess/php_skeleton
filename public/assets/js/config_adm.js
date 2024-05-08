@@ -41,5 +41,6 @@ document.addEventListener("DOMContentLoaded",async ()=>{
 
    
     // console.log(response)
-   tH(response)
+//    tH(response)
+//    arrumar(response)
 });
