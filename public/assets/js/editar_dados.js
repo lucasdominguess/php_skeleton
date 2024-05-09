@@ -44,5 +44,52 @@ function gerarModal(key,obj) {
 
 }
 
+//exibir o tempo restante da sessao do usuario
+function atualizarTempo() {
+  const tempo =  document.getElementById('temposessao').textContent;   
+
+
+ 
+
+  var dataAtual = new Date(); // Cria uma instância de Date()
+  var timestamp = dataAtual.getTime(); // Obtém o timestamp em milissegundos
+
+  // console.log(timestamp); // Imprime o timestamp
+
+  let temtoken = new Date(tempo); 
+  let timestampTempo = temtoken.getTime();
+
+  let difereca = timestampTempo - timestamp;
+
+
+  let n = new Date(difereca); // criando instancia da diff entre as datas
+
+  var horasAtuais = n.getHours();  
+  var minutosAtuais = n.getMinutes();
+  let segundos = n.getSeconds();
+
+  //adcionando 0 caso o valor conhenha apenas um digito 
+  let formattedHoras = horasAtuais.toString().padStart(2, "0");
+  let formattedMinutos = minutosAtuais.toString().padStart(2, "0");
+  let formattedSegundos = segundos.toString().padStart(2, "0");
+
+
+
+  let tempoRestante = `${formattedMinutos}:${formattedSegundos}` 
+
+  // console.log(tempoRestante)
+let tempoRest =  document.getElementById('temposessao2').textContent = tempoRestante
+
+
+  
+//    let  tempoRest = document.getElementById('temposessao2').textContent
+if(/^00:\d{2}$/.test(tempoRest)){
+    $('#temposessao2').css('color', 'red');
+  }
+  if(tempoRest == "00:00"){
+      fnMensagem('error',"Sessão Expirada",true,'/')
+  }
+}
+setInterval(atualizarTempo, 1000);
 
 

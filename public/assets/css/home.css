@@ -3,7 +3,7 @@
 /* body  */
 .body {
     /* background-color: rgb(26, 25, 25); */
-   /* background: url(/assets/img/6860.jpg); */
+   background: url(/assets/img/7084.svg);
    
     /* filter: grayscale(100%); */
     height: 100vh;
@@ -31,20 +31,22 @@
 }
 #header{ 
     /* background-color: rgba(0, 255, 8, 0.333); */
+    /* border: 1px solid rgba(160, 157, 157, 0.485); */
     display: flex;
     justify-content: start;
-    align-items: center;
+    align-items: start;
     width: 100%;
     gap: 10px;
+    padding: 10px;
 }
 #nav{ 
     /* background-color: rgba(255, 0, 200, 0.581); */
     /* width: 100%; */
-    padding: 10px 0px 10px 0px;
+    /* padding: 10px 0px 10px 0px; */
 }
 .navbar{
     border: 1px solid rgba(160, 157, 157, 0.485);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.300);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.300);
     border-radius: 3px;
 }
 #div_icons{ 
@@ -61,7 +63,7 @@
 #sessao_adm{
     /* background-color:white; */
     /* width: 30%; */
-    
+      border: 1px solid rgba(160, 157, 157, 0.485);
     /* min-width: 300px; */
     /* background-color: rgba(255, 0, 0, 0.342); */
     /* padding: 10px;
@@ -231,12 +233,11 @@ ul.pagination:hover{
 .bg-transp { 
    
     /* background: rgba(255, 255, 255, 0.391); */
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    /* border-radius: 16px; */
+    /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
     backdrop-filter: blur(9.4px);
     -webkit-backdrop-filter: blur(9.4px);
-    border: 1px solid rgba(255, 255, 255, 1);
-    /* border: 1px solid rgba(255, 255, 255, 0.471); */
+
 }
 #title_h3 { 
     font-family: "Madimi One", sans-serif;
