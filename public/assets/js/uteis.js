@@ -94,117 +94,48 @@ function arrumar(obj){
     button2.addEventListener('click',confirmExcluir);
 };
   
+//exibir o tempo restante da sessao do usuario
+function atualizarTempo() {
+    const tempo =  document.getElementById('temposessao').textContent;   
 
 
- function atualizarTempo() {
-  
-    // const tempo = await fetch('/temposessao')
-    // let response = await tempo.json(); 
-    // let exp_sessao = document.getElementById('temposessao').textContent;
-    // // console.log(exp_sessao)
-    // let dateToday = new Date();
+   
 
-    // let hr = dateToday.getHours();
-    // let min = dateToday.getMinutes();
-    // let seg = dateToday.getSeconds();
-    
-    // let horas_form = `${min}:${seg}` 
-    // let tempo_rest =  horas_form - exp_sessao
-    // console.log(horas_form)
+    var dataAtual = new Date(); // Cria uma instância de Date()
+    var timestamp = dataAtual.getTime(); // Obtém o timestamp em milissegundos
 
-    // Suponha que você tenha uma variável contendo o valor 59:20
-    // let tempo =  document.getElementById('temposessao').textContent
-    const tempo = document.getElementById('temposessao').textContent
-    // const tempo = "00:59:59" 
-    // Divida a string em horas, minutos e segundos
-    let [horas, minutos, segundos] = tempo.split(":");
-    
-    // Converta as strings em números
-    horas = parseInt(horas);
-    minutos = parseInt(minutos);
-    segundos = parseInt(segundos);
-    
-    // Converta as horas e minutos para segundos e some tudo
-    let totalSegundos = horas * 3600 + minutos * 60 + segundos;
-    
-    // Subtraia o tempo desejado (por exemplo, 1 segundo)
-    totalSegundos -= 1;
-    
-    // Converta os segundos de volta para horas, minutos e segundos
-    horas = Math.floor(totalSegundos / 3600);
-    minutos = Math.floor((totalSegundos % 3600) / 60);
-    segundos = totalSegundos % 60;
-    
-    console.log(`${horas}:${minutos}:${segundos}`)
-    // Formate os valores para garantir que tenham sempre 2 dígitos
-    let formattedHoras = horas.toString().padStart(2, "0");
-    let formattedMinutos = minutos.toString().padStart(2, "0");
+    // console.log(timestamp); // Imprime o timestamp
+
+    let temtoken = new Date(tempo); 
+    let timestampTempo = temtoken.getTime();
+
+    let difereca = timestampTempo - timestamp;
+
+
+    let n = new Date(difereca); // criando instancia da diff entre as datas
+
+    var horasAtuais = n.getHours();  
+    var minutosAtuais = n.getMinutes();
+    let segundos = n.getSeconds();
+
+    //adcionando 0 caso o valor conhenha apenas um digito 
+    let formattedHoras = horasAtuais.toString().padStart(2, "0");
+    let formattedMinutos = minutosAtuais.toString().padStart(2, "0");
     let formattedSegundos = segundos.toString().padStart(2, "0");
-    
-    // Crie uma nova string no formato "hh:mm:ss"
-    let novoTempo = `${formattedHoras}:${formattedMinutos}:${formattedSegundos}`;
-    
-    tempo.textContent = 'banana'
-    // console.log(tempo)
-    // console.log(novoTempo - tempo); // Saída: "59:19:59" (1 segundo subtraído)
-    // // Atualize o conteúdo da div com o novo tempo
-//    const temp = document.getElementById('temposessao').innerText = response
+
+
+
+    let tempoRestante = `${formattedMinutos}:${formattedSegundos}` 
+
+    // console.log(tempoRestante)
+  let tempoRest =  document.getElementById('temposessao2').textContent = tempoRestante
+
+//    let  tempoRest = document.getElementById('temposessao2').textContent
+    if(tempoRest == "00:20"){
+        tempoRest.style.color= red
+    }
+    if(tempoRest == "00:00"){
+        fnMensagem('error',"Sessão Expirada",true,'/')
+    }
 }
-
-// Atualize o tempo a cada segundo
-// setInterval(atualizarTempo, 1000);
-// atualizarTempo()
-
-
-
-
-
-// $(document).ready(async ()=>{
-//   let tag = document.querySelector('.htmlpags').id
-
-//   //  let obj = await buscar(`/listar?rota=${tag}`)
-//     let obj = await buscar('/listar');
-
-//     // console.log(obj)
-//     tH(Object.keys(obj[0]));
-    
-//     // console.log(obj)
-    
-//     // loop para construir chave da tabela
-//     for (let index = 0; index < obj.length; index++) {
-//       // console.log(obj.length)
-//       const element = obj[index];
-      
-//           arrumar(element)      
-         
-//         }
-    
-// });
-//Função escrevendo letras
-
-// document.addEventListener("DOMContentLoaded", function() {
-//   function ativaLetra(elemento) {
-//     const arrTexto = elemento.innerHTML.split('');
-//     elemento.innerHTML = '';
-//     arrTexto.forEach((letra, i) => {
-//       setTimeout(() => {
-//         elemento.innerHTML += letra;
-//       }, 75 * i);
-//     });
-//   }
-
-
-  
-//   function escrevendoLetra() {
-//     const titulo = document.querySelector('.escletra');
-//     ativaLetra(titulo);
-//   }
-// escrevendoLetra();
-// });
-
-// document.addEventListener("DOMContentLoaded", function() {
-//    let tag = document.querySelector('.htmlpags').id
-
-//   //  buscar(`/listar?rota=${tag}`)
-//     console.log(tag)
-// });
+setInterval(atualizarTempo, 1000);

@@ -29,25 +29,10 @@ define('USEREMAIL',$email );
 $nivel = $_SESSION[User::USER_NIVEL] ?? null;
 define('USER_NIVEL',$nivel);
 
+// tempo de expiração de token 
 $expToken = $_SESSION['EXP_TOKEN'] ?? '';
-$GLOBALS['datefull3'] = (new DateTime($expToken));
-// $expToken->format('H:i:s');
-$t = strtotime($expToken);
-$r = strtotime($GLOBALS['datefull2']);
-$t0 = $t -$r;
-
-$t1 =date("H:i:s" , $t0);
-$t2 =date("H:i:s" , $t);
-// $t = $expToken->diff($GLOBALS['datefull3']) ; 
-// $formExp = $_SESSION['EXP_TOKEN']->format('H:i:s');
-define('EXP_TOKEN',$t1);
-// $tokenExpira = $GLOBALS['TZ'] - $formExp;
-// $resToken = 1
-//  - $_SESSION['EXP_TOKEN']; 
-// // $tokenExpira = $_SESSION['EXP_TOKEN'] - 1;
-
-// define("EXP_TOKEN",$resToken);
-// $_ENV['secretkey'];
+$formExp= (new DateTime($expToken))->format('H:i:s');
+define('EXP_TOKEN',$expToken);
 
 
 define('URL_HOMEUSER','http://localhost:9000/user/acessouser');

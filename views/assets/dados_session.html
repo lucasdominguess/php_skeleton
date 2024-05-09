@@ -1,21 +1,18 @@
+{% set exptoken = constant('EXP_TOKEN') %}
 
-<!-- 
-    <section id="sessao_adm" class="col-2">
+  <section id="sessao_adm">
+    <div id="fotoPerfil">
+       <img id="img_perfil" src="/assets/img/perfilM.svg" alt="">
+    </div>
+    <div id="div_info">
       <div id="nomeAdm">
-        <<div class="d-flex">
-          <div>
-            <button id="btn_sair" class="btn btn-danger">Sair</button>
-          </div>
           <h4 class="escletra h1s">Bem-vindo, {{username}}!</h4>
-          < <h5>{{useremail}}</h5> -->
-          <!-- <h5>{{userid}}</h5> -->
-          <!-- <h5>{{userdata}}</h5> -->
-          <!-- <h5>{{usernivel}}</h5> -->
-          <!-- <h3>{{username}}</h3> -->
-        <!-- </div> -->
-      <!-- </div> -->
-      <!-- <div id="tempo_sessao">
-        <br />
-      </div> -->
-    <!-- </section> -->
+      </div>
+        <div  id="temposessao" class="d-none">{{exptoken}}</div>
+        <div class="d-flex gap-1">
+            <p>Sessão Expira em: </p> 
+           <span id="temposessao2"></span>
+        </div>
+    </div>
+  </section>
 
