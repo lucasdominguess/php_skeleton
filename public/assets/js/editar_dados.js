@@ -54,7 +54,7 @@ function atualizarTempo() {
   var dataAtual = new Date(); // Cria uma instância de Date()
   var timestamp = dataAtual.getTime(); // Obtém o timestamp em milissegundos
 
-  // console.log(timestamp); // Imprime o timestamp
+  // console.log(timestamp); // 
 
   let temtoken = new Date(tempo); 
   let timestampTempo = temtoken.getTime();
@@ -68,7 +68,7 @@ function atualizarTempo() {
   var minutosAtuais = n.getMinutes();
   let segundos = n.getSeconds();
 
-  //adcionando 0 caso o valor conhenha apenas um digito 
+  //adcionando 0 caso o valor contenha apenas um digito 
   let formattedHoras = horasAtuais.toString().padStart(2, "0");
   let formattedMinutos = minutosAtuais.toString().padStart(2, "0");
   let formattedSegundos = segundos.toString().padStart(2, "0");

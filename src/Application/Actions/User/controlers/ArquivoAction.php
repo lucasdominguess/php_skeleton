@@ -1,10 +1,12 @@
 <?php
-namespace App\Application\files;
+namespace App\Application\Actions\User\controlers;
 
-use App\Application\Actions\Action;
-use App\Application\files\Upload;
-use Psr\Http\Message\ResponseInterface;
+
 use ZipArchive;
+
+use App\Application\files\Upload;
+use App\Application\Actions\Action;
+use Psr\Http\Message\ResponseInterface;
 
 class ArquivoAction extends Action { 
 
@@ -25,13 +27,12 @@ class ArquivoAction extends Action {
       }
             
       $file = new Upload($_FILES['file']);
-      $file->upload(__DIR__.'/arquivos');
+      $file->upload(__DIR__ ."./../../../files/arquivos/");
 
       $msg = ['status' => 'ok', 'msg' => 'Arquivo enviado com sucesso!'];
       return $this->respondWithData($msg);
 
 
-      
 
 
 

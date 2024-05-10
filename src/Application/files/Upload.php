@@ -32,7 +32,7 @@ class Upload {
       
       
 
-        $path =$dir .'/'.$this->getBasename(); 
+        $path =$dir .'/arquivos'.$this->getBasename(); 
         return move_uploaded_file($this->tmpName,$path) ;
     }
 

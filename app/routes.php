@@ -6,8 +6,7 @@ use Slim\App;
 use Slim\Views\Twig;
 use App\classes\TempoSessao;
 use App\Application\Actions\User;
-use App\Application\files\Download;
-use App\Application\files\ArquivoAction;
+
 use App\Application\files\DownloadAction;
 
 use App\Application\Actions\User\controlers;
@@ -24,6 +23,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Application\Actions\User\controlers\LogarAction;
 use App\Application\Actions\User\controlers\EditarAction;
 use App\Application\Actions\User\controlers\ListarAction;
+use App\Application\Actions\User\controlers\ArquivoAction;
 use App\Application\Actions\User\controlers\ExcluirAction;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 use App\Application\Actions\User\controlers\CadastrarAction;
@@ -77,8 +77,8 @@ return function (App $app) {
         $app->post('/logar',LogarAction::class)->add(ValidatePostMiddleware::class); //efetuar login 
         $app->post('/sair',SairSessaoAction::class); //sair da sessao
         $app->get('/listar',ListarAction::class); //listar dados para tabela
-        $app->post('/cadastrar',CadastrarAction::class); //cadastrar
-        $app->get('/temposessao', TempoSessao::class);
+        $app->post('/cadastrar',CadastrarAction::class); //efetuar cadastro
+        // $app->get('/temposessao', TempoSessao::class);
     
        
 
