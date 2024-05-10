@@ -9,6 +9,7 @@ use Firebase\JWT\Key;
 // use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 use App\Domain\User\User;
+use App\Infrastructure\Persistence\User\RedisConn;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
  
@@ -50,7 +51,8 @@ class TokenMiddleware {
         }
         setcookie('token','',-1,'/');
         session_destroy();
-        
+        $redis = new RedisConn(); 
+        $redis->del($_SESSION[User::USER_EMAIL]);
      
         $response = new Response();
 

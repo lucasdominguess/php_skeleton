@@ -22,8 +22,6 @@ class DownloadAction extends Action
     {
         $filename = $this->request->getQueryParams()['filename'] ?? '';
 
-
-
         if(empty($filename)){ 
             throw new HttpBadRequestException($this->request, 'Nome do arquivo invalido');
         }
@@ -31,13 +29,9 @@ class DownloadAction extends Action
         $filepath = realpath(__DIR__ . "/arquivos/$filename");
         // die(var_dump($filepath,file_exists($filepath)));
         
-
-
         if (!file_exists($filepath)) {
             throw new HttpNotFoundException($this->request, "Arquivo nao encontrado ");
         }
-
-
 
         $fileStream = fopen($filepath, 'r');
         $stream = new Stream($fileStream);

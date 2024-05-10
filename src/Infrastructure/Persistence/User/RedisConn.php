@@ -1,6 +1,8 @@
 <?php
 namespace App\Infrastructure\Persistence\User;
 
+
+use Redis;
 use App\Domain\User\User;
 
 class RedisConn extends \Redis
@@ -22,9 +24,10 @@ class RedisConn extends \Redis
 
 
 
-// $redisUser = new redisConn();
-// $batata->hset('estagiario','nomes','rodrigo o bruxo do front-end');
-// $batata->hset('animal','raça','dog caramelo');
+// $redisUser = new RedisConn();
+// $redisUser->hset('user','nome','rodrigo o bruxo do front-end');
+
+// $redisUser->hset('animal','raça','dog caramelo');
 // hget estagiario nomes
 
 //    $redisUser->hset('Usuario', 'nome',$_SESSION[User::USER_NAME] , 'email', $_SESSION[User::USER_EMAIL] , 'nivel', $_SESSION[User::USER_NIVEL]); 

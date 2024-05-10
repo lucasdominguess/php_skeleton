@@ -1,12 +1,12 @@
 <?php
 namespace App\Application\Actions\User\controlers;
 
-use App\Infrastructure\Persistence\User\redisConn;
 use PDO;
 use DateTime;
 use DateTimeZone;
 use Monolog\Logger;
 use Slim\Views\Twig;
+use App\classes\Token;
 use App\Domain\User\User;
 use App\classes\CreateLogger;
 use App\classes\ConsultaBanco;
@@ -18,8 +18,9 @@ use App\classes\VerificarEmail;
 use App\classes\VerificarLogin;
 
 use App\Application\Actions\User\UserAction;
-use App\classes\Token;
 use App\Infrastructure\Persistence\User\Sql;
+
+use App\Infrastructure\Persistence\User\RedisConn;
 use Psr\Http\Message\ResponseInterface as Response; 
 
 
@@ -53,7 +54,7 @@ class LogarAction extends UserAction
         {   //Regex para validar formado de nome com min. de 3
             $response= (['status' => 'fail', 'msg' => 'Email Inválido!']);
             return $this->respondWithData($response);
-            exit();
+            // exit();
         }
 
           
@@ -76,13 +77,13 @@ class LogarAction extends UserAction
                     case $res === 1 : 
                         $response= (['status'=>'fail','msg'=>'Usuario ou Senha invalida']);
                         return $this->respondWithData($response);
-                        break;
+                        // break;
                       
 
                     case $res === 2 : 
                         $response= (['status'=>'fail','msg'=>'Acesso Negado Aguarde 10 minutos']);
                         return $this->respondWithData($response);
-                        break;
+                        // break;
 
                 // endswitch;
                 }
@@ -90,11 +91,13 @@ class LogarAction extends UserAction
             }   
                  //criando instancia do redis e verifica se ja existe usuario logado 
                 $redis = new RedisConn(); 
-                // $redis_user = $redis->hget('user', $email); 
-                // if($redis_user){
-                //     $response= (['status'=>'fail','msg'=>$redis_user]);
-                //     return $this->respondWithData($response);
-                // }
+                $redis_user = $redis->hget($email,'email'); 
+                // echo $redis_user; 
+                    if($redis_user){
+                        $response= (['status'=>'fail','msg'=>'Usuario ja esta logado']);
+                        return $this->respondWithData($response);
+                    }
+                    // }
       
                 //criando dados do User 
                 $user = new User($retorno[0]['id_adm'],$retorno[0]['nome'],$retorno[0]['email'],$retorno[0]['nivel']);
@@ -120,10 +123,10 @@ class LogarAction extends UserAction
                
                 //criando instancia do redis e key fild do usuario 
                 $redis = new RedisConn(); 
-                $redis->hset('user', 'name',$_SESSION[User::USER_NAME]);
-                $redis->hset('user', 'email',$_SESSION[User::USER_EMAIL] );
-                $redis->hset('user', 'nivel',$_SESSION[User::USER_NIVEL] );
-                $redis->expire('user', 20);
+                $redis->hset($_SESSION[User::USER_EMAIL], 'name',$_SESSION[User::USER_NAME]);
+                $redis->hset($_SESSION[User::USER_EMAIL], 'email',$_SESSION[User::USER_EMAIL] );
+                $redis->hset($_SESSION[User::USER_EMAIL], 'nivel',$_SESSION[User::USER_NIVEL] );
+                $redis->expire($_SESSION[User::USER_EMAIL], 3600);
 
 
                 // , 'email', $_SESSION[User::USER_EMAIL] , 'nivel', $_SESSION[User::USER_NIVEL]); 
