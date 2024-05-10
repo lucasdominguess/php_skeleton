@@ -1,6 +1,7 @@
 <?php
 namespace App\Application\Actions\User\controlers;
 
+use App\Infrastructure\Persistence\User\redisConn;
 use PDO;
 use DateTime;
 use DateTimeZone;
@@ -55,6 +56,8 @@ class LogarAction extends UserAction
             exit();
         }
 
+          
+
     // Verificando se email e senha correspondem a um cadastro valido 
     $stmt=$db->prepare("Select * from usuarios where email = :email");
     $stmt->bindValue(":email",$email);
@@ -84,10 +87,17 @@ class LogarAction extends UserAction
                 // endswitch;
                 }
                
-            }
+            }   
+                 //criando instancia do redis e verifica se ja existe usuario logado 
+                $redis = new RedisConn(); 
+                // $redis_user = $redis->hget('user', $email); 
+                // if($redis_user){
+                //     $response= (['status'=>'fail','msg'=>$redis_user]);
+                //     return $this->respondWithData($response);
+                // }
       
-
-                $user = new User($retorno[0]['id_adm'],$retorno[0]['nome'],$retorno[0]['email'],$retorno[0]['nivel'],$GLOBALS['TZ']);
+                //criando dados do User 
+                $user = new User($retorno[0]['id_adm'],$retorno[0]['nome'],$retorno[0]['email'],$retorno[0]['nivel']);
                 
 
                 $_SESSION[User::USER_ID]=$user->id_adm;
@@ -98,16 +108,29 @@ class LogarAction extends UserAction
                 // $_SESSION['datasessao']=$::USER_EMAIL;
 
      
-
+                //criando instancia de logger 
                 $logger = new CreateLogger();
                 // $logger->loggerProcessor();
                 $logger->logger("LOGIN",'Usuario: '.$_SESSION[User::USER_NAME].' Realizou Login ','info',$_SESSION);
                 // $logger->logTelegran($_SESSION);
                 
-
+                // criando token do usuario
                 $token = new Token($_SESSION[User::USER_NAME]);
 
                
+                //criando instancia do redis e key fild do usuario 
+                $redis = new RedisConn(); 
+                $redis->hset('user', 'name',$_SESSION[User::USER_NAME]);
+                $redis->hset('user', 'email',$_SESSION[User::USER_EMAIL] );
+                $redis->hset('user', 'nivel',$_SESSION[User::USER_NIVEL] );
+                $redis->expire('user', 20);
+
+
+                // , 'email', $_SESSION[User::USER_EMAIL] , 'nivel', $_SESSION[User::USER_NIVEL]); 
+
+
+                // $redisUser->set('user', 'name' $_SESSION[User::USER_NAME], ['EX' => 20] );
+                
 
                 $response= ['status'=>'ok','msg'=>'logado com sucesso','location'=>'/sender'];
 

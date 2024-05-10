@@ -15,6 +15,7 @@ use DateTimeZone;
 use App\Domain\User\User;
 use App\classes\CreateLogger;
 use App\Application\Actions\User\UserAction;
+use App\Infrastructure\Persistence\User\RedisConn;
 use Psr\Http\Message\ResponseInterface as Response;
 
 class SairSessaoAction extends UserAction 
@@ -24,8 +25,12 @@ class SairSessaoAction extends UserAction
         $logger = new CreateLogger();
         $logger->logger("LOGOUT",'Usuario: '.$_SESSION[User::USER_NAME].' Desconectou','info');
 
+        $redis = new RedisConn(); 
+        $redis->del('user');
+
         session_unset();
         session_destroy();
+
         $response= ['status'=>'ok','msg'=>'Sessao encerrada com sucesso','location'=>'/'];
         return $this->respondWithData($response);
     }

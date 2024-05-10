@@ -1,25 +1,25 @@
 <?php
-require __DIR__ .'/vendor/autoload.php' ;
+// require __DIR__ .'/vendor/autoload.php' ;
 
-use App\Infrastructure\Persistence\User\Sql;
-use League\Csv\Reader;
+// use App\Infrastructure\Persistence\User\Sql;
+// use League\Csv\Reader;
 
-$db = new Sql();
-// We are going to insert some data into the users table
-$sth = $db->prepare(
-    "INSERT INTO registros (firstname, lastname, email) VALUES (:firstname, :lastname, :email)"
-);
+// $db = new Sql();
+// // We are going to insert some data into the users table
+// $sth = $db->prepare(
+//     "INSERT INTO registros (firstname, lastname, email) VALUES (:firstname, :lastname, :email)"
+// );
 
-$csv = Reader::createFromPath('./file.csv','r+')
-    ->setHeaderOffset(0)
-;
+// $csv = Reader::createFromPath('./file.csv','r+')
+//     ->setHeaderOffset(0)
+// ;
 
 
-foreach ($csv as $record) {
-    // Do not forget to validate your data before inserting it in your database
-    $sth->bindValue(':firstname', $record['firstname'] , PDO::PARAM_STR);
-    $sth->bindValue(':lastname', $record['lastname'], PDO::PARAM_STR);
-    $sth->bindValue(':email', $record['email'], PDO::PARAM_STR);
-    $sth->execute();
-}
+// foreach ($csv as $record) {
+//     // Do not forget to validate your data before inserting it in your database
+//     $sth->bindValue(':firstname', $record['firstname'] , PDO::PARAM_STR);
+//     $sth->bindValue(':lastname', $record['lastname'], PDO::PARAM_STR);
+//     $sth->bindValue(':email', $record['email'], PDO::PARAM_STR);
+//     $sth->execute();
+// }
 // print_r($csv);
