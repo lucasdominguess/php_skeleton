@@ -4,7 +4,7 @@ function fnMensagem(icon,msg,reload=false,location=''){
       title: msg,
       icon: icon,
       confirmButtonText: 'Ok',
-      timer: 5500,
+      timer: 4500,
       timerProgressBar: true,
       customClass: {
         container: 'dark-mode-alert'
@@ -79,6 +79,25 @@ function confirmExcluir(key) {
       confirmButtonText: 'Ok'
     })
   }
+
+
+function deslogMensagem(icon,msg,reload){
+  Swal.fire({
+    title: msg,
+    icon: icon,
+    confirmButtonText: 'Ok',
+    timer: 2500,
+    timerProgressBar: true,
+
+  willClose: () => {
+  
+ 
+  if(reload){
+    window.location.reload();
+  }
+  }
+  })};
+
 // outros sweetalert
   // Swal.fire({
   //   title: "Custom animation with Animate.css",

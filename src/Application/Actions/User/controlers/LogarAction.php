@@ -29,7 +29,10 @@ class LogarAction extends UserAction
    
     protected function action(): Response
     {  
-       
+         //criando instancia de logger 
+         $logger = new CreateLogger();
+
+        
         $email = $_POST['email'] ?? null;
         $senha = $_POST['senha'] ?? null;
 
@@ -40,6 +43,7 @@ class LogarAction extends UserAction
             $db = new Sql();
         }catch(\PDOException $e){ 
             $response = (['status'=>'fail','msg'=> $e->getMessage()]);
+            $logger->logger('Erro Sql', "Erro ao conectar no Banco de dados",'warning'); 
             return $this->respondWithData($response);
         }
 
@@ -90,11 +94,18 @@ class LogarAction extends UserAction
                
             }   
                  //criando instancia do redis e verifica se ja existe usuario logado 
-                $redis = new RedisConn(); 
-                $redis_user = $redis->hget($email,'email'); 
-                // echo $redis_user; 
+                try {
+                    //code...
+                    $redis = new RedisConn(); 
+                    $redis_user = $redis->hget($email,'email'); 
+                } catch (\Throwable $e) {
+                    $logger->logger('Erro Redis','Erro ao conectar em Redis','warning');
+                    $response = (['status'=>'fail','msg'=> $e->getMessage()]);
+                    return $this->respondWithData($response);
+                }
                     if($redis_user){
                         $response= (['status'=>'fail','msg'=>'Usuario ja esta logado']);
+                        $logger->logger("Duplicidade de Sessão",'Tentativa de multiplos acessos','warning',"Email: $email");
                         return $this->respondWithData($response);
                     }
                     // }
@@ -111,8 +122,7 @@ class LogarAction extends UserAction
                 // $_SESSION['datasessao']=$::USER_EMAIL;
 
      
-                //criando instancia de logger 
-                $logger = new CreateLogger();
+                // gerando loggers 
                 // $logger->loggerProcessor();
                 $logger->logger("LOGIN",'Usuario: '.$_SESSION[User::USER_NAME].' Realizou Login ','info',$_SESSION);
                 // $logger->logTelegran($_SESSION);

@@ -42,7 +42,7 @@ class TokenMiddleware {
         // echo $newdate_now ;
         // echo $exp_sessao;
         
-        if($newdate_now < $exp_sessao) 
+        if($newdate_now <= $exp_sessao) 
         { 
             // header('location: /');
             
