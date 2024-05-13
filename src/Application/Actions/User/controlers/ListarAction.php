@@ -13,16 +13,18 @@ class ListarAction extends Action {
         $db = new Sql();
         $user = new ReadRepository($db);
 
-        $url =  $_SERVER['HTTP_REFERER'] ?? null ;
-        // $url = 'banana' ;
-        // return $this->respondWithData($url);
+        // $url =  $_SERVER['HTTP_REFERER'] ?? null ;
+        // $url =  $_SERVER['SCRIPT_URI'] ?? null ;
+       
         
-        // if ($url == null ){
+        if(URI_SERVER == URL_HOMEUSER){ 
+            
+            $resultado = $user->estagisFindAll();
 
-        //             // $resultado = ['location'=>'/'];
-        //     }
-
-        if($url == URL_HOMEADM || $url == URL_HOMEUSER){ 
+            return $this->respondWithData($resultado);
+           
+        }
+        if(URI_SERVER == URL_HOMEADM){ 
             
             $resultado = $user->estagisFindAll();
 
@@ -30,7 +32,7 @@ class ListarAction extends Action {
            
         }
             
-        if($url == URL_EXIBIR_ADMIN){
+        if(URI_SERVER == URL_EXIBIR_ADMIN){
  
             $resultado = $user->admsFindAll();
                 
@@ -39,13 +41,13 @@ class ListarAction extends Action {
         }
 
                 
-        if($url == URL_TENTA_ACESSO){ 
+        if(URI_SERVER == URL_TENTA_ACESSO){ 
         $resultado = $user->tentativasFindAll();
 
         return $this->respondWithData($resultado);
         }
         
-        if($url == URL_ARQUIVOS_ADM){
+        if(URI_SERVER == URL_ARQUIVOS_ADM){
             $pasta = "C:/Users/x492420/OneDrive - rede.sp/Área de Trabalho/php_skeleton/src/Application/files/arquivos ";
             // $pasta = 'arquivos';
             // $pasta = __DIR__ ."arquivos";
@@ -57,7 +59,7 @@ class ListarAction extends Action {
             
         }
     
-        // return $this->respondWithData($url);
+        return $this->respondWithData(['msg'=>'Erro']);
     // }
     
 }

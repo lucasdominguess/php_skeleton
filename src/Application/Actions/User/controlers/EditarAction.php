@@ -18,7 +18,7 @@ class EditarAction extends Action{
 
         $id = $_GET['id'] ; 
         $db =new Sql(); 
-        $url =  $_SERVER['HTTP_REFERER'] ?? null ;
+        $url = URI_SERVER ;
         $user = new ReadRepository($db); 
 
         if($url == URL_HOMEADM || $url == URL_HOMEUSER){

@@ -12,7 +12,8 @@ class ExcluirAction extends Action{
     protected function action(): response 
     {
         $id = $_GET['id']; 
-        $url =  $_SERVER['HTTP_REFERER'] ?? null ;
+        $url = URI_SERVER ;
+        
         $db =new Sql(); 
         $user = new DeleteRepository($db) ;
         $logger = new CreateLogger ;

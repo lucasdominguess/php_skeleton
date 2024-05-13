@@ -36,12 +36,23 @@ $formExp= (new DateTime($expToken))->format('H:i:s');
 define('EXP_TOKEN',$expToken);
 
 
-define('URL_HOMEUSER','http://localhost:9000/user/acessouser');
-define('URL_HOMEADM','http://localhost:9000/admin/acessoadm');
-define('URL_EXIBIR_ADMIN','http://localhost:9000/admin/exibiradmins');
-define('URL_TENTA_ACESSO','http://localhost:9000/admin/tentativasacesso');
-define('URL_ARQUIVOS_ADM','http://localhost:9000/admin/configadms');
+// define('URL_HOMEUSER','http://localhost:9000/user/acessouser');
+// define('URL_HOMEADM','http://0.0.0.0:9000/admin/acessoadm');
+
+// $reg = "/(?<=\/\/).*:\d{1,4}(?=\/)/"; 
+// $reg2 = "/(http://localhost:9000)/g";
+
+// $link=["http://$reg/admin/acessouser" or "http://localhost:9000/admin/acessouser"];
+
+define('URL_HOMEUSER',"http://{$_SERVER['HTTP_HOST']}/user/acessouser");
+define('URL_HOMEADM',"http://{$_SERVER['HTTP_HOST']}/admin/acessoadm");
+
+
+define('URL_EXIBIR_ADMIN',"http://{$_SERVER['HTTP_HOST']}/admin/exibiradmins");
+define('URL_TENTA_ACESSO',"http://{$_SERVER['HTTP_HOST']}/admin/tentativasacesso");
+define('URL_ARQUIVOS_ADM',"http://{$_SERVER['HTTP_HOST']}/admin/configadms");
 
 // $uri = $_SERVER['SCRIPT_URI'];
 define('URI_SERVER', $_SERVER['HTTP_REFERER'] ?? null);
+// define('URI_SERVER', $_SERVER['PATH_INFO'] ?? null );
 
