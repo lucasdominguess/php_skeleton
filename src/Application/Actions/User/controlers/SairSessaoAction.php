@@ -27,7 +27,8 @@ class SairSessaoAction extends UserAction
 
         $redis = new RedisConn(); 
         $redis->del($_SESSION[User::USER_EMAIL]);
-
+        
+        setcookie('token','',-1,'/');
         session_unset();
         session_destroy();
 

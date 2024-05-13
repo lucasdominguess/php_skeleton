@@ -84,7 +84,7 @@ return function (App $app) {
 
         $app->get('/invalidtoken', function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
-        return $view->render($response, '404.html', [
+        return $view->render($response, 'index.php', [
           
         ]);
     })->setName('tokenInvalido');

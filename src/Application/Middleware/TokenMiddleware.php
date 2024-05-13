@@ -19,6 +19,16 @@ class TokenMiddleware {
     {  
         global $env;
         $key = $env['secretkey'];
+        $response = new Response();
+        
+        $msg = json_encode(['status' => 'fail', 'msg' => 'Sessão Expirada']);
+
+        if(!isset($_COOKIE['token'])){
+            setcookie('token','',-1,'/');
+            session_destroy();
+            // return $response->withHeader('Location', '/?msg=' . urlencode($msg))->withStatus(302);   
+            return $response->withHeader('Location', '/')->withStatus(302); 
+        }
 
         $email = $_SESSION[User::USER_EMAIL];
 
@@ -54,18 +64,17 @@ class TokenMiddleware {
         $redis = new RedisConn(); 
         $redis->del($_SESSION[User::USER_EMAIL]);
      
-        $response = new Response();
+        
 
                 // Defina a mensagem
-        $msg = json_encode(['status' => 'fail', 'msg' => 'Sessão Expirada']);
 
         // Redirecione o cliente e inclua a mensagem na URL como um parâmetro de consulta
-        return $response->withHeader('Location', '/?msg=' . urlencode($msg))->withStatus(302);
+        // return $response->withHeader('Location', '/?msg=' . urlencode($msg))->withStatus(302);
 
 
 
         
-        // return $response->withHeader('Location', '/')->withStatus(302); 
+        return $response->withHeader('Location', '/')->withStatus(302); 
         // return $resposta;
 
         }
