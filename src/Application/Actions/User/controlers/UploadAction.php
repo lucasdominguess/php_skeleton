@@ -8,7 +8,7 @@ use App\Application\files\Upload;
 use App\Application\Actions\Action;
 use Psr\Http\Message\ResponseInterface;
 
-class ArquivoAction extends Action { 
+class UploadAction extends Action { 
 
     protected function action(): ResponseInterface
     {
@@ -20,14 +20,30 @@ class ArquivoAction extends Action {
       
       $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 
-      if(!in_array($ext,['png','jpg','gif','mp4','wmv']))
+      if(!in_array($ext,['png','jpg','gif','mp4','wmv','csv','txt','pdf']))
       {
         $msg = ['status' => 'fail', 'msg' => 'Formato invalido!'];
         return $this->respondWithData($msg);
       }
-            
+
       $file = new Upload($_FILES['file']);
-      $file->upload(__DIR__ ."./../../../files/arquivos/");
+
+
+        if(in_array($ext, ['png','jpg','gif'])){
+          // $pastaArquivos = __DIR__ ."./../../../files/arquivos";
+          // $pastaImg = __DIR__ ."./../../../files/arquivos/imagens"; 
+            // chmod(__DIR__ ."./../../../files/arquivos",0755);
+            // mkdir($pastaArquivos,0755);
+          
+          $file->upload(__DIR__ ."./../../../files/arquivos/imagens");
+
+        }
+        if(in_array($ext, ['pdf','xls'])){
+          $file->upload(__DIR__ ."./../../../files/arquivos/planilhas");
+        }
+        if(in_array($ext, ['csv','txt',''])){
+          $file->upload(__DIR__ ."./../../../files/arquivos");
+        }
 
       $msg = ['status' => 'ok', 'msg' => 'Arquivo enviado com sucesso!'];
       return $this->respondWithData($msg);

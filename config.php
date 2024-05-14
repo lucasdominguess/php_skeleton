@@ -36,16 +36,16 @@ $formExp= (new DateTime($expToken))->format('H:i:s');
 define('EXP_TOKEN',$expToken);
 
 
-// define('URL_HOMEUSER','http://localhost:9000/user/acessouser');
-// define('URL_HOMEADM','http://0.0.0.0:9000/admin/acessoadm');
+// define('URL_HOMEUSER','http://localhost:9000/user/home_user');
+// define('URL_HOMEADM','http://0.0.0.0:9000/admin/home_adm');
 
 // $reg = "/(?<=\/\/).*:\d{1,4}(?=\/)/"; 
 // $reg2 = "/(http://localhost:9000)/g";
 
-// $link=["http://$reg/admin/acessouser" or "http://localhost:9000/admin/acessouser"];
+// $link=["http://$reg/admin/home_user" or "http://localhost:9000/admin/home_user"];
 
-define('URL_HOMEUSER',"http://{$_SERVER['HTTP_HOST']}/user/acessouser");
-define('URL_HOMEADM',"http://{$_SERVER['HTTP_HOST']}/admin/acessoadm");
+define('URL_HOMEUSER',"http://{$_SERVER['HTTP_HOST']}/user/home_user");
+define('URL_HOMEADM',"http://{$_SERVER['HTTP_HOST']}/admin/home_adm");
 
 
 define('URL_EXIBIR_ADMIN',"http://{$_SERVER['HTTP_HOST']}/admin/exibiradmins");

@@ -124,7 +124,7 @@ class LogarAction extends UserAction
      
                 // gerando loggers 
                 // $logger->loggerProcessor();
-                $logger->logger("LOGIN",'Usuario: '.$_SESSION[User::USER_NAME].' Realizou Login ','info',$_SESSION);
+                $logger->logger("LOGIN",'Usuario: '.$_SESSION[User::USER_NAME].' Realizou Login ','info',$_SERVER['HTTP_HOST']);
                 // $logger->logTelegran($_SESSION);
                 
                 // criando token do usuario

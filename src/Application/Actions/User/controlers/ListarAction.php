@@ -2,6 +2,7 @@
 namespace App\Application\Actions\User\controlers;
 
 use App\Application\Actions\Action;
+use App\Application\files\ListarDiretorios;
 use App\Infrastructure\Persistence\User\ReadRepository;
 use App\Infrastructure\Persistence\User\Sql;
 use Psr\Http\Message\ResponseInterface as response;
@@ -48,18 +49,17 @@ class ListarAction extends Action {
         }
         
         if(URI_SERVER == URL_ARQUIVOS_ADM){
-            $pasta = "C:/Users/x492420/OneDrive - rede.sp/Área de Trabalho/php_skeleton/src/Application/files/arquivos ";
-            // $pasta = 'arquivos';
-            // $pasta = __DIR__ ."arquivos";
-            // $pasta=  "C:/Users/lucas domingues/OneDrive/Documentos/Lucas Backup/repositorios_git/php_slim/src/Application/files/arquivos";
-            $arquivos = scandir($pasta);
-            array_shift($arquivos);
-            array_shift($arquivos);
-            return $this->respondWithData($arquivos);
+            $pasta = __DIR__ .'/../../../files/arquivos';
+            $arquivos = new ListarDiretorios();
+
+            $r =    $arquivos->listar($pasta);
+            return $this->respondWithData($r);
+       
+            
             
         }
     
-        return $this->respondWithData(['msg'=>'Erro']);
+        return $this->respondWithData(['msg'=>'erro']);
     // }
     
 }

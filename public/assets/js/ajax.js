@@ -47,8 +47,8 @@ async function requestGETrota(rota) {
 
 //   console.log(id);
   let response = await fetch(`${rota}`);
-  let obj = await response.json()
-  // console.log(obj) 
+  // let obj = await response.json()
+  // // console.log(obj) 
   let newResponse = await response.json()
   // console.log(newResponse)
   let icon = newResponse.data.status == 'fail' ? 'error' : 'success' 
@@ -105,7 +105,38 @@ async function buscar(rota)
       
     };
     };
+  
+// buscar dados com metodo GET
+  async function requestGETdir(key) { 
+    // let id = key.target.id
 
+    console.log(key);
+    let response = await fetch(`/admin/listar_diretorio?name=${key}`);
+ 
+    let newResponse = await response.json()
+   
+
+    console.log(newResponse)
+
+    for(let i =0; i < newResponse.length ; i++ ) { 
+        const num = Math.floor(Math.random() * (1000 - 1) + 1);
+        const item = newResponse[i] ; 
+        let tr = document.createElement('tr')
+        // tr.id = "tr""+num
+        tr.innerHTML = `
+      
+            <td><a id="a${num}" class="bi bi-card-image" onclick="requestGETdir(${item})">${item}</a></td>
+            <td>????</td>
+            <td>????</td>
+            <td><button id="btn_arquivo${num}" class="btn btn-outline-primary" onclick="requestGETdir(${num})" type="button">Download</button></td>
+        
+        
+        `
+        $("#tb_arq").append(tr)
+  }
+
+
+  }
   async function requestGETDownload (rota){
     // let id = key.target.id
       console.log(rota);

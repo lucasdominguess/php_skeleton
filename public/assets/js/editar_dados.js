@@ -87,8 +87,10 @@ if(/^00:\d{2}$/.test(tempoRest)){
     $('#temposessao2').css('color', 'red');
   }
   if(tempoRest == "00:00"){
-    // setTimeout(1000)
-    deslogMensagem('error',"Sessão Expirada",true)
+    setTimeout( deslogMensagem('error',"Sessão Expirada",true) ,1000)
+
+      
+    
       // return false
   }
 }

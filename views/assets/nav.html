@@ -13,15 +13,15 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        {% if userid == 4%}
+                        {% if usernivel == 5%}
                         <a class="nav-link active" aria-current="page" 
-                        href="/admin/acessoadm">Cadastros</a>
+                        href="/admin/home_adm">Cadastros</a>
                         {%else%}
                         <a class="nav-link active" aria-current="page" 
-                        href="/user/acessouser">Cadastros</a>
+                        href="/user/home_user">Cadastros</a>
                         {%endif%}
                     </li>
-                    {% if userid == 4 %}
+                    {% if usernivel == 5 %}
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/exibiradmins" >Admins</a>
                     </li>
@@ -34,9 +34,11 @@
                            Configurações
                         </a>
                         <ul class="dropdown-menu">
+                            {% if usernivel != 5 %}
                             <li><a class="dropdown-item" href="#">Configurações de Usuario</a></li>
+                            {% endif %}
 
-                            {% if userid == 4 %}
+                            {% if usernivel == 5 %}
                             <li><a class="dropdown-item" href="/admin/configadms">Configurações de Administradores</a></li>
                             <li>
                                 <hr class="dropdown-divider">

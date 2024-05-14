@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 use Slim\App;
 use Slim\Views\Twig;
+
 use App\classes\TempoSessao;
 use App\Application\Actions\User;
 
 use App\Application\files\DownloadAction;
-
+use App\Application\Actions\User\controlers\ListarArquivosAction;
 use App\Application\Actions\User\controlers;
+use App\Application\Middleware\UserMiddleware;
 use App\Application\Middleware\AdminMiddleware;
 use App\Application\Middleware\TokenMiddleware;
 use App\Application\Actions\User\ViewUserAction;
-use App\Application\Actions\User\ListUsersAction;
+
 use App\Application\Middleware\UsuarioMiddleware;
 use Psr\Http\Message\ResponseInterface as Response;
 use App\Application\Actions\sender\HandleSenderAction;
@@ -23,7 +25,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Application\Actions\User\controlers\LogarAction;
 use App\Application\Actions\User\controlers\EditarAction;
 use App\Application\Actions\User\controlers\ListarAction;
-use App\Application\Actions\User\controlers\ArquivoAction;
+use App\Application\Actions\User\controlers\UploadAction;
 use App\Application\Actions\User\controlers\ExcluirAction;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 use App\Application\Actions\User\controlers\CadastrarAction;
@@ -52,7 +54,7 @@ return function (App $app) {
     
     $app->get('/', function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'index.php', [
+        return $view->render($response, 'index.html', [
           
         ]);
     })->setName('login');
@@ -84,19 +86,19 @@ return function (App $app) {
 
         $app->get('/invalidtoken', function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'index.php', [
+        return $view->render($response, 'index.html', [
           
         ]);
     })->setName('tokenInvalido');
 
    // Rotas Admins 
     $app->group('/admin',function(Group $group){ 
-        $group->get('/acessoadm', function ($request, $response, $args) {
+        $group->get('/home_adm', function ($request, $response, $args) {
             $view = Twig::fromRequest($request);
             return $view->render($response, '/admin/home.html', [
               
             ]);
-            })->setName('acessoadm');
+            })->setName('home_adm');
         
         $group->get('/editar',EditarAction::class);
         $group->post('/excluir',ExcluirAction::class);
@@ -120,24 +122,25 @@ return function (App $app) {
               
             ]);
         });
-        $group->post('/arquivo',ArquivoAction::class);
+        $group->post('/upload_arquivo',UploadAction::class);
         $group->get('/listar_arquivos',ListarAction::class);
+        $group->get('/listar_diretorio',ListarArquivosAction::class);
         $group->get('/download',DownloadAction::class);
         // $group->get('/download/{filename}',DownloadAction::class);
 
 
-    });
-    // ->add(new TokenMiddleware())->add(new AdminMiddleware());
+    })->add(new TokenMiddleware())->add(new AdminMiddleware());
 
 
     // rotas Usuarios
     $app->group('/user',function(Group $group){ 
-        $group->get('/acessouser', function ($request, $response, $args) {
+        $group->get('/home_user', function ($request, $response, $args) {
             $view = Twig::fromRequest($request);
             return $view->render($response, '/users/home_users.html', [
               
             ]);
-            })->setName('acessouser')->add(new TokenMiddleware());
+            })->setName('home_user')->add(new TokenMiddleware())->add(new UserMiddleware());
+            
 
     });
 

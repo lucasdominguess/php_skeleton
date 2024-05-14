@@ -25,6 +25,7 @@ class TokenMiddleware {
 
         if(!isset($_COOKIE['token'])){
             setcookie('token','',-1,'/');
+            session_unset();
             session_destroy();
             // return $response->withHeader('Location', '/?msg=' . urlencode($msg))->withStatus(302);   
             return $response->withHeader('Location', '/')->withStatus(302); 
@@ -59,10 +60,10 @@ class TokenMiddleware {
                         $response = $handler->handle($request);
                         return $response;
         }
-        setcookie('token','',-1,'/');
-        session_destroy();
         $redis = new RedisConn(); 
         $redis->del($_SESSION[User::USER_EMAIL]);
+        setcookie('token','',-1,'/');
+        session_destroy();
      
         
 

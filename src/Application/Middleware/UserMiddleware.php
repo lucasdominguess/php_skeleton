@@ -19,7 +19,7 @@ class UserMiddleware
     public function __invoke(Request $request, RequestHandler $handler): Response
     {
 
-        if (!isset($_SESSION[User::USER_ID]) || $_SESSION[User::USER_ID] == 4 ) {
+        if (!isset($_SESSION[User::USER_ID]) || $_SESSION[User::USER_ID] == 5 ) {
             $response = new Response();
 
             return $response->withHeader('Location', '/')->withStatus(302);

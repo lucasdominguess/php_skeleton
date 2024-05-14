@@ -18,7 +18,9 @@
     <header id="header" >
         {{include('/assets/dados_session.html')}}
         {{include('/assets/nav.html')}}
+      <div>
 
+      </div>
     </header>
 
 <section id="configuracoes" class="form-control d-flex body " >
@@ -34,16 +36,40 @@
             </div>
             <div>
                 
-                <form id="form_config" class="d-flex " action="arquivo" method="post" enctype="multipart/form-data">
+                <form id="form_config" class="d-flex "  method="post" enctype="multipart/form-data">
                     <input type="file" name="file" accept="images/gif, images/jpeg, images/png, images/jpg, images/jfif">
-                    <button  class="btn btn-outline-primary " type="submit">Alterar foto</button>
+                    <button  class="btn btn-outline-primary " type="submit">Upload</button>
                 </form>
             </div>
         </div>
     </div>
     
-         <section id="sessao_tabela2" class="container col-sm-10 form-control">
-            <table class="table">
+         <section id="sessao_tabela" class="container col-sm-10 form-control">
+
+          <div
+            class="table-responsive"
+          >
+            <table
+              class="table "
+            >
+              <thead>
+                <tr>
+                  <th scope="col">Nome do Arquivo</th>
+                  <th scope="col">tamanho</th>
+                  <th scope="col">tipo</th>
+                  <th scope="col">Download</th>
+                </tr>
+              </thead>
+              <tbody id="tb_arq">
+               
+              </tbody>
+            </table>
+          </div>
+          
+          <ul id="ul_list">
+
+          </ul>
+            <!-- <table class="table">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -76,7 +102,7 @@
                     <td><button id="btn_dowload_03" class="btn btn-outline-primary">Download</button></td>
                   </tr>
                 </tbody>
-              </table>
+              </table> -->
         </section>
         <!-- <section id="sessao_tabela" class="container col-sm-8">
           
@@ -87,4 +113,5 @@
 
 </section>
 <script src="/assets/js/config_adm.js"></script>
+<script src="/assets/js/ajax.js"></script>
 {% endblock %}

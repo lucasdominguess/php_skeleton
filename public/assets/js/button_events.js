@@ -51,11 +51,18 @@ $("#icon_home").click( function (){
 
 //CONFIGURAÇÕES DE ADM 
 
-$("#btn_enviar_foto").click ( function (){
-  let v_form = new FormData(document.getElementById('form_config')) 
-  requestPOST("/admin/arquivo" ,v_form)
+// $("#btn_enviar_foto").click ( function (){
+//   let v_form = new FormData(document.getElementById('form_config')) 
+//   requestPOST("/admin/arquivo" ,v_form)
+// });
+
+$("#btn_arquivo").click( function () { 
+  console.log('atu')
+  // requestGETdir()
 });
 
-$("#btn_dowload_01").click( function () { 
-  requestGETDownload('/admin/download?filename=vendas.png')
-})
+
+
+// $("#btn_dowload_01").click( function () { 
+//   requestGETDownload('/admin/download?filename=vendas.png')
+// })

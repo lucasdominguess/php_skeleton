@@ -4,7 +4,7 @@ function fnMensagem(icon,msg,reload=false,location=''){
       title: msg,
       icon: icon,
       confirmButtonText: 'Ok',
-      timer: 4500,
+      timer: 4000,
       timerProgressBar: true,
       customClass: {
         container: 'dark-mode-alert'
