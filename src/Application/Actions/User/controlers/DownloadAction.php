@@ -1,6 +1,7 @@
 <?php
+namespace App\Application\Actions\User\controlers;
 
-namespace App\Application\files;
+
 
 use App\Application\Actions\Action;
 use phpDocumentor\Reflection\Types\This;
