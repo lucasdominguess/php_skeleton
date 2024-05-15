@@ -4,24 +4,14 @@ declare(strict_types=1);
 
 use Slim\App;
 use Slim\Views\Twig;
-
-use App\classes\TempoSessao;
-use App\Application\Actions\User;
-
 use App\Application\files\DownloadAction;
 use App\Application\Actions\User\controlers\ListarArquivosAction;
-use App\Application\Actions\User\controlers;
 use App\Application\Middleware\UserMiddleware;
 use App\Application\Middleware\AdminMiddleware;
 use App\Application\Middleware\TokenMiddleware;
-use App\Application\Actions\User\ViewUserAction;
 
-use App\Application\Middleware\UsuarioMiddleware;
-use Psr\Http\Message\ResponseInterface as Response;
 use App\Application\Actions\sender\HandleSenderAction;
-use App\Application\Actions\User\controlers\Registrar;
 use App\Application\Middleware\ValidatePostMiddleware;
-use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Application\Actions\User\controlers\LogarAction;
 use App\Application\Actions\User\controlers\EditarAction;
 use App\Application\Actions\User\controlers\ListarAction;
@@ -30,7 +20,6 @@ use App\Application\Actions\User\controlers\ExcluirAction;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 use App\Application\Actions\User\controlers\CadastrarAction;
 use App\Application\Actions\User\controlers\SairSessaoAction;
-use App\Application\Actions\User\controlers\ExibiradminsAction;
 
 return function (App $app) {
 
@@ -75,13 +64,14 @@ return function (App $app) {
           
     //     ]);
     // });
-   
+        
+    //ROTAS PUBLICAS
         $app->post('/logar',LogarAction::class)->add(ValidatePostMiddleware::class); //efetuar login 
         $app->post('/sair',SairSessaoAction::class); //sair da sessao
         $app->get('/listar',ListarAction::class); //listar dados para tabela
         $app->post('/cadastrar',CadastrarAction::class); //efetuar cadastro
-        // $app->get('/temposessao', TempoSessao::class);
-    
+        
+        
        
 
         $app->get('/invalidtoken', function ($request, $response, $args) {
@@ -91,7 +81,7 @@ return function (App $app) {
         ]);
     })->setName('tokenInvalido');
 
-   // Rotas Admins 
+   //ROTAS DE ADMIN 
     $app->group('/admin',function(Group $group){ 
         $group->get('/home_adm', function ($request, $response, $args) {
             $view = Twig::fromRequest($request);

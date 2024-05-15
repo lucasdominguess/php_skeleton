@@ -21,19 +21,19 @@ class EditarAction extends Action{
         $url = URI_SERVER ;
         $user = new ReadRepository($db); 
 
-        if($url == URL_HOMEADM || $url == URL_HOMEUSER){
+        if(URI_SERVER == URL_HOMEADM){
             
             $newuser =  [$user->estagisFindId($id),'code'=>'usuario'];
             return $this->respondWithData($newuser); 
         
         }   
-        if($url == URL_EXIBIR_ADMIN){
+        if(URI_SERVER == URL_EXIBIR_ADMIN){
           
             $newuser =  [$user->admFindId($id),'code'=>'admin'];
             return $this->respondWithData($newuser); 
         
         }   
-        if($url == URL_TENTA_ACESSO){
+        if(URI_SERVER == URL_TENTA_ACESSO){
       
            $newuser =  [$user->tentativasFindId($id),'code'=>'3'];
             return $this->respondWithData($newuser); 

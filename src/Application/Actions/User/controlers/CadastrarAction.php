@@ -5,9 +5,8 @@ use App\classes\Data;
 
 use App\classes\Usuario;
 use App\Domain\User\User;
-use App\classes\CriarSenha;
 use App\classes\CreateLogger;
-use App\Application\Actions\Action;
+use App\Infrastructure\Helpers;
 use App\Application\Actions\User\UserAction;
 use App\Infrastructure\Persistence\User\Sql;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -16,20 +15,14 @@ use App\Infrastructure\Persistence\User\CreateRepository;
 class CadastrarAction extends UserAction{ 
     protected function action(): Response
     {   
-        $url = URI_SERVER ;
+ 
         $db = new Sql();    
         $logger = new CreateLogger();
 
-        // if($url == null ){
 
-        //         $response= ['status'=>'fail','msg'=>'PAGINA 404'];
-        //         return $this->respondWithData($response);
+        if( URI_SERVER == URL_HOMEADM || URI_SERVER == URL_HOMEUSER){
 
-        // }
-
-        if($url == URL_HOMEADM || $url == URL_HOMEUSER){
-
-
+          
             
                     $nome = $_POST['nome'];
                     $data = $_POST['data_nascimento'];
@@ -45,7 +38,6 @@ class CadastrarAction extends UserAction{
                     
                         $resposta =['status'=>'fail','msg'=>$th->getMessage()];
                         return $this->respondWithData($resposta);
-                    
                     }
             
                     try { 
@@ -59,29 +51,29 @@ class CadastrarAction extends UserAction{
                        if($db->errorCode()=='23000'){
                            $resposta =['status'=>'fail','msg'=>"O mesmo nome nao pode ser inserido"];
                            return $this->respondWithData($resposta);
-                           exit();
+                      
                        }
                    }
        
            
        }
 
-       if($url == URL_EXIBIR_ADMIN){ 
-            $nome = $_POST['nome'] ; 
-            $email = $_POST['email'];
-            $senha = $_POST['senha'];
-            $nivel = $_POST['nivel']; 
-            $senhaCodif = password_hash($senha, PASSWORD_DEFAULT); 
-        try{
-           
-            $user = new CreateRepository($db) ;
-            $user->createAdmin($nome,$email,$senhaCodif,$nivel);
-            $logger->logger("CADASTRO",'Usuario: '.$_SESSION[User::USER_NAME].' Cadastrou um Admin ' .$nome,'info');
-        }catch(\Throwable $e){
-            return $this->respondWithData($e);
-        }
+            if(URI_SERVER == URL_EXIBIR_ADMIN){ 
+                    $nome = $_POST['nome'] ; 
+                    $email = $_POST['email'];
+                    $senha = $_POST['senha'];
+                    $nivel = $_POST['nivel']; 
+                    $senhaCodif = password_hash($senha, PASSWORD_DEFAULT); 
+                try{
+                
+                    $user = new CreateRepository($db) ;
+                    $user->createAdmin($nome,$email,$senhaCodif,$nivel);
+                    $logger->logger("CADASTRO",'Usuario: '.$_SESSION[User::USER_NAME].' Cadastrou um Admin ' .$nome,'info');
+                }catch(\Throwable $e){
+                    return $this->respondWithData($e);
+                }
 
-       }
+            }
 
 
         $response= ['status'=>'ok','msg'=>'Cadastro realizado!'];

@@ -13,13 +13,13 @@ class ExcluirAction extends Action{
     {
         $id = $_GET['id']; 
         $url = URI_SERVER ;
-        
+
         $db =new Sql(); 
         $user = new DeleteRepository($db) ;
         $logger = new CreateLogger ;
        
         
-        if($url == URL_HOMEADM ){ 
+        if(URI_SERVER == URL_HOMEADM){ 
             
             
             try{
@@ -31,7 +31,7 @@ class ExcluirAction extends Action{
             }
         }
 
-        if($url == URL_EXIBIR_ADMIN){
+        if(URI_SERVER == URL_EXIBIR_ADMIN){
  
             try{
                 $user->Delete_AdminsOfId($id);
@@ -41,7 +41,7 @@ class ExcluirAction extends Action{
     
             }
        }
-       if($url == URL_TENTA_ACESSO){ 
+       if(URI_SERVER == URL_TENTA_ACESSO){ 
             try{
                 $user->Delete_TentativasOfId($id);
                 $logger->logger("DELETE","Admin: " .$_SESSION[User::USER_NAME]." Deletou um Email em tentativas de acesso");

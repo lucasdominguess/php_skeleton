@@ -35,24 +35,17 @@ $expToken = $_SESSION['EXP_TOKEN'] ?? '';
 $formExp= (new DateTime($expToken))->format('H:i:s');
 define('EXP_TOKEN',$expToken);
 
-
-// define('URL_HOMEUSER','http://localhost:9000/user/home_user');
-// define('URL_HOMEADM','http://0.0.0.0:9000/admin/home_adm');
-
-// $reg = "/(?<=\/\/).*:\d{1,4}(?=\/)/"; 
-// $reg2 = "/(http://localhost:9000)/g";
-
-// $link=["http://$reg/admin/home_user" or "http://localhost:9000/admin/home_user"];
-
+//definindo caminhos das paginas 
 define('URL_HOMEUSER',"http://{$_SERVER['HTTP_HOST']}/user/home_user");
 define('URL_HOMEADM',"http://{$_SERVER['HTTP_HOST']}/admin/home_adm");
-
 
 define('URL_EXIBIR_ADMIN',"http://{$_SERVER['HTTP_HOST']}/admin/exibiradmins");
 define('URL_TENTA_ACESSO',"http://{$_SERVER['HTTP_HOST']}/admin/tentativasacesso");
 define('URL_ARQUIVOS_ADM',"http://{$_SERVER['HTTP_HOST']}/admin/configadms");
 
-// $uri = $_SERVER['SCRIPT_URI'];
-define('URI_SERVER', $_SERVER['HTTP_REFERER'] ?? null);
+//definindo caminho 
+define('URI_SERVER', $_SERVER['HTTP_REFERER'] ?? null); //http://localhost:9000/user/home_user
+define('IP_SERVER', $_SERVER['REMOTE_ADDR'] ?? NULL ); //"127.0.0.1"
+
 // define('URI_SERVER', $_SERVER['PATH_INFO'] ?? null );
 

@@ -1,34 +1,23 @@
 <?php
 namespace App\Application\Actions\User\controlers;
 
+use App\Infrastructure\Helpers;
 use PDO;
-use DateTime;
-use DateTimeZone;
-use Monolog\Logger;
-use Slim\Views\Twig;
 use App\classes\Token;
 use App\Domain\User\User;
 use App\classes\CreateLogger;
-use App\classes\ConsultaBanco;
-use App\classes\IniciarSessao;
-use GuzzleHttp\Promise\Create;
 use App\classes\BloquearAcesso;
-// use App\classes\CreateLogger as ClassesCreateLogger;
-use App\classes\VerificarEmail;
-use App\classes\VerificarLogin;
-
 use App\Application\Actions\User\UserAction;
 use App\Infrastructure\Persistence\User\Sql;
-
 use App\Infrastructure\Persistence\User\RedisConn;
 use Psr\Http\Message\ResponseInterface as Response; 
 
 
 class LogarAction extends UserAction
 {
-   
     protected function action(): Response
     {  
+      
          //criando instancia de logger 
          $logger = new CreateLogger();
 
@@ -36,7 +25,7 @@ class LogarAction extends UserAction
         $email = $_POST['email'] ?? null;
         $senha = $_POST['senha'] ?? null;
 
-        // return $this->respondWithData(['recebido'=>1,"email"=>$email]);
+       
         
         try{
 
@@ -95,7 +84,7 @@ class LogarAction extends UserAction
             }   
                  //criando instancia do redis e verifica se ja existe usuario logado 
                 try {
-                    //code...
+                  
                     $redis = new RedisConn(); 
                     $redis_user = $redis->hget($email,'email'); 
                 } catch (\Throwable $e) {
@@ -105,7 +94,7 @@ class LogarAction extends UserAction
                 }
                     if($redis_user){
                         $response= (['status'=>'fail','msg'=>'Usuario ja esta logado']);
-                        $logger->logger("Duplicidade de Sessão",'Tentativa de multiplos acessos','warning',"Email: $email");
+                        $logger->logger("Duplicidade de Sessão","Tentativa de multiplos acessos $email " ,'warning',IP_SERVER);
                         return $this->respondWithData($response);
                     }
                     // }
@@ -124,7 +113,7 @@ class LogarAction extends UserAction
      
                 // gerando loggers 
                 // $logger->loggerProcessor();
-                $logger->logger("LOGIN",'Usuario: '.$_SESSION[User::USER_NAME].' Realizou Login ','info',$_SERVER['HTTP_HOST']);
+                $logger->logger("LOGIN",'Usuario: '.$_SESSION[User::USER_NAME].' Realizou Login ','info',IP_SERVER);
                 // $logger->logTelegran($_SESSION);
                 
                 // criando token do usuario
@@ -139,10 +128,6 @@ class LogarAction extends UserAction
                 $redis->expire($_SESSION[User::USER_EMAIL], 3600);
 
 
-                // , 'email', $_SESSION[User::USER_EMAIL] , 'nivel', $_SESSION[User::USER_NIVEL]); 
-
-
-                // $redisUser->set('user', 'name' $_SESSION[User::USER_NAME], ['EX' => 20] );
                 
 
                 $response= ['status'=>'ok','msg'=>'logado com sucesso','location'=>'/sender'];
