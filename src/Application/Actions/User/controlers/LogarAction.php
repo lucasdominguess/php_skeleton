@@ -27,15 +27,15 @@ class LogarAction extends UserAction
 
        
         
-        try{
+        // try{
 
-            $db = new Sql();
-        }catch(\PDOException $e){ 
-            $response = (['status'=>'fail','msg'=> $e->getMessage()]);
-            $logger->logger('Erro Sql', "Erro ao conectar no Banco de dados",'warning'); 
-            return $this->respondWithData($response);
-        }
-
+        //     $this->sql = new Sql();
+        // }catch(\PDOException $e){ 
+        //     $response = (['status'=>'fail','msg'=> $e->getMessage()]);
+        //     $logger->logger('Erro Sql', "Erro ao conectar no Banco de dados",'warning'); 
+        //     return $this->respondWithData($response);
+        // }
+    
         // Verificando se Email e senha estao em branco 
         if($email == null || $senha == null)
         {
@@ -53,29 +53,29 @@ class LogarAction extends UserAction
           
 
     // Verificando se email e senha correspondem a um cadastro valido 
-    $stmt=$db->prepare("Select * from usuarios where email = :email");
+    $stmt=$this->sql->prepare("Select * from usuarios where email = :email");
     $stmt->bindValue(":email",$email);
     $stmt->execute();
    
         $retorno = $stmt->fetchAll(PDO::FETCH_ASSOC);
             if(!isset($retorno[0]['id_adm'])||!password_verify($senha,$retorno[0]['senha']))
             {   
-                $block = new BloquearAcesso($email,$db); 
+                $block = new BloquearAcesso(); 
 
-                $res=$block->bloqueio($email,$db);
+                $res=$block->bloqueio($email,$this->sql);
                 
 
 
                 switch ($res){ 
                     case $res === 1 : 
                         $response= (['status'=>'fail','msg'=>'Usuario ou Senha invalida']);
-                        return $this->respondWithData($response);
+                        return $this->respondWithData($response)->withStatus(401);
                         // break;
                       
 
                     case $res === 2 : 
                         $response= (['status'=>'fail','msg'=>'Acesso Negado Aguarde 10 minutos']);
-                        return $this->respondWithData($response);
+                        return $this->respondWithData($response)->withStatus(401);
                         // break;
 
                 // endswitch;
@@ -137,5 +137,4 @@ class LogarAction extends UserAction
 
 
     }
-  
 }

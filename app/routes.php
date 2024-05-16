@@ -122,8 +122,7 @@ return function (App $app) {
         // $group->get('/download/{filename}',DownloadAction::class);
 
 
-    });
-    // ->add(new TokenMiddleware())->add(new AdminMiddleware());
+    })->add(new TokenMiddleware())->add(new AdminMiddleware());
 
 
     // rotas Usuarios

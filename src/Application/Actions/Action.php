@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace App\Application\Actions;
 
-use App\Domain\DomainException\DomainRecordNotFoundException;
+use Psr\Log\LoggerInterface;
+use Slim\Exception\HttpNotFoundException;
+use Slim\Exception\HttpBadRequestException;
+use App\Infrastructure\Persistence\User\Sql;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Log\LoggerInterface;
-use Slim\Exception\HttpBadRequestException;
-use Slim\Exception\HttpNotFoundException;
+use App\Domain\DomainException\DomainRecordNotFoundException;
 
 abstract class Action
 {
     protected LoggerInterface $logger;
+
+    protected Sql $sql;
 
     protected Request $request;
 
@@ -21,9 +24,10 @@ abstract class Action
 
     protected array $args;
 
-    public function __construct(LoggerInterface $logger)
+    public function __construct(LoggerInterface $logger , Sql $sql)
     {
         $this->logger = $logger;
+        $this->sql = $sql;
     }
 
     /**

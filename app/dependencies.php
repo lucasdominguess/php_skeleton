@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Application\Settings\SettingsInterface;
+use App\Infrastructure\Persistence\User\Sql;
 use DI\ContainerBuilder;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -25,6 +26,17 @@ return function (ContainerBuilder $containerBuilder) {
             $logger->pushHandler($handler);
 
             return $logger;
+
+
         },
+
+        Sql::class => function (ContainerInterface $c) {
+            try {
+                return new Sql;
+          
+            } catch (\Throwable $th) {
+         
+            }
+        }
     ]);
 };
