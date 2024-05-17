@@ -39,8 +39,25 @@ return function (ContainerBuilder $containerBuilder) {
             try {
                 return new Sql;
           
-            } catch (\Throwable $th) {
+            } catch (\PDOException $e) {
+                throw new Exception($e->getMessage());
+                
          
+            }
+        },
+
+        RedisConn::class => function (ContainerInterface $c){ 
+            try {
+                return new RedisConn;
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+        },
+        CreateLogger::class => function (ContainerInterface $c) { 
+            try {
+                return new CreateLogger; 
+            } catch (\Throwable $th) {
+                //throw $th;
             }
         }
     ]);
