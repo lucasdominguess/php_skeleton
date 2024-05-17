@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 use App\Application\Settings\SettingsInterface;
 use App\classes\CreateLogger;
+use App\Infrastructure\Persistence\User\RedisConn;
 use App\Infrastructure\Persistence\User\Sql;
+use DI\Container;
 use DI\ContainerBuilder;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -37,21 +39,9 @@ return function (ContainerBuilder $containerBuilder) {
             try {
                 return new Sql;
           
-            } catch (\PDOException $e){ 
-           $response = json_encode(['status'=>'fail','msg'=> $e->getMessage()]);
-           return $response; 
-        }
-    },
-
-        // CreateLogger::class => function (ContainerInterface $c) { 
-        //     try {
-        //         return new CreateLogger ; 
-        //     } catch (\Throwable $e) {
-        //         $response = json_encode(['status'=>'fail','msg'=> 'Nao foi possivel criar logger']);
-        //         return $response; 
+            } catch (\Throwable $th) {
          
-        //     }
-        // }
-
+            }
+        }
     ]);
 };

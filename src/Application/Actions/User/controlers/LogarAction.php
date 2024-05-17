@@ -19,7 +19,7 @@ class LogarAction extends UserAction
     {  
       
          //criando instancia de logger 
-         $logger = new CreateLogger();
+        //  $this->createLogger = new CreateLogger();
 
         
         $email = $_POST['email'] ?? null;
@@ -32,7 +32,7 @@ class LogarAction extends UserAction
         //     $this->sql = new Sql();
         // }catch(\PDOException $e){ 
         //     $response = (['status'=>'fail','msg'=> $e->getMessage()]);
-        //     $logger->logger('Erro Sql', "Erro ao conectar no Banco de dados",'warning'); 
+        //     $this->createLogger->logger('Erro Sql', "Erro ao conectar no Banco de dados",'warning'); 
         //     return $this->respondWithData($response);
         // }
     
@@ -83,20 +83,20 @@ class LogarAction extends UserAction
                
             }   
                  //criando instancia do redis e verifica se ja existe usuario logado 
-                // try {
+                try {
                   
-                //     $redis = new RedisConn(); 
-                //     $redis_user = $redis->hget($email,'email'); 
-                // } catch (\Throwable $e) {
-                //     $logger->logger('Erro Redis','Erro ao conectar em Redis','warning');
-                //     $response = (['status'=>'fail','msg'=> $e->getMessage()]);
-                //     return $this->respondWithData($response);
-                // }
-                //     if($redis_user){
-                //         $response= (['status'=>'fail','msg'=>'Usuario ja esta logado']);
-                //         $logger->logger("Duplicidade de Sessão","Tentativa de multiplos acessos $email " ,'warning',IP_SERVER);
-                //         return $this->respondWithData($response);
-                //     }
+                    // $redis = new RedisConn(); 
+                    $redis_user = $this->redisConn->hget($email,'email'); 
+                } catch (\Throwable $e) {
+                    $this->createLogger->logger('Erro Redis','Erro ao conectar em Redis','warning');
+                    $response = (['status'=>'fail','msg'=> $e->getMessage()]);
+                    return $this->respondWithData($response);
+                }
+                    if($redis_user){
+                        $response= (['status'=>'fail','msg'=>'Usuario ja esta logado']);
+                        $this->createLogger->logger("Duplicidade de Sessão","Tentativa de multiplos acessos $email " ,'warning',IP_SERVER);
+                        return $this->respondWithData($response);
+                    }
                     // }
       
                 //criando dados do User 
@@ -112,9 +112,9 @@ class LogarAction extends UserAction
 
      
                 // gerando loggers 
-                // $logger->loggerProcessor();
-                $logger->logger("LOGIN",'Usuario: '.$_SESSION[User::USER_NAME].' Realizou Login ','info',IP_SERVER);
-                // $logger->logTelegran($_SESSION);
+                // $this->createLogger->loggerProcessor();
+                $this->createLogger->logger("LOGIN",'Usuario: '.$_SESSION[User::USER_NAME].' Realizou Login ','info',IP_SERVER);
+                // $this->createLogger->logTelegran($_SESSION);
                 
                 // criando token do usuario
                 $token = new Token($_SESSION[User::USER_NAME]);
@@ -122,10 +122,10 @@ class LogarAction extends UserAction
                
                 //criando instancia do redis e key fild do usuario 
                 // $redis = new RedisConn(); 
-                // $redis->hset($_SESSION[User::USER_EMAIL], 'name',$_SESSION[User::USER_NAME]);
-                // $redis->hset($_SESSION[User::USER_EMAIL], 'email',$_SESSION[User::USER_EMAIL] );
-                // $redis->hset($_SESSION[User::USER_EMAIL], 'nivel',$_SESSION[User::USER_NIVEL] );
-                // $redis->expire($_SESSION[User::USER_EMAIL], 3600);
+                $this->redisConn->hset($_SESSION[User::USER_EMAIL], 'name',$_SESSION[User::USER_NAME]);
+                $this->redisConn->hset($_SESSION[User::USER_EMAIL], 'email',$_SESSION[User::USER_EMAIL] );
+                $this->redisConn->hset($_SESSION[User::USER_EMAIL], 'nivel',$_SESSION[User::USER_NIVEL] );
+                $this->redisConn->expire($_SESSION[User::USER_EMAIL], 3600);
 
 
                 

@@ -2,8 +2,6 @@
 namespace App\Infrastructure\Persistence\User;
 
 
-use Redis;
-use App\Domain\User\User;
 
 class RedisConn extends Redis
 {      
