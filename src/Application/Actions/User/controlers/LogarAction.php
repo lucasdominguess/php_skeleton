@@ -8,7 +8,7 @@ use App\Domain\User\User;
 use App\classes\CreateLogger;
 use App\classes\BloquearAcesso;
 use App\Application\Actions\User\UserAction;
-use App\Infrastructure\Persistence\User\Sql;
+use App\Infrastructure\Persistence\User\Sql; // 
 use App\Infrastructure\Persistence\User\RedisConn;
 use Psr\Http\Message\ResponseInterface as Response; 
 
@@ -83,20 +83,20 @@ class LogarAction extends UserAction
                
             }   
                  //criando instancia do redis e verifica se ja existe usuario logado 
-                try {
+                // try {
                   
-                    $redis = new RedisConn(); 
-                    $redis_user = $redis->hget($email,'email'); 
-                } catch (\Throwable $e) {
-                    $logger->logger('Erro Redis','Erro ao conectar em Redis','warning');
-                    $response = (['status'=>'fail','msg'=> $e->getMessage()]);
-                    return $this->respondWithData($response);
-                }
-                    if($redis_user){
-                        $response= (['status'=>'fail','msg'=>'Usuario ja esta logado']);
-                        $logger->logger("Duplicidade de Sessão","Tentativa de multiplos acessos $email " ,'warning',IP_SERVER);
-                        return $this->respondWithData($response);
-                    }
+                //     $redis = new RedisConn(); 
+                //     $redis_user = $redis->hget($email,'email'); 
+                // } catch (\Throwable $e) {
+                //     $logger->logger('Erro Redis','Erro ao conectar em Redis','warning');
+                //     $response = (['status'=>'fail','msg'=> $e->getMessage()]);
+                //     return $this->respondWithData($response);
+                // }
+                //     if($redis_user){
+                //         $response= (['status'=>'fail','msg'=>'Usuario ja esta logado']);
+                //         $logger->logger("Duplicidade de Sessão","Tentativa de multiplos acessos $email " ,'warning',IP_SERVER);
+                //         return $this->respondWithData($response);
+                //     }
                     // }
       
                 //criando dados do User 
@@ -121,11 +121,11 @@ class LogarAction extends UserAction
 
                
                 //criando instancia do redis e key fild do usuario 
-                $redis = new RedisConn(); 
-                $redis->hset($_SESSION[User::USER_EMAIL], 'name',$_SESSION[User::USER_NAME]);
-                $redis->hset($_SESSION[User::USER_EMAIL], 'email',$_SESSION[User::USER_EMAIL] );
-                $redis->hset($_SESSION[User::USER_EMAIL], 'nivel',$_SESSION[User::USER_NIVEL] );
-                $redis->expire($_SESSION[User::USER_EMAIL], 3600);
+                // $redis = new RedisConn(); 
+                // $redis->hset($_SESSION[User::USER_EMAIL], 'name',$_SESSION[User::USER_NAME]);
+                // $redis->hset($_SESSION[User::USER_EMAIL], 'email',$_SESSION[User::USER_EMAIL] );
+                // $redis->hset($_SESSION[User::USER_EMAIL], 'nivel',$_SESSION[User::USER_NIVEL] );
+                // $redis->expire($_SESSION[User::USER_EMAIL], 3600);
 
 
                 

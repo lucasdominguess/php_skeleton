@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Application\Settings\SettingsInterface;
+use App\classes\CreateLogger;
 use App\Infrastructure\Persistence\User\Sql;
 use DI\ContainerBuilder;
 use Monolog\Handler\StreamHandler;
@@ -13,6 +14,8 @@ use Psr\Log\LoggerInterface;
 
 return function (ContainerBuilder $containerBuilder) {
     $containerBuilder->addDefinitions([
+
+        //logger padrao slim 
         LoggerInterface::class => function (ContainerInterface $c) {
             $settings = $c->get(SettingsInterface::class);
 
@@ -29,14 +32,26 @@ return function (ContainerBuilder $containerBuilder) {
 
 
         },
-
+        // sql connection 
         Sql::class => function (ContainerInterface $c) {
             try {
                 return new Sql;
           
-            } catch (\Throwable $th) {
-         
-            }
+            } catch (\PDOException $e){ 
+           $response = json_encode(['status'=>'fail','msg'=> $e->getMessage()]);
+           return $response; 
         }
+    },
+
+        // CreateLogger::class => function (ContainerInterface $c) { 
+        //     try {
+        //         return new CreateLogger ; 
+        //     } catch (\Throwable $e) {
+        //         $response = json_encode(['status'=>'fail','msg'=> 'Nao foi possivel criar logger']);
+        //         return $response; 
+         
+        //     }
+        // }
+
     ]);
 };

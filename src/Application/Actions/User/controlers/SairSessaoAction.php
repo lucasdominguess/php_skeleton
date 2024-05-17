@@ -25,8 +25,8 @@ class SairSessaoAction extends UserAction
         $logger = new CreateLogger();
         $logger->logger("LOGOUT",'Usuario: '.$_SESSION[User::USER_NAME].' Desconectou','info');
 
-        $redis = new RedisConn(); 
-        $redis->del($_SESSION[User::USER_EMAIL]);
+        // $redis = new RedisConn(); 
+        // $redis->del($_SESSION[User::USER_EMAIL]);
         
         setcookie('token','',-1,'/');
         session_unset();
