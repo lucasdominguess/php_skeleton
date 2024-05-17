@@ -9,6 +9,7 @@ use Firebase\JWT\Key;
 // use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 use App\Domain\User\User;
+use App\Infrastructure\Helpers;
 use App\Infrastructure\Persistence\User\RedisConn;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
@@ -20,6 +21,8 @@ class TokenMiddleware {
         global $env;
         $key = $env['secretkey'];
         $response = new Response();
+        $tokenAuth = $_SERVER['HTTP_AUTHORIZATION'] ?? 'tokennaoexiste' ;
+        Helpers::dd($tokenAuth);
         
         $msg = json_encode(['status' => 'fail', 'msg' => 'Sessão Expirada']);
 
@@ -58,6 +61,7 @@ class TokenMiddleware {
             // header('location: /');
             
                         $response = $handler->handle($request);
+                        // $response= $tokenAuth;
                         return $response;
         }
         $redis = new RedisConn(); 

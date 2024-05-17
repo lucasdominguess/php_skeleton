@@ -3,7 +3,10 @@
 declare(strict_types=1);
 
 use App\Application\Settings\SettingsInterface;
+use App\classes\CreateLogger;
+use App\Infrastructure\Persistence\User\RedisConn;
 use App\Infrastructure\Persistence\User\Sql;
+use DI\Container;
 use DI\ContainerBuilder;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -34,9 +37,27 @@ return function (ContainerBuilder $containerBuilder) {
             try {
                 return new Sql;
           
-            } catch (\Throwable $th) {
+            } catch (\PDOException $e) {
+                throw new Exception($e->getMessage());
+                
          
             }
+        },
+
+        RedisConn::class => function (ContainerInterface $c){ 
+            try {
+                return new RedisConn;
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+        },
+        CreateLogger::class => function (ContainerInterface $c) { 
+            try {
+                return new CreateLogger; 
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
         }
+        
     ]);
 };
