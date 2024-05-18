@@ -1,5 +1,6 @@
 $(document).ready(async ()=>{
-
+  const token = sessionStorage['cookie']
+  console.log(token)
 
     let obj = await buscar('/listar');
     

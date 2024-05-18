@@ -21,8 +21,8 @@ class TokenMiddleware {
         global $env;
         $key = $env['secretkey'];
         $response = new Response();
-        $tokenAuth = $_SERVER['HTTP_AUTHORIZATION'] ?? 'tokennaoexiste' ;
-        Helpers::dd($tokenAuth);
+        // $tokenAuth = $_SERVER['HTTP_AUTHORIZATION'] ?? 'tokennaoexiste' ;
+        // Helpers::dd($tokenAuth);
         
         $msg = json_encode(['status' => 'fail', 'msg' => 'Sessão Expirada']);
 

@@ -1,6 +1,8 @@
 <?php
 namespace App\Infrastructure\Persistence\User;
 
+use Redis;
+
 
 
 class RedisConn extends Redis

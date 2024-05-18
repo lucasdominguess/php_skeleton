@@ -41,24 +41,24 @@ return function (ContainerBuilder $containerBuilder) {
           
             } catch (\PDOException $e) {
                 throw new Exception($e->getMessage());
-                
+                // $this->createLogger->logger('Erro Sql', "Erro ao conectar no Banco de dados",'warning');
          
             }
         },
-
+        //conexao com banco redis 
         RedisConn::class => function (ContainerInterface $c){ 
             try {
                 return new RedisConn;
-            } catch (\Throwable $th) {
-                //throw $th;
+            } catch (\Throwable $e) {
+                throw new Exception($e->getMessage());
             }
         },
         CreateLogger::class => function (ContainerInterface $c) { 
             try {
                 return new CreateLogger; 
-            } catch (\Throwable $th) {
-                //throw $th;
+            } catch (\Throwable $e) {
+                throw new Exception($e->getMessage());
             }
-        }
+        },
     ]);
 };
