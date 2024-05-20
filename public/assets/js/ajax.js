@@ -1,7 +1,10 @@
 //enviando dados com medoto POST
 async function requestPOST(rota,v_form=null){
     const rots = rota 
-    // v_form.append(modoDark)
+  
+  //   const headers = {
+  //     'Authorization': `Bearer ${token}`
+  // };
     const response = await fetch(`${rots}`
 ,{
 

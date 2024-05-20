@@ -22,10 +22,8 @@ class SairSessaoAction extends UserAction
 { 
     protected function action(): Response 
     {   
-        $logger = new CreateLogger();
-        $logger->logger("LOGOUT",'Usuario: '.$_SESSION[User::USER_NAME].' Desconectou','info');
-
-        // $redis = new RedisConn(); 
+        
+        $this->createLogger->logger("LOGOUT",'Usuario: '.$_SESSION[User::USER_NAME].' Desconectou','info'); 
         $this->redisConn->del($_SESSION[User::USER_EMAIL]);
         
         setcookie('token','',-1,'/');
