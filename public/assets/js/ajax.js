@@ -7,6 +7,7 @@ async function requestPOST(rota,v_form=null){
 
     method : 'post' , 
     body : v_form,
+    credentials : 'include'
   
 
 });
@@ -43,7 +44,13 @@ async function requestGET(key) {
 
 // buscar dados com metodo GET
 async function requestGETrota(rota) { 
-   
+   define([
+    'require',
+    'dependency'
+   ], function(require, factory) {
+    'use strict';
+    
+   });
 
 //   console.log(id);
   let response = await fetch(`${rota}`);

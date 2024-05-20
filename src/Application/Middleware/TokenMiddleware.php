@@ -7,6 +7,7 @@ use DateTimeZone;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 // use Slim\Psr7\Request;
+use App\classes\Token;
 use Slim\Psr7\Response;
 use App\Domain\User\User;
 use App\Infrastructure\Helpers;
@@ -21,12 +22,11 @@ class TokenMiddleware {
         global $env;
         $key = $env['secretkey'];
         $response = new Response();
-        $tokenAuth = $_SERVER['HTTP_AUTHORIZATION'] ?? 'tokennaoexiste' ;
-        Helpers::dd($tokenAuth);
+        // $tokenAuth = $_SERVER['HTTP_AUTHORIZATION'] ?? 'tokennaoexiste' ;
+        $cookie = $_COOKIE['token'];
         
-        $msg = json_encode(['status' => 'fail', 'msg' => 'Sessão Expirada']);
-
-        if(!isset($_COOKIE['token'])){
+        // verificando se o token existe
+        if(!isset($cookie)){
             setcookie('token','',-1,'/');
             session_unset();
             session_destroy();
@@ -36,8 +36,14 @@ class TokenMiddleware {
 
         $email = $_SESSION[User::USER_EMAIL];
 
-        $decoded = JWT::decode($_COOKIE['token'], new Key($key, 'HS256'));
+        $decoded = JWT::decode($cookie, new Key($key, 'HS256'));
         $decoded_array = (array) $decoded;
+
+        $r = $decoded_array['email'] ; 
+       
+
+       
+
     
         $inicia_time = $decoded_array['iat'];  //tempo do inicio criação token
         $exp_sessao = $decoded_array['exp'];  //tempo de expiração do token 
@@ -52,34 +58,30 @@ class TokenMiddleware {
         $datenow = new DateTime('now', new DateTimeZone('America/Sao_Paulo')); 
         $newdate_now = $datenow->format('Y-m-d H:i:s');
 
-        // $_SESSION['EXP_TOKEN'] = $exp_sessao ;
-        // echo $newdate_now ;
-        // echo $exp_sessao;
+        // if($email == $r){
+        //     $response = $handler->handle($request);
+        //     return $response;
+        // }
         
         if($newdate_now <= $exp_sessao) 
-        { 
-            // header('location: /');
-            
-                        $response = $handler->handle($request);
-                        // $response= $tokenAuth;
-                        return $response;
+        {   
+            $token = new Token($email,"+10 minutes"); 
+            $response = $handler->handle($request);
+            return $response;
+
         }
         $redis = new RedisConn(); 
         $redis->del($_SESSION[User::USER_EMAIL]);
         setcookie('token','',-1,'/');
         session_destroy();
-     
-        
-
-                // Defina a mensagem
-
+        return $response->withHeader('Location', '/')->withStatus(302); 
+             
         // Redirecione o cliente e inclua a mensagem na URL como um parâmetro de consulta
         // return $response->withHeader('Location', '/?msg=' . urlencode($msg))->withStatus(302);
 
 
 
         
-        return $response->withHeader('Location', '/')->withStatus(302); 
         // return $resposta;
 
         }

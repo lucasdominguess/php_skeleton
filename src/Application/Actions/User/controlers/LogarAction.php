@@ -117,7 +117,7 @@ class LogarAction extends UserAction
                 // $this->createLogger->logTelegran($_SESSION);
                 
                 // criando token do usuario
-                $token = new Token($_SESSION[User::USER_NAME]);
+                $token = new Token($_SESSION[User::USER_EMAIL],"+1 minutes");
 
                
                 //criando instancia do redis e key fild do usuario 

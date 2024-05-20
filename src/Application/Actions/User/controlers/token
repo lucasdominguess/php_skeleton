@@ -1,0 +1,33 @@
+<?php 
+ 
+ global $env;
+        $key = $env['secretkey'];
+       
+       
+        $tokenAuth = $_SERVER['HTTP_AUTHORIZATION'] ?? null ;
+ 
+        if ($tokenAuth == null ){
+           
+            $response= ['status'=>'fail','msg'=>'Sem autorização!'];
+            return $this->respondWithData($response);
+        }
+            $decoded = JWT::decode($tokenAuth, new Key($key, 'HS256'));
+            // $response= ['status'=>'ok','msg'=>'ok!','token'=>$decoded];
+            $r = $decoded->email;
+ 
+               
+        //  Helpers::dd($decoded) ;
+ 
+            if($r == $_SESSION[User::USER_EMAIL]) {
+                $response= ['status'=>'ok' , 'token'=>$r] ;
+                return $this->respondWithData($response);
+            }
+           
+            // if($tokenAuth == $r){
+            //     $response= ['status'=>'ok' , 'token'=>'Os tokens sao iguais'] ;
+            //     return $this->respondWithData($response);
+            // }
+            $response= ['status'=>'fail','msg'=>'nenhuma das comparaçoes'];
+ 
+            return $this->respondWithData($response);
+        
