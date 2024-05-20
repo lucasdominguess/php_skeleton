@@ -23,10 +23,10 @@ class TokenMiddleware {
         $key = $env['secretkey'];
         $response = new Response();
         // $tokenAuth = $_SERVER['HTTP_AUTHORIZATION'] ?? 'tokennaoexiste' ;
-        $cookie = $_COOKIE['token'];
+        // $cookie = $_COOKIE['token'];
         
         // verificando se o token existe
-        if(!isset($cookie)){
+        if(!isset($_COOKIE['token'])){
             setcookie('token','',-1,'/');
             session_unset();
             session_destroy();
@@ -36,12 +36,14 @@ class TokenMiddleware {
 
         $email = $_SESSION[User::USER_EMAIL];
 
-        $decoded = JWT::decode($cookie, new Key($key, 'HS256'));
+        $decoded = JWT::decode($_COOKIE['token'], new Key($key, 'HS256'));
         $decoded_array = (array) $decoded;
 
         $r = $decoded_array['email'] ; 
        
-
+        if(!$r == $email){
+            return $response->withHeader('Location', '/')->withStatus(302);
+        }
        
 
     

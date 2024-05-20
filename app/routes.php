@@ -23,6 +23,8 @@ use App\Application\Actions\User\controlers\CadastrarAction;
 use App\Application\Actions\User\controlers\SairSessaoAction;
 use App\Application\Actions\User\controlers\ListarArquivosAction;
 
+use function DI\add;
+
 return function (App $app) {
 
 // $app->options('/{routes:.*}', function (Request $request, Response $response) {
@@ -72,7 +74,7 @@ return function (App $app) {
         // ->add(ValidatePostMiddleware::class); //efetuar login 
         $app->post('/sair',SairSessaoAction::class); //sair da sessao
         $app->get('/listar',ListarAction::class); //listar dados para tabela
-        $app->post('/cadastrar',CadastrarAction::class); //efetuar cadastro
+        $app->post('/cadastrar',CadastrarAction::class)->add(new TokenMiddleware()); //efetuar cadastro
         
         
        

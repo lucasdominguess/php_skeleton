@@ -24,14 +24,7 @@ class LogarAction extends UserAction
 
 
 
-        // try{
-        //     $this->sql = new Sql();
-        // }catch(\PDOException $e){ 
-        //     $response = (['status'=>'fail','msg'=> $e->getMessage()]);
-        //     $this->createLogger->logger('Erro Sql', "Erro ao conectar no Banco de dados",'warning'); 
-        //     return $this->respondWithData($response);
-        // }
-
+    
         // Verificando se Email e senha estao em branco 
         if ($email == null || $senha == null) {
             $response = ['status' => 'fail', 'msg' => 'Usuario ou Senha não podem estar vazios'];
@@ -53,7 +46,7 @@ class LogarAction extends UserAction
 
         $retorno = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if (!isset($retorno[0]['id_adm']) || !password_verify($senha, $retorno[0]['senha'])) {
-            $block = new BloquearAcesso();
+            $block = new BloquearAcesso(); //somente quando usuario errar email e senha 
 
             $res = $block->bloqueio($email, $this->sql);
 
@@ -73,7 +66,7 @@ class LogarAction extends UserAction
 
                        }
                     }
-        //criando instancia do redis e verifica se ja existe usuario logado 
+        //criando instancia do redis e verificando se ja existe um usuario logado 
 
         // try {
 
@@ -85,11 +78,11 @@ class LogarAction extends UserAction
         // }
 
         $redis_user = $this->redisConn->hget($email, 'email');
-        if ($redis_user) {
-            $response = (['status' => 'fail', 'msg' => 'Usuario ja esta logado']);
-            $this->createLogger->logger("Duplicidade de Sessão", "Tentativa de multiplos acessos $email ", 'warning', IP_SERVER);
-            return $this->respondWithData($response);
-        }
+            if ($redis_user) {
+                $response = (['status' => 'fail', 'msg' => 'Usuario ja esta logado']);
+                $this->createLogger->logger("Duplicidade de Sessão", "Tentativa de multiplos acessos $email ", 'warning', IP_SERVER);
+                return $this->respondWithData($response);
+            }
         // }
 
         //criando dados do User 
@@ -100,30 +93,26 @@ class LogarAction extends UserAction
         $_SESSION[User::USER_NAME] = $user->nome;
         $_SESSION[User::USER_EMAIL] = $user->email;
         $_SESSION[User::USER_NIVEL] = $user->nivel;
-        // $_SESSION[User::USER_DATE]=$user->data;
-        // $_SESSION['datasessao']=$::USER_EMAIL;
-
-     
-                // gerando loggers 
-                // $this->createLogger->loggerProcessor();
-                $this->createLogger->logger("LOGIN",'Usuario: '.$_SESSION[User::USER_NAME].' Realizou Login ','info',IP_SERVER);
-                // $this->createLogger->logTelegran($_SESSION);
-                
-                // criando token do usuario
-                $token = new Token($_SESSION[User::USER_EMAIL],"+1 minutes");
-
-
-        //criando instancia do redis e key fild do usuario 
-        // $redis = new RedisConn(); 
+   
+        // criando dados do usuario no redis
         $this->redisConn->hset($_SESSION[User::USER_EMAIL], 'name', $_SESSION[User::USER_NAME]);
         $this->redisConn->hset($_SESSION[User::USER_EMAIL], 'email', $_SESSION[User::USER_EMAIL]);
         $this->redisConn->hset($_SESSION[User::USER_EMAIL], 'nivel', $_SESSION[User::USER_NIVEL]);
         $this->redisConn->expire($_SESSION[User::USER_EMAIL], 3600);
 
+     
+        // gerando loggers 
+        $this->createLogger->logger("LOGIN",'Usuario: '.$_SESSION[User::USER_NAME].' Realizou Login ','info',IP_SERVER);
+                // $this->createLogger->loggerProcessor();
+                // $this->createLogger->logTelegran($_SESSION);
+                
+                // criando token do usuario
+        $token = new Token($_SESSION[User::USER_EMAIL],"+1 minutes");
 
 
 
-        $response = ['status' => 'ok', 'msg' => 'logado com sucesso', 'location' => '/sender'];
+
+        $response = ['status' => 'ok', 'msg' => 'logado com sucesso', 'valortoken' => $_SESSION['token']];
 
         return $this->respondWithData($response);
 

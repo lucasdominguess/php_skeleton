@@ -1,7 +1,7 @@
 <?php 
 namespace App\classes;
 
-
+use App\Domain\User\User;
 use DateTime;
 use DateTimeZone;
 use Firebase\JWT\JWT;
@@ -26,14 +26,14 @@ class Token {
     'iat' => strtotime($newtime),
     'exp' => $new_exp_time,
     'email' => $email,
-    'id' => '1'
+    'nivel' => $_SESSION[User::USER_NIVEL]
     ];
    
     $jwt = JWT::encode($payload, $key, 'HS256');
         //  print_r("chave cripto: ".$jwt ."\n");
         setcookie('token',$jwt,0,'','',false,true);
         $_SESSION['EXP_TOKEN'] = $new_exp_time ;
-        
+        $_SESSION['token']= $jwt;
      
     }
  }

@@ -20,7 +20,7 @@ class CadastrarAction extends UserAction{
         $logger = new CreateLogger();
 
 
-        if( URI_SERVER == URL_HOMEADM || URI_SERVER == URL_HOMEUSER){
+        // if( URI_SERVER == URL_HOMEADM || URI_SERVER == URL_HOMEUSER){
 
           
             
@@ -56,7 +56,7 @@ class CadastrarAction extends UserAction{
                    }
        
            
-       }
+    //    }
 
             if(URI_SERVER == URL_EXIBIR_ADMIN){ 
                     $nome = $_POST['nome'] ; 
