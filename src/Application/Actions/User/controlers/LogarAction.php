@@ -11,16 +11,17 @@ use App\Application\Actions\User\UserAction;
 use App\Infrastructure\Persistence\User\Sql; // 
 use App\Infrastructure\Persistence\User\RedisConn;
 use Psr\Http\Message\ResponseInterface as Response;
+use voku\helper\AntiXSS;
 
 
 class LogarAction extends UserAction
 {
     protected function action(): Response
     {
+        $xss = new AntiXSS(); 
 
-
-        $email = $_POST['email'] ?? null;
-        $senha = $_POST['senha'] ?? null;
+        $email = $xss->xss_clean($_POST['email']) ?? null;
+        $senha = $xss->xss_clean($_POST['senha']) ?? null;
 
 
 
@@ -105,9 +106,9 @@ class LogarAction extends UserAction
         $this->createLogger->logger("LOGIN",'Usuario: '.$_SESSION[User::USER_NAME].' Realizou Login ','info',IP_SERVER);
                 // $this->createLogger->loggerProcessor();
                 // $this->createLogger->logTelegran($_SESSION);
-                
+        global $env ; 
                 // criando token do usuario
-        $token = new Token($_SESSION[User::USER_EMAIL],"+1 minutes");
+        $token = new Token($_SESSION[User::USER_EMAIL],$env['exp_token']);
 
 
 

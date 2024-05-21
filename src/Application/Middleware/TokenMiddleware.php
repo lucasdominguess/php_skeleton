@@ -27,7 +27,7 @@ class TokenMiddleware {
         
         // verificando se o token existe
         if(!isset($_COOKIE['token'])){
-            setcookie('token','',-1,'/');
+            // setcookie('token','',-1,'/');
             session_unset();
             session_destroy();
             // return $response->withHeader('Location', '/?msg=' . urlencode($msg))->withStatus(302);   
@@ -69,7 +69,8 @@ class TokenMiddleware {
             session_destroy();
             return $response->withHeader('Location', '/')->withStatus(302); 
         }
-        $token = new Token($email,"+10 minutes"); 
+        global $env ; 
+        $token = new Token($email,$env['exp_token']); 
         $response = $handler->handle($request);
         return $response;
              
