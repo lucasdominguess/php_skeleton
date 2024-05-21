@@ -112,7 +112,7 @@ class LogarAction extends UserAction
 
 
 
-        $response = ['status' => 'ok', 'msg' => 'logado com sucesso', 'valortoken' => $_SESSION['token']];
+        $response = ['status' => 'ok', 'msg' => 'logado com sucesso','location'=>'/sender'];
 
         return $this->respondWithData($response);
 

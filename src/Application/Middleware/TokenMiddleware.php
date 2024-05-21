@@ -49,14 +49,9 @@ class TokenMiddleware {
     
         $inicia_time = $decoded_array['iat'];  //tempo do inicio criação token
         $exp_sessao = $decoded_array['exp'];  //tempo de expiração do token 
-        
-        // $Hrexp =$exp_sessao->format('H:i:s');
-        // define('TOKEN_EXP',$exp_sessao);
 
         $inicia_time_new=date("Y-m-d H:i:s",$inicia_time);
-      
-    
-    
+         
         $datenow = new DateTime('now', new DateTimeZone('America/Sao_Paulo')); 
         $newdate_now = $datenow->format('Y-m-d H:i:s');
 
@@ -67,26 +62,21 @@ class TokenMiddleware {
         
         if($newdate_now <= $exp_sessao) 
         {   
-            $token = new Token($email,"+10 minutes"); 
-            $response = $handler->handle($request);
-            return $response;
-
+            
+            $redis = new RedisConn(); 
+            $redis->del($_SESSION[User::USER_EMAIL]);
+            setcookie('token','',-1,'/');
+            session_destroy();
+            return $response->withHeader('Location', '/')->withStatus(302); 
         }
-        $redis = new RedisConn(); 
-        $redis->del($_SESSION[User::USER_EMAIL]);
-        setcookie('token','',-1,'/');
-        session_destroy();
-        return $response->withHeader('Location', '/')->withStatus(302); 
+        $token = new Token($email,"+10 minutes"); 
+        $response = $handler->handle($request);
+        return $response;
              
         // Redirecione o cliente e inclua a mensagem na URL como um parâmetro de consulta
         // return $response->withHeader('Location', '/?msg=' . urlencode($msg))->withStatus(302);
-
-
-
         
-        // return $resposta;
-
-        }
+         }
         
        
         }
