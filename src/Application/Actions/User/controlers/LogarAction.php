@@ -78,12 +78,12 @@ class LogarAction extends UserAction
         //     return $this->respondWithData($response);
         // }
 
-        $redis_user = $this->redisConn->hget($email, 'email');
-            if ($redis_user) {
-                $response = (['status' => 'fail', 'msg' => 'Usuario ja esta logado']);
-                $this->createLogger->logger("Duplicidade de Sessão", "Tentativa de multiplos acessos $email ", 'warning', IP_SERVER);
-                return $this->respondWithData($response);
-            }
+        // $redis_user = $this->redisConn->hget($email, 'email');
+        //     if ($redis_user) {
+        //         $response = (['status' => 'fail', 'msg' => 'Usuario ja esta logado']);
+        //         $this->createLogger->logger("Duplicidade de Sessão", "Tentativa de multiplos acessos $email ", 'warning', IP_SERVER);
+        //         return $this->respondWithData($response);
+        //     }
         // }
 
         //criando dados do User 

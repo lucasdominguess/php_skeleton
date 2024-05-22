@@ -20,8 +20,8 @@ final class HandleSenderAction extends SenderAction
 
 
         if($name == 'root' || $id_adm == 4){
-            return $this->response->withHeader("Location","/admin/home_adm")->withStatus(302);
+            return $this->response->withHeader("location","/admin/home_adm")->withStatus(302);
         }
-         return $this->response->withHeader("Location","/user/home_user")->withStatus(302);
+         return $this->response->withHeader("location","/user/home_user")->withStatus(302);
     }
 }

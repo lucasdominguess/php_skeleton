@@ -9,7 +9,7 @@ use Firebase\JWT\Key;
 
 
 class Token { 
-    public function __construct($email,$time='+60 minutes')
+    public function __construct($email,$time)
  {
       $this->gerarToken($email,$time);
  }
@@ -31,9 +31,9 @@ class Token {
    
     $jwt = JWT::encode($payload, $key, 'HS256');
         //  print_r("chave cripto: ".$jwt ."\n");
-        setcookie('token',$jwt,0,'','',false,true);
+        setcookie('token',$jwt,0,'/','',false,true);
         $_SESSION['EXP_TOKEN'] = $new_exp_time ;
-        $_SESSION['token']= $jwt;
+        // $_SESSION['token']= $jwt;
      
     }
  }

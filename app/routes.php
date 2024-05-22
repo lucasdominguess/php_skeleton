@@ -74,7 +74,8 @@ return function (App $app) {
         // ->add(ValidatePostMiddleware::class); //efetuar login 
         $app->post('/sair',SairSessaoAction::class); //sair da sessao
         $app->get('/listar',ListarAction::class); //listar dados para tabela
-        $app->post('/cadastrar',CadastrarAction::class)->add(new TokenMiddleware()); //efetuar cadastro
+        $app->post('/cadastrar',CadastrarAction::class);
+        // ->add(new TokenMiddleware()); //efetuar cadastro
         
         
        
@@ -134,8 +135,9 @@ return function (App $app) {
             return $view->render($response, '/users/home_users.html', [
               
             ]);
-            })->setName('home_user')->add(new TokenMiddleware());
-            // ->add(new UserMiddleware());
+            })->setName('home_user')
+            ->add(new TokenMiddleware())
+            ->add(new UserMiddleware());
             
 
     });

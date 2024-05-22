@@ -86,13 +86,13 @@ let tempoRest =  document.getElementById('temposessao2').textContent = tempoRest
 if(/^00:\d{2}$/.test(tempoRest)){
     $('#temposessao2').css('color', 'red');
   }
-  if(tempoRest == "00:00"){
-    deslogMensagem('error',"Sessão Expirada",true)
+  // if(tempoRest == "00:00"){
+  //   deslogMensagem('error',"Sessão Expirada",true)
 
       
     
-      // return false
-  }
+   
+  // }
 }
 setInterval(atualizarTempo, 1000);
 
