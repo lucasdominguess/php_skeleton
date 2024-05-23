@@ -2,16 +2,13 @@
 namespace App\Application\Middleware;
  
 
-use DateTime;
-use DateTimeZone;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
-// use Slim\Psr7\Request;
-use App\classes\Token;
+
 use Slim\Psr7\Response;
 use App\Domain\User\User;
-use App\Infrastructure\Helpers;
 use Firebase\JWT\ExpiredException;
+
 use App\Infrastructure\Persistence\User\RedisConn;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
@@ -20,73 +17,47 @@ use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 class TokenMiddleware {
     public function __invoke(Request $request, RequestHandler $handler)
     {  
+        $response = new Response();
         global $env;
         $key = $env['secretkey'];
-        $response = new Response();
-        // $tokenAuth = $_SERVER['HTTP_AUTHORIZATION'] ?? 'tokennaoexiste' ;
+        $time =$env['exp_token'];
+        $email = $_SESSION[User::USER_EMAIL];
         $cookie = $_COOKIE['token'] ?? null ;
         
         // verificando se o token existe
         if(!isset($cookie)){
             session_unset();
             session_destroy();
-            // return $response->withHeader('Location', '/?msg=' . urlencode($msg))->withStatus(302);   
             return $response->withHeader('Location', '/')->withStatus(302); 
         }
         // decodificando o token e verificando validade e expiraçao
         try {
-            $decoded = JWT::decode($_COOKIE['token'], new Key($key, 'HS256'));
-            // $decoded_array = (array) $decoded;
-            // $rk = $decoded_array['exp'] ; 
-            // var_dump($decoded);
+            $decoded = JWT::decode($cookie, new Key($key, 'HS256'));
+        
             
         } catch (ExpiredException $e) {
             $redis = new RedisConn(); 
-            $redis->del($_SESSION[User::USER_EMAIL]);
+            $redis->del($email);
             setcookie('token','',-1,'/');
             session_destroy();
             return $response->withHeader('Location', '/')->withStatus(302);
         }
 
         // verificando se o token decodificado contem a chave email correspondente 
-        $email = $_SESSION[User::USER_EMAIL];
+        
         $decoded_array = (array) $decoded;
         $r = $decoded_array['email'] ; 
-        $rn = $decoded_array['exp'] ; 
-       
+              
         if(!$r == $email){
             return $response->withHeader('Location', '/')->withStatus(302);
         }
-       
-        // global $env ; 
-        // $token = new Token($email,$env['exp_token']); 
+        // setcookie('token','',-1,'/');
+        
         $response = $handler->handle($request);
         return $response;
              
 
-    
-        // $inicia_time = $decoded_array['iat'];  //tempo do inicio criação token
-        // $exp_sessao = $decoded_array['exp'];  //tempo de expiração do token 
 
-        // $inicia_time_new=date("Y-m-d H:i:s",$inicia_time);
-         
-        // $datenow = new DateTime('now', new DateTimeZone('America/Sao_Paulo')); 
-        // $newdate_now = $datenow->format('Y-m-d H:i:s');
-
-        // if($email == $r){
-        //     $response = $handler->handle($request);
-        //     return $response;
-        // }
-        
-        // if($newdate_now <= $exp_sessao) 
-        // {   
-            
-           
-        //     return $response->withHeader('Location', '/')->withStatus(302); 
-        // }
-        // Redirecione o cliente e inclua a mensagem na URL como um parâmetro de consulta
-        // return $response->withHeader('Location', '/?msg=' . urlencode($msg))->withStatus(302);
-        
          }
         
        

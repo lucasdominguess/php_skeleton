@@ -36,6 +36,8 @@ class ExcluirAction extends Action{
             try{
                 $user->Delete_AdminsOfId($id);
                 $logger->logger("DELETE","Admin: " .$_SESSION[User::USER_NAME]." Deletou um Administrador");
+                $this->createLogger->logTelegran('Usuario: ' .$_SESSION[User::USER_NAME]. ' Deletou um Administrador',"warning");
+
             }catch(\Throwable $e){
                 return $this->respondWithData($e->getMessage());
     

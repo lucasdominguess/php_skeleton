@@ -16,11 +16,11 @@ class CadastrarAction extends UserAction{
     protected function action(): Response
     {   
  
-        $db = new Sql();    
-        $logger = new CreateLogger();
+       
+       
 
 
-        // if( URI_SERVER == URL_HOMEADM || URI_SERVER == URL_HOMEUSER){
+        if( URI_SERVER == URL_HOMEADM || URI_SERVER == URL_HOMEUSER){
 
           
             
@@ -41,15 +41,15 @@ class CadastrarAction extends UserAction{
                     }
             
                     try { 
-                        $stmt = new CreateRepository($db);
+                        $stmt = new CreateRepository($this->sql);
                         $stmt->createUser($cad,$primarykey,$id_adm);
 
-                        // $logger = new CreateLogger();
-                        $logger->logger("CADASTRO",'Usuario: '.$_SESSION[User::USER_NAME].' Cadastrou ' .$nome,'info');
-                        $this->createLogger->logTelegran($_COOKIE['token']);
+                        // $this->createLogger-> = new CreateLogger();
+                        $this->createLogger->logger("CADASTRO",'Usuario: '.$_SESSION[User::USER_NAME].' Cadastrou novo adm' .$nome,'info');
+                       
                      
                    }catch(\Throwable $th) { //erro caso nome ja esteja cadastrado
-                       if($db->errorCode()=='23000'){
+                       if($this->sql->errorCode()=='23000'){
                            $resposta =['status'=>'fail','msg'=>"O mesmo nome nao pode ser inserido"];
                            return $this->respondWithData($resposta);
                       
@@ -57,7 +57,7 @@ class CadastrarAction extends UserAction{
                    }
        
            
-    //    }
+       }
 
             if(URI_SERVER == URL_EXIBIR_ADMIN){ 
                     $nome = $_POST['nome'] ; 
@@ -67,9 +67,10 @@ class CadastrarAction extends UserAction{
                     $senhaCodif = password_hash($senha, PASSWORD_DEFAULT); 
                 try{
                 
-                    $user = new CreateRepository($db) ;
+                    $user = new CreateRepository($this->sql) ;
                     $user->createAdmin($nome,$email,$senhaCodif,$nivel);
-                    $logger->logger("CADASTRO",'Usuario: '.$_SESSION[User::USER_NAME].' Cadastrou um Admin ' .$nome,'info');
+                    $this->createLogger->logger("CADASTRO",'Usuario: '.$_SESSION[User::USER_NAME].' Cadastrou um Admin ' .$nome,'info');
+                    $this->createLogger->logTelegran('Usuario: ' .$_SESSION[User::USER_NAME]. ' Cadastrou novo adm ' .$nome,"warning");
                 }catch(\Throwable $e){
                     return $this->respondWithData($e);
                 }

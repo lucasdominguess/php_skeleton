@@ -94,23 +94,23 @@ class LogarAction extends UserAction
         $_SESSION[User::USER_NAME] = $user->nome;
         $_SESSION[User::USER_EMAIL] = $user->email;
         $_SESSION[User::USER_NIVEL] = $user->nivel;
-   
+            
+        global $env ; 
         // criando dados do usuario no redis
         $this->redisConn->hset($_SESSION[User::USER_EMAIL], 'name', $_SESSION[User::USER_NAME]);
         $this->redisConn->hset($_SESSION[User::USER_EMAIL], 'email', $_SESSION[User::USER_EMAIL]);
         $this->redisConn->hset($_SESSION[User::USER_EMAIL], 'nivel', $_SESSION[User::USER_NIVEL]);
-        $this->redisConn->expire($_SESSION[User::USER_EMAIL], 3600);
+        $this->redisConn->expire($_SESSION[User::USER_EMAIL], $env['exp_redis']);
 
+        // criando token do usuario
+        $token = new Token($_SESSION[User::USER_EMAIL],$env['exp_token']);
      
         // gerando loggers 
         $this->createLogger->logger("LOGIN",'Usuario: '.$_SESSION[User::USER_NAME].' Realizou Login ','info',IP_SERVER);
                 // $this->createLogger->loggerProcessor();
        
-        global $env ; 
-                // criando token do usuario
-        $token = new Token($_SESSION[User::USER_EMAIL],$env['exp_token']);
 
-        $c = $_COOKIE['token'] ?? null; 
+      
 
 
         $response = ['status' => 'ok', 'msg' => 'logado com sucesso','location'=>'/sender'];

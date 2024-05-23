@@ -24,7 +24,7 @@ class CreateLogger {
         $logger->pushHandler(new StreamHandler(dirname(__FILE__)."/../../logs/logs".$date.".csv"));
         $logger->$modo($msg);
 }
-    public function logTelegran(array|string $extra = null){
+    public function logTelegran($msg, $modo = 'warning', array|string $extra = null){
         $logger = new Logger('TelegranBot');
         
         $logger->pushProcessor(function ($record) use ($extra) { 
@@ -38,7 +38,8 @@ class CreateLogger {
             channel:"@phpAplicationweb",
             level:Level::Warning
     ));
-        $logger->warning('Administrador'.$_SESSION[User::USER_NAME].  ' efetuou login');
+        $logger->$modo($msg);
+        
        
     
 

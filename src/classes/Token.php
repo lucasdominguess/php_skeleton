@@ -21,11 +21,10 @@ class Token {
     $datenow->add(date_interval_create_from_date_string($time)); // adc a hora atual o tempo em string "10 minutes"
    
     
-
     $payload = [
     // 'iat' => strtotime($formDatenow),
     'exp' => $datenow->getTimestamp(),
-    'email' => $email,
+    'email' => $_SESSION[User::USER_EMAIL],
     'nivel' => $_SESSION[User::USER_NIVEL]
     ];
    
