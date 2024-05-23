@@ -36,8 +36,9 @@ class TokenMiddleware {
         // decodificando o token e verificando validade e expiraçao
         try {
             $decoded = JWT::decode($_COOKIE['token'], new Key($key, 'HS256'));
-            $decoded_array = (array) $decoded;
-            $r = $decoded_array['exp'] ; 
+            // $decoded_array = (array) $decoded;
+            // $rk = $decoded_array['exp'] ; 
+            // var_dump($decoded);
             
         } catch (ExpiredException $e) {
             $redis = new RedisConn(); 

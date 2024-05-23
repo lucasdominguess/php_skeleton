@@ -78,13 +78,13 @@ class LogarAction extends UserAction
         //     return $this->respondWithData($response);
         // }
 
-        // $redis_user = $this->redisConn->hget($email, 'email');
-        //     if ($redis_user) {
-        //         $response = (['status' => 'fail', 'msg' => 'Usuario ja esta logado']);
-        //         $this->createLogger->logger("Duplicidade de Sessão", "Tentativa de multiplos acessos $email ", 'warning', IP_SERVER);
-        //         return $this->respondWithData($response);
-        //     }
-        // }
+        $redis_user = $this->redisConn->hget($email, 'email');
+            if ($redis_user) {
+                $response = (['status' => 'fail', 'msg' => 'Usuario ja esta logado']);
+                $this->createLogger->logger("Duplicidade de Sessão", "Tentativa de multiplos acessos $email ", 'warning', IP_SERVER);
+                return $this->respondWithData($response);
+            }
+        
 
         //criando dados do User 
         $user = new User($retorno[0]['id_adm'], $retorno[0]['nome'], $retorno[0]['email'], $retorno[0]['nivel']);
@@ -105,12 +105,12 @@ class LogarAction extends UserAction
         // gerando loggers 
         $this->createLogger->logger("LOGIN",'Usuario: '.$_SESSION[User::USER_NAME].' Realizou Login ','info',IP_SERVER);
                 // $this->createLogger->loggerProcessor();
-                // $this->createLogger->logTelegran($_SESSION);
+       
         global $env ; 
                 // criando token do usuario
         $token = new Token($_SESSION[User::USER_EMAIL],$env['exp_token']);
 
-
+        $c = $_COOKIE['token'] ?? null; 
 
 
         $response = ['status' => 'ok', 'msg' => 'logado com sucesso','location'=>'/sender'];

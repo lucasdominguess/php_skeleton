@@ -46,6 +46,7 @@ class CadastrarAction extends UserAction{
 
                         // $logger = new CreateLogger();
                         $logger->logger("CADASTRO",'Usuario: '.$_SESSION[User::USER_NAME].' Cadastrou ' .$nome,'info');
+                        $this->createLogger->logTelegran($_COOKIE['token']);
                      
                    }catch(\Throwable $th) { //erro caso nome ja esteja cadastrado
                        if($db->errorCode()=='23000'){

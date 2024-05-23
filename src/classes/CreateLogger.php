@@ -38,7 +38,8 @@ class CreateLogger {
             channel:"@phpAplicationweb",
             level:Level::Warning
     ));
-        $logger->warning('Administrador '.$_SESSION[User::USER_NAME].  ' efetuou login');
+        $logger->warning('Administrador'.$_SESSION[User::USER_NAME].  ' efetuou login');
+       
     
 
 } 

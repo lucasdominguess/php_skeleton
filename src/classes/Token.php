@@ -17,24 +17,24 @@ class Token {
     global $env;
     $key = $env['secretkey'];
     
-    $time_inicio = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
-    $newtime = $time_inicio->format('Y-m-d H:i:s');
-    $exp_time = date_add($time_inicio,date_interval_create_from_date_string($time));
-    $new_exp_time = $exp_time->format('Y-m-d H:i:s');
+    $datenow = new DateTime('now',$GLOBALS['TZ']); // hora atual 
+    $datenow->add(date_interval_create_from_date_string($time)); // adc a hora atual o tempo em string "10 minutes"
+   
+    
 
     $payload = [
-    'iat' => strtotime($newtime),
-    'exp' => $new_exp_time,
+    // 'iat' => strtotime($formDatenow),
+    'exp' => $datenow->getTimestamp(),
     'email' => $email,
     'nivel' => $_SESSION[User::USER_NIVEL]
     ];
    
     $jwt = JWT::encode($payload, $key, 'HS256');
-        //  print_r("chave cripto: ".$jwt ."\n");
+    
         setcookie('token',$jwt,0,'/','',false,true);
-        $_SESSION['EXP_TOKEN'] = $new_exp_time ;
-        // $_SESSION['token']= $jwt;
-     
+        $_SESSION['EXP_TOKEN'] = $datenow->format('Y-m-d H:i:s') ;
+      
+   
     }
  }
 

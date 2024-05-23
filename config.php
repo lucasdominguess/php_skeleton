@@ -30,9 +30,9 @@ define('USEREMAIL',$email );
 $nivel = $_SESSION[User::USER_NIVEL] ?? null;
 define('USER_NIVEL',$nivel);
 
-// tempo de expiração de token 
+//definindo tempo de expiração de token 
 $expToken = $_SESSION['EXP_TOKEN'] ?? '';
-$formExp= (new DateTime($expToken))->format('H:i:s');
+// $formExp= (new DateTime($expToken))->format('H:i:s');
 define('EXP_TOKEN',$expToken);
 
 //definindo caminhos das paginas 
