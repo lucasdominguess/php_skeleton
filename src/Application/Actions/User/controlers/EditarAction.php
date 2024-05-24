@@ -1,25 +1,22 @@
 <?php
 namespace App\Application\Actions\User\controlers;
 
-use App\Domain\User\User;
 use App\Application\Actions\Action;
 use App\Infrastructure\Persistence\User\ReadRepository;
-use App\Infrastructure\Persistence\User\Sql;
-use PhpParser\Node\Stmt\Return_;
 use Psr\Http\Message\ResponseInterface as response;
 
 class EditarAction extends Action{ 
     protected function action(): response 
     {   
-        if ($_SESSION[User::USER_NIVEL] != 5) {
-            $response = new response;
-            return $response->withHeader('Location', '/')->withStatus(302);
-        }
+        // if ($_SESSION[User::USER_NIVEL] != 5) {
+        //     $response = new response;
+        //     return $response->withHeader('Location', '/')->withStatus(302);
+        // }
 
         $id = $_GET['id'] ; 
-        $db =new Sql(); 
-        $url = URI_SERVER ;
-        $user = new ReadRepository($db); 
+       
+    
+        $user = new ReadRepository($this->sql); 
 
         if(URI_SERVER == URL_HOMEADM){
             
@@ -38,6 +35,8 @@ class EditarAction extends Action{
            $newuser =  [$user->tentativasFindId($id),'code'=>'3'];
             return $this->respondWithData($newuser); 
         
-        }   
+        }
+        $response = new response;
+        return $response->withHeader('Location', '/')->withStatus(302);
     }
 }

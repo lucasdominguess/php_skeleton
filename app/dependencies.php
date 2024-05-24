@@ -40,8 +40,8 @@ return function (ContainerBuilder $containerBuilder) {
                 return new Sql;
           
             } catch (\PDOException $e) {
+                $this->createLogger->logger('Erro Sql', "Erro ao conectar no Banco de dados",'warning');
                 throw new Exception($e->getMessage());
-                // $this->createLogger->logger('Erro Sql', "Erro ao conectar no Banco de dados",'warning');
          
             }
         },
@@ -50,6 +50,7 @@ return function (ContainerBuilder $containerBuilder) {
             try {
                 return new RedisConn;
             } catch (\Throwable $e) {
+                $this->createLogger->logger('Erro Redis', "Erro ao conectar no Banco Redis",'warning');
                 throw new Exception($e->getMessage());
             }
         },

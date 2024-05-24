@@ -30,10 +30,12 @@ class TokenMiddleware {
             session_destroy();
             return $response->withHeader('Location', '/')->withStatus(302); 
         }
+    
+
         // decodificando o token e verificando validade e expiraçao
         try {
             $decoded = JWT::decode($cookie, new Key($key, 'HS256'));
-        
+            
             
         } catch (ExpiredException $e) {
             $redis = new RedisConn(); 

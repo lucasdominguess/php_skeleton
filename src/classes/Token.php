@@ -9,6 +9,12 @@ use Firebase\JWT\Key;
 
 
 class Token { 
+    /**
+     * Cria um Token de usuario 
+     * @param $email Adiciona email do usuario ao payload
+     * @param string $time Adiciona o tempo limite para expirar o token 
+     */
+    
     public function __construct($email,$time)
  {
       $this->gerarToken($email,$time);
@@ -32,7 +38,7 @@ class Token {
     
         setcookie('token',$jwt,0,'/','',false,true);
         $_SESSION['EXP_TOKEN'] = $datenow->format('Y-m-d H:i:s') ;
-      
+        $_SESSION['HASH_TOKEN'] = $jwt ; 
    
     }
  }

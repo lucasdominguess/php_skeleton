@@ -87,30 +87,28 @@ return function (App $app) {
         ]);
     })->setName('tokenInvalido');
 
-   //ROTAS DE ADMIN 
+////////ROTAS DE ADMIN 
     $app->group('/admin',function(Group $group){ 
         $group->get('/home_adm', function ($request, $response, $args) {
             $view = Twig::fromRequest($request);
-            return $view->render($response, '/admin/home.html', [
-              
-            ]);
+            return $view->render($response, '/admin/home.html', []);
             })->setName('home_adm');
         
         $group->get('/editar',EditarAction::class);
+       
+
         $group->post('/excluir',ExcluirAction::class);
+
+//////////// Paginação 
         $group->get('/exibir_admins',ListarAction::class);
         $group->get('/exibiradmins', function ($request, $response, $args) {
             $view = Twig::fromRequest($request);
-            return $view->render($response,'/admin/exibiradmins.html', [
-              
-            ]);
-            });
+            return $view->render($response,'/admin/exibiradmins.html', []);
+        });
         $group->get('/tentativas_acesso',ListarAction::class);   
         $group->get('/tentativasacesso', function ($request, $response, $args) {
             $view = Twig::fromRequest($request);
-            return $view->render($response,'/admin/tentativas_acesso.html', [
-              
-            ]);
+            return $view->render($response,'/admin/tentativas_acesso.html', []);
         });
         $group->get('/configadms' ,function ($request, $response, $args) {
             $view = Twig::fromRequest($request);
@@ -118,6 +116,7 @@ return function (App $app) {
               
             ]);
         });
+//////// arquivos 
         $group->post('/upload_arquivo',UploadAction::class);
         $group->get('/listar_arquivos',ListarAction::class);
         $group->get('/listar_diretorio',ListarArquivosAction::class);
@@ -127,8 +126,7 @@ return function (App $app) {
 
     })->add(new TokenMiddleware())->add(new AdminMiddleware());
 
-
-    // rotas Usuarios
+////// rotas Usuarios
     $app->group('/user',function(Group $group){ 
         $group->get('/home_user', function ($request, $response, $args) {
             $view = Twig::fromRequest($request);

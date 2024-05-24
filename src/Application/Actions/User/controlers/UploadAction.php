@@ -13,7 +13,7 @@ class UploadAction extends Action {
     protected function action(): ResponseInterface
     {
    
-      if($_FILES['file']['error'] == 0 ) {
+      if($_FILES['file']['error'] == 4 ) {
         $msg = ['status' => 'fail', 'msg' => 'Nenhum Arquivo foi enviado!'];
         return $this->respondWithData($msg);
       }

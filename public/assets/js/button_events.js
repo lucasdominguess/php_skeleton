@@ -57,7 +57,7 @@ $("#icon_home").click( function (){
 // });
 
 $("#btn_arquivo").click( function () { 
-  console.log('atu')
+  
   // requestGETdir()
 });
 
