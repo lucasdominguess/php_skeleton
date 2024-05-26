@@ -1,3 +1,4 @@
+// import _, { map } from 'https://cdn.jsdelivr.net/npm/underscore@1.13.6/underscore-esm-min.js'
 
 
 //construindo header de tabela dinamicamente 
@@ -93,3 +94,71 @@ function arrumar(obj){
     button.addEventListener('click',requestGET);
     button2.addEventListener('click',confirmExcluir);
 };
+// buscando cards de usuarios pelo input 
+function montar(obj)
+{
+    console.log(obj)
+    for (let i = 0; i < obj.length; i++) {
+        const el = obj[i];
+        let li = document.createElement('li');
+        li.id = 'liPerso'                                    //onmouseover="fntest(this)
+        li.innerHTML = `
+        <div id="div_${el.id}" class="card cardPerso">
+            <div class="row" >
+                <p><span class="spanPerso">Nome:&nbsp;&nbsp;</span>${el.nome}</p>
+                <p><span class="spanPerso" >Nascimento:&nbsp;&nbsp;</span>${el.data_nascimento}</p>
+                <div class="col-6 form-group">
+                    <p><span class="spanPerso">CPF:&nbsp;&nbsp;</span>${el.cpf}</p>
+                </div>
+                <div class="col-6 form-group">
+                    <p><span class="spanPerso">CEP:&nbsp;&nbsp;</span>${el.cep}</p>
+                </div>
+                <div class='div_btn '>
+                <button id="${el.id}" type="button" class="btnEdit btn btn-outline-primary">Editar</button>
+                <button id="btn2-${el.id}" class="btn btn-outline-danger">Excluir</button>
+                </div>
+                
+            </div>
+    </div>`
+        
+
+        $("#ul_cardlist").append(li)
+          
+        btnEdits('.btnEdit')
+    }
+}
+    function btnEdits(key){
+         $(key).click(function (e) {
+         btn_editar(`${e.target.id}`)
+        
+   
+}); 
+}
+
+
+
+async function buscarCard(v)
+{
+    let resposta = await fetch(`http://localhost:9000/listarcards?name=${v}`);
+    
+    let obj = await resposta.json()
+    console.log(obj.data)
+    console.log(obj.data.msg)
+    if(!obj.data.length){
+        setTimeout(
+        msgErro(obj.data.msg),2500)
+    }
+    return obj.data
+}
+
+$("#ipt_search").on('input',_.throttle(async (e)=>{
+    let v = e.target.value;
+   console.log(v)
+    if (v.length <= 3) {
+        $("#ul_cardlist").html('')
+    }else if (v.length > 3) {
+        let res = await buscarCard(v)
+        $("#ul_cardlist").html('')
+        montar(res);
+    }
+},1200))

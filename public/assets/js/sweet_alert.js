@@ -80,6 +80,14 @@ function confirmExcluir(key) {
     })
   }
 
+function msgErro(msg) {
+    Swal.fire({
+        title: 'Erro!',
+        text: msg,
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
+}
 
 function deslogMensagem(icon,msg,reload){
   Swal.fire({

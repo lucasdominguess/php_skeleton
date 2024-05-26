@@ -21,6 +21,9 @@
                         href="/user/home_user">Cadastros</a>
                         {%endif%}
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/listar_cards">Cards de Usuarios</a>
+                    </li>
                     {% if usernivel == 5 %}
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/exibiradmins" >Admins</a>
@@ -52,7 +55,7 @@
                     </li> -->
                 </ul>
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <input id="ipt_search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>

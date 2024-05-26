@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block link %}
+
+
+        <html id='html_cards_users'>
+         <link rel="stylesheet" href="/assets/css/home.css">
+        <link rel="stylesheet" href="/assets/css/cardlist.css"> 
+        <title>Cards Usuarios</title>
+{% endblock %}
+
+{% block body %}
+
+<section id="conteudo">
+
+    <header id="header" >
+        {{include('/assets/dados_session.html')}}
+        {{include('/assets/nav.html')}}
+      <div>
+
+      </div>
+
+    </header>
+
+    <section id="section_cards" class="">
+        <div id="divcard" class="">
+        <!-- class="divCards col col-md-6 offset-md-3" -->
+            <ul id="ul_cardlist" class="form-control">
+             
+            </ul>
+        </div>
+    </section>
+</section>
+<script src="/assets/js/uteis.js"></script>
+<script src="/assets/js/ajax.js"></script>
+{% endblock %}

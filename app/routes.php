@@ -3,13 +3,15 @@
 declare(strict_types=1);
 
 use Slim\App;
+use function DI\add;
+
+
 use Slim\Views\Twig;
 
-
 use App\Application\Middleware\UserMiddleware;
+
 use App\Application\Middleware\AdminMiddleware;
 use App\Application\Middleware\TokenMiddleware;
-
 use App\Application\Actions\sender\HandleSenderAction;
 use App\Application\Middleware\ValidatePostMiddleware;
 use App\Application\Actions\User\controlers\LogarAction;
@@ -20,10 +22,10 @@ use App\Application\Actions\User\controlers\ExcluirAction;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 use App\Application\Actions\User\controlers\DownloadAction;
 use App\Application\Actions\User\controlers\CadastrarAction;
-use App\Application\Actions\User\controlers\SairSessaoAction;
-use App\Application\Actions\User\controlers\ListarArquivosAction;
 
-use function DI\add;
+use App\Application\Actions\User\controlers\SairSessaoAction;
+use App\Application\Actions\User\controlers\ListarCardsAction;
+use App\Application\Actions\User\controlers\ListarArquivosAction;
 
 return function (App $app) {
 
@@ -71,6 +73,13 @@ return function (App $app) {
         
     //ROTAS PUBLICAS
         $app->post('/logar',LogarAction::class);
+        $app->get('/listarcards',ListarCardsAction::class);
+        $app->get('/listar_cards', function ($request, $response, $args) {
+            $view = Twig::fromRequest($request);
+            return $view->render($response, 'cards_users.html', [
+              
+            ]);
+        });
         // ->add(ValidatePostMiddleware::class); //efetuar login 
         $app->post('/sair',SairSessaoAction::class); //sair da sessao
         $app->get('/listar',ListarAction::class); //listar dados para tabela
@@ -97,7 +106,7 @@ return function (App $app) {
         $group->get('/editar',EditarAction::class);
        
 
-        $group->post('/excluir',ExcluirAction::class);
+        $group->get('/excluir',ExcluirAction::class);
 
 //////////// Paginação 
         $group->get('/exibir_admins',ListarAction::class);

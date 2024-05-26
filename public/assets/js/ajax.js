@@ -1,10 +1,7 @@
 //enviando dados com medoto POST
 async function requestPOST(rota,v_form=null){
     const rots = rota 
-  
-  //   const headers = {
-  //     'Authorization': `Bearer ${token}`
-  // };
+
     const response = await fetch(`${rots}`
 ,{
 
@@ -16,20 +13,18 @@ async function requestPOST(rota,v_form=null){
 });
 
 let newResponse = await response.json()
-// console.log(newResponse)
 let icon = newResponse.data.status == 'fail' ? 'error' : 'success' 
 let reload = newResponse.data.status=='fail' ? false : true
-// let reload2 = newResponse.data.reload =='fail' ? false : true
 let rotas = newResponse.data.location 
 let msg = newResponse.data.msg
 
-if(icon=='error'){
-    fnMensagem(icon,msg)
-    
-}else {
-    fnMensagem(icon,msg,reload,rotas)
-    // window.location.href='registrar' 
-}
+  if(icon=='error'){
+      fnMensagem(icon,msg)
+      
+  }else {
+      fnMensagem(icon,msg,reload,rotas)
+      // window.location.href='registrar' 
+  }
 }
 // buscar dados com metodo GET 
 async function requestGET(key) { 
@@ -78,17 +73,8 @@ async function requestGETrota(rota) {
 async function requestDELETE(key,rota) {
     try {
       let id = key.target.id;
-      // console.log(key.target.emails);
-      
-      const response = await fetch(
-        `${rota}?id=${id}`,
-        {
-          method: "post",
-          body: id,
-          
-          
-        }
-      );
+           
+      const response = await fetch(`${rota}?id=${id}`);
       
     // capturando resposta para enviar no sweetAlert
     let newResponse = await response.json();
@@ -149,9 +135,9 @@ async function buscar(rota)
   }
   async function requestGETDownload (rota){
     // let id = key.target.id
-      console.log(rota);
+     
       let response = await fetch(`${rota}`);
-      console.log(response)
+     
       let obj = await response.json()
     
   }

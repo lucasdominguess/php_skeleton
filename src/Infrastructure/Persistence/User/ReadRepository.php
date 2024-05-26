@@ -21,6 +21,15 @@ class ReadRepository
         
         return $resultado;
     }
+    public function estagisFindAllforName($nome): array
+    {
+        $stmt = $this->db->prepare("select * from estagiarios where nome like :nome ");
+        $stmt->bindValue(":nome",$nome.'%');
+        $stmt->execute();
+        $resultado=$stmt->fetchAll(\PDO::FETCH_ASSOC); 
+        
+        return $resultado;
+    }
     public function estagisFindId($id)
 
     {
