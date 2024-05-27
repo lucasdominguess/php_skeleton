@@ -103,7 +103,7 @@ function montar(obj)
         let li = document.createElement('li');
         li.id = 'liPerso'                                    //onmouseover="fntest(this)
         li.innerHTML = `
-        <div id="div_${el.id}" class="card cardPerso">
+        <div id="div_${el.id}" class="card cardPerso fadeIn">
             <div class="row" >
                 <p><span class="spanPerso">Nome:&nbsp;&nbsp;</span>${el.nome}</p>
                 <p><span class="spanPerso" >Nascimento:&nbsp;&nbsp;</span>${el.data_nascimento}</p>

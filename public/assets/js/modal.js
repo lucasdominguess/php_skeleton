@@ -44,3 +44,7 @@ function modalEditarAdm(key){
     $("#nivel").val(values[4])
    
 }
+function modalRecuperarSenha(){ 
+  $("#myModal").fadeToggle(1000)
+  $('#title_h3').text('Recuperar Senha')
+}

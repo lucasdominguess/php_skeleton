@@ -13,6 +13,7 @@ body{
     0%{background-position:100%}
     50%{background-position:50%}
     100%{background-position:0%}
+    
 }
 
 #divicon{
@@ -145,9 +146,22 @@ body{
    
 }
 
+.bg-transp { 
+   
+    /* background: rgba(255, 255, 255, 0.391); */
+    /* border-radius: 16px; */
+    /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
+    backdrop-filter: blur(9.4px);
+    -webkit-backdrop-filter: blur(9.4px);
 
+}
 
-
+#sessao_modal{ 
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 /* #title_login{ 
     font-family: "Madimi One", sans-serif;
     font-size: 28px;
