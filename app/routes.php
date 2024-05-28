@@ -8,8 +8,9 @@ use function DI\add;
 
 use Slim\Views\Twig;
 
-use App\Application\Middleware\UserMiddleware;
 
+
+use App\Application\Middleware\UserMiddleware;
 use App\Application\Middleware\AdminMiddleware;
 use App\Application\Middleware\TokenMiddleware;
 use App\Application\Actions\sender\HandleSenderAction;
@@ -21,11 +22,12 @@ use App\Application\Actions\User\controlers\UploadAction;
 use App\Application\Actions\User\controlers\ExcluirAction;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 use App\Application\Actions\User\controlers\DownloadAction;
-use App\Application\Actions\User\controlers\CadastrarAction;
 
+use App\Application\Actions\User\controlers\CadastrarAction;
 use App\Application\Actions\User\controlers\SairSessaoAction;
 use App\Application\Actions\User\controlers\ListarCardsAction;
 use App\Application\Actions\User\controlers\ListarArquivosAction;
+use App\Application\Actions\User\controlers\RecuperarSenhaAction;
 
 return function (App $app) {
 
@@ -53,6 +55,14 @@ return function (App $app) {
           
         ]);
     })->setName('login');
+    $app->get('/trocar_senha', function ($request, $response, $args) {
+        $view = Twig::fromRequest($request);
+        return $view->render($response, 'trocarsenha.html', [
+          
+        ]);
+    })->setName('Trocar Senha');
+    $app->post('/trocarsenha', RecuperarSenhaAction::class);
+    
     $app->get('/sender', HandleSenderAction::class);
 
     // $app->get('/logar', function ($request, $response,$args) {

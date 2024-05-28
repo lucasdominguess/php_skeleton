@@ -61,7 +61,14 @@ $("#btn_arquivo").click( function () {
   // requestGETdir()
 });
 
+$("#btn_env_altsenha").click(function (){ 
+  let v_form = new FormData(document.getElementById('form_alt_senha')) 
 
+  requestPOST('/trocarsenha',v_form)
+}); 
+$("#btn_canc_altsenha").click(function () { 
+  window.location.href='/'
+}) ; 
 
 // $("#btn_dowload_01").click( function () { 
 //   requestGETDownload('/admin/download?filename=vendas.png')

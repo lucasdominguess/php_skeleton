@@ -59,6 +59,15 @@ class ReadRepository
         
         return $resultado;
     }
+    public function admFindEmail($email)
+    {
+        $stmt =$this->db->prepare("select * from usuarios where email = :email");
+        $stmt->bindValue(":email",$email);
+        $stmt->execute();
+        $resultado=$stmt->fetchAll(\PDO::FETCH_ASSOC); 
+        
+        return $resultado;
+    }
     public function tentativasFindAll(): array
     {
         $stmt = $this->db->prepare("select * from tentativa");
