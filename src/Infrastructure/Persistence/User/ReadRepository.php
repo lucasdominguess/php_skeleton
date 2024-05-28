@@ -87,4 +87,14 @@ class ReadRepository
         
         return $resultado;
     }
+    public function resetFindAllEmail($token)
+
+    {
+        $stmt =$this->db->prepare("select * from reset where token = :token");
+        $stmt->bindValue(":token",$token);
+        $stmt->execute();
+        $resultado=$stmt->fetchAll(\PDO::FETCH_ASSOC); 
+        
+        return $resultado;
+    }
 }

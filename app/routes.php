@@ -62,6 +62,7 @@ return function (App $app) {
         ]);
     })->setName('Trocar Senha');
     $app->post('/trocarsenha', RecuperarSenhaAction::class);
+    $app->post('/recsenha',RecSenhaAction::class);
     
     $app->get('/sender', HandleSenderAction::class);
 

@@ -14,16 +14,16 @@ use PHPMailer\PHPMailer\SMTP;
 class Email 
 { 
 
-public function mandar_email()
+public function mandar_email($email,$token)
     {
+        global $env ; 
 
-        
         $mail = new PHPMailer(true);
-        $login = 'admin';
-        $senha = '';
-        $smtp = 'smtpcorp.prodam';
-        $port = 25;
-        $sender = 'smsdtic@prefeitura.sp.gov.br';
+        $login = $env['login'];
+        $senha = $env['senha'];
+        $smtp = $env['smtp'];
+        $port = $env['port'];
+        $sender = $env['sender'];
         try {
             //Server settings
             $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
@@ -37,7 +37,7 @@ public function mandar_email()
             $mail->Port       = $port;                                    //TCP port to connect to; use 587 if you have set SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS
         
             //Recipients
-            $mail->setFrom($sender, 'LUCAS');
+            $mail->setFrom($sender, 'teste');
             // $mail->addAddress('lucasdomingues@prefeitura.sp.gov.br', 'Joe User');     //Add a recipient
             $mail->addAddress('lucasdomingues25.dev@gmail.com', 'Joe User');     //Add a recipient
             /*
@@ -53,8 +53,8 @@ public function mandar_email()
         
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Here is the subject';
-            $mail->Body    = 'teste teste <b>in bold!</b>';
+            $mail->Subject = 'Alteração de senha Solicitada';
+            $mail->Body    = 'para seguir com a alteração click no link : <a href="http://localhost:9000/recsenha?token=$token?email=$email">alterar Senha</a>';
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
         
             $mail->send();
