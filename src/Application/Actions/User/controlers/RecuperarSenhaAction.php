@@ -38,6 +38,7 @@ class RecuperarSenhaAction extends Action
         }
 
         $senhaCodif = password_hash($email, PASSWORD_DEFAULT);
+        
 
         $date = new DateTime(); 
         $date->modify("+5 minutes");
