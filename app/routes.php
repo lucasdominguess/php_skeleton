@@ -23,9 +23,11 @@ use App\Application\Actions\User\controlers\ExcluirAction;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 use App\Application\Actions\User\controlers\DownloadAction;
 
+use App\Application\Actions\User\controlers\RecSenhaAction;
 use App\Application\Actions\User\controlers\CadastrarAction;
 use App\Application\Actions\User\controlers\SairSessaoAction;
 use App\Application\Actions\User\controlers\ListarCardsAction;
+use App\Application\Actions\User\controlers\ValidarSenhaAction;
 use App\Application\Actions\User\controlers\ListarArquivosAction;
 use App\Application\Actions\User\controlers\RecuperarSenhaAction;
 
@@ -60,8 +62,16 @@ return function (App $app) {
         return $view->render($response, 'trocarsenha.html', [
           
         ]);
-    })->setName('Trocar Senha');
+    });
     $app->post('/trocarsenha', RecuperarSenhaAction::class);
+    $app->get('/recsenha',RecSenhaAction::class);
+    $app->get('/recuperar_senha',function ($request, $response, $args) {
+        $view = Twig::fromRequest($request);
+        return $view->render($response, 'newsenha.html', [
+          
+        ]);
+    });
+    $app->post("/validarnewsenha",ValidarSenhaAction::class);
     
     $app->get('/sender', HandleSenderAction::class);
 

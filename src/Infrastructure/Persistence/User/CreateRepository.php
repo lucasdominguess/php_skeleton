@@ -24,4 +24,12 @@ class CreateRepository
         $this->db->setParms($stmt,$var);
         $stmt->execute();
     }
+
+    public function createResetSenha($date,$email,$token) { 
+        $stmt=$this->db->prepare("insert into reset(date,email,token) values(:date,:email,:token)");
+        $var=[':date'=>$date,':email'=>$email,':token'=>$token];
+        $this->db->setParms($stmt,$var);
+        $stmt->execute();
+    }
+
 }

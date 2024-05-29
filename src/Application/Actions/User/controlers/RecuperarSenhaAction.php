@@ -8,6 +8,7 @@ namespace App\Application\Actions\User\controlers;
 
 // use App\classes\Email;
 
+use App\Infrastructure\Persistence\User\CreateRepository;
 use DateTime;
 use App\classes\Email;
 use voku\helper\AntiXSS;
@@ -37,20 +38,21 @@ class RecuperarSenhaAction extends Action
             return $this->respondWithData($msg);
         }
 
-        $senhaCodif = password_hash($email, PASSWORD_DEFAULT);
-        
+        $token = password_hash($email, PASSWORD_DEFAULT);
 
         $date = new DateTime(); 
-        $date->modify("+5 minutes");
+        $date->modify("+10 minutes");
+        $newdata =$date->format("Y-m-d H:i:s");
         
-        
-        var_dump($date);
-        echo $date;
+        $insert = new CreateRepository($this->sql);
+        $insert->createResetSenha($newdata,$email,$token);
+        // var_dump($date);
+     
 
         try {
             
             $e = new Email;
-            $e->mandar_email();
+            $e->mandar_email($email,$token);
             $msg = ['status'=> 'ok', 'msg'=>'Email enviado com sucesso!'];
             return $this->respondWithData($msg);
         } catch (\Throwable $th) {

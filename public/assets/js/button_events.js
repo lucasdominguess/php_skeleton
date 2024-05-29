@@ -69,7 +69,11 @@ $("#btn_env_altsenha").click(function (){
 $("#btn_canc_altsenha").click(function () { 
   window.location.href='/'
 }) ; 
+$("#btn_env_newsenha").click(function (){ 
+  let v_form = new FormData(document.getElementById('form_new_senha')) 
 
+  requestPOST('/validarnewsenha',v_form)
+}); 
 // $("#btn_dowload_01").click( function () { 
 //   requestGETDownload('/admin/download?filename=vendas.png')
 // })
