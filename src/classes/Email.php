@@ -29,7 +29,7 @@ public function mandar_email($email,$token_url)
             $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
             $mail->isSMTP();                                            //Send using SMTP
             $mail->Host       = $smtp ; //'sandbox.smtp.mailtrap.io'; //$smtp;                     //Set the SMTP server to send through
-            $mail->SMTPAuth   = true;  //prodam = false                                 //Enable SMTP authentication
+            $mail->SMTPAuth   = false;  //prodam = false                                 //Enable SMTP authentication
             $mail->Username   =  $username; //'f73cef0376c9d3';  //;                     //SMTP username
             $mail->Password   = $senha;                               //SMTP password
             $mail->SMTPSecure = false;            //Enable implicit TLS encryption
@@ -54,7 +54,8 @@ public function mandar_email($email,$token_url)
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = 'Alteracao de senha Solicitada';
-            $mail->Body    = "para seguir com a alteracao click no link : <a href='http://localhost:9000/validar_tokenuser?token=$token_url&email=$email'>alterar Senha</a>";
+            $mail->Body    = "para seguir com a alteracao click no link : <a href='http://localhost:9000/validar_tokenuser/$token_url'>alterar Senha</a> ";
+            // $mail->Body    = "para seguir com a alteracao click no link : <a href='http://localhost:9000/registrar_novasenha/token=$token_url'>alterar Senha</a> ";
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
             $mail->CharSet ='UTF-8';
         

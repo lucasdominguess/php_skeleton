@@ -7,7 +7,7 @@ async function requestPOST(rota,v_form=null){
 
     method : 'post' , 
     body : v_form,
-    credentials : 'include'
+    // credentials : 'include'
   
 
 });

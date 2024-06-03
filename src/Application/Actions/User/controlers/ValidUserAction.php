@@ -39,9 +39,10 @@ class ValidUserAction extends Action
             return $this->respondWithData($msg);
         }
         
-        $token = password_hash($email, PASSWORD_DEFAULT);
+        // $token = password_hash($email, PASSWORD_DEFAULT);
+        $token_url = md5(uniqid());
 
-        $token_url = urlencode($token);
+        // $token_url = urlencode($token);
         // Helpers::dd($token_url);
         // $decoded = urldecode($token_url); 
 
@@ -51,7 +52,7 @@ class ValidUserAction extends Action
         $newdata =$date->format("Y-m-d H:i:s");
         
         $insert = new CreateRepository($this->sql);
-        $insert->createResetSenha($newdata,$email,$token);
+        $insert->createResetSenha($newdata,$email,$token_url);
         // var_dump($date);
      
 

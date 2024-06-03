@@ -12,7 +12,8 @@ class ValidTokenEmailAction extends Action
 
     public function action(): response 
     {   
-        $token = $_GET['token'] ?? null ; 
+        // $token = $_GET['token'] ?? null ; 
+        $token = $this->args['token'];
         // Helpers::dd($token);
         $email = $_GET['email'] ?? null ; 
         if(!isset($token)) { 
@@ -34,7 +35,7 @@ class ValidTokenEmailAction extends Action
         // Helpers::dd($newnow);
         // Helpers::dd($tokenbd[0]['date']);
 
-
+        
         if($newnow > $tokenbd[0]['date']){
             
             return $this->response->withHeader("location","/")->withStatus(302);
@@ -52,8 +53,8 @@ class ValidTokenEmailAction extends Action
         // }
 
            
-        $token_url = urlencode($token);
-        
-        return $this->response->withHeader("location","/registrar_novasenha/$token_url")->withStatus(307);
+        $token_url = rawurlencode($token);
+        // Helpers::dd($token_url);
+        return $this->response->withHeader("location","/registrar_novasenha/$token")->withStatus(307);
     }
 }

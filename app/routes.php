@@ -66,14 +66,14 @@ return function (App $app) {
         ]);
     });
     $app->post('/validar_usuario',ValidUserAction::class);
-    $app->get('/validar_tokenuser',ValidTokenEmailAction::class);
+    $app->get('/validar_tokenuser/{token}',ValidTokenEmailAction::class);
     $app->get('/registrar_novasenha/{token}',function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
-        // $param1 = $args['token'];
-        // Helpers::dd($param1);;
+        $param1 = $args['token'];
+        // Helpers::dd($param1);
         // $param2 = $args['email'];
         return $view->render($response, 'newsenha.html', [
-            // 'token' => $param1,
+            'token' => $param1,
             // 'email' => $param2
         ]);
     });
