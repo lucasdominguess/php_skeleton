@@ -13,10 +13,11 @@ use DateTime;
 use App\classes\Email;
 use voku\helper\AntiXSS;
 use App\Application\Actions\Action;
+use App\Infrastructure\Helpers;
 use Psr\Http\Message\ResponseInterface as response;
 use App\Infrastructure\Persistence\User\ReadRepository;
 
-class RecuperarSenhaAction extends Action 
+class ValidUserAction extends Action 
 {
     public function action(): response 
     {   
@@ -37,9 +38,14 @@ class RecuperarSenhaAction extends Action
             $msg = ['status'=> 'fail', 'msg'=>'serviço indisponivel'];
             return $this->respondWithData($msg);
         }
-
+        
         $token = password_hash($email, PASSWORD_DEFAULT);
 
+        $token_url = urlencode($token);
+        // Helpers::dd($token_url);
+        // $decoded = urldecode($token_url); 
+
+       
         $date = new DateTime(); 
         $date->modify("+10 minutes");
         $newdata =$date->format("Y-m-d H:i:s");
@@ -52,7 +58,7 @@ class RecuperarSenhaAction extends Action
         try {
             
             $e = new Email;
-            $e->mandar_email($email,$token);
+            $e->mandar_email($email,$token_url);
             $msg = ['status'=> 'ok', 'msg'=>'Email enviado com sucesso!'];
             return $this->respondWithData($msg);
         } catch (\Throwable $th) {

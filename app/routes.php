@@ -10,6 +10,7 @@ use Slim\Views\Twig;
 
 
 
+use App\Infrastructure\Helpers;
 use App\Application\Middleware\UserMiddleware;
 use App\Application\Middleware\AdminMiddleware;
 use App\Application\Middleware\TokenMiddleware;
@@ -21,15 +22,16 @@ use App\Application\Actions\User\controlers\ListarAction;
 use App\Application\Actions\User\controlers\UploadAction;
 use App\Application\Actions\User\controlers\ExcluirAction;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
-use App\Application\Actions\User\controlers\DownloadAction;
 
-use App\Application\Actions\User\controlers\RecSenhaAction;
+use App\Application\Actions\User\controlers\DownloadAction;
 use App\Application\Actions\User\controlers\CadastrarAction;
+use App\Application\Actions\User\controlers\ValidPassAction;
+use App\Application\Actions\User\controlers\ValidUserAction;
+
 use App\Application\Actions\User\controlers\SairSessaoAction;
 use App\Application\Actions\User\controlers\ListarCardsAction;
-use App\Application\Actions\User\controlers\ValidarSenhaAction;
 use App\Application\Actions\User\controlers\ListarArquivosAction;
-use App\Application\Actions\User\controlers\RecuperarSenhaAction;
+use App\Application\Actions\User\controlers\ValidTokenEmailAction;
 
 return function (App $app) {
 
@@ -57,21 +59,25 @@ return function (App $app) {
           
         ]);
     })->setName('login');
-    $app->get('/trocar_senha', function ($request, $response, $args) {
+    $app->get('/solicitar_trocar_senha', function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
         return $view->render($response, 'trocarsenha.html', [
           
         ]);
     });
-    $app->post('/trocarsenha', RecuperarSenhaAction::class);
-    $app->get('/recsenha',RecSenhaAction::class);
-    $app->get('/recuperar_senha',function ($request, $response, $args) {
+    $app->post('/validar_usuario',ValidUserAction::class);
+    $app->get('/validar_tokenuser',ValidTokenEmailAction::class);
+    $app->get('/registrar_novasenha/{token}',function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
+        // $param1 = $args['token'];
+        // Helpers::dd($param1);;
+        // $param2 = $args['email'];
         return $view->render($response, 'newsenha.html', [
-          
+            // 'token' => $param1,
+            // 'email' => $param2
         ]);
     });
-    $app->post("/validarnewsenha",ValidarSenhaAction::class);
+    $app->post("/validar_novasenha",ValidPassAction::class);
     
     $app->get('/sender', HandleSenderAction::class);
 

@@ -14,12 +14,12 @@ use PHPMailer\PHPMailer\SMTP;
 class Email 
 { 
 
-public function mandar_email($email,$token)
+public function mandar_email($email,$token_url)
     {
         global $env ; 
 
         $mail = new PHPMailer(true);
-        $login = $env['login'];
+        $username = $env['username'];
         $senha = $env['senha'];
         $smtp = $env['smtp'];
         $port = $env['port'];
@@ -28,18 +28,18 @@ public function mandar_email($email,$token)
             //Server settings
             $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
             $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host       = $smtp;                     //Set the SMTP server to send through
-            $mail->SMTPAuth   = false;                                   //Enable SMTP authentication
-            $mail->Username   = $login;                     //SMTP username
+            $mail->Host       = $smtp ; //'sandbox.smtp.mailtrap.io'; //$smtp;                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;  //prodam = false                                 //Enable SMTP authentication
+            $mail->Username   =  $username; //'f73cef0376c9d3';  //;                     //SMTP username
             $mail->Password   = $senha;                               //SMTP password
             $mail->SMTPSecure = false;            //Enable implicit TLS encryption
             $mail->SMTPAutoTLS = false;
-            $mail->Port       = $port;                                    //TCP port to connect to; use 587 if you have set SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS
+            $mail->Port  =    $port;                                    //TCP port to connect to; use 587 if you have set SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS
         
             //Recipients
             $mail->setFrom($sender, 'teste');
             // $mail->addAddress('lucasdomingues@prefeitura.sp.gov.br', 'Joe User');     //Add a recipient
-            $mail->addAddress('lucasdomingues25.dev@gmail.com', 'Joe User');     //Add a recipient
+            $mail->addAddress('lucasdomingues25.dev@gmail.com', 'Admin Lucas');     //Add a recipient
             /*
              *$mail->addAddress('ellen@example.com');               //Name is optional
             $mail->addReplyTo('info@example.com', 'Information');
@@ -53,9 +53,10 @@ public function mandar_email($email,$token)
         
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Alteração de senha Solicitada';
-            $mail->Body    = "para seguir com a alteração click no link : <a href='http://localhost:9000/recsenha?token=$token&email=$email'>alterar Senha</a>";
+            $mail->Subject = 'Alteracao de senha Solicitada';
+            $mail->Body    = "para seguir com a alteracao click no link : <a href='http://localhost:9000/validar_tokenuser?token=$token_url&email=$email'>alterar Senha</a>";
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            $mail->CharSet ='UTF-8';
         
             $mail->send();
             echo 'Message has been sent';

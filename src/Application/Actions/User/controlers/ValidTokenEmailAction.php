@@ -1,15 +1,19 @@
 <?php
 namespace App\Application\Actions\User\controlers;
 
+use DateTime;
 use App\Application\Actions\Action;
-use App\Infrastructure\Persistence\User\ReadRepository;
+use App\Infrastructure\Helpers;
 use Psr\Http\Message\ResponseInterface as response;
-class RecSenhaAction extends Action  
+use App\Infrastructure\Persistence\User\ReadRepository;
+
+class ValidTokenEmailAction extends Action  
 { 
 
     public function action(): response 
     {   
         $token = $_GET['token'] ?? null ; 
+        // Helpers::dd($token);
         $email = $_GET['email'] ?? null ; 
         if(!isset($token)) { 
             $msg = ['status'=> 'fail', 'msg'=>'token invalido!'];
@@ -18,13 +22,20 @@ class RecSenhaAction extends Action
         $user = new ReadRepository($this->sql); 
         try {
             $tokenbd =  $user->resetFindAllEmail($token);
-            //code...
+            // Helpers::dd($tokenbd);
+            //cohel...
         } catch (\Throwable $th) {
             $msg = ['status'=> 'fail', 'msg'=>'token invalido!'];
             return $this->response->withHeader("location","/")->withStatus(302);
-            
+        
         }
-        if(!$GLOBALS['datefullForm'] > $tokenbd[0]['date']){
+        $now = new DateTime();
+        $newnow =$now->format("Y-m-d H:i:s");
+        // Helpers::dd($newnow);
+        // Helpers::dd($tokenbd[0]['date']);
+
+
+        if($newnow > $tokenbd[0]['date']){
             
             return $this->response->withHeader("location","/")->withStatus(302);
         } 
@@ -40,9 +51,9 @@ class RecSenhaAction extends Action
         //     return $this->respondWithData($msg);
         // }
 
-
-
+           
+        $token_url = urlencode($token);
         
-        return $this->response->withHeader("location","/recuperar_senha")->withStatus(307);
+        return $this->response->withHeader("location","/registrar_novasenha/$token_url")->withStatus(307);
     }
 }

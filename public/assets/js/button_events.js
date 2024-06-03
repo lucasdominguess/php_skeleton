@@ -64,7 +64,7 @@ $("#btn_arquivo").click( function () {
 $("#btn_env_altsenha").click(function (){ 
   let v_form = new FormData(document.getElementById('form_alt_senha')) 
 
-  requestPOST('/trocarsenha',v_form)
+  requestPOST('/validar_usuario',v_form)
 }); 
 $("#btn_canc_altsenha").click(function () { 
   window.location.href='/'
@@ -72,7 +72,7 @@ $("#btn_canc_altsenha").click(function () {
 $("#btn_env_newsenha").click(function (){ 
   let v_form = new FormData(document.getElementById('form_new_senha')) 
 
-  requestPOST('/validarnewsenha',v_form)
+  requestPOST('/validar_novasenha',v_form)
 }); 
 // $("#btn_dowload_01").click( function () { 
 //   requestGETDownload('/admin/download?filename=vendas.png')
