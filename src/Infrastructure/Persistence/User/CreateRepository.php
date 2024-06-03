@@ -31,5 +31,10 @@ class CreateRepository
         $this->db->setParms($stmt,$var);
         $stmt->execute();
     }
-
+    public function updateSenha($email,$value){ 
+        $stmt=$this->db->prepare(" UPDATE usuarios SET senha = :value where email = :email ");
+        $var=[':email'=>$email,':value' => $value];
+        $this->db->setParms($stmt,$var);
+        $stmt->execute();
+    }
 }

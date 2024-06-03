@@ -1,21 +1,20 @@
 <?php
 namespace App\Application\Actions\User\controlers;
 
+use DateTime;
 use voku\helper\AntiXSS; 
 use App\Infrastructure\Helpers;
 use App\Application\Actions\Action;
+use App\Infrastructure\Persistence\User\CreateRepository;
 use Psr\Http\Message\ResponseInterface as response ;
 use App\Infrastructure\Persistence\User\ReadRepository;
 
 class ValidPassAction extends Action 
 {
     public function action(): Response
-    {   $xss = new AntiXSS();
-
-        // $get = $_GET['token']; 
-        
-        // Helpers::dd($get);
-
+    {   
+        $xss = new AntiXSS();
+ 
         $senha1 = $xss->xss_clean($_POST['senha1']) ?? null ; 
         $senha2 = $xss->xss_clean($_POST['senha2']) ?? null ; 
         $token = $xss->xss_clean($_POST['token']) ?? null ; 
@@ -33,20 +32,33 @@ class ValidPassAction extends Action
         if ($token == null) {
             return $this->response->withHeader("location","/")->withStatus(302);
         }
-        // $user = new ReadRepository($this->sql); 
         
-        // $tokenbd =  $user->resetFindAllEmail($token);
+        $user = new ReadRepository($this->sql); 
+        
+        $tokenbd =  $user->resetFindAllEmail($token);
 
+        if(!$tokenbd){
 
-        $msg = ['status'=> 'ok', 'msg'=>"$token "];
-        return $this->respondWithData($msg); 
-            // Helpers::dd($tokenbd);
-            //cohel...
-    //     } catch (\Throwable $th) {
-    //         $msg = ['status'=> 'fail', 'msg'=>'token invalido!'];
-    //         // return $this->response->withHeader("location","/")->withStatus(302);
-    //         return $this->respondWithData($msg);
-    // }
+            $msg = ['status'=> 'fail', 'msg'=>"Token Invalido!",'location'=>'/'];
+            return $this->respondWithData($msg);
+          
+        }
+        $now = new DateTime();
+        $newnow =$now->format("Y-m-d H:i:s");
+            
+        if($newnow > $tokenbd[0]['date']){
+            $msg = ['status'=> 'fail', 'msg'=>"Token Expirou!",'location'=>'/'];
+            // return $this->response->withHeader("location","/")->withStatus(302);
+        } 
+        
+        $altsenha = new CreateRepository($this->sql);
+        $senhaCodif = password_hash($senha1, PASSWORD_DEFAULT); 
+        $altsenha->updateSenha($tokenbd[0]['email'],$senhaCodif);
+
+        $msg = ['status'=> 'ok', 'msg'=>"Senha alterada com Sucesso",'location'=>'/'];
+        return $this->respondWithData($msg);
+        
+    
         }
         
 

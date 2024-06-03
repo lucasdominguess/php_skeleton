@@ -15,7 +15,7 @@ class ValidTokenEmailAction extends Action
         // $token = $_GET['token'] ?? null ; 
         $token = $this->args['token'];
         // Helpers::dd($token);
-        $email = $_GET['email'] ?? null ; 
+        
         if(!isset($token)) { 
             $msg = ['status'=> 'fail', 'msg'=>'token invalido!'];
             return $this->response->withHeader("location","/")->withStatus(307);
@@ -32,29 +32,12 @@ class ValidTokenEmailAction extends Action
         }
         $now = new DateTime();
         $newnow =$now->format("Y-m-d H:i:s");
-        // Helpers::dd($newnow);
-        // Helpers::dd($tokenbd[0]['date']);
-
-        
+            
         if($newnow > $tokenbd[0]['date']){
             
             return $this->response->withHeader("location","/")->withStatus(302);
         } 
-        // var_dump($token); 
-        // var_dump($email); 
-        // var_dump($user); 
-        
-        // $tokenbd[0]['date'];
-  
-
-        // if(!isset($user)) { 
-        //     $msg = ['status'=> 'fail', 'msg'=>'token invalido!'];
-        //     return $this->respondWithData($msg);
-        // }
-
-           
-        $token_url = rawurlencode($token);
-        // Helpers::dd($token_url);
+       
         return $this->response->withHeader("location","/registrar_novasenha/$token")->withStatus(307);
     }
 }

@@ -40,7 +40,7 @@ class ValidUserAction extends Action
         }
         
         // $token = password_hash($email, PASSWORD_DEFAULT);
-        $token_url = md5(uniqid());
+        $token = md5(uniqid());
 
         // $token_url = urlencode($token);
         // Helpers::dd($token_url);
@@ -52,14 +52,14 @@ class ValidUserAction extends Action
         $newdata =$date->format("Y-m-d H:i:s");
         
         $insert = new CreateRepository($this->sql);
-        $insert->createResetSenha($newdata,$email,$token_url);
+        $insert->createResetSenha($newdata,$email,$token);
         // var_dump($date);
      
 
         try {
             
             $e = new Email;
-            $e->mandar_email($email,$token_url);
+            $e->mandar_email($email,$token);
             $msg = ['status'=> 'ok', 'msg'=>'Email enviado com sucesso!'];
             return $this->respondWithData($msg);
         } catch (\Throwable $th) {
