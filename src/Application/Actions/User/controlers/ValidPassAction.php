@@ -18,13 +18,21 @@ class ValidPassAction extends Action
         $senha1 = $xss->xss_clean($_POST['senha1']) ?? null ; 
         $senha2 = $xss->xss_clean($_POST['senha2']) ?? null ; 
         $token = $xss->xss_clean($_POST['token']) ?? null ; 
-
+        $pattern = '/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#_])[0-9a-zA-Z$*&@#_]{8,19}/';
+        // $data = $this->request->getParsedBody();
+   
         
         if($senha1 == null || $senha2 == null  ){ 
             
             $msg = ['status'=> 'fail', 'msg'=>'os campos senhas nao podem estar vazios'];
             return $this->respondWithData($msg); 
         }
+        if (!preg_match($pattern,($senha1||$senha2))){ 
+            $msg = ['status'=> 'fail', 'msg'=>'A senha nao atende o padrao especificado'];
+            return $this->respondWithData($msg); 
+        }
+
+
         if ($senha1 != $senha2){ 
             $msg = ['status'=> 'fail', 'msg'=>'As senhas nao são iguais'];
             return $this->respondWithData($msg); 

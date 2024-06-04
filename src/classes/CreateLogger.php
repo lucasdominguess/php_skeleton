@@ -2,6 +2,8 @@
 namespace App\classes;
 
 use App\Domain\User\User;
+use Monolog\Handler\NativeMailerHandler;
+use Monolog\Handler\SendGridHandler;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\TelegramBotHandler;
@@ -44,6 +46,19 @@ class CreateLogger {
     
 
 } 
+    // public function logEmail () { 
+    //     $logger = new Logger('LogEmail'); 
+    //     $logger->setHandlers( new SendGridHandler(
+            
+    //          'tFDsDNNwTTSrcs53EploOQ',
+    //         // 'US80e513d3d8481861521c14afc98b6d14',
+    //         // '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',
+    //         from: 'lucasdomingues25.dev@gmail.com' ,
+    //         to: "lucasdomingues25.dev@gmail.com" ,
+    //         subject: "ERRO LOGGS" , 
+    //         level: Level::Warning
+    //     ));
+    // }
  
 
 }
