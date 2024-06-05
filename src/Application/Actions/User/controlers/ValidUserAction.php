@@ -13,6 +13,7 @@ use DateTime;
 use App\classes\Email;
 use voku\helper\AntiXSS;
 use App\Application\Actions\Action;
+use App\classes\SendEmail;
 use App\Infrastructure\Helpers;
 use Psr\Http\Message\ResponseInterface as response;
 use App\Infrastructure\Persistence\User\ReadRepository;
@@ -56,15 +57,24 @@ class ValidUserAction extends Action
         // var_dump($date);
      
 
-        try {
+        // try {
             
-            $e = new Email;
-            $e->mandar_email($email,$token);
-            $msg = ['status'=> 'ok', 'msg'=>'Email enviado com sucesso!'];
-            return $this->respondWithData($msg);
+        //     $e = new Email;
+        //     $e->mandar_email($email,$token);
+        //     $msg = ['status'=> 'ok', 'msg'=>'Email enviado com sucesso!'];
+        //     return $this->respondWithData($msg);
+        // } catch (\Throwable $th) {
+        //     $msg = ['status'=> 'fail', 'msg'=>'Não foi possivel enviar email!'];
+        //     return $this->respondWithData($msg);
+        // }
+        try {
+            // $sendEmail = new SendEmail();
+            // $sendEmail->fila("enviar_email",$email);
+
+            $this->redisConn->rPush('enviar_email',$email);
         } catch (\Throwable $th) {
             $msg = ['status'=> 'fail', 'msg'=>'Não foi possivel enviar email!'];
-            return $this->respondWithData($msg);
+                return $this->respondWithData($msg);
         }
 
 

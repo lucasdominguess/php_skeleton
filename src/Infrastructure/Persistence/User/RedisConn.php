@@ -24,7 +24,8 @@ class RedisConn extends Redis
 
 
 
-// $redisUser = new RedisConn();
+$redisUser = new RedisConn();
+$redisUser->lPush('enviar_email','newe_mail@gmail');
 // $redisUser->hset('user','nome','rodrigo o bruxo do front-end');
 
 // $redisUser->hset('animal','raça','dog caramelo');
