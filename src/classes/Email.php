@@ -17,14 +17,22 @@ class Email
 public function mandar_email($email,$token)
     {
         global $env ; 
-
         $mail = new PHPMailer(true);
-        $username = 'admin'; // $env['username'];
-        $senha =   // $env['senha'];
-        $smtp = "smtpcorp.prodam";//$env['smtp'];
+
+        // $username = 'admin'; // $env['username'];
+        // $senha =   // $env['senha'];
+        // $smtp = "smtpcorp.prodam";//$env['smtp'];
+        // $port = 25 ;//$env['port'];
+        // $sender ='smsdtic@prefeitura.sp.gov.br' ;// $env['sender'];
+        // $auth = false ;// $env['auth'];
+
+        $username = 'f73cef0376c9d3'; // $env['username'];
+        $senha =  "12228ec13a8660"; // $env['senha'];
+        $smtp = "sandbox.smtp.mailtrap.io";//$env['smtp'];
         $port = 25 ;//$env['port'];
-        $sender ='smsdtic@prefeitura.sp.gov.br' ;// $env['sender'];
-        $auth = false ;// $env['auth'];
+        $sender ='lukasbreaking@gmail.com' ;// $env['sender'];
+        $auth = true ;// $env['auth'];
+        
         try {
             //Server settings
             $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
