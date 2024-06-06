@@ -7,9 +7,9 @@ use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
 
-// require '../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
-// require '../../vendor/phpmailer/phpmailer/src/SMTP.php';
-// require '../../vendor/phpmailer/phpmailer/src/Exception.php';
+require '../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require '../../vendor/phpmailer/phpmailer/src/SMTP.php';
+require '../../vendor/phpmailer/phpmailer/src/Exception.php';
  
 class Email 
 { 
@@ -19,12 +19,12 @@ public function mandar_email($email,$token)
         global $env ; 
 
         $mail = new PHPMailer(true);
-        $username = $env['username'];
-        $senha = $env['senha'];
-        $smtp = $env['smtp'];
-        $port = $env['port'];
-        $sender = $env['sender'];
-        $auth = $env['auth'];
+        $username = 'admin'; // $env['username'];
+        $senha =   // $env['senha'];
+        $smtp = "smtpcorp.prodam";//$env['smtp'];
+        $port = 25 ;//$env['port'];
+        $sender ='smsdtic@prefeitura.sp.gov.br' ;// $env['sender'];
+        $auth = false ;// $env['auth'];
         try {
             //Server settings
             $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
@@ -54,7 +54,7 @@ public function mandar_email($email,$token)
         
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Alteração de senha Solicitada';
+            $mail->Subject = 'Thiago vou te chama teams';
             $mail->Body    = " <h3> Uma alteração de senha foi solicitada para este email caso nao seja vc desconsidere esse email <br> 
              para seguir com a alteracao click no link :  <a href='http://localhost:9000/validar_tokenuser/$token'>alterar Senha</a></h3> ";
             // $mail->Body    = "para seguir com a alteracao click no link : <a href='http://localhost:9000/registrar_novasenha/token=$token_url'>alterar Senha</a> ";

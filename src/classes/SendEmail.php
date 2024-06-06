@@ -1,20 +1,18 @@
 <?php
-namespace App\classes;
 
+
+require "classes/Email_Service.php";
 use App\Infrastructure\Persistence\User\RedisConn;
 
+// use App\classes\Email_Service;
+
+function redisService() { 
+
+    $service = new Email_Service();
+    $service->Adcionar_fila("enviar_email","func_email_service");
+
+}
+
+redisService();
 
 
-
-// class SendEmail {
-
-//     public function fila($key,$value){ 
-//         $s = new RedisConn();
-
-//         $s->lPush($key ,$value); 
-//     }
-// }
-
-
-$r = new RedisConn(); 
-$r->lPush('enviar_email','teste@gmail');

@@ -1,14 +1,15 @@
 <?php
 namespace App\Infrastructure\Persistence\User;
 
+use App\classes\Email_Service;
 use Redis;
 
 
 
 class RedisConn extends Redis
 {      
-    private string $host;
-    private int $port;
+    protected string $host;
+    protected int $port;
     function __construct()
     {  
          
@@ -20,12 +21,12 @@ class RedisConn extends Redis
     }
 
     
+    
 }
 
 
-
-$redisUser = new RedisConn();
-$redisUser->lPush('enviar_email','newe_mail@gmail');
+// $redisUser = new RedisConn();
+// $redisUser->lPush('enviar_email','redisConn_@gmail');
 // $redisUser->hset('user','nome','rodrigo o bruxo do front-end');
 
 // $redisUser->hset('animal','raça','dog caramelo');

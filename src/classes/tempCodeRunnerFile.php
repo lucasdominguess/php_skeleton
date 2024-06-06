@@ -1,1 +1,2 @@
 <?php
+if (empty($r)) {

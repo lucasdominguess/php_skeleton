@@ -8,6 +8,7 @@ namespace App\Application\Actions\User\controlers;
 
 // use App\classes\Email;
 
+use App\classes\Email_Service;
 use App\Infrastructure\Persistence\User\CreateRepository;
 use DateTime;
 use App\classes\Email;
@@ -17,6 +18,8 @@ use App\classes\SendEmail;
 use App\Infrastructure\Helpers;
 use Psr\Http\Message\ResponseInterface as response;
 use App\Infrastructure\Persistence\User\ReadRepository;
+
+use function App\classes\verificarFila;
 
 class ValidUserAction extends Action 
 {
@@ -68,9 +71,10 @@ class ValidUserAction extends Action
         //     return $this->respondWithData($msg);
         // }
         try {
-            // $sendEmail = new SendEmail();
-            // $sendEmail->fila("enviar_email",$email);
-
+            // $sendEmail = new  Email_Service();
+            // $sendEmail->Adcionar_fila("enviar_email","Send_Email_ $newdata @gmail");
+            // $sendEmail->verificarFila();
+            // verificarFila();
             $this->redisConn->rPush('enviar_email',$email);
         } catch (\Throwable $th) {
             $msg = ['status'=> 'fail', 'msg'=>'Não foi possivel enviar email!'];
