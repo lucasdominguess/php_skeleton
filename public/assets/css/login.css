@@ -7,7 +7,9 @@
 body{
     /* background-image: url(/assets/img/3525926.jpg); */
 }
-
+.body_recsenha{ 
+    background-image: url("/assets/img/back2.jpg");
+}
 
 @keyframes AnimacaoGradient {
     0%{background-position:100%}
