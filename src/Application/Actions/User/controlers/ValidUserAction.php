@@ -58,24 +58,17 @@ class ValidUserAction extends Action
         $insert = new CreateRepository($this->sql);
         $insert->createResetSenha($newdata,$email,$token);
         // var_dump($date);
-     
-
-        // try {
-            
-        //     $e = new Email;
-        //     $e->mandar_email($email,$token);
-        //     $msg = ['status'=> 'ok', 'msg'=>'Email enviado com sucesso!'];
-        //     return $this->respondWithData($msg);
-        // } catch (\Throwable $th) {
-        //     $msg = ['status'=> 'fail', 'msg'=>'Não foi possivel enviar email!'];
-        //     return $this->respondWithData($msg);
+        
+       
+        $dados = json_encode(['email'=>$email, 'token'=>$token]);
+   
         // }
         try {
             // $sendEmail = new  Email_Service();
-            // $sendEmail->Adcionar_fila("enviar_email","Send_Email_ $newdata @gmail");
-            // $sendEmail->verificarFila();
-            // verificarFila();
-            $this->redisConn->rPush('enviar_email',$email);
+          
+            $this->redisConn->rPush('enviar_email',$dados);
+            $msg = ['status'=> 'ok', 'msg'=>'Email enviado!'];
+            return $this->respondWithData($msg);
         } catch (\Throwable $th) {
             $msg = ['status'=> 'fail', 'msg'=>'Não foi possivel enviar email!'];
                 return $this->respondWithData($msg);

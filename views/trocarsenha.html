@@ -9,8 +9,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Madimi+One&family=Poppins:wght@100;400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="assets/css/login.css">
+<link rel="stylesheet" href="/assets/css/rec_acesso.css">
 <link rel="stylesheet" href="/assets/css/style.css">
-<title>login</title>
+<title>Recuperar Acesso</title>
 {% endblock %}
 
 {% block body %}
@@ -24,9 +25,10 @@
     <!-- Sessao login -->
     <section id="sessao" class="container-fluid " >
 
-         <!-- <div id="div-img"> 
-            <img id="img" class="opacity-75" src="assets/img/img2.svg" alt="">
-            </div>  -->
+         <div id="div-img"> 
+            <img id="img_recSenha" class="opacity-75" src="assets/img/img_recSenha2.svg" alt="">
+         </div> 
+
             <form id="form_alt_senha" class="">
                 <div class="div1 form-control padding-20" style="padding: 35px;">
                     <div class="mb-3 " >
@@ -53,41 +55,7 @@
                 </div>
               </form>
     </section>
-    <section id="sessao_modal" class="">
 
-        <div class="modal bg-transp" id="myModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-
-
-                    <div class="modal-header">
-                        <!-- <h4 class="modal-title">Insira os novos dados de edição</h4> -->
-                        <button id="btn_close" type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-
-
-                    <div class="modal-body">
-
-                        <form id="form_cad" class="">
-
-                          
-                            <h3 id="title_h3">Cadastro</h3>
-                            <label for="rec_email"><b>Email:</b></label><br>
-                            <input class="input" type="email" id="rec_email" name="rec_email" placeholder="Digite seu email"><br><br>
-                         
-                        </form>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button id="fechar" type="button" class="btn btn-danger">Fechar</button>
-                        <button id="btn_enviarCad" type="button" class="btn btn-success">Enviar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    </section>
     {% endblock %}
 
 

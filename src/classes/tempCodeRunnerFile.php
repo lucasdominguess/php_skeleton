@@ -1,2 +1,0 @@
-<?php
-if (empty($r)) {

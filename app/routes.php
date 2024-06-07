@@ -109,15 +109,14 @@ return function (App $app) {
         // ->add(ValidatePostMiddleware::class); //efetuar login 
         $app->post('/sair',SairSessaoAction::class); //sair da sessao
         $app->get('/listar',ListarAction::class); //listar dados para tabela
-        $app->post('/cadastrar',CadastrarAction::class);
-        // ->add(new TokenMiddleware()); //efetuar cadastro
+        $app->post('/cadastrar',CadastrarAction::class)->add(new TokenMiddleware()); 
         
         
        
 
         $app->get('/invalidtoken', function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'index.html', [
+        return $view->render($response, '404.html', [
           
         ]);
     })->setName('tokenInvalido');

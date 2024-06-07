@@ -1,0 +1,18 @@
+
+#div-img{
+    /* background-color: red; */
+
+    display: flex;
+    justify-content: end;
+    padding-right: 380px;
+    height:55px;
+    padding-left:15px;
+    z-index: 0;
+    position: relative;
+}
+
+#img_recSenha{
+    width: 350px;
+    position: absolute;
+ 
+}

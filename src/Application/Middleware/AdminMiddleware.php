@@ -23,7 +23,7 @@ class AdminMiddleware
         if (!isset($_SESSION[User::USER_NIVEL]) || $_SESSION[User::USER_NIVEL] != 5  ) {
             $response = new Response();
 
-            return $response->withHeader('Location', '/')->withStatus(302);
+            return $response->withHeader('Location', '/invalidtoken')->withStatus(302);
         }
      
         $response = $handler->handle($request);

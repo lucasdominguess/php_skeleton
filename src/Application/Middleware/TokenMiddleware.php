@@ -21,14 +21,14 @@ class TokenMiddleware {
         global $env;
         $key = $env['secretkey'];
         $time =$env['exp_token'];
-        $email = $_SESSION[User::USER_EMAIL];
+        $email = $_SESSION[User::USER_EMAIL] ?? null ;
         $cookie = $_COOKIE['token'] ?? null ;
         
         // verificando se o token existe
-        if(!isset($cookie)){
+        if(!isset($cookie) || !isset($email)){
             session_unset();
             session_destroy();
-            return $response->withHeader('Location', '/')->withStatus(302); 
+            return $response->withHeader('Location', '/invalidtoken')->withStatus(302); 
         }
     
 

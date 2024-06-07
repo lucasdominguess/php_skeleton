@@ -14,8 +14,10 @@ class CreateLogger {
     
    
     public function logger ($dirname ,$msg, $modo = 'info', array|string $extra = null){
-   
-        $date = $GLOBALS['days'];
+        $now = new \DateTimeZone( 'America/Sao_Paulo');
+        $now_form =(new \DateTime('now',$now))->format('d-m-Y');
+        
+        $date = $GLOBALS['days'] ?? $now_form ;
         $logger = new Logger($dirname);
 
         $logger->pushProcessor(function ($record) use ($extra) { 
