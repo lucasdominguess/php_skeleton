@@ -99,13 +99,14 @@ return function (App $app) {
         
     //ROTAS PUBLICAS
         $app->post('/logar',LogarAction::class);
-        $app->get('/listarcards',ListarCardsAction::class);
+        
+        $app->get('/listarcards',ListarCardsAction::class)->add(new TokenMiddleware()); ;
         $app->get('/listar_cards', function ($request, $response, $args) {
             $view = Twig::fromRequest($request);
             return $view->render($response, 'cards_users.html', [
               
             ]);
-        });
+        })->add(new TokenMiddleware()); ;
         // ->add(ValidatePostMiddleware::class); //efetuar login 
         $app->post('/sair',SairSessaoAction::class); //sair da sessao
         $app->get('/listar',ListarAction::class); //listar dados para tabela

@@ -6,13 +6,19 @@ use ZipArchive;
 
 use App\Application\files\Upload;
 use App\Application\Actions\Action;
+use App\Infrastructure\Helpers;
 use Psr\Http\Message\ResponseInterface;
 
 class UploadAction extends Action { 
 
     protected function action(): ResponseInterface
-    {
-   
+    {   
+
+      $file = $_FILES['file']; 
+      $ext2 = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+    
+     Helpers::dd($ext2);
+      
       if($_FILES['file']['error'] == 4 ) {
         $msg = ['status' => 'fail', 'msg' => 'Nenhum Arquivo foi enviado!'];
         return $this->respondWithData($msg);
@@ -28,26 +34,29 @@ class UploadAction extends Action {
 
       $file = new Upload($_FILES['file']);
 
+      $file->upload(__DIR__ ."./../../../files/arquivos");
 
-        if(in_array($ext, ['png','jpg','gif'])){
-          // $pastaArquivos = __DIR__ ."./../../../files/arquivos";
-          // $pastaImg = __DIR__ ."./../../../files/arquivos/imagens"; 
-            // chmod(__DIR__ ."./../../../files/arquivos",0755);
-            // mkdir($pastaArquivos,0755);
-          
-          $file->upload(__DIR__ ."./../../../files/arquivos/imagens");
-
-        }
-        if(in_array($ext, ['pdf','xls'])){
-          $file->upload(__DIR__ ."./../../../files/arquivos/planilhas");
-        }
-        if(in_array($ext, ['csv','txt',''])){
-          $file->upload(__DIR__ ."./../../../files/arquivos");
-        }
 
       $msg = ['status' => 'ok', 'msg' => 'Arquivo enviado com sucesso!'];
-      return $this->respondWithData($msg);
+      return $this->respondWithData($file);
 
+      // Fazer upload em pastas de acordo com a extensao do arquivo 
+        // if(in_array($ext, ['png','jpg','gif'])){
+        //   // $pastaArquivos = __DIR__ ."./../../../files/arquivos";  
+        //   // $pastaImg = __DIR__ ."./../../../files/arquivos/imagens"; 
+        //     // chmod(__DIR__ ."./../../../files/arquivos",0755);
+        //     // mkdir($pastaArquivos,0755);
+          
+        //   $file->upload(__DIR__ ."./../../../files/arquivos/imagens");
+
+        // }
+        // if(in_array($ext, ['pdf','xls'])){
+          //   $file->upload(__DIR__ ."./../../../files/arquivos/planilhas");
+          // }
+          // if(in_array($ext, ['csv','txt',''])){
+            //   $file->upload(__DIR__ ."./../../../files/arquivos");
+        // }    
+  
 
 
 

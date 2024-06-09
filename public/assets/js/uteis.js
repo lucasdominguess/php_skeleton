@@ -97,7 +97,7 @@ function arrumar(obj){
 // buscando cards de usuarios pelo input 
 function montar(obj)
 {
-    console.log(obj)
+    // console.log(obj)
     for (let i = 0; i < obj.length; i++) {
         const el = obj[i];
         let li = document.createElement('li');

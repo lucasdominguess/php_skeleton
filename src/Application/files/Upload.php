@@ -9,7 +9,7 @@ class Upload {
     private $extension; 
     private $tmpName; 
     private $error;
-    private $size ; 
+    private $size ;  
     private $type ; 
     
     public function __construct($file){
