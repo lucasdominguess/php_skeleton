@@ -1,6 +1,9 @@
 <?php
 namespace App\Infrastructure\Persistence\User;
 
+use App\Infrastructure\Helpers;
+use InvalidArgumentException;
+
 
 
 class CreateRepository 
@@ -32,9 +35,60 @@ class CreateRepository
         $stmt->execute();
     }
     public function updateSenha($email,$value){ 
-        $stmt=$this->db->prepare(" UPDATE usuarios SET senha = :value where email = :email ");
+        $stmt=$this->db->prepare("UPDATE usuarios SET senha = :value where email = :email ");
         $var=[':email'=>$email,':value' => $value];
         $this->db->setParms($stmt,$var);
         $stmt->execute();
     }
+    // public function createArquivos($id, $id_user, $create_time, $name, $type, $temp_name, $error, $size){
+    //     $stmt=$this->db->prepare("insert into arquivos(id,id_user,create_time,name,type,temp_name,error,size) values(:id,:id_user:,:create_time,:name,:type,:temp_name,:error,:size)");
+    //     $params = [
+    //         ':id' => $id,
+    //         ':id_user' => $id_user,
+    //         ':create_time' => $create_time,
+    //         ':name' => $name,
+    //         ':type' => $type,
+    //         ':temp_name' => $temp_name,
+    //         ':error' => $error,
+    //         ':size' => $size
+    //     ];
+    //     $this->db->setParms($stmt,$params);
+    //     $stmt->execute();
+    // }
+
+    public function createArquivos(array $data) {
+        // Verificar se o array de dados não está vazio
+        if (empty($data)) {
+            throw new InvalidArgumentException("Os dados não podem estar vazios");
+        }
+    
+        // Obter os nomes das colunas a partir das chaves do array
+        $columns = array_keys($data);
+    
+        // Criar os placeholders correspondentes
+        $placeholders = array_map(fn($col) => ':' . $col, $columns);
+        
+        // Helpers::dd($columns);
+        // Helpers::dd($placeholders);
+
+        // Construir a consulta SQL
+        $query = sprintf(
+            "INSERT INTO arquivos (%s) VALUES (%s)",
+            implode(', ', $columns),
+            implode(', ', $placeholders)
+        );
+        // Helpers::dd($query);
+
+        // Preparar a declaração
+        $stmt = $this->db->prepare($query);
+    
+        // Vincular os valores do array de dados
+        foreach ($data as $column => $value) {
+            $stmt->bindValue(':' . $column, $value);
+        }
+    
+        // Executar a declaração
+        $stmt->execute();
+    }
+    
 }

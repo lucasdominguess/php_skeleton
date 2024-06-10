@@ -97,4 +97,15 @@ class ReadRepository
         
         return $resultado;
     }
+    public function tableFindAll($id)
+    {
+        $stmt =$this->db->prepare("select * from arquivos where id_adm = :id");
+        // $stmt->bindValue(":table",$table);
+        // $stmt->bindValue(":column",$column);
+        $stmt->bindValue(":id",$id);
+        $stmt->execute();
+        $resultado=$stmt->fetchAll(\PDO::FETCH_ASSOC); 
+        
+        return $resultado;
+    }
 }

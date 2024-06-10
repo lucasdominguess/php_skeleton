@@ -1,7 +1,7 @@
 <?php 
 namespace App\Application\files;
 
-
+use App\Infrastructure\Helpers;
 
 class Upload { 
    
@@ -24,15 +24,26 @@ class Upload {
         $this->extension =  pathinfo($file['name'],PATHINFO_EXTENSION);
     }
     public function getBasename(){
+
+        /**
+         * retorna nome do arquivo com sua extensao 
+         */
         $extension = strlen($this->extension) ? '.' .$this->extension : '' ;
+        // Helpers::dd($r);
+
         return $this->name.$extension ; 
     }
         
-    public function upload($dir){
-      
-      
+    public function moveFile(){
 
-        $path =$dir .'/arquivos'.$this->getBasename(); 
+    /**
+     * Move arquivo para diretorio /arquivos 
+     */
+      
+        $path =__DIR__.'/arquivos/'.$this->getBasename(); 
+        // $path =__DIR__.'/arquivos/'.$this->name.$this->extension; 
+
+        // Helpers::dd($path);
         return move_uploaded_file($this->tmpName,$path) ;
     }
 

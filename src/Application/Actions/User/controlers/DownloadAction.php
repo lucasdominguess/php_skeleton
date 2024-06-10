@@ -4,6 +4,7 @@ namespace App\Application\Actions\User\controlers;
 
 
 use App\Application\Actions\Action;
+use App\Infrastructure\Helpers;
 use phpDocumentor\Reflection\Types\This;
 use PhpParser\Node\Expr\Throw_;
 use Slim\Psr7\Stream;
@@ -20,15 +21,20 @@ class DownloadAction extends Action
 
 {
     public function action(): Response
-    {
-        $filename = $this->request->getQueryParams()['filename'] ?? '';
+    {   
+        $filename =  $_GET['id'] ?? '';
+        // $filename = $this->request->getQueryParams()['filename'] ?? '';
+        // Helpers::dd($filename);
+
+
 
         if(empty($filename)){ 
             throw new HttpBadRequestException($this->request, 'Nome do arquivo invalido');
         }
 
-        $filepath = realpath(__DIR__ . "/arquivos/$filename");
-        // die(var_dump($filepath,file_exists($filepath)));
+        $filepath = realpath(__DIR__ ."../../../files/arquivos/$filename");
+      
+;
         
         if (!file_exists($filepath)) {
             throw new HttpNotFoundException($this->request, "Arquivo nao encontrado ");

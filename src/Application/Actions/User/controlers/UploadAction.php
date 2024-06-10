@@ -3,42 +3,61 @@ namespace App\Application\Actions\User\controlers;
 
 
 use ZipArchive;
+use App\Domain\User\User;
 
+use App\Infrastructure\Helpers;
 use App\Application\files\Upload;
 use App\Application\Actions\Action;
-use App\Infrastructure\Helpers;
 use Psr\Http\Message\ResponseInterface;
+use App\Infrastructure\Persistence\User\CreateRepository;
 
 class UploadAction extends Action { 
 
     protected function action(): ResponseInterface
     {   
+      
 
       $file = $_FILES['file']; 
-      $ext2 = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+      
+
+      // $ext2 = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+      // Helpers::dd($file);
     
-     Helpers::dd($ext2);
       
       if($_FILES['file']['error'] == 4 ) {
         $msg = ['status' => 'fail', 'msg' => 'Nenhum Arquivo foi enviado!'];
         return $this->respondWithData($msg);
       }
+      // if ($_FILES['size'] >= 6291456) {
+      //   $msg = ['status' => 'fail', 'msg' => 'Tamanho de arquivo excedido!'];
+      //   return $this->respondWithData($msg);
+      // }
       
       $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 
-      if(!in_array($ext,['png','jpg','gif','mp4','wmv','csv','txt','pdf']))
+      if(!in_array($ext,['png','jpg','gif','csv','txt','pdf']))
       {
         $msg = ['status' => 'fail', 'msg' => 'Formato invalido!'];
         return $this->respondWithData($msg);
       }
+      //salvando no banco de dados 
+      try {
+       
+        $file['id_adm'] = $_SESSION[User::USER_ID];
+        $file['create_time']= $GLOBALS['datefullForm'];
+        $insert = new CreateRepository($this->sql);
+        $insert->createArquivos($file);
+      } catch (\Throwable $e) {
+          return $this->respondWithData($e);
+      }
 
+      // salvando em diretorio 
       $file = new Upload($_FILES['file']);
-
-      $file->upload(__DIR__ ."./../../../files/arquivos");
+      $file->moveFile();
 
 
       $msg = ['status' => 'ok', 'msg' => 'Arquivo enviado com sucesso!'];
-      return $this->respondWithData($file);
+      return $this->respondWithData($msg);
 
       // Fazer upload em pastas de acordo com a extensao do arquivo 
         // if(in_array($ext, ['png','jpg','gif'])){

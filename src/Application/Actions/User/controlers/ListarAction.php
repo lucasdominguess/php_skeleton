@@ -3,6 +3,7 @@ namespace App\Application\Actions\User\controlers;
 
 use App\Application\Actions\Action;
 use App\Application\files\ListarDiretorios;
+use App\Domain\User\User;
 use App\Infrastructure\Persistence\User\ReadRepository;
 use App\Infrastructure\Persistence\User\Sql;
 use Psr\Http\Message\ResponseInterface as response;
@@ -49,11 +50,15 @@ class ListarAction extends Action {
         }
         
         if(URI_SERVER == URL_ARQUIVOS_ADM){
-            $pasta = __DIR__ .'/../../../files/arquivos';
-            $arquivos = new ListarDiretorios();
+            
+            $resultado = $user->tableFindAll($_SESSION[User::USER_ID]);
 
-            $r =    $arquivos->listar($pasta);
-            return $this->respondWithData($r);
+            //listar diretorios para exibir na tela 
+            // $pasta = __DIR__ .'/../../../files/arquivos';
+            // $arquivos = new ListarDiretorios();
+
+            // $r =    $arquivos->listar($pasta);
+            return $this->respondWithData($resultado);
        
             
             

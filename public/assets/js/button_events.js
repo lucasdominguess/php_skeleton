@@ -74,7 +74,8 @@ $("#btn_env_newsenha").click(function (){
 
   requestPOST('/validar_novasenha',v_form)
 }); 
-// $("#btn_dowload_01").click( function () { 
+$(".btn_all").click( function () { 
+  console.log('kkk')
 
-//   requestGETDownload('/admin/download?filename=vendas.png')
-// })
+  // requestGETDownload('/admin/download?filename=vendas.png')
+})

@@ -133,10 +133,10 @@ async function buscar(rota)
 
 
   }
-  async function requestGETDownload (rota){
-    // let id = key.target.id
-     
-      let response = await fetch(`${rota}`);
+  async function requestGETDownload(key){
+      let id = key.target.id
+      console.log(id)
+      let response = await fetch(`/admin/download?id=${id}`);
      
       let obj = await response.json()
     

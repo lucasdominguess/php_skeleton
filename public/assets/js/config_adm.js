@@ -41,23 +41,44 @@ document.addEventListener("DOMContentLoaded",async ()=>{
     const response = await buscar('/admin/listar_arquivos')
 
    
-    console.log(response)
+    // console.log(response[0]['name'])
 
     for(let i =0; i < response.length ; i++ ) { 
-        const num = Math.floor(Math.random() * (1000 - 1) + 1);
+        // const num = Math.floor(Math.random() * (1000 - 1) + 1);
         const item = response[i] ; 
-        let tr = document.createElement('tr')
+        // console.log(item['name'])
+        const tr = document.createElement('tr')
+        const button = document.createElement('button')
+        const button2 = document.createElement('button')
+        $(button).text('Download');
+        $(button2).text('Excluir');
+        button.id = `${item['name']}`;
+
         // tr.id = "tr""+num
         tr.innerHTML = `
      
-            <td><a id="a${num}"   onclick="requestGETdir('${item}')">${item}</a></td>
-            <td>????</td>
-            <td>????</td>
-            <td><button id="btn_arquivo${num}" class="btn btn-outline-primary" onclick="requestGETdir(${num})" type="button">Download</button></td>
+        <td><a id=""</a>${item['name']}</td>
+        <td><a id=""</a>${item['type']}</td>
+        <td><a id=""</a>${item['tmp_name']}</td>
+      
+        <td><a id=""</a>${item['create_time']}</td>
+        
+           
         
         
-        `
+         `
+        const td2=document.createElement('td')
+        const td3=document.createElement('td')
+        td2.append(button)
+        td3.append(button2)
+        tr.append(td2,td3)
+        // $(tr).append(button,button2)
         $("#tb_arq").append(tr)
+        $(button).addClass('btn btn-all btn-outline-primary ')
+        $(button2).addClass('btn btn-all btn-outline-danger ')
+        button.addEventListener('click',requestGETDownload);
+        button2.addEventListener('click',confirmExcluir);
+
         // 
         
     }
