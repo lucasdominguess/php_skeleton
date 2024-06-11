@@ -32,7 +32,8 @@ class DownloadAction extends Action
             throw new HttpBadRequestException($this->request, 'Nome do arquivo invalido');
         }
 
-        $filepath = realpath(__DIR__ ."../../../files/arquivos/$filename");
+        // __DIR__."/../../../files/arquivos"
+        $filepath = realpath(__DIR__ ."/../../../files/arquivos/$filename");
       
 ;
         
@@ -42,15 +43,18 @@ class DownloadAction extends Action
 
         $fileStream = fopen($filepath, 'r');
         $stream = new Stream($fileStream);
+        // $fileName = mb_convert_encoding(basename($filename), 'UTF-8');
         $fileName = mb_convert_encoding($filepath, 'UTF-8');
         $mimeType = mime_content_type($filepath);
         // $fileSize = (string) $item->getSize();
+        $fileSize = filesize($filepath);
 
         return $this->response
             ->withBody($stream)
             ->withHeader('Content-Disposition', 'attachment;filename=' . rawurlencode($fileName))
+            // ->withHeader('Content-Disposition', 'attachment; filename="' . rawurlencode($fileName) . '"')
             ->withHeader('Content-Type', $mimeType)
-            // ->withHeader('Content-Length', $fileSize)
+            ->withHeader('Content-Length', (string)$fileSize)
             ->withStatus(200);
 
         // $this->response->withHeader('Content-Type', 'application/octet-stream');

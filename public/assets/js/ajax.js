@@ -139,5 +139,6 @@ async function buscar(rota)
       let response = await fetch(`/admin/download?id=${id}`);
      
       let obj = await response.json()
+      return obj
     
   }

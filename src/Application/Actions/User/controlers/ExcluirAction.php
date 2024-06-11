@@ -26,7 +26,7 @@ class ExcluirAction extends Action{
                 $user->Delete_EstagiariosOfId($id); 
                 $logger->logger("DELETE","Admin: " .$_SESSION[User::USER_NAME]." Deletou um Usuario");
             }catch(\Throwable $e){
-                return $this->respondWithData($e->getMessage());
+                return $this->respondWithData($e);
     
             }
         }
@@ -39,7 +39,7 @@ class ExcluirAction extends Action{
                 $this->createLogger->logTelegran('Usuario: ' .$_SESSION[User::USER_NAME]. ' Deletou um Administrador',"warning");
 
             }catch(\Throwable $e){
-                return $this->respondWithData($e->getMessage());
+                return $this->respondWithData($e);
     
             }
        }
@@ -48,7 +48,16 @@ class ExcluirAction extends Action{
                 $user->Delete_TentativasOfId($id);
                 $logger->logger("DELETE","Admin: " .$_SESSION[User::USER_NAME]." Deletou um Email em tentativas de acesso");
             }catch(\Throwable $e){
-                return $this->respondWithData($e->getMessage());
+                return $this->respondWithData($e);
+
+            }
+        }
+       if(URI_SERVER == URL_ARQUIVOS_ADM){ 
+            try{
+                $user->Delete_ArquivosOfId($id);
+                $logger->logger("DELETE","Admin: " .$_SESSION[User::USER_NAME]." Deletou um arquivo em na tabela arquivos");
+            }catch(\Throwable $e){
+                return $this->respondWithData($e);
 
             }
         }

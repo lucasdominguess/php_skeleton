@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded",async ()=>{
         const item = response[i] ; 
         // console.log(item['name'])
         const tr = document.createElement('tr')
-        const button = document.createElement('button')
+        const button = document.createElement('a')
         const button2 = document.createElement('button')
         $(button).text('Download');
         $(button2).text('Excluir');

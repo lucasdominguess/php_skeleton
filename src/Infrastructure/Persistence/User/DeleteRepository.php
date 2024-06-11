@@ -50,4 +50,14 @@ class DeleteRepository
    
       
     }
+    public function Delete_ArquivosOfId($id)
+    {
+        $stmt =$this->db->prepare("delete from arquivos where id = :id");
+  
+        $stmt->bindValue(":id",$id);
+        $stmt->execute();
+        
+   
+      
+    }
 }
