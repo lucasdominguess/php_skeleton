@@ -62,7 +62,7 @@ class VerifyNewUserAction extends Action
            $this->redisConn->hset($token,'name',$name);
            $this->redisConn->hset($token,'email',$email);
            $this->redisConn->hset($token,'senha',$senha1);
-           $this->redisConn->expire($token,1800);
+           $this->redisConn->expire($token,1000);
      
           
            $this->redisConn->rPush('enviar_email',$dados);

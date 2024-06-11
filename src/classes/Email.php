@@ -10,6 +10,7 @@ use PHPMailer\PHPMailer\SMTP;
 require '../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require '../../vendor/phpmailer/phpmailer/src/SMTP.php';
 require '../../vendor/phpmailer/phpmailer/src/Exception.php';
+
  
 class Email 
 { 
@@ -19,20 +20,26 @@ public function mandar_email($email,$token,$subject,$body)
         global $env ; 
         $mail = new PHPMailer(true);
 
-        $username = 'admin'; // $env['username'];
-        $senha =   // $env['senha'];
-        $smtp = "smtpcorp.prodam";//$env['smtp'];
-        $port = 25 ;//$env['port'];
-        $sender ='smsdtic@prefeitura.sp.gov.br' ;// $env['sender'];
-        $auth = false ;// $env['auth'];
-
-        // $username = 'f73cef0376c9d3'; // $env['username'];
-        // $senha =  "12228ec13a8660"; // $env['senha'];
-        // $smtp = "sandbox.smtp.mailtrap.io";//$env['smtp'];
+        // $username = 'admin'; // $env['username'];
+        // $senha =   // $env['senha'];
+        // $smtp = "smtpcorp.prodam";//$env['smtp'];
         // $port = 25 ;//$env['port'];
-        // $sender ='lukasbreaking@gmail.com' ;// $env['sender'];
-        // $auth = true ;// $env['auth'];
-        
+        // $sender ='smsdtic@prefeitura.sp.gov.br' ;// $env['sender'];
+        // $auth = false ;// $env['auth'];
+
+        $username = 'f73cef0376c9d3'; 
+        $senha =  "12228ec13a8660"; 
+        $smtp = "sandbox.smtp.mailtrap.io";
+        $port = 25 ;
+        $sender ='lukasbreaking@gmail.com' ;
+        $auth = true ;
+      
+    //    $username= $env['username'];
+    //    $senha = $env['senha'];z
+    //    $smtp = $env['smtp'];
+    //    $port= $env['port'];
+    //    $sender = $env['sender'];
+    //    $auth = $env['auth'];
         try {
             //Server settings
             $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output

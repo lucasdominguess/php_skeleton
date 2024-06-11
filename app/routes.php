@@ -20,19 +20,21 @@ use App\Application\Middleware\ValidatePostMiddleware;
 use App\Application\Actions\User\controlers\LogarAction;
 use App\Application\Actions\User\controlers\EditarAction;
 use App\Application\Actions\User\controlers\ListarAction;
-use App\Application\Actions\User\controlers\UploadAction;
 use App\Application\Actions\User\controlers\ExcluirAction;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 
-use App\Application\Actions\User\controlers\DownloadAction;
 use App\Application\Actions\User\controlers\CadastrarAction;
-use App\Application\Actions\User\controlers\ValidPassAction;
-use App\Application\Actions\User\controlers\ValidUserAction;
+
 
 use App\Application\Actions\User\controlers\SairSessaoAction;
 use App\Application\Actions\User\controlers\ListarCardsAction;
 use App\Application\Actions\User\controlers\ListarArquivosAction;
-use App\Application\Actions\User\controlers\ValidTokenEmailAction;
+
+use App\Application\Actions\User\controlers\arquivos\UploadAction;
+use App\Application\Actions\User\controlers\arquivos\DownloadAction;
+use App\Application\Actions\User\controlers\alterar_senha\ValidPassAction;
+use App\Application\Actions\User\controlers\alterar_senha\ValidUserAction;
+use App\Application\Actions\User\controlers\alterar_senha\ValidTokenEmailAction;
 use App\Application\Actions\User\controlers\cadastrar_usuario\VerifyNewUserAction;
 use App\Application\Actions\User\controlers\cadastrar_usuario\VerifyNewEmailAction;
 
@@ -62,6 +64,7 @@ return function (App $app) {
           
         ]);
     })->setName('login');
+    //Sessao alterar senha 
     $app->get('/solicitar_trocar_senha', function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
         return $view->render($response, 'trocarsenha.html', []);});
@@ -79,7 +82,7 @@ return function (App $app) {
         ]);
     });
     $app->post("/validar_novasenha",ValidPassAction::class);
-    
+    //Sessao novo usuario 
     $app->get("/solicitar_novo_usuario", function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
         return $view->render($response, 'newuser.html', []);});

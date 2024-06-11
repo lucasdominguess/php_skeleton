@@ -1,5 +1,5 @@
 <?php
-namespace App\Application\Actions\User\controlers;
+namespace App\Application\Actions\User\controlers\arquivos;
 
 
 
@@ -34,6 +34,7 @@ class DownloadAction extends Action
 
         // __DIR__."/../../../files/arquivos"
         $filepath = realpath(__DIR__ ."/../../../files/arquivos/$filename");
+        $filepath = realpath(__DIR__ ."/../);
       
 ;
         

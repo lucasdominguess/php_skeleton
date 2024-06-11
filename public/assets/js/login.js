@@ -4,12 +4,14 @@ const params = new URLSearchParams(window.location.search);
 const msg = params.get('msg');
 
 if (msg) {
-    const msg1 = JSON.parse(decodeURIComponent(msg));
+    const dados = JSON.parse(decodeURIComponent(msg));
+    let icon = dados['status'] == 'fail' ? 'error' : 'success'
+    let title = dados['msg'] 
 
     Swal.fire({
-        // icon: status === 'fail' ? 'error' : 'success',
-        icon : 'success',
-        title: msg1,
+        icon: icon,
+        // icon : status === 'fail' ? 'error',
+        title: title,
         // text: msg1
     });
 }

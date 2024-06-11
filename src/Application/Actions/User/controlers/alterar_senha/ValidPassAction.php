@@ -1,5 +1,6 @@
 <?php
-namespace App\Application\Actions\User\controlers;
+namespace App\Application\Actions\User\controlers\alterar_senha;
+
 
 use DateTime;
 use voku\helper\AntiXSS; 

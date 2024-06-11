@@ -1,5 +1,5 @@
 <?php
-namespace App\Application\Actions\User\controlers;
+namespace App\Application\Actions\User\controlers\alterar_senha;
 
 use DateTime;
 use App\Application\Actions\Action;

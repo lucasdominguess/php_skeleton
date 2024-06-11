@@ -1,5 +1,5 @@
 <?php 
-namespace App\Application\Actions\User\controlers;
+namespace App\Application\Actions\User\controlers\alterar_senha;
 
 // require '../../../../../vendor/phpmailer/src/SMTP.php';
 // require '../../vendor/phpmailer/phpmailer/src/SMTP.php';
