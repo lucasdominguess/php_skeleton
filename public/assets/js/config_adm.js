@@ -53,6 +53,7 @@ document.addEventListener("DOMContentLoaded",async ()=>{
         $(button).text('Download');
         $(button2).text('Excluir');
         button.id = `${item['name']}`;
+        button2.id = `${item['id']}`;
 
         // tr.id = "tr""+num
         tr.innerHTML = `

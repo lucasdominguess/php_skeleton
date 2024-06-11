@@ -14,24 +14,24 @@ require '../../vendor/phpmailer/phpmailer/src/Exception.php';
 class Email 
 { 
 
-public function mandar_email($email,$token)
+public function mandar_email($email,$token,$subject,$body)
     {
         global $env ; 
         $mail = new PHPMailer(true);
 
-        // $username = 'admin'; // $env['username'];
-        // $senha =   // $env['senha'];
-        // $smtp = "smtpcorp.prodam";//$env['smtp'];
-        // $port = 25 ;//$env['port'];
-        // $sender ='smsdtic@prefeitura.sp.gov.br' ;// $env['sender'];
-        // $auth = false ;// $env['auth'];
-
-        $username = 'f73cef0376c9d3'; // $env['username'];
-        $senha =  "12228ec13a8660"; // $env['senha'];
-        $smtp = "sandbox.smtp.mailtrap.io";//$env['smtp'];
+        $username = 'admin'; // $env['username'];
+        $senha =   // $env['senha'];
+        $smtp = "smtpcorp.prodam";//$env['smtp'];
         $port = 25 ;//$env['port'];
-        $sender ='lukasbreaking@gmail.com' ;// $env['sender'];
-        $auth = true ;// $env['auth'];
+        $sender ='smsdtic@prefeitura.sp.gov.br' ;// $env['sender'];
+        $auth = false ;// $env['auth'];
+
+        // $username = 'f73cef0376c9d3'; // $env['username'];
+        // $senha =  "12228ec13a8660"; // $env['senha'];
+        // $smtp = "sandbox.smtp.mailtrap.io";//$env['smtp'];
+        // $port = 25 ;//$env['port'];
+        // $sender ='lukasbreaking@gmail.com' ;// $env['sender'];
+        // $auth = true ;// $env['auth'];
         
         try {
             //Server settings
@@ -62,9 +62,8 @@ public function mandar_email($email,$token)
         
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Recuperação de senha';
-            $mail->Body    = " <h3> Alteração de senha solicitada , caso desconheça essa solicitação desconsidere este email <br> 
-             para seguir com sua solicitaçao Por favor  click no link e a seguir:  <a href='http://localhost:9000/validar_tokenuser/$token'>alterar Senha</a></h3> ";
+            $mail->Subject = $subject;
+            $mail->Body    = $body;
             // $mail->Body    = "para seguir com a alteracao click no link : <a href='http://localhost:9000/registrar_novasenha/token=$token_url'>alterar Senha</a> ";
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
             $mail->CharSet ='UTF-8';

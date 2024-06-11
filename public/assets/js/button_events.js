@@ -60,6 +60,12 @@ $("#btn_arquivo").click( function () {
   
   // requestGETdir()
 });
+$("#btn_env_novocad").click(function(){
+  let v_form = new FormData(document.getElementById('form_new_cad')) 
+
+  requestPOST('/validar_novo_usuario',v_form)
+})
+
 
 $("#btn_env_altsenha").click(function (){ 
   let v_form = new FormData(document.getElementById('form_alt_senha')) 

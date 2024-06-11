@@ -48,9 +48,11 @@ class Email_Service
                 $dados = json_decode($res, true);
                 $email = $dados['email'];
                 $token = $dados['token'];
+                $subject = $dados['subject'];
+                $body = $dados['body'];
                                 
                 $send = new Email();
-                $send->mandar_email($email,$token);
+                $send->mandar_email($email,$token,$subject,$body);
                 
                 $log = new CreateLogger();
                 $log->logger("Email_Service","Foi Enviado um Email de recuperação de senha para $email");

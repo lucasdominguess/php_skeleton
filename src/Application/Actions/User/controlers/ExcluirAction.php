@@ -8,7 +8,8 @@ use App\Infrastructure\Persistence\User\Sql;
 use Psr\Http\Message\ResponseInterface as response;
 use App\Infrastructure\Persistence\User\DeleteRepository;
 
-class ExcluirAction extends Action{ 
+class ExcluirAction extends Action
+{ 
     protected function action(): response 
     {
         $id = $_GET['id']; 

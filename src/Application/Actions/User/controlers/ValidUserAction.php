@@ -60,8 +60,14 @@ class ValidUserAction extends Action
         // var_dump($date);
         
        
-        $dados = json_encode(['email'=>$email, 'token'=>$token]);
-   
+        $dados = json_encode(
+            [
+                'email'=>$email, 
+                'token'=>$token,
+                'subject'=>"Confirmação de email",
+                'body'=>" <h3> Alteração de senha solicitada , caso desconheça essa solicitação desconsidere este email <br> 
+             para seguir com sua solicitaçao Por favor  click no link e a seguir:  <a href='http://localhost:9000/validar_tokenuser/$token'>alterar Senha</a></h3>" 
+            ]);
         // }
         try {
             // $sendEmail = new  Email_Service();

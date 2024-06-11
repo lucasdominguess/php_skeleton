@@ -10,6 +10,7 @@ use Slim\Views\Twig;
 
 
 
+
 use App\Infrastructure\Helpers;
 use App\Application\Middleware\UserMiddleware;
 use App\Application\Middleware\AdminMiddleware;
@@ -32,6 +33,8 @@ use App\Application\Actions\User\controlers\SairSessaoAction;
 use App\Application\Actions\User\controlers\ListarCardsAction;
 use App\Application\Actions\User\controlers\ListarArquivosAction;
 use App\Application\Actions\User\controlers\ValidTokenEmailAction;
+use App\Application\Actions\User\controlers\cadastrar_usuario\VerifyNewUserAction;
+use App\Application\Actions\User\controlers\cadastrar_usuario\VerifyNewEmailAction;
 
 return function (App $app) {
 
@@ -61,10 +64,8 @@ return function (App $app) {
     })->setName('login');
     $app->get('/solicitar_trocar_senha', function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'trocarsenha.html', [
-          
-        ]);
-    });
+        return $view->render($response, 'trocarsenha.html', []);});
+
     $app->post('/validar_usuario',ValidUserAction::class);
     $app->get('/validar_tokenuser/{token}',ValidTokenEmailAction::class);
     $app->get('/registrar_novasenha/{token}',function ($request, $response, $args) {
@@ -79,6 +80,16 @@ return function (App $app) {
     });
     $app->post("/validar_novasenha",ValidPassAction::class);
     
+    $app->get("/solicitar_novo_usuario", function ($request, $response, $args) {
+        $view = Twig::fromRequest($request);
+        return $view->render($response, 'newuser.html', []);});
+    $app->post("/validar_novo_usuario",VerifyNewUserAction::class);
+    $app->get('/verificar_email_enviado/{token}',VerifyNewEmailAction::class);
+
+
+
+
+
     $app->get('/sender', HandleSenderAction::class);
 
     // $app->get('/logar', function ($request, $response,$args) {
