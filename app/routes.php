@@ -35,6 +35,7 @@ use App\Application\Actions\User\controlers\arquivos\DownloadAction;
 use App\Application\Actions\User\controlers\alterar_senha\ValidPassAction;
 use App\Application\Actions\User\controlers\alterar_senha\ValidUserAction;
 use App\Application\Actions\User\controlers\alterar_senha\ValidTokenEmailAction;
+use App\Application\Actions\User\controlers\cadastrar_usuario\AprovarCadastroAction;
 use App\Application\Actions\User\controlers\cadastrar_usuario\VerifyNewUserAction;
 use App\Application\Actions\User\controlers\cadastrar_usuario\VerifyNewEmailAction;
 
@@ -88,6 +89,7 @@ return function (App $app) {
         return $view->render($response, 'newuser.html', []);});
     $app->post("/validar_novo_usuario",VerifyNewUserAction::class);
     $app->get('/verificar_email_enviado/{token}',VerifyNewEmailAction::class);
+    $app->get('/aprovar_cadastro/{token}/{auth}',AprovarCadastroAction::class);
 
 
 

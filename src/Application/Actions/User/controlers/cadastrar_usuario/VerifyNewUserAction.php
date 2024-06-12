@@ -52,7 +52,7 @@ class VerifyNewUserAction extends Action
             'email'=>$email, 
             'token'=>$token,
             'subject'=>"Confirmação de email",
-            'body'=>"<h3> Um registro de cadastro foi solicitado para este email ,caso não seja voçê desconsidere ete Email <br> 
+            'body'=>"<h3> Um registro de cadastro foi solicitado para este email ,caso não seja voçê desconsidere este Email <br> 
              para seguir com sua solicitaçao Por favor  click no link e a seguir:  <a href='http://localhost:9000/verificar_email_enviado/$token'>Confirmar cadastro</a></h3>"
         ]);
           

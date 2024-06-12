@@ -11,7 +11,8 @@ class BloquearAcesso {
    
 
 
-    function bloqueio($email,$db){
+ public function bloqueio($email,$db)
+    {
                 $logger = new CreateLogger();
                //Verificando se o email ja existe no banco de tentativas incorretas de login 
                 $stmt = $db->prepare("SELECT COUNT(*) AS total FROM tentativa WHERE emails = :email");
@@ -78,7 +79,21 @@ class BloquearAcesso {
                         
                 
     } 
-                }
-        
     }
+ public function bloqueioCadastro($db,$email)
+ {  
+        // $datenow = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
+        // $hr_bloq = date_add($datenow,date_interval_create_from_date_string($date));
+        // $newtime = $hr_bloq->format('Y-m-d H:i:s');
+        $date = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
+        $date->modify('+3 months');
+        $formattedDate = $date->format('Y-m-d H:i:s');
+
+        
+        $stmt=$db->prepare("insert into tentativa(emails,data) values(:email,:data)");
+            $var=[':data'=>$formattedDate,':email'=>$email];
+            $db->setParms($stmt,$var);
+            $stmt->execute();
+ }     
+}   
    

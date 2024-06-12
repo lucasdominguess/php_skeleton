@@ -32,13 +32,30 @@ class VerifyNewEmailAction extends Action
         $username = $dados['name'];
         $email =$dados['email'];
         
+        //cadastrando no banco usuario com nivel 0 (sem acesso)
         $senha = password_hash($dados['senha'], PASSWORD_DEFAULT); 
         $newuser = new  CreateRepository($this->sql);
         $newuser->createAdmin($username,$email,$senha,0);
 
+        //mandando email para o adm 
+        $tokenadm = md5(uniqid());
+        $dados = json_encode(
+            [   
+                'email'=>'lucasdomingues@prefeitura.sp.gov.br', 
+                'token'=>$tokenadm,
+                
+                'subject'=>"Aprovação de cadastro ",
+                'body'=>"<h3> Uma aprovação de cadastro foi solicitada para o email $email em nome de $username,caso queira prosseguir com a aprovação click em  <a href='http://localhost:9000/aprovar_cadastro/$tokenadm/sim'>Aprovar cadastro</a> <br> 
+                 para Reprovar a ativação do cadastro click no link e a seguir: <a href='http://localhost:9000/aprovar_cadastro/$tokenadm/nao'>Reprovar Cadastro</a></h3>"
+            ]);
+        $this->redisConn->rPush('enviar_email',$dados);
+        $this->redisConn->hset($tokenadm,'tokenadm',$tokenadm);
+        $this->redisConn->hset($tokenadm,'email',$email);
+
+        
 
         $msg = json_encode(['status'=> 'ok', 'msg'=>'Cadastro realizado! Aguarde aprovação de um administrador para logar ']);
-       
+        
         $newmsg = urlencode($msg);
         return $this->response->withHeader("location","/?msg=$newmsg")->withStatus(307);
 

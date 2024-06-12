@@ -20,19 +20,19 @@ public function mandar_email($email,$token,$subject,$body)
         global $env ; 
         $mail = new PHPMailer(true);
 
-        // $username = 'admin'; // $env['username'];
-        // $senha =   // $env['senha'];
-        // $smtp = "smtpcorp.prodam";//$env['smtp'];
-        // $port = 25 ;//$env['port'];
-        // $sender ='smsdtic@prefeitura.sp.gov.br' ;// $env['sender'];
-        // $auth = false ;// $env['auth'];
-
-        $username = 'f73cef0376c9d3'; 
-        $senha =  "12228ec13a8660"; 
-        $smtp = "sandbox.smtp.mailtrap.io";
+        $username = 'admin'; 
+        $senha =  
+        $smtp = "smtpcorp.prodam";
         $port = 25 ;
-        $sender ='lukasbreaking@gmail.com' ;
-        $auth = true ;
+        $sender ='smsdtic@prefeitura.sp.gov.br';
+        $auth = false ;
+
+        // $username = 'f73cef0376c9d3'; 
+        // $senha =  "12228ec13a8660"; 
+        // $smtp = "sandbox.smtp.mailtrap.io";
+        // $port = 25 ;
+        // $sender ='lukasbreaking@gmail.com' ;
+        // $auth = true ;
       
     //    $username= $env['username'];
     //    $senha = $env['senha'];z

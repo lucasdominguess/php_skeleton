@@ -1,15 +1,18 @@
 <?php 
-// namespace App\Infrastructure\Persistence\User;
+namespace App\Infrastructure\Persistence\User;
 
 
-// abstract class UpdateRepository 
-// { 
-//     static public function updateById($table,$id,$db)
-//     { 
+ class UpdateRepository 
+{ 
+    public function updateById($table,$id,$db)
+    { 
         
-//     }
-//     static public function updateAll($table,$db)
-//     { 
-
-//     }
-// }
+    }
+    public function update($db,$email,$value)
+    { 
+        $stmt=$db->prepare("UPDATE usuarios SET nivel = :value where email = :email ");
+        $var=[':email'=>$email,':value'=> $value];
+        $db->setParms($stmt,$var);
+        $stmt->execute();
+    }
+}

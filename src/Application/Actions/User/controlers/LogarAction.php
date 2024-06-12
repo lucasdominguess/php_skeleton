@@ -89,6 +89,17 @@ class LogarAction extends UserAction
         //criando dados do User 
         $user = new User($retorno[0]['id_adm'], $retorno[0]['nome'], $retorno[0]['email'], $retorno[0]['nivel']);
 
+        switch ($retorno[0]['nivel']) {
+            case 0:
+                $response = ['status' => 'fail', 'msg' => 'Seu cadastro nao foi aprovado tente novamente em 6 meses'];
+                return $this->respondWithData($response);
+                
+            
+            case 1:
+                $response = ['status' => 'fail', 'msg' => 'Seu cadastro ainda aguarda aprovaçao de um administrador'];
+                return $this->respondWithData($response);
+        }
+
 
         $_SESSION[User::USER_ID] = $user->id_adm;
         $_SESSION[User::USER_NAME] = $user->nome;
