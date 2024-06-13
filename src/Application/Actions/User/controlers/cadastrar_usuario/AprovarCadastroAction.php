@@ -15,6 +15,7 @@ class AprovarCadastroAction extends Action
     {
         $token = $this->args['token'];
         $auth = $this->args['auth'];
+        
 
         if(!isset($token) || !isset($auth)) { 
           
@@ -29,6 +30,8 @@ class AprovarCadastroAction extends Action
             return $this->response->withHeader("location","/")->withStatus(307);
 
         }
+        $update = new UpdateRepository ; 
+
         if ($auth == 'nao') {
             $dados = json_encode(
                 [   
@@ -40,7 +43,8 @@ class AprovarCadastroAction extends Action
                 $block->bloqueioCadastro($this->sql,$dadosRedis['email']);
                 
                 $this->redisConn->rPush('enviar_email',$dados);
-
+                
+                $update->update($this->sql,$dadosRedis['email'],0);
                 return $this->response->withHeader("location","/")->withStatus(307);
 
 
@@ -56,8 +60,8 @@ class AprovarCadastroAction extends Action
 
 
                 
-                $update = new UpdateRepository ; 
-                $update->update($this->sql,$dadosRedis['email'],1);
+               
+                $update->update($this->sql,$dadosRedis['email'],2);
                 $this->redisConn->rPush('enviar_email',$dados);
                 
 

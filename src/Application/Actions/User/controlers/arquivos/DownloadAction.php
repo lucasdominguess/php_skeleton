@@ -3,6 +3,7 @@ namespace App\Application\Actions\User\controlers\arquivos;
 
 
 
+
 use App\Application\Actions\Action;
 use App\Infrastructure\Helpers;
 use phpDocumentor\Reflection\Types\This;
@@ -16,57 +17,103 @@ use Slim\Exception\HttpNotFoundException;
 
 use function PHPUnit\Framework\fileExists;
 
+
+
 class DownloadAction extends Action
-
-
 {
     public function action(): Response
     {   
-        $filename =  $_GET['id'] ?? '';
-        // $filename = $this->request->getQueryParams()['filename'] ?? '';
-        // Helpers::dd($filename);
+        $filename = $_GET['id'] ?? '';
 
-
-
-        if(empty($filename)){ 
-            throw new HttpBadRequestException($this->request, 'Nome do arquivo invalido');
+        if (empty($filename)) { 
+            throw new HttpBadRequestException($this->request, 'Nome do arquivo inválido');
         }
 
-        // __DIR__."/../../../files/arquivos"
-        $filepath = realpath(__DIR__ ."/../../../files/arquivos/$filename");
-        $filepath = realpath(__DIR__ ."/../);
-      
-;
-        
-        if (!file_exists($filepath)) {
-            throw new HttpNotFoundException($this->request, "Arquivo nao encontrado ");
+        $filepath = realpath(__DIR__ . "/../../../../files/arquivos/$filename");
+
+        if ($filepath === false || !file_exists($filepath)) {
+            throw new HttpNotFoundException($this->request, "Arquivo não encontrado");
         }
 
         $fileStream = fopen($filepath, 'r');
+        if ($fileStream === false) {
+            throw new HttpNotFoundException($this->request, "Não foi possível abrir o arquivo");
+        }
+
         $stream = new Stream($fileStream);
-        // $fileName = mb_convert_encoding(basename($filename), 'UTF-8');
-        $fileName = mb_convert_encoding($filepath, 'UTF-8');
+        $fileName = basename($filename);
         $mimeType = mime_content_type($filepath);
-        // $fileSize = (string) $item->getSize();
         $fileSize = filesize($filepath);
 
-        return $this->response
+        $response = $this->response
             ->withBody($stream)
-            ->withHeader('Content-Disposition', 'attachment;filename=' . rawurlencode($fileName))
-            // ->withHeader('Content-Disposition', 'attachment; filename="' . rawurlencode($fileName) . '"')
+            ->withHeader('Content-Disposition', 'attachment; filename="' . rawurlencode($fileName) . '"')
             ->withHeader('Content-Type', $mimeType)
             ->withHeader('Content-Length', (string)$fileSize)
             ->withStatus(200);
 
-        // $this->response->withHeader('Content-Type', 'application/octet-stream');
-        // $this->response->withHeader('Content-Disposition', 'attachment; filename=' . basename($filename));
+        // Fechamento do stream após enviar a resposta
+        $response->getBody()->close();
 
-
-        // return $this->response->withBody($stream);
-
-
-
+        return $response;
     }
+}
+
+// class DownloadAction extends Action
+
+
+// {
+//     public function action(): Response
+//     {   
+//         $filename =  $_GET['id'] ?? '';
+//         // $filename = $this->request->getQueryParams()['filename'] ?? '';
+//         // Helpers::dd($filename);
+
+
+
+//         if(empty($filename)){ 
+//             throw new HttpBadRequestException($this->request, 'Nome do arquivo invalido');
+//         }
+
+//         // __DIR__."/../../../files/arquivos"
+//         // $filepath = realpath(__DIR__ ."/../../../files/arquivos/$filename");
+//         $filepath = realpath(__DIR__ ."/../../../../files/arquivos/$filename");
+      
+// ;
+        
+      
+//         if ($filepath === false || !file_exists($filepath)) {
+//              throw new HttpNotFoundException($this->request, "Arquivo não encontrado");
+//         }
+//         $fileStream = fopen($filepath, 'r');
+//         if ($fileStream === false) {
+//             throw new HttpNotFoundException($this->request, "Não foi possível abrir o arquivo");
+//         }
+//         $stream = new Stream($fileStream);
+//         // $fileName = mb_convert_encoding(basename($filename), 'UTF-8');
+//         $fileName = mb_convert_encoding($filepath, 'UTF-8');
+//         $mimeType = mime_content_type($filepath);
+//         // $fileSize = (string) $item->getSize();
+//         $fileSize = filesize($filepath);
+
+//         return $this->response
+//             ->withBody($stream)
+//             ->withHeader('Content-Disposition', 'attachment;filename=' . rawurlencode($fileName))
+//             // ->withHeader('Content-Disposition', 'attachment; filename="' . rawurlencode($fileName) . '"')
+//             ->withHeader('Content-Type', $mimeType)
+//             ->withHeader('Content-Length', (string)$fileSize)
+//             ->withStatus(200);
+
+//         // $this->response->withHeader('Content-Type', 'application/octet-stream');
+//         // $this->response->withHeader('Content-Disposition', 'attachment; filename=' . basename($filename));
+
+
+//         // return $this->response->withBody($stream);
+
+
+
+// }
+        
 // {
 //     public function action(): Response
 //     {
@@ -109,4 +156,4 @@ class DownloadAction extends Action
 
 
 //     }
-}
+

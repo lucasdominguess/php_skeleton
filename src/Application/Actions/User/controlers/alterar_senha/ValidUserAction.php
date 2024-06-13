@@ -45,6 +45,7 @@ class ValidUserAction extends Action
         
         // $token = password_hash($email, PASSWORD_DEFAULT);
         $token = md5(uniqid());
+        
 
         // $token_url = urlencode($token);
         // Helpers::dd($token_url);

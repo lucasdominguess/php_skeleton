@@ -65,7 +65,8 @@ return function (App $app) {
           
         ]);
     })->setName('login');
-    //Sessao alterar senha 
+
+    //Sessao alterar senha //////////////////////////////////////////////////////////////
     $app->get('/solicitar_trocar_senha', function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
         return $view->render($response, 'trocarsenha.html', []);});
@@ -83,7 +84,8 @@ return function (App $app) {
         ]);
     });
     $app->post("/validar_novasenha",ValidPassAction::class);
-    //Sessao novo usuario 
+    
+    //Sessao novo usuario ////////////////////////////////////////////////////////////
     $app->get("/solicitar_novo_usuario", function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
         return $view->render($response, 'newuser.html', []);});

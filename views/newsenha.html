@@ -30,10 +30,14 @@
             <!-- <img id="img_recSenha" class="opacity-75" src="assets/img/img_recSenha2.svg" alt=""> -->
         </div> 
            
-                <form id="form_new_senha" class="form-inline">
+                <form id="form_new_senha" class="form-inline box-shadown">
                         <div class="div1 form-control padding-20" style="padding: 35px;">
-                   
-                            <div class="d-flex align-itens-start justify-content-center">
+                          <div id="div_icons" class="d-flex justify-content-end " style="padding: 10px" >
+                            <abbr title="Modo Dark"><i id="icon_login" class="fa-solid fa-moon icons"></i>
+                            </abbr>
+                            <!-- <p>Modo Dark</p> -->
+                            </div>
+                            <div class="d-flex align-itens-start justify-content-center" style="padding: 10px">
                                 <h2>Digite sua nova Senha </h2>
                             </div>
                             <!-- <div class="form-group"> -->
@@ -48,7 +52,7 @@
                                 Deve ter entre 8 e 20 caracteres.
                               </small>
                             <!-- </div> -->
-                          </form>
+                    </form>
                    
                     <!-- <div class="mb-3">
                       <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -82,5 +86,6 @@
     <script src="/assets/js/ajax.js"></script>
     <script src="/assets/js/dark_mode.js"></script>
     <script src="/assets/js/modal.js"></script>
+    <script src="/assets/js/pags_backgroud.js"></script>
 
     {% endblock %}

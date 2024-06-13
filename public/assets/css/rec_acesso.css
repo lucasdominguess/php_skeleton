@@ -19,3 +19,8 @@
     position: absolute;
  
 }
+.box-shadown{ 
+    
+    box-shadow: 9px 7px 30px -4px rgba(29, 27, 27, 0.747)
+
+}

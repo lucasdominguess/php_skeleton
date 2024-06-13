@@ -42,10 +42,10 @@ class VerifyNewUserAction extends Action
         $newemail = $user->admFindEmail($email);
 
         if ($newemail) {
-            $msg = ['status'=> 'fail', 'msg'=>'Email ja existe ou invalido👍'];
+            $msg = ['status'=> 'fail', 'msg'=>'Email ja existe ou invalido'];
             return $this->respondWithData($msg); 
         }
-
+        ///Preparando email de verificação de email do novo usuario
         $token = md5(uniqid());
         $dados = json_encode(
         [
@@ -64,7 +64,7 @@ class VerifyNewUserAction extends Action
            $this->redisConn->hset($token,'senha',$senha1);
            $this->redisConn->expire($token,1000);
      
-          
+          //adcionando a fila 
            $this->redisConn->rPush('enviar_email',$dados);
 
 

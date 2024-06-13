@@ -32,10 +32,10 @@ class VerifyNewEmailAction extends Action
         $username = $dados['name'];
         $email =$dados['email'];
         
-        //cadastrando no banco usuario com nivel 0 (sem acesso)
+        //cadastrando no banco usuario com nivel 1 (sem acesso aguardando aprovação)
         $senha = password_hash($dados['senha'], PASSWORD_DEFAULT); 
         $newuser = new  CreateRepository($this->sql);
-        $newuser->createAdmin($username,$email,$senha,0);
+        $newuser->createAdmin($username,$email,$senha,1);
 
         //mandando email para o adm 
         $tokenadm = md5(uniqid());
