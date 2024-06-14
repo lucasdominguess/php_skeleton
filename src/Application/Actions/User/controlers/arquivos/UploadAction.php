@@ -18,28 +18,38 @@ class UploadAction extends Action {
       
 
       $file = $_FILES['file']; 
-      
-
+      $names = $file['name'];
+      $tmp_name = $file['tmp_name'];
+      // $tmp_name = $file['ext'];
+      $info = pathinfo($file['name'][0]);
       // $ext2 = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
-      // Helpers::dd($file);
-    
+      Helpers::dd($file['name']);
       
-      if($_FILES['file']['error'] == 4 ) {
+      
+      if($_FILES['file']['error'][0] == 4 ) {
         $msg = ['status' => 'fail', 'msg' => 'Nenhum Arquivo foi enviado!'];
         return $this->respondWithData($msg);
-      }
-      // if ($_FILES['size'] >= 6291456) {
-      //   $msg = ['status' => 'fail', 'msg' => 'Tamanho de arquivo excedido!'];
-      //   return $this->respondWithData($msg);
-      // }
-      
-      $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+        }
+        // if ($_FILES['size'] >= 6291456) {
+          //   $msg = ['status' => 'fail', 'msg' => 'Tamanho de arquivo excedido!'];
+          //   return $this->respondWithData($msg);
+          // }
+        foreach ($names as $index => $value) {
+        
+            $ext = pathinfo($_FILES['file']['name'][$index], PATHINFO_EXTENSION);
 
-      if(!in_array($ext,['png','jpg','gif','csv','txt','pdf']))
-      {
-        $msg = ['status' => 'fail', 'msg' => 'Formato invalido!'];
-        return $this->respondWithData($msg);
-      }
+            if(!in_array($ext,['jpg','gif','csv','txt']))
+            {
+              $msg = ['status' => 'fail', 'msg' => "Formato invalido! $value"];
+              return $this->respondWithData($msg);
+            }
+             if ($_FILES['file']['size'][$index] >= 598812) {
+                $msg = ['status' => 'fail', 'msg' => "Tamanho de arquivo excedido! $value"];
+                return $this->respondWithData($msg);
+          }
+        }
+          // Helpers::dd($ext);
+          
       //salvando no banco de dados 
       try {
        
