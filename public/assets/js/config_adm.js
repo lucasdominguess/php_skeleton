@@ -40,8 +40,7 @@ document.addEventListener("DOMContentLoaded",async ()=>{
 
     const response = await buscar('/admin/listar_arquivos')
 
-   
-    // console.log(response[0]['name'])
+
 
     for(let i =0; i < response.length ; i++ ) { 
         // const num = Math.floor(Math.random() * (1000 - 1) + 1);
@@ -60,7 +59,8 @@ document.addEventListener("DOMContentLoaded",async ()=>{
      
         <td><a id=""</a>${item['name']}</td>
         <td><a id=""</a>${item['type']}</td>
-        <td><a id=""</a>${item['tmp_name']}</td>
+        <td><a id=""</a>${item['folder']}</td>
+        
       
         <td><a id=""</a>${item['create_time']}</td>
         

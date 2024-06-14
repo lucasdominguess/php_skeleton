@@ -2,6 +2,7 @@
 namespace App\Application\Actions\User\controlers\arquivos;
 
 
+use App\classes\CreateFolderUser;
 use ZipArchive;
 use App\Domain\User\User;
 
@@ -15,59 +16,74 @@ class UploadAction extends Action {
 
     protected function action(): ResponseInterface
     {   
-      
-
       $file = $_FILES['file']; 
+      // $info = pathinfo($file['name'][0]);
+
+      
+      $userfolder = 'ID_0'.$_SESSION[User::USER_ID]."_". strtoupper($_SESSION[User::USER_NAME]) ; 
+      
+      $folder = new CreateFolderUser();
+      $path = $folder->createFolder($userfolder);
+      
+      
       $names = $file['name'];
+      // Helpers::dd($names);
       $tmp_name = $file['tmp_name'];
+      $fileSize = $file['size']; 
+      // $path = __DIR__ ."/../../../../files/arquivos/$userfolder";
+
+
       // $tmp_name = $file['ext'];
-      $info = pathinfo($file['name'][0]);
       // $ext2 = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
-      Helpers::dd($file['name']);
       
       
       if($_FILES['file']['error'][0] == 4 ) {
         $msg = ['status' => 'fail', 'msg' => 'Nenhum Arquivo foi enviado!'];
         return $this->respondWithData($msg);
         }
-        // if ($_FILES['size'] >= 6291456) {
-          //   $msg = ['status' => 'fail', 'msg' => 'Tamanho de arquivo excedido!'];
-          //   return $this->respondWithData($msg);
-          // }
+        
         foreach ($names as $index => $value) {
         
-            $ext = pathinfo($_FILES['file']['name'][$index], PATHINFO_EXTENSION);
+            $ext = pathinfo($names[$index], PATHINFO_EXTENSION);
 
-            if(!in_array($ext,['jpg','gif','csv','txt']))
+            if(!in_array($ext,['png','jpg','gif','csv','txt']))
             {
               $msg = ['status' => 'fail', 'msg' => "Formato invalido! $value"];
               return $this->respondWithData($msg);
             }
-             if ($_FILES['file']['size'][$index] >= 598812) {
+             if ($fileSize[$index] >= 598812) {
                 $msg = ['status' => 'fail', 'msg' => "Tamanho de arquivo excedido! $value"];
                 return $this->respondWithData($msg);
           }
-        }
-          // Helpers::dd($ext);
+            // $arqName = uniqid().'.'.$ext;
+            // $name = strtoupper(str_replace([" ","%"],'_',$names[$index])); 
+            move_uploaded_file($tmp_name[$index],"$path/$names[$index]");
+            
+            $file['id_adm'][$index] = $_SESSION[User::USER_ID];
+            $file['create_time'][$index]= $GLOBALS['datefullForm'];
+            $file['folder'][$index]= $userfolder;
+            $file['path'][$index]= $path."/";
+            
+            
+            
+            }
+          try {
+                $insert = new CreateRepository($this->sql);
+                $insert->createArquivos($file);
+          } catch (\Throwable $e) {
+                  return $this->respondWithData($e);
+              }
+              // Helpers::dd($file['name']);
           
-      //salvando no banco de dados 
-      try {
-       
-        $file['id_adm'] = $_SESSION[User::USER_ID];
-        $file['create_time']= $GLOBALS['datefullForm'];
-        $insert = new CreateRepository($this->sql);
-        $insert->createArquivos($file);
-      } catch (\Throwable $e) {
-          return $this->respondWithData($e);
-      }
-
-      // salvando em diretorio 
-      $file = new Upload($_FILES['file']);
-      $file->moveFile();
-
-
       $msg = ['status' => 'ok', 'msg' => 'Arquivo enviado com sucesso!'];
       return $this->respondWithData($msg);
+      //salvando no banco de dados 
+
+      // salvando em diretorio 
+      // $file = new Upload($_FILES['file']);
+      // $file->moveFile();
+
+
 
       // Fazer upload em pastas de acordo com a extensao do arquivo 
         // if(in_array($ext, ['png','jpg','gif'])){
