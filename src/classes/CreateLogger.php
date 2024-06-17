@@ -48,6 +48,18 @@ class CreateLogger {
     
 
 } 
+    public function Emaillogger(string|array $to ,string $subject , string $from) { 
+        $logger = new Logger ( 'Emailloger'); 
+        $logger->pushHandler(new NativeMailerHandler(
+            to : $to ,
+            subject : $subject , 
+            from : $from ,
+            level : Level::Critical
+
+        )); 
+        $logger->critical('Esta é uma mensagem de erro crítica!');
+        
+    }
 
 
 }

@@ -2,23 +2,29 @@
 namespace App\Application\Actions\User\controlers\arquivos;
 
 
-use App\classes\CreateFolderUser;
 use ZipArchive;
+
 use App\Domain\User\User;
 
 use App\Infrastructure\Helpers;
 use App\Application\files\Upload;
+use App\classes\CreateFolderUser;
 use App\Application\Actions\Action;
 use Psr\Http\Message\ResponseInterface;
 use App\Infrastructure\Persistence\User\CreateRepository;
 
 class UploadAction extends Action { 
 
+
+
+
     protected function action(): ResponseInterface
     {   
       $file = $_FILES['file']; 
+
+
       $info = pathinfo($file['name'][0]);
-      // Helpers::dd($info);
+      Helpers::dd($file);
 
       
       $userfolder = 'ID_0'.$_SESSION[User::USER_ID]."_". strtoupper($_SESSION[User::USER_NAME]) ; 
@@ -77,6 +83,8 @@ class UploadAction extends Action {
          
           }
               }
+          
+
               // Helpers::dd($file['name']);
           
       $msg = ['status' => 'ok', 'msg' => 'Arquivo enviado com sucesso!'];
@@ -116,22 +124,6 @@ class UploadAction extends Action {
             
     
      
-        // $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
-
-        // $file = new Upload($_FILES['file']); 
-        // $sucesso = $file->upload(__DIR__.'/');
-    
-        // if($sucesso){
-        //     return $this->respondWithData('arquivo enviando com sucesso '.$ext);
-        // }
-        // if( $ext == 'jpg')
-        // {   
-
-            
-            
-                
-                // }
-
-        // }
+       
         
 }

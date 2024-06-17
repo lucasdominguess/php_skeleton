@@ -121,8 +121,7 @@ class LogarAction extends UserAction
                 // $this->createLogger->loggerProcessor();
        
 
-      
-
+   
 
         $response = ['status' => 'ok', 'msg' => 'logado com sucesso','location'=>'/sender'];
 

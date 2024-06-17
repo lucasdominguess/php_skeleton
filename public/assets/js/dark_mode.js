@@ -77,7 +77,7 @@ function modoDark () {
     // sweetDark.parentNode.removeChild(sweetDark);
     // sweetLigth.parentNode.appendChild(sweetLigth);
     
-      console.log(linksweet.href)
+ 
       icones.forEach(element => {
       element.classList.remove('fa-sun')
       element.classList.add('fa-moon')

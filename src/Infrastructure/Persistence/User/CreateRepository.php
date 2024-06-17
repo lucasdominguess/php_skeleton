@@ -57,40 +57,40 @@ class CreateRepository
     //     $stmt->execute();
     // }
 
-    // public function createArquivos(array $data) {
-    //     // Verificar se o array de dados não está vazio
-    //     if (empty($data)) {
-    //         throw new InvalidArgumentException("Os dados não podem estar vazios");
-    //     }
+    public function createArquivos2(array $data) {
+        // Verificar se o array de dados não está vazio
+        if (empty($data)) {
+            throw new InvalidArgumentException("Os dados não podem estar vazios");
+        }
     
-    //     // Obter os nomes das colunas a partir das chaves do array
-    //     $columns = array_keys($data);
+        // Obter os nomes das colunas a partir das chaves do array
+        $columns = array_keys($data);
     
-    //     // Criar os placeholders correspondentes
-    //     $placeholders = array_map(fn($col) => ':' . $col, $columns);
+        // Criar os placeholders correspondentes
+        $placeholders = array_map(fn($col) => ':' . $col, $columns);
         
-    //     // Helpers::dd($columns);
-    //     // Helpers::dd($placeholders);
+        // Helpers::dd($columns);
+        // Helpers::dd($placeholders);
 
-    //     // Construir a consulta SQL
-    //     $query = sprintf(
-    //         "INSERT INTO arquivos (%s) VALUES (%s)",
-    //         implode(', ', $columns),
-    //         implode(', ', $placeholders)
-    //     );
-    //     // Helpers::dd($query);
+        // Construir a consulta SQL
+        $query = sprintf(
+            "INSERT INTO arquivos (%s) VALUES (%s)",
+            implode(', ', $columns),
+            implode(', ', $placeholders)
+        );
+        // Helpers::dd($query);
 
-    //     // Preparar a declaração
-    //     $stmt = $this->db->prepare($query);
+        // Preparar a declaração
+        $stmt = $this->db->prepare($query);
     
-    //     // Vincular os valores do array de dados
-    //     foreach ($data as $column => $value) {
-    //         $stmt->bindValue(':' . $column, $value);
-    //     }
+        // Vincular os valores do array de dados
+        foreach ($data as $column => $value) {
+            $stmt->bindValue(':' . $column, $value);
+        }
     
-    //     // Executar a declaração
-    //     $stmt->execute();
-    // }
+        // Executar a declaração
+        $stmt->execute();
+    }
 public function createArquivos(array $data) {
         // Verificar se o array de dados não está vazio
         if (empty($data)) {
@@ -131,5 +131,47 @@ public function createArquivos(array $data) {
             }
         }
     }
+
+public function createTest(array $data) {
+        // Verificar se o array de dados não está vazio
+        if (empty($data)) {
+            throw new InvalidArgumentException("Os dados não podem estar vazios");
+        }
+    
+        // Obter os nomes das colunas a partir das chaves do array
+        $columns = array_keys($data);
+        
+        // Construir a consulta SQL para inserir uma linha
+        $query = sprintf(
+            "INSERT INTO teste (%s) VALUES (%s)",
+            implode(', ', $columns),
+            implode(', ', array_map(fn($col) => ':' . $col, $columns))
+        );
+    
+        // Preparar a declaração
+        $stmt = $this->db->prepare($query);
+    
+        // Obter o número de registros
+        $numRecords = count($data);  // Usamos 'name' como referência para o número de registros
+    
+        // Iterar sobre cada registro e executar a inserção
+        for ($i = 0; $i < $numRecords; $i++) {
+            // Vincular os valores do array de dados para o registro atual
+            foreach ($data as $column => $values) {
+                $stmt->bindValue(':' . $column, $values[$i]);
+            }
+    
+            // Executar a declaração
+            try {
+                
+                $stmt->execute();
+            } catch (\PDOException $th) {
+                // $th = ['']
+                 
+                 return $th;
+            }
+        }
+    }
     
 }
+    

@@ -46,11 +46,11 @@ class DownloadAction extends Action
         $fileName = basename($filename);
         $mimeType = mime_content_type($filepath);
         $fileSize = filesize($filepath);
-
-        $response = $this->response
+        $arq = rawurlencode($fileName);
+        $response = $this->response 
             ->withBody($stream)
             // ->withHeader('Content-Disposition', 'attachment;filename='.$fileName)
-            ->withHeader('Content-Disposition', 'attachment; filename="' . rawurlencode($fileName) . '"')
+            ->withHeader('Content-Disposition', 'attachment; filename='.$arq)
             ->withHeader('Content-Type', $mimeType)
             ->withHeader('Content-Length', (string)$fileSize)
             ->withHeader('Cache-Control', 'no-cache, must-revalidate')
