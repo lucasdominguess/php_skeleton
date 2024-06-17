@@ -1,15 +1,17 @@
 
  //Funcao Dark_Light 
+const linksweet = document.querySelectorAll(".link_sweet_pags") // pegar todos os links do sweetalert
 
 //Evento reload da pagina 
 document.addEventListener("DOMContentLoaded", function() {
 
       const isDarkMode = localStorage.getItem('darkMode')
-
+     
 // verifica se o darkmode esta ativo e salvo em localStorage
     const htmlpags = document.querySelectorAll('.htmlpags'); 
     const icones = document.querySelectorAll('.icons');
       if (isDarkMode =='true') {
+       
         htmlpags.forEach(htmls => {
           htmls.setAttribute('data-bs-theme','dark');
           
@@ -19,14 +21,21 @@ document.addEventListener("DOMContentLoaded", function() {
           element.classList.add('fa-sun')
           
         });
+        linksweet.forEach(element => { 
+          element.href = "https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"
+        });
       }else{
         htmlpags.forEach(htmls => {
           htmls.setAttribute('data-bs-theme','ligth');
+          linksweet.href=""
         });
         icones.forEach(element => {
           element.classList.remove('fa-sun')
           element.classList.add('fa-moon')
 
+        });
+        linksweet.forEach(element => { 
+          element.href = "https://cdn.jsdelivr.net/npm/@sweetalert2"
         });
 }
 })
@@ -36,25 +45,39 @@ function modoDark () {
   const isDarkMode = localStorage.getItem('darkMode')
   const htmlpags = document.querySelectorAll('.htmlpags');
   const icones = document.querySelectorAll('.icons');
+
+  // console.log(linksweet.href)
   // const classIcons = document.getElementById(`${icon}`)
  
 
  
   if ( isDarkMode == 'false') { 
-
-        icones.forEach(element => {
-        element.classList.remove('fa-moon')
-        element.classList.add('fa-sun')
-
-      });
-        htmlpags.forEach(element => {
-        element.setAttribute('data-bs-theme', 'dark');
-        
-      });
-      localStorage.setItem('darkMode','true');
-     
-      return;
+    
+ 
+    // sweetLigth.parentNode.removeChild(sweetLigth);
+    // sweetLigth.href = "https://cdn.jsdelivr.net/npm/@sweetalert2"
+    // sweetDark.parentNode.appendChild(sweetDark)
+    icones.forEach(element => {
+      element.classList.remove('fa-moon')
+      element.classList.add('fa-sun')
+      
+    });
+    htmlpags.forEach(element => {
+      element.setAttribute('data-bs-theme', 'dark');
+      
+    });
+    linksweet.forEach(element => { 
+      element.href = "https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"
+    });
+    localStorage.setItem('darkMode','true');
+    
+    return;
   }else {
+    // sweetLigth.href = "https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"
+    // sweetDark.parentNode.removeChild(sweetDark);
+    // sweetLigth.parentNode.appendChild(sweetLigth);
+    
+      console.log(linksweet.href)
       icones.forEach(element => {
       element.classList.remove('fa-sun')
       element.classList.add('fa-moon')
@@ -63,6 +86,9 @@ function modoDark () {
       element.setAttribute('data-bs-theme','ligth');
       
 
+    });
+    linksweet.forEach(element => { 
+      element.href = "https://cdn.jsdelivr.net/npm/@sweetalert2"
     });
       localStorage.setItem('darkMode', 'false');
      

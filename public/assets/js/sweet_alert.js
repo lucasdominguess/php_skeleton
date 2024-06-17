@@ -6,9 +6,7 @@ function fnMensagem(icon,msg,reload=false,location=''){
       confirmButtonText: 'Ok',
       timer: 4000,
       timerProgressBar: true,
-      customClass: {
-        container: 'dark-mode-alert'
-      },
+    
       willClose: () => {
         
         if(reload){
@@ -27,11 +25,12 @@ function admMensagem(msg,icon){
     confirmButtonText: 'Ok',
     timer: 3500,
     timerProgressBar: true,
-    customClass: {
-      container: 'dark-mode-alert'
-    }
+   
 })
-}function sair() {
+
+
+}
+function sair() {
     Swal.fire({ 
     title: 'Deseja realmente sair? Dados serão Perdidos! ',
     showDenyButton: true,            

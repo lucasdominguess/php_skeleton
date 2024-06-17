@@ -17,7 +17,8 @@ class UploadAction extends Action {
     protected function action(): ResponseInterface
     {   
       $file = $_FILES['file']; 
-      // $info = pathinfo($file['name'][0]);
+      $info = pathinfo($file['name'][0]);
+      // Helpers::dd($info);
 
       
       $userfolder = 'ID_0'.$_SESSION[User::USER_ID]."_". strtoupper($_SESSION[User::USER_NAME]) ; 
@@ -27,7 +28,6 @@ class UploadAction extends Action {
       
       
       $names = $file['name'];
-      // Helpers::dd($names);
       $tmp_name = $file['tmp_name'];
       $fileSize = $file['size']; 
       // $path = __DIR__ ."/../../../../files/arquivos/$userfolder";
@@ -70,8 +70,12 @@ class UploadAction extends Action {
           try {
                 $insert = new CreateRepository($this->sql);
                 $insert->createArquivos($file);
-          } catch (\Throwable $e) {
-                  return $this->respondWithData($e);
+          } catch (\PDOException $e) {
+            if($this->sql->errorCode()=='23000'){
+              $resposta =['status'=>'fail','msg'=>"O mesmo nome nao pode ser inserido"];
+              return $this->respondWithData($resposta);
+         
+          }
               }
               // Helpers::dd($file['name']);
           

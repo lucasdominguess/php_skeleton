@@ -49,14 +49,16 @@ class DownloadAction extends Action
 
         $response = $this->response
             ->withBody($stream)
-            ->withHeader('Content-Disposition', 'attachment;filename='.$fileName)
-            // ->withHeader('Content-Disposition', 'attachment; filename="' . rawurlencode($fileName) . '"')
+            // ->withHeader('Content-Disposition', 'attachment;filename='.$fileName)
+            ->withHeader('Content-Disposition', 'attachment; filename="' . rawurlencode($fileName) . '"')
             ->withHeader('Content-Type', $mimeType)
             ->withHeader('Content-Length', (string)$fileSize)
+            ->withHeader('Cache-Control', 'no-cache, must-revalidate')
+            ->withHeader('Pragma', 'no-cache')
             ->withStatus(200);
 
         // Fechamento do stream após enviar a resposta
-        $response->getBody()->close();
+        // $response->getBody()->close();
 
         return $response;
     }

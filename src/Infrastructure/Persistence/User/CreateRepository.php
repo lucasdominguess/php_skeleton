@@ -2,6 +2,7 @@
 namespace App\Infrastructure\Persistence\User;
 
 use App\Infrastructure\Helpers;
+use Exception;
 use InvalidArgumentException;
 
 
@@ -90,7 +91,7 @@ class CreateRepository
     //     // Executar a declaração
     //     $stmt->execute();
     // }
-    public function createArquivos(array $data) {
+public function createArquivos(array $data) {
         // Verificar se o array de dados não está vazio
         if (empty($data)) {
             throw new InvalidArgumentException("Os dados não podem estar vazios");
@@ -120,7 +121,14 @@ class CreateRepository
             }
     
             // Executar a declaração
-            $stmt->execute();
+            try {
+                
+                $stmt->execute();
+            } catch (\PDOException $th) {
+                // $th = ['']
+                 
+                 return $th;
+            }
         }
     }
     
