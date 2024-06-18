@@ -59,9 +59,6 @@ class Email_Service
 
 
 
-
-            // $logger = new CreateLogger();
-            // $logger->logger('testeredis','foi enviado','info',$r);
     
     
         }

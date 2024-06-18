@@ -24,7 +24,7 @@ class ValidTokenEmailAction extends Action
         try {
             $tokenbd =  $user->resetFindAllEmail($token);
             // Helpers::dd($tokenbd);
-            //cohel...
+        
         } catch (\Throwable $th) {
             $msg = ['status'=> 'fail', 'msg'=>'token invalido!'];
             return $this->response->withHeader("location","/")->withStatus(302);

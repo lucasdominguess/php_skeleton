@@ -1,7 +1,6 @@
 <?php
 namespace App\Infrastructure\Persistence\User;
-// namespace App\Infrastructure\Persistence\User;
-// namespace App\Infrastructure\Persistence\User ; 
+
 
     class Sql extends \PDO
   

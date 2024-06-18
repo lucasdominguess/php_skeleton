@@ -11,7 +11,11 @@ use App\Infrastructure\Persistence\User\DeleteRepository;
 class ExcluirAction extends Action
 { 
     protected function action(): response 
-    {
+    {   
+        //Precisa ser atualizada ...
+        //correção : criar rotas individuais para cada consulta no banco de dados 
+
+        
         $id = $_GET['id']; 
         $url = URI_SERVER ;
 

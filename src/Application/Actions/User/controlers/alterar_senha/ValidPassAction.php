@@ -19,6 +19,8 @@ class ValidPassAction extends Action
         $senha1 = $xss->xss_clean($_POST['senha1']) ?? null ; 
         $senha2 = $xss->xss_clean($_POST['senha2']) ?? null ; 
         $token = $xss->xss_clean($_POST['token']) ?? null ; 
+
+        
         // $pattern = '/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#_])[0-9a-zA-Z$*&@#_]{8,19}/';
         // $data = $this->request->getParsedBody();
    

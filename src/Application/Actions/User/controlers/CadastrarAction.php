@@ -18,7 +18,8 @@ class CadastrarAction extends UserAction{
  
        
        
-
+        //Precisa ser atualizada ...
+        //correção : criar rotas individuais para cada consulta no banco de dados 
 
         if( URI_SERVER == URL_HOMEADM || URI_SERVER == URL_HOMEUSER){
 

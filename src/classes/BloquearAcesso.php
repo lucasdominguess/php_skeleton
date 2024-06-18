@@ -5,7 +5,7 @@ namespace App\classes;
 use PDO;
 use DateTime;
 use DateTimeZone;
-use App\Infrastructure\Persistence\User\Sql;
+
 
 class BloquearAcesso { 
    
@@ -82,9 +82,7 @@ class BloquearAcesso {
     }
  public function bloqueioCadastro($db,$email)
  {  
-        // $datenow = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
-        // $hr_bloq = date_add($datenow,date_interval_create_from_date_string($date));
-        // $newtime = $hr_bloq->format('Y-m-d H:i:s');
+      
         $date = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
         $date->modify('+3 months');
         $formattedDate = $date->format('Y-m-d H:i:s');

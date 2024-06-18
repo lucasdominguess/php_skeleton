@@ -3,14 +3,7 @@
 declare(strict_types=1);
 
 use Slim\App;
-use function DI\add;
-
-
 use Slim\Views\Twig;
-
-
-
-
 use App\Infrastructure\Helpers;
 use App\Application\Middleware\UserMiddleware;
 use App\Application\Middleware\AdminMiddleware;
@@ -24,8 +17,6 @@ use App\Application\Actions\User\controlers\ExcluirAction;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 
 use App\Application\Actions\User\controlers\CadastrarAction;
-
-
 use App\Application\Actions\User\controlers\SairSessaoAction;
 use App\Application\Actions\User\controlers\ListarCardsAction;
 use App\Application\Actions\User\controlers\ListarArquivosAction;
@@ -66,7 +57,7 @@ return function (App $app) {
         ]);
     })->setName('login');
 
-    //Sessao alterar senha //////////////////////////////////////////////////////////////
+    //Sessao alterar senha 
     $app->get('/solicitar_trocar_senha', function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
         return $view->render($response, 'trocarsenha.html', []);});
@@ -76,16 +67,15 @@ return function (App $app) {
     $app->get('/registrar_novasenha/{token}',function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
         $param1 = $args['token'];
-        // Helpers::dd($param1);
-        // $param2 = $args['email'];
+    
         return $view->render($response, 'newsenha.html', [
             'token' => $param1,
-            // 'email' => $param2
+         
         ]);
     });
     $app->post("/validar_novasenha",ValidPassAction::class);
     
-    //Sessao novo usuario ////////////////////////////////////////////////////////////
+    //Sessao novo usuario 
     $app->get("/solicitar_novo_usuario", function ($request, $response, $args) {
         $view = Twig::fromRequest($request);
         return $view->render($response, 'newuser.html', []);});
@@ -99,23 +89,8 @@ return function (App $app) {
 
     $app->get('/sender', HandleSenderAction::class);
 
-    // $app->get('/logar', function ($request, $response,$args) {
-    //     //  echo json_encode('chegou no app da rota');
-    //     $view = Twig::fromRequest($request);
-    //     return $view->render($response, 'registrar.php', [
-          
-    //     ]);
-    // });
-        
-      
-    // $app->get('/log', function ($request, $response, $args) {
-    //     $view = Twig::fromRequest($request);
-    //     return $view->render($response, 'logs.php', [
-          
-    //     ]);
-    // });
-        
-    //ROTAS PUBLICAS
+
+    //ROTAS NIVEL USERS/ADMIN
         $app->post('/logar',LogarAction::class);
         
         $app->get('/listarcards',ListarCardsAction::class)->add(new TokenMiddleware()); ;
@@ -140,7 +115,7 @@ return function (App $app) {
         ]);
     })->setName('tokenInvalido');
 
-////////ROTAS DE ADMIN 
+////////ROTAS NIVEL ADMIN 
     $app->group('/admin',function(Group $group){ 
         $group->get('/home_adm', function ($request, $response, $args) {
             $view = Twig::fromRequest($request);
@@ -179,7 +154,7 @@ return function (App $app) {
 
     })->add(new TokenMiddleware())->add(new AdminMiddleware());
 
-////// rotas Usuarios
+////// ROTAS NIVEL USUARIO
     $app->group('/user',function(Group $group){ 
         $group->get('/home_user', function ($request, $response, $args) {
             $view = Twig::fromRequest($request);

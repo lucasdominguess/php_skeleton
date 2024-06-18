@@ -1,12 +1,12 @@
 <?php
 namespace App\Application\Actions\User\controlers\cadastrar_usuario;
 
-use PhpParser\Node\Stmt\Block;
+
 use App\classes\BloquearAcesso;
 use App\Application\Actions\Action;
 use App\Infrastructure\Helpers;
 use Psr\Http\Message\ResponseInterface;
-use App\Infrastructure\Persistence\User\DeleteRepository;
+
 use App\Infrastructure\Persistence\User\UpdateRepository;
 
 class AprovarCadastroAction extends Action 
@@ -32,25 +32,26 @@ class AprovarCadastroAction extends Action
         }
         $update = new UpdateRepository ; 
 
-        if ($auth == 'nao') {
+        if ($auth == 'nao') {  //Caso cadastro nao seja aprovado pelo adm 
             $dados = json_encode(
                 [   
                     'email'=>$dadosRedis['email'], 
                     'subject'=>"Reprovação de cadastro",
                     'body'=>"Infelizmente seu cadastro nao foi aprovado. tente novamente após o periodo de 6 meses "
                 ]);
+                //adcionando email a lista de bloqeados com penalidade de 3 meses 
                 $block = new BloquearAcesso();
                 $block->bloqueioCadastro($this->sql,$dadosRedis['email']);
                 
                 $this->redisConn->rPush('enviar_email',$dados);
-                
+                    //setando o usuario com permissao 0 (sem permissao de acesso  )
                 $update->update($this->sql,$dadosRedis['email'],0);
                 return $this->response->withHeader("location","/")->withStatus(307);
 
 
 
         }
-        if ($auth == 'sim') {
+        if ($auth == 'sim') { //Caso cadastro seja aprovado pelo adm 
             $dados = json_encode(
                 [   
                     'email'=>$dadosRedis['email'], 
@@ -60,7 +61,7 @@ class AprovarCadastroAction extends Action
 
 
                 
-               
+               //setando o usuario com permissao 2 (permissao de acesso simples )
                 $update->update($this->sql,$dadosRedis['email'],2);
                 $this->redisConn->rPush('enviar_email',$dados);
                 

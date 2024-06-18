@@ -8,6 +8,9 @@ use Psr\Http\Message\ResponseInterface as response;
 class EditarAction extends Action{ 
     protected function action(): response 
     {   
+        //Precisa ser atualizada ...
+        //correção : criar rotas individuais para cada consulta no banco de dados 
+
         // if ($_SESSION[User::USER_NIVEL] != 5) {
         //     $response = new response;
         //     return $response->withHeader('Location', '/')->withStatus(302);

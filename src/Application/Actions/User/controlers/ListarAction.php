@@ -12,6 +12,9 @@ class ListarAction extends Action {
 
     protected function action(): response 
     {   
+        //Precisa ser atualizada ...
+        //correção : criar rotas individuais para cada consulta no banco de dados 
+        
         $db = new Sql();
         $user = new ReadRepository($db);
 

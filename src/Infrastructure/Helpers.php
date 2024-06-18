@@ -8,7 +8,7 @@ abstract class Helpers{
         echo "</pre>";
         die();
        
-        // die(var_dump($var));
+       
     }
  
 }

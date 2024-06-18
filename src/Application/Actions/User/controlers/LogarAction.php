@@ -1,15 +1,11 @@
 <?php
 namespace App\Application\Actions\User\controlers;
 
-use App\Infrastructure\Helpers;
 use PDO;
 use App\classes\Token;
 use App\Domain\User\User;
-use App\classes\CreateLogger;
 use App\classes\BloquearAcesso;
 use App\Application\Actions\User\UserAction;
-use App\Infrastructure\Persistence\User\Sql; // 
-use App\Infrastructure\Persistence\User\RedisConn;
 use Psr\Http\Message\ResponseInterface as Response;
 use voku\helper\AntiXSS;
 
@@ -69,15 +65,6 @@ class LogarAction extends UserAction
                     }
         //criando instancia do redis e verificando se ja existe um usuario logado 
 
-        // try {
-
-        // $redis = new RedisConn(); 
-        // } catch (\Throwable $e) {
-        //     $this->createLogger->logger('Erro Redis','Erro ao conectar em Redis','warning');
-        //     $response = (['status'=>'fail','msg'=> $e->getMessage()]);
-        //     return $this->respondWithData($response);
-        // }
-
         $redis_user = $this->redisConn->hget($email, 'email');
             if ($redis_user) {
                 $response = (['status' => 'fail', 'msg' => 'Usuario ja esta logado']);
@@ -86,7 +73,7 @@ class LogarAction extends UserAction
             }
         
 
-        //criando dados do User 
+        //criando dados do Usuario
         $user = new User($retorno[0]['id_adm'], $retorno[0]['nome'], $retorno[0]['email'], $retorno[0]['nivel']);
 
         switch ($retorno[0]['nivel']) {

@@ -8,14 +8,13 @@ namespace App\Application\Actions\User\controlers\alterar_senha;
 
 // use App\classes\Email;
 
-use App\classes\Email_Service;
+
 use App\Infrastructure\Persistence\User\CreateRepository;
 use DateTime;
-use App\classes\Email;
+
 use voku\helper\AntiXSS;
 use App\Application\Actions\Action;
-use App\classes\SendEmail;
-use App\Infrastructure\Helpers;
+
 use Psr\Http\Message\ResponseInterface as response;
 use App\Infrastructure\Persistence\User\ReadRepository;
 
@@ -38,8 +37,8 @@ class ValidUserAction extends Action
         $banco = new ReadRepository($this->sql); 
         $user= $banco->admFindEmail($email);
 
-        if(!$user){
-            $msg = ['status'=> 'fail', 'msg'=>'serviço indisponivel'];
+        if(!$user){ //mensagem caso o usuario nao exista ... correção de segurança (mentir para um suposto atacante )
+            $msg = ['status'=> 'fail', 'msg'=>'Email enviado'];
             return $this->respondWithData($msg);
         }
         
@@ -47,7 +46,7 @@ class ValidUserAction extends Action
         $token = md5(uniqid());
         
 
-        // $token_url = urlencode($token);
+    
         // Helpers::dd($token_url);
         // $decoded = urldecode($token_url); 
 
@@ -71,8 +70,8 @@ class ValidUserAction extends Action
             ]);
         // }
         try {
-            // $sendEmail = new  Email_Service();
-          
+            //criando fila no redis 
+                   
             $this->redisConn->rPush('enviar_email',$dados);
             $msg = ['status'=> 'ok', 'msg'=>'Email enviado!'];
             return $this->respondWithData($msg);

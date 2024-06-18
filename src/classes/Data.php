@@ -2,7 +2,7 @@
 
 namespace App\classes;
 use DateTime;
-use DateTimeZone;
+
 
 class Data
 {
@@ -32,10 +32,4 @@ class Data
     }
 }
 
-// $data1 = new DateTime($this->data);
-// $data2 = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
-// $dataform = $data2->format("Y-m-d");
 
-
-
-// var_dump($data1);
